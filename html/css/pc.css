@@ -45,7 +45,7 @@
 	float: left;
 	height: 100%;
 	padding: 0 25px;
-	background: url(../images/nav-divider.gif) no-repeat right center;
+	/*background: url(../images/nav-divider.gif) no-repeat right center;*/
 }
 
 .header .navigation ul li a {
