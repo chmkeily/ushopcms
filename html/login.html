@@ -49,48 +49,41 @@
                 var account = $('#usr_account').val();
                 var password = $('#usr_passwd').val();
 
+                var url = "/index.php/user/login";
                 //#0 使用post方法发送post请求
-                var url = "/index.php/cms/user/login";
-                $.post(url, {
+                /*$.post(url, {
                         email:account,
                         secret:password,
                         timestamp:1430462931
                     },
-                    funtion(result){
+                    function(result){
                         alert(result.ret);
-                    }, "json");
+                    }, "json");*/
 
-                //#0.1 使用原始Ajax函数
+                //#1 使用原始Ajax函数
                 $.ajax({
                     url:url,
                     type:"post",
-                    async:false,
+                    //async:false,
+                    data:{
+                        email:account,
+                        secret:password,
+                        timestamp:1430462931
+                    },
                     dataType:"json",
                     success: function(result){
-                        alert(result.ret);
+                        alert("[succ]ret:" + result.ret);
                     },
                     error:function(o){
-                        alert(o);
+                        alert("[error]" + o);
                     }
                 });
 
-                //var requrl = "/index.php/cms/user/login?email=" + account + "&secret=" + password + "&timestamp=" + 1430462931;
-                //#1 使用getJSON方法发送get请求
+                //var requrl = "/index.php/user/login?email=" + account + "&secret=" + password + "&timestamp=" + 1430462931;
+                //#2 使用getJSON方法发送get请求
 				/*$.getJSON(requrl, function(rsp){
 					alert(rsp.ret);
 				});*/
-
-
-				//#2 ajax自动解析json
-				/*$.ajax({
-					url:requrl,
-					//async:false,
-					dataType:"json",
-					success: function(rsp){
-						alert(rsp.ret);
-					}
-				});*/
-
 
                 //#3 使用eval自行解析json
                 /*var htmlobj = $.ajax({
