@@ -149,8 +149,9 @@ class User extends CI_Controller {
      * @brief 修改个人信息
      * <pre>
      *  接受的表单参数:
-     *      name        用户昵称 (optional)
-     *      contact     联系方式 (optional)
+     *      name        用户昵称(公司名称等)
+     *      phone       联系方式(手机/电话)
+     *      contact     联系人
      *      city        所在城市编码 (optional)
      * </pre>
      * @return 操作结果
@@ -158,6 +159,7 @@ class User extends CI_Controller {
     function update()
     {
 		$name 		= trim($this->input->get_post('name', TRUE));
+		$phone 		= trim($this->input->get_post('phone', TRUE));
 		$contact	= trim($this->input->get_post('contact', TRUE));
 		$city	    = trim($this->input->get_post('city', TRUE));
         
@@ -174,6 +176,10 @@ class User extends CI_Controller {
         if (!empty($name))
         {
             $updates['user_name'] = $name;
+        }
+        if (!empty($phone))
+        {
+            $updates['use_phone'] = $phone;
         }
         if (!empty($contact))
         {

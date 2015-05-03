@@ -48,25 +48,51 @@
             $('#login_btn').bind('click', function(){
                 var account = $('#usr_account').val();
                 var password = $('#usr_passwd').val();
-                var requrl = "/index.php/cms/user/login?email=" + account + "&secret=" + password + "&timestamp=" + 1430462931;
 
-				//#1
-				$.getJSON(requrl, function(rsp){
+                //#0 使用post方法发送post请求
+                var url = "/index.php/cms/user/login";
+                $.post(url, {
+                        email:account,
+                        secret:password,
+                        timestamp:1430462931
+                    },
+                    funtion(result){
+
+                    }, "json");
+
+                //#0.1 使用原始Ajax函数
+                $.ajax({
+                    url:url,
+                    type:"post",
+                    async:false,
+                    dataType:"json",
+                    success: function(result){
+                        alert(result.ret);
+                    },
+                    error:function(o){
+                        alert(o);
+                    }
+                });
+
+                //var requrl = "/index.php/cms/user/login?email=" + account + "&secret=" + password + "&timestamp=" + 1430462931;
+                //#1 使用getJSON方法发送get请求
+				/*$.getJSON(requrl, function(rsp){
 					alert(rsp.ret);
-				});
+				});*/
 
-				//#2
+
+				//#2 ajax自动解析json
 				/*$.ajax({
 					url:requrl,
 					//async:false,
 					dataType:"json",
 					success: function(rsp){
-						alert(rsp);
 						alert(rsp.ret);
 					}
 				});*/
 
-				//#3
+
+                //#3 使用eval自行解析json
                 /*var htmlobj = $.ajax({
                     url:requrl,
                     async:false,

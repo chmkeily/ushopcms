@@ -2,7 +2,7 @@
 
 class CMSUser_model extends CI_Model
 {
-	var $TableName = 'tb_cms_user';
+	var $TableName = 'tb_user';
     var $FieldMatrix = array(
             'user_id'       => 'ID',
             'user_email'    => 'Email',
