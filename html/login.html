@@ -43,11 +43,14 @@
     </div>
 
     <script src="js/jquery-1.6.1.min.js"></script>
+    <script src="js/jquery.md5.js"></script>
     <script>
         $(document).ready(function(){
             $('#login_btn').bind('click', function(){
                 var account = $('#usr_account').val();
                 var password = $('#usr_passwd').val();
+                var timestamp = 0;
+                var secret = $.md5(password + timestamp);
 
                 var url = "/index.php/user/login";
                 //#0 使用post方法发送post请求
@@ -64,11 +67,10 @@
                 $.ajax({
                     url:url,
                     type:"post",
-                    //async:false,
                     data:{
                         email:account,
-                        secret:password,
-                        timestamp:1430462931
+                        secret:secret,
+                        timestamp:timestamp
                     },
                     dataType:"json",
                     success: function(result){
