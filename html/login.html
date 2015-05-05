@@ -49,10 +49,15 @@
             $('#login_btn').bind('click', function(){
                 var account = $('#usr_account').val();
                 var password = $('#usr_passwd').val();
+                if (empty(account) || empty(password))
+                {
+                    alert("请填写用户名和密码!");
+                    return;
+                }
+
                 var timestamp = Math.floor( (new Date()).getTime()/1000 );
                 var secret = $.md5(password + timestamp);
-
-                var url = "/index.php/user/login";
+                var url = "/user/login";
 
                 //#0 使用原始Ajax函数
                 $.ajax({
@@ -71,7 +76,7 @@
                         }
                         else
                         {
-                            alert("failed to login (ret:" + result.ret + ")");
+                            alert("登录失败(ret:" + result.ret + ")");
                         }
                     },
                     error:function(e){
@@ -89,7 +94,7 @@
                         alert(result.ret);
                     }, "json");*/
 
-                //var requrl = "/index.php/user/login?email=" + account + "&secret=" + password + "&timestamp=" + 1430462931;
+                //var requrl = "/user/login?email=" + account + "&secret=" + password + "&timestamp=" + 1430462931;
                 //#2 使用getJSON方法发送get请求
 				/*$.getJSON(requrl, function(rsp){
 					alert(rsp.ret);
