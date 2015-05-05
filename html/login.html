@@ -49,7 +49,7 @@
             $('#login_btn').bind('click', function(){
                 var account = $('#usr_account').val();
                 var password = $('#usr_passwd').val();
-                var timestamp = 0;
+                var timestamp = Math.floor( (new Date()).getTime()/1000 );
                 var secret = $.md5(password + timestamp);
 
                 var url = "/index.php/user/login";
