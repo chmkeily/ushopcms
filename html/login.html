@@ -53,17 +53,8 @@
                 var secret = $.md5(password + timestamp);
 
                 var url = "/index.php/user/login";
-                //#0 使用post方法发送post请求
-                /*$.post(url, {
-                        email:account,
-                        secret:password,
-                        timestamp:1430462931
-                    },
-                    function(result){
-                        alert(result.ret);
-                    }, "json");*/
 
-                //#1 使用原始Ajax函数
+                //#0 使用原始Ajax函数
                 $.ajax({
                     url:url,
                     type:"post",
@@ -74,12 +65,29 @@
                     },
                     dataType:"json",
                     success: function(result){
-                        alert("[succ]ret:" + result.ret);
+                        if (0 == result.ret)
+                        {
+                            location.href = "/html/pages/provider/index.html"
+                        }
+                        else
+                        {
+                            alert("failed to login (ret:" + result.ret + ")");
+                        }
                     },
-                    error:function(o){
-                        alert("[error]" + o);
+                    error:function(e){
+                        alert("[error]" + e);
                     }
                 });
+
+                //#1 使用post方法发送post请求
+                /*$.post(url, {
+                        email:account,
+                        secret:password,
+                        timestamp:1430462931
+                    },
+                    function(result){
+                        alert(result.ret);
+                    }, "json");*/
 
                 //var requrl = "/index.php/user/login?email=" + account + "&secret=" + password + "&timestamp=" + 1430462931;
                 //#2 使用getJSON方法发送get请求
