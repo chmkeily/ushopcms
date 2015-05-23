@@ -20,8 +20,9 @@ class User_model extends CI_Model
             'user_license'  => 'License',
             'user_pid'      => 'ProviderID',
             'user_verified' => 'Verified',
-            'user_warranted' => 'Warranted',
-            'user_fieldtag' => 'FieldTga',
+            'user_warranted'  => 'Warranted',
+            'user_fieldtag'   => 'FieldTag',
+            'user_permission' => 'Permission',
         );
 
     public function __construct()
@@ -74,6 +75,41 @@ class User_model extends CI_Model
         }
 
         return XFORMAT($row, $this->FieldMatrix, FALSE);
+    }
+
+    /**
+     * 
+     */
+    function create_query($conditions)
+    {
+        if (!empty($conditions['userid']))
+        {
+            $this->db->where('ID', $conditions['userid']);
+            return $this->db;
+        }
+
+        if (!empty($conditions['status']))
+        {
+            $this->db->where('Status', $conditions['status']);
+        }
+
+        return $this->db;
+    }
+
+    /**
+     * 
+     */
+    function get_users($conditions = array(), $limit = 10, $offset = 0)
+    {
+        $this->db->select('ID,Type,Email,Name,Phone,Contact,Address,Status,Brief,License,FieldTag');
+        $rows = $this->create_query($conditions)->get($this->TableName, $limit, $offset)->result_array();
+        $items = array();
+        foreach ($rows as $row)
+        {
+            $items[] = XFORMAT($row, $this->FieldMatrix, FALSE);
+        }
+
+        return $items;
     }
 
     /**
