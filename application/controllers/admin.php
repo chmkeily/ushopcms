@@ -1,9 +1,9 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 /**
-* @brief 用户管理
+* @brief 管理员
 */
-class User extends CI_Controller {
+class Admin extends CI_Controller {
 	
 	/**
 	* constructor
@@ -14,7 +14,7 @@ class User extends CI_Controller {
 	}
 
 	/**
-	* @brief 用户登录
+	* @brief 登录
 	*  <pre>
 	*	接受的表单数据：
 	*		email				登录邮箱
@@ -24,8 +24,8 @@ class User extends CI_Controller {
 	*  </pre>
 	*  <pre>
 	*	测试账号: 
-	*		Email: user001@gmail.com
-    *		密 码: user001pwd
+	*		Email: admin@ushop.com
+    *		密 码: abc123
 	*  </pre>
 	* @return 操作结果
 	*/
@@ -122,8 +122,8 @@ class User extends CI_Controller {
 			'user_secret'	=> $secret,
 			'user_name'		=> $name,
 			'user_contact'	=> $contact,
-			'user_type'		=> 1,
-			'user_location'	=> 101
+			'user_type'		=> 99,
+			'user_location'	=> 0
 			);
 
 		$this->load->model('user_model');
@@ -145,10 +145,10 @@ class User extends CI_Controller {
     }
 
     /**
-     * @brief 修改个人信息
+     * @brief 修改帐号信息
      * <pre>
      *  接受的表单参数:
-     *      name        用户昵称(公司名称等)
+     *      name        用户昵称
      *      phone       联系方式(手机/电话)
      *      contact     联系人
      *      city        所在城市编码 (optional)
@@ -210,7 +210,7 @@ class User extends CI_Controller {
 
     ///////以下主要为业务内容
     /**
-     * @brief 查询服务商用户列表
+     * @brief 查询用户列表
      * <pre>
      *  接受的表单参数:
      *      userid       用户id
@@ -218,7 +218,7 @@ class User extends CI_Controller {
      * </pre>
      * @return 操作结果
      */
-    function profiles()
+    function userinfos()
     {
 		$userid 	= trim($this->input->get_post('userid', TRUE));
         $status 	= trim($this->input->get_post('status', TRUE));
@@ -234,7 +234,36 @@ class User extends CI_Controller {
         }
 
         $userinfos = $this->user_model->get_users($conditions);
-        //TODO
+        $viewdata['userinfos'] = $userinfos;
+        $this->load->view('users_view', $viewdata);
+    }
+
+    /**
+     * @brief 查询用户信息
+     * <pre>
+     *  接受的表单参数:
+     *      userid       用户id
+     * </pre>
+     * @return 操作结果
+     */
+    function userprofile()
+    {
+        $userid 	= trim($this->input->get_post('userid', TRUE));
+        if (!empty($userid) && is_numeric($userid))
+        {
+            $viewdata['ret'] = ERR_INVALID_VALUE;
+            $viewdata['err_msg'] = 'A valid user id is reguired.';
+        }
+
+        $_RSP['ret'] = -1;
+        $userinfo = $this->user_model->get_user_by_id($userid);
+        if (!empty($userinfo))
+        {
+            $_RSP['ret'] = 0;
+            $_RSP['userinfo'] = $userinfo;
+        }
+
+        exit(json_encode($_RSP));
     }
 }
 
