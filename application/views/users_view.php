@@ -18,7 +18,8 @@
     <div class="manage_container">
         <div class="aside">
             <div class="menu">
-                <a class="menu_item active">需求管理</a>
+                <a class="menu_item active">服务商管理</a>
+                <a class="menu_item">需求管理</a>
                 <a class="menu_item">案例管理</a>
             </div>
         </div>
