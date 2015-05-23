@@ -61,7 +61,7 @@
                         <td><?php echo $userinfo['user_address']; ?></td>
                         <td><?php echo $userinfo['user_status']; ?></td>
                         <td><?php echo $userinfo['user_brief']; ?></td>
-                        <td><?php echo $userinfo['user_license']; ?></td>
+                        <td><a href="<?php echo $userinfo['user_license']; ?>">查看</a></td>
                     </tr>
                 <?php endforeach; ?>
                 </tbody>
