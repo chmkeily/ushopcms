@@ -49,12 +49,6 @@
             $('#login_btn').bind('click', function(){
                 var account = $('#usr_account').val();
                 var password = $('#usr_passwd').val();
-                if (empty(account) || empty(password))
-                {
-                    alert("请填写用户名和密码!");
-                    return;
-                }
-
                 var timestamp = Math.floor( (new Date()).getTime()/1000 );
                 var secret = $.md5(password + timestamp);
                 var url = "/user/login";
