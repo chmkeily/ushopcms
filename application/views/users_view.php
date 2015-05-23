@@ -37,39 +37,32 @@
                 <thead>
                     <tr>
                         <th><input type="checkbox" class="tc-checkbox check-all"></th>
-                        <th><span>需求名称</span></th>
-                        <th><span>称呼</span></th>
+                        <th><span>邮箱</span></th>
+                        <th><span>名称</span></th>
+                        <th><span>类型</span></th>
                         <th><span>电话</span></th>
-                        <th><span>店铺面积</span></th>
-                        <th><span>店铺类型</span></th>
-                        <th><span>预算（万元）</span></th>
-                        <th><span>详细地址</span></th>
-                        <th><span>备注</span></th>
+                        <th><span>联系人</span></th>
+                        <th><span>地址</span></th>
+                        <th><span>状态</span></th>
+                        <th><span>简介</span></th>
+                        <th><span>执照</span></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                <?php foreach ($userinfos as $userinfo): ?>
+                    <tr id="u<?php echo $userinfo['user_id']; ?>">
                         <td><input type="checkbox" class="tc-checkbox"></td>
-                        <td>我想开咖啡店</td>
-                        <td>王先生</td>
-                        <td>19878787888</td>
-                        <td>43</td>
-                        <td>餐饮</td>
-                        <td>200</td>
-                        <td>深圳南山西丽</td>
-                        <td>不知道需要买什么，最好能给整套方案</td>
+                        <td><?php echo $userinfo['user_email']; ?></td>
+                        <td><?php echo $userinfo['user_name']; ?></td>
+                        <td><?php echo $userinfo['user_type']; ?></td>
+                        <td><?php echo $userinfo['user_phone']; ?></td>
+                        <td><?php echo $userinfo['user_contact']; ?></td>
+                        <td><?php echo $userinfo['user_address']; ?></td>
+                        <td><?php echo $userinfo['user_status']; ?></td>
+                        <td><?php echo $userinfo['user_brief']; ?></td>
+                        <td><?php echo $userinfo['user_license']; ?></td>
                     </tr>
-                    <tr>
-                        <td><input type="checkbox" class="tc-checkbox"></td>
-                        <td>我想开咖啡店</td>
-                        <td>王先生</td>
-                        <td>19878787888</td>
-                        <td>43</td>
-                        <td>餐饮</td>
-                        <td>200</td>
-                        <td>深圳南山西丽</td>
-                        <td>不知道需要买什么，最好能给整套方案</td>
-                    </tr>
+                <?php endforeach; ?>
                 </tbody>
             </table>
         </div>
