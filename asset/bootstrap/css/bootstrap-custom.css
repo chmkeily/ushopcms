@@ -1,0 +1,61 @@
+body{
+    margin: 10px 20px;
+    background: #EAEAEA;
+    font-size: 13px;
+}
+.form-horizontal{
+    padding: 10px;
+    margin-bottom: 50px;
+    border-radius: 5px;
+    min-width: 500px;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    *border-right-width: 2px;
+    *border-bottom-width: 2px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    -webkit-background-clip: padding-box;
+    -moz-background-clip: padding;
+    background-clip: padding-box;
+    float: none;
+}
+.form-horizontal .control-group {
+    margin-bottom: 15px;
+}
+.form-horizontal .control-label{
+    width: 120px;
+}
+.form-horizontal .controls {
+    margin-left: 140px;
+}
+.table-bordered th, .table-bordered td {
+    border-left: 1px solid #CCC;
+    border-top: 1px solid #CCC;
+}
+.table-bordered thead th{
+    font-size: 14px;
+    padding: 8px 5px;
+    text-align: center;
+    vertical-align: middle;
+    border-bottom: 1px solid gray;
+}
+legend{
+    margin-bottom: 0;
+}
+.error{
+    color: #B94A48;
+    background-color: #F2DEDE;
+    border-color: #EED3D7;
+    padding: 3px 8px;
+    margin: 2px 0;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    width: 205px;
+}

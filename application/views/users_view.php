@@ -7,11 +7,13 @@
    <!--  <link rel="shortcut icon" href="images/fav.ico">
     <link rel="bookmark" href="images/fav.ico"> -->
     <link rel="stylesheet" type="text/css" href="/html/css/pc.css" media="screen">
+	<link rel="stylesheet" type="text/css" href="/asset/bootstrap/css/bootstrap.min.css" media="screen">
+	<!-- link rel="stylesheet" type="text/css" href="/asset/bootstrap/css/bootstrap-custom.css" media="screen" -->
 </head>
 <body id="home">
     <div class="header_min">
         <div class="topnav">
-            <h1><a class="logo" href="#" title="店之宝">店之宝</a></h1>
+            <h1><a class="logo" href="/html/index.html" title="店之宝">店之宝</a></h1>
             <strong class="subnav">管理中心</strong>
         </div>
     </div>
@@ -24,33 +26,25 @@
             </div>
         </div>
         <div class="main">
-            <table class="tc-table tc-table-headcolor">
-                <colgroup><col class="tc-table-col1" style="width:3%">
-                    <col class="tc-table-col2" style="width:22%">
-                    <col class="tc-table-col3" style="width:10%">
-                    <col class="tc-table-col4" style="width:10%">
-                    <col class="tc-table-col5" style="width:10%">
-                    <col class="tc-table-col6" style="width:13%">
-                    <col class="tc-table-col7" style="width:13%">
-                    <col class="tc-table-col8" style="width:9%">
-                    <col class="tc-table-col9" style="width:10%">
-                </colgroup>
-                <thead>
-                    <tr>
-                        <th><input type="checkbox" class="tc-checkbox check-all"></th>
-                        <th><span>邮箱</span></th>
-                        <th><span>名称</span></th>
-                        <th><span>类型</span></th>
-                        <th><span>电话</span></th>
-                        <th><span>联系人</span></th>
-                        <th><span>地址</span></th>
-                        <th><span>状态</span></th>
-                        <th><span>简介</span></th>
-                        <th><span>执照</span></th>
-                    </tr>
-                </thead>
-                <tbody>
-                <?php foreach ($userinfos as $userinfo): ?>
+     
+			<table class="table table-bordered table-striped table-hover table-condensed">
+				<thead style="background: #CCCCCC url(/asset/images/treetable/bg-table-thead.png) repeat-x;">
+					<tr>
+						<th><span>选择</span></th>
+						<th><span>邮箱</span></th>
+						<th><span>名称</span></th>
+						<th><span>类型</span></th>
+						<th><span>电话</span></th>
+						<th><span>联系人</span></th>
+						<th><span>地址</span></th>
+						<th><span>状态</span></th>
+						<th><span>简介</span></th>
+						<th><span>执照</span></th>
+					</tr>
+				</thead>
+			<?php if(isset($userinfos)): ?>
+				<tbody>
+            <?php foreach ($userinfos as $userinfo): ?>
                     <tr id="u<?php echo $userinfo['user_id']; ?>">
                         <td><input type="checkbox" class="tc-checkbox"></td>
                         <td><?php echo $userinfo['user_email']; ?></td>
@@ -60,16 +54,15 @@
                         <td><?php echo $userinfo['user_contact']; ?></td>
                         <td><?php echo $userinfo['user_address']; ?></td>
                         <td><?php echo $userinfo['user_status']; ?></td>
-                        <td><?php echo $userinfo['user_brief']; ?></td>
+                        <td><?php echo substr($userinfo['user_brief'], 0, 20); ?></td>
                         <td><a href="<?php echo $userinfo['user_license']; ?>">查看</a></td>
                     </tr>
-                <?php endforeach; ?>
+            <?php endforeach; ?>
                 </tbody>
-            </table>
+			<?php endif ?>
+			</table>
         </div>
     </div>
-    
-
-    <script src="/html/js/jquery-1.6.1.min.js"></script>
+	
 </body>
 </html>
