@@ -43,21 +43,21 @@
 				<div class="control-group">
 					<label class="control-label">邮箱</label>
 					<div class="controls">
-                        <input type="text" name="phone" class="inputbox" value="<?php echo $userinfo['user_email']; ?>"/>
+                        <input type="text" name="email" class="inputbox" value="<?php echo $userinfo['user_email']; ?>"/>
 					</div>
 				</div>
 				
 				<div class="control-group">
 					<label class="control-label">联系人</label>
 					<div class="controls">
-                        <input type="text" name="phone" class="inputbox" value="<?php echo $userinfo['user_contact']; ?>"/>
+                        <input type="text" name="contact" class="inputbox" value="<?php echo $userinfo['user_contact']; ?>"/>
 					</div>
 				</div>
 				
 				<div class="control-group">
 					<label class="control-label">地址</label>
 					<div class="controls">
-                        <input type="text" name="phone" class="inputbox" value="<?php echo $userinfo['user_address']; ?>"/>
+                        <input type="text" name="address" class="inputbox" value="<?php echo $userinfo['user_address']; ?>"/>
 					</div>
 					</div>
 				</div>
@@ -65,10 +65,24 @@
 				<div class="control-group">
 					<label class="control-label">简介</label>
 					<div class="controls">
-                        <input type="text" name="phone" class="inputbox" value="<?php echo $userinfo['user_brief']; ?>"/>
+                        <input type="text" name="brief" class="inputbox" value="<?php echo $userinfo['user_brief']; ?>"/>
+					</div>
+                </div>
+
+				<div class="control-group">
+					<label class="control-label">详情</label>
+					<div class="controls">
+                        <input type="text" name="intro" class="inputbox" value="<?php echo $userinfo['user_intro']; ?>"/>
 					</div>
 				</div>
-            
+
+ 				<div class="control-group">
+					<div class="controls">
+						<button type="reset" class="btn">重置</button>
+						<button type="submit" class="btn btn-primary">提交</button>
+					</div>
+				</div>
+           
 			</fieldset>
 		</form>
 		

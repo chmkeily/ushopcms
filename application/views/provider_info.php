@@ -66,8 +66,15 @@
 					<div class="controls">
                         <span><?php echo $userinfo['user_brief']; ?></span>
 					</div>
+                </div>
+
+        		<div class="control-group">
+					<label class="control-label">详情</label>
+					<div class="controls">
+                        <span><?php echo $userinfo['user_intro']; ?></span>
+					</div>
 				</div>
-            
+           
 			</fieldset>
 		</form>
 		
