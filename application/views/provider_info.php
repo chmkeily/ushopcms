@@ -24,7 +24,7 @@
         </div>
         <div class="main">
      
-		<form class="form-horizontal span8" method="post" action="/provider/register">
+		<form class="form-horizontal span8" method="post">
 			<fieldset>
 				<div class="control-group">
 					<label class="control-label">名称</label>

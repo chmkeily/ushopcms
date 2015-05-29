@@ -24,47 +24,48 @@
         </div>
         <div class="main">
      
-		<form class="form-horizontal span8" method="post" action="/provider/register">
-			<fieldset>
+		<form class="form-horizontal span8" method="post" action="/provider/update">
+            <fieldset>
 				<div class="control-group">
 					<label class="control-label">名称</label>
                     <div class="controls">
-                        <span><?php echo $userinfo['user_name']; ?></span>
+                        <input type="text" name="name" class="inputbox" value="<?php echo $userinfo['user_name']; ?>"/>
 					</div>
 				</div>
 
 				<div class="control-group">
 					<label class="control-label">电话</label>
 					<div class="controls">
-                        <span><?php echo $userinfo['user_phone']; ?></span>
+                        <input type="text" name="phone" class="inputbox" value="<?php echo $userinfo['user_phone']; ?>"/>
 					</div>
 				</div>
 				
 				<div class="control-group">
 					<label class="control-label">邮箱</label>
 					<div class="controls">
-                        <span><?php echo $userinfo['user_email']; ?></span>
+                        <input type="text" name="phone" class="inputbox" value="<?php echo $userinfo['user_email']; ?>"/>
 					</div>
 				</div>
 				
 				<div class="control-group">
 					<label class="control-label">联系人</label>
 					<div class="controls">
-                        <span><?php echo $userinfo['user_contact']; ?></span>
+                        <input type="text" name="phone" class="inputbox" value="<?php echo $userinfo['user_contact']; ?>"/>
 					</div>
 				</div>
 				
 				<div class="control-group">
 					<label class="control-label">地址</label>
 					<div class="controls">
-                        <span><?php echo $userinfo['user_address']; ?></span>
+                        <input type="text" name="phone" class="inputbox" value="<?php echo $userinfo['user_address']; ?>"/>
+					</div>
 					</div>
 				</div>
 				
 				<div class="control-group">
 					<label class="control-label">简介</label>
 					<div class="controls">
-                        <span><?php echo $userinfo['user_brief']; ?></span>
+                        <input type="text" name="phone" class="inputbox" value="<?php echo $userinfo['user_brief']; ?>"/>
 					</div>
 				</div>
             
