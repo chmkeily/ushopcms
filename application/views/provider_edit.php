@@ -40,12 +40,12 @@
 					</div>
 				</div>
 				
-				<div class="control-group">
+				<!-- div class="control-group">
 					<label class="control-label">邮箱</label>
 					<div class="controls">
                         <input type="text" name="email" class="inputbox" value="<?php echo $userinfo['user_email']; ?>"/>
 					</div>
-				</div>
+				</div -->
 				
 				<div class="control-group">
 					<label class="control-label">联系人</label>
