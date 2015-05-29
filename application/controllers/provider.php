@@ -137,6 +137,8 @@ class Provider extends CI_Controller {
             exit(json_encode($_RSP));
         }
 
+        $updates['user_status'] = 10; //10:已更新
+
         $ret = $this->user_model->update($userid, $updates);
         if (false === $ret)
         {
@@ -191,6 +193,11 @@ class Provider extends CI_Controller {
             $this->load->view('provider_edit', $viewdata);
         }
     }
+
+    /**
+     *
+     */
+    function 
 }
 
 /* End of file provider.php */
