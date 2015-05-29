@@ -195,9 +195,21 @@ class Provider extends CI_Controller {
     }
 
     /**
+     * @brief 优惠劵管理
+     */
+    function coupon()
+    {
+
+    }
+
+    /**
+     * @brief 案例管理
      *
      */
-    function 
+    function case()
+    {
+
+    }
 }
 
 /* End of file provider.php */
