@@ -150,25 +150,18 @@ class Provider extends CI_Controller {
     }
 
     /**
-     * @brief 服务商个人管理主页
-     *
-     */
-    function index()
-    {
-
-    }
-
-    /**
-     * @brief 查询服务商用户列表
+     * @brief 查询/编辑服务商资料
      * <pre>
      *  接受的表单参数:
-     *      userid       用户id (optional)
+     *      userid      用户id (optional)
+     *      isedit      是否是编辑(optional, 非空表示编辑)
      * </pre>
      * @return 操作结果
      */
-    function edit()
+    function index()
     {
         $userid 	= trim($this->input->get_post('userid', TRUE));
+        $isedit 	= trim($this->input->get_post('isedit', TRUE));
 
         if (empty($userid) || !is_numeric($userid))
         {
@@ -188,7 +181,14 @@ class Provider extends CI_Controller {
             $viewdata['userinfo'] = $userinfo;
         }
 
-        $this->load->view('provider_info_view', $viewdata);
+        if (empty(isedit))
+        {
+            $this->load->view('provider_info', $viewdata);
+        }
+        else
+        {
+            $this->load->view('provider_edit', $viewdata);
+        }
     }
 }
 
