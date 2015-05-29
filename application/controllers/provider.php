@@ -206,7 +206,7 @@ class Provider extends CI_Controller {
      * @brief 案例管理
      *
      */
-    function case()
+    function shopcase()
     {
 
     }
