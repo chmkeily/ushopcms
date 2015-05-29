@@ -59,7 +59,6 @@
 					<div class="controls">
                         <input type="text" name="address" class="inputbox" value="<?php echo $userinfo['user_address']; ?>"/>
 					</div>
-					</div>
 				</div>
 				
 				<div class="control-group">
