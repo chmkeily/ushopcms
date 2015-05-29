@@ -157,6 +157,39 @@ class Provider extends CI_Controller {
     {
 
     }
+
+    /**
+     * @brief 查询服务商用户列表
+     * <pre>
+     *  接受的表单参数:
+     *      userid       用户id (optional)
+     * </pre>
+     * @return 操作结果
+     */
+    function edit()
+    {
+        $userid 	= trim($this->input->get_post('userid', TRUE));
+
+        if (empty($userid) || !is_numeric($userid))
+        {
+            $this->load->library('auth');
+            $userid = $this->auth->get_userid();
+            if (null === $userid)
+            {
+                $_RSP['ret'] = -1;
+                $_RSP['msg'] = 'missing userid, or please login';
+                exit(json_encode($_RSP));
+            }
+        }
+
+        $userinfo = $this->user_model->get_user_by_id($userid);
+        if (!empty($userinfo))
+        {
+            viewdata['userinfo'] = $userinfo;
+        }
+
+        $this->load->view('provider_info_view', $viewdata);
+    }
 }
 
 /* End of file provider.php */
