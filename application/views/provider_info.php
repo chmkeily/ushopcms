@@ -78,7 +78,7 @@
            
         		<div class="control-group">
 					<div class="controls">
-                        <button type="button" class="btn btn-primary" target="/provider/index?isedit=true">修改</button>
+                        <a class="btn btn-primary" href="/provider/index?isedit=true">修改</a>
                     </div>
                 </div>
 			</fieldset>
