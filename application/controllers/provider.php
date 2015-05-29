@@ -185,7 +185,7 @@ class Provider extends CI_Controller {
         $userinfo = $this->user_model->get_user_by_id($userid);
         if (!empty($userinfo))
         {
-            viewdata['userinfo'] = $userinfo;
+            $viewdata['userinfo'] = $userinfo;
         }
 
         $this->load->view('provider_info_view', $viewdata);
