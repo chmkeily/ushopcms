@@ -6,6 +6,7 @@
     <title>个人信息中心</title>
     <link rel="stylesheet" type="text/css" href="/html/css/pc.css" media="screen">
 	<link rel="stylesheet" type="text/css" href="/asset/bootstrap/css/bootstrap.min.css" media="screen">
+	<link rel="stylesheet" type="text/css" href="/asset/bootstrap/css/bootstrap-custom.css" media="screen">
 </head>
 <body id="home">
     <div class="header_min">
@@ -24,7 +25,7 @@
         </div>
         <div class="main">
      
-		<form class="form-horizontal span8" method="post">
+		<form class="form-horizontal span8">
 			<fieldset>
 				<div class="control-group">
 					<label class="control-label">名称</label>
