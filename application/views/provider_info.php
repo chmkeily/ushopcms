@@ -76,6 +76,11 @@
 					</div>
 				</div>
            
+        		<div class="control-group">
+					<div class="controls">
+                        <button type="button" class="btn btn-primary" target="/provider/index?isedit=true">修改</button>
+                    </div>
+                </div>
 			</fieldset>
 		</form>
 		
