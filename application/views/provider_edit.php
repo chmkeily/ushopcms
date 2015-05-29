@@ -19,7 +19,7 @@
             <div class="menu">
                 <a class="menu_item active">基本资料</a>
                 <a class="menu_item" href="/provider/coupon">优惠劵</a>
-                <a class="menu_item" href="/provider/case">案例管理</a>
+                <a class="menu_item" href="/provider/shopcase">案例管理</a>
             </div>
         </div>
         <div class="main">
