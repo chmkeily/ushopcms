@@ -3,7 +3,7 @@
     <meta charset="UTF-8">
     <meta name="keywords" content="店之宝,开店,我要开店,店管家,POST机,收银软件,店铺帮手">
     <meta name="description" content="店之宝，提供开店必备软硬件信息。">
-    <title>服务商注册申请</title>
+    <title>修改资料</title>
     <link rel="stylesheet" type="text/css" href="/html/css/pc.css" media="screen">
 	<link rel="stylesheet" type="text/css" href="/asset/bootstrap/css/bootstrap.min.css" media="screen">
 </head>
@@ -29,42 +29,42 @@
 				<div class="control-group">
 					<label class="control-label">名称</label>
                     <div class="controls">
-                        <span><?php $userinfo['user_name']; ?></span>
+                        <span><?php echo $userinfo['user_name']; ?></span>
 					</div>
 				</div>
 
 				<div class="control-group">
 					<label class="control-label">电话</label>
 					<div class="controls">
-                        <span><?php $userinfo['user_phone']; ?></span>
+                        <span><?php echo $userinfo['user_phone']; ?></span>
 					</div>
 				</div>
 				
 				<div class="control-group">
 					<label class="control-label">邮箱</label>
 					<div class="controls">
-                        <span><?php $userinfo['user_email']; ?></span>
+                        <span><?php echo $userinfo['user_email']; ?></span>
 					</div>
 				</div>
 				
 				<div class="control-group">
 					<label class="control-label">联系人</label>
 					<div class="controls">
-                        <span><?php $userinfo['user_contact']; ?></span>
+                        <span><?php echo $userinfo['user_contact']; ?></span>
 					</div>
 				</div>
 				
 				<div class="control-group">
 					<label class="control-label">地址</label>
 					<div class="controls">
-                        <span><?php $userinfo['user_address']; ?></span>
+                        <span><?php echo $userinfo['user_address']; ?></span>
 					</div>
 				</div>
 				
 				<div class="control-group">
 					<label class="control-label">简介</label>
 					<div class="controls">
-                        <span><?php $userinfo['user_brief']; ?></span>
+                        <span><?php echo $userinfo['user_brief']; ?></span>
 					</div>
 				</div>
             
