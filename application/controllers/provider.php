@@ -23,7 +23,8 @@ class Provider extends CI_Controller {
 	*		email				邮箱
 	*		contact 			联系人
 	*		address				地址
-	*		brief				简介
+    *		brief				简介
+    *		...
     *  </pre>
 	*/
 	function register()
@@ -147,7 +148,16 @@ class Provider extends CI_Controller {
         $_RSP['ret'] = 0;
         exit(json_encode($_RSP));
     }
+
+    /**
+     * @brief 服务商个人管理主页
+     *
+     */
+    function index()
+    {
+
+    }
 }
 
-/* End of file user.php */
-/* Location: ./application/controllers/user.php */
+/* End of file provider.php */
+/* Location: ./application/controllers/provider.php */
