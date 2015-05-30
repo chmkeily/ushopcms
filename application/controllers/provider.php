@@ -94,6 +94,8 @@ class Provider extends CI_Controller {
      *      phone       联系方式(手机/电话)
      *      contact     联系人
      *      city        所在城市编码 (optional)
+     *      brief       简介
+     *      intro       详情
      * </pre>
      * @return 操作结果
      */
@@ -103,6 +105,8 @@ class Provider extends CI_Controller {
 		$phone 		= trim($this->input->get_post('phone', TRUE));
 		$contact	= trim($this->input->get_post('contact', TRUE));
 		$city	    = trim($this->input->get_post('city', TRUE));
+		$brief	    = trim($this->input->get_post('brief', TRUE));
+		$intro	    = trim($this->input->get_post('intro', TRUE));
         
         $this->load->library('auth');
         $userid = $this->auth->get_userid();
@@ -129,6 +133,14 @@ class Provider extends CI_Controller {
         if (!empty($city))
         {
             $updates['user_location'] = $city;
+        }
+        if (!empty($brief))
+        {
+            $updates['user_brief'] = $brief;
+        }
+        if (!empty($intro))
+        {
+            $updates['user_intro'] = $intro;
         }
 
         if (empty($updates))
