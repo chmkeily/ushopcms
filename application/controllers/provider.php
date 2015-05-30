@@ -64,7 +64,8 @@ class Provider extends CI_Controller {
 			'user_contact'	=> $contact,
 			'user_type'		=> 0,
 			'user_address'	=> $address,
-			'user_brief'	=> $brief
+            'user_brief'	=> $brief,
+            'user_intro'    => 'null'
 			);
 
 		$this->load->model('user_model');
