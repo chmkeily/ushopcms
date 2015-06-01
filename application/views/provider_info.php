@@ -80,7 +80,7 @@
                 <div class="control-group">
 					<label class="control-label">营业执照</label>
                     <div class="controls">
-                        <a href="<?php echo $userinfo['user_license']; ?>"> <img style="width:80px;height:80px;" src="<?php echo $userinfo['user_license']; ?>"></img> </a>
+                        <a href="<?php echo $userinfo['user_license']; ?>"> <img style="width:80px;height:60px;" src="<?php echo $userinfo['user_license']; ?>"></img> </a>
 					</div>
                 </div>
           

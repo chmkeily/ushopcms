@@ -62,6 +62,13 @@
 				</div>
 				
 				<div class="control-group">
+					<label class="control-label">营业执照</label>
+					<div class="controls">
+                        <input type="text" name="license" class="inputbox" value="<?php echo $userinfo['user_license']; ?>"/>
+					</div>
+                </div>
+
+                <div class="control-group">
 					<label class="control-label">简介</label>
 					<div class="controls">
                         <input type="text" name="brief" class="inputbox" value="<?php echo $userinfo['user_brief']; ?>"/>

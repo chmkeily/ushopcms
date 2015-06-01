@@ -96,6 +96,7 @@ class Provider extends CI_Controller {
      *      city        所在城市编码 (optional)
      *      brief       简介
      *      intro       详情
+     *      license     执照url
      * </pre>
      * @return 操作结果
      */
@@ -107,6 +108,7 @@ class Provider extends CI_Controller {
 		$city	    = trim($this->input->get_post('city', TRUE));
 		$brief	    = trim($this->input->get_post('brief', TRUE));
 		$intro	    = trim($this->input->get_post('intro', TRUE));
+		$license    = trim($this->input->get_post('license', TRUE));
         
         $this->load->library('auth');
         $userid = $this->auth->get_userid();
@@ -141,6 +143,10 @@ class Provider extends CI_Controller {
         if (!empty($intro))
         {
             $updates['user_intro'] = $intro;
+        }
+        if (!empty($license))
+        {
+            $updates['user_license'] = $license;
         }
 
         if (empty($updates))
