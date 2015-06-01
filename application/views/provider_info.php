@@ -21,6 +21,7 @@
                 <a class="menu_item active">基本资料</a>
                 <a class="menu_item" href="/provider/coupon">优惠劵</a>
                 <a class="menu_item" href="/provider/shopcase">案例管理</a>
+                <a class="menu_item">更多服务</a>
             </div>
         </div>
         <div class="main">
@@ -68,14 +69,21 @@
                         <span><?php echo $userinfo['user_brief']; ?></span>
 					</div>
                 </div>
-
+                
         		<div class="control-group">
 					<label class="control-label">详情</label>
 					<div class="controls">
                         <span><?php echo $userinfo['user_intro']; ?></span>
 					</div>
 				</div>
-           
+ 
+                <div class="control-group">
+					<label class="control-label">营业执照</label>
+					<div class="controls">
+                        <img style="width:20px;height:20px;"><?php echo $userinfo['user_license']; ?></img>
+					</div>
+                </div>
+          
         		<div class="control-group">
 					<div class="controls">
                         <a class="btn btn-primary" href="/provider/index?isedit=true">修改</a>
