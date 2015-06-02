@@ -103,6 +103,14 @@
 				var jsonobj = eval("(" + htmlobj.responseText + ")");
 				alert(jsonobj.ret);*/
             });
+
+            $('#usr_passwd').keypress(function(evt){
+                if (13 == evt.keyCode)
+                {
+                    //TO-DO
+                    alert('请点击登陆!');
+                }
+            });
         });
     </script>
 </body>
