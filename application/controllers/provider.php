@@ -239,6 +239,14 @@ class Provider extends CI_Controller {
     }
 
     /**
+     * @brief 订单管理
+     */
+    function requirement()
+    {
+
+    }
+
+    /**
      * @brief 案例管理
      *
      */
