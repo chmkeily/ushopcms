@@ -20,6 +20,7 @@
             <div class="menu">
                 <a class="menu_item active">基本资料</a>
                 <a class="menu_item" href="/provider/coupon">优惠劵</a>
+                <a class="menu_item" href="/provider/requirement">订单管理</a>
                 <a class="menu_item" href="/provider/shopcase">案例管理</a>
                 <a class="menu_item">更多服务</a>
             </div>

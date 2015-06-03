@@ -46,14 +46,14 @@
 */
 
 //$active_group = 'default';
-$active_group = 'ushopkit';
+$active_group = 'ushopcms';
 $active_record = TRUE;
 
 /*
 $db['default']['hostname'] = 'localhost';
 $db['default']['username'] = 'root';
 $db['default']['password'] = 'chm';
-$db['default']['database'] = 'ushopkit';
+$db['default']['database'] = 'ushopcms';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
@@ -68,42 +68,22 @@ $db['default']['stricton'] = FALSE;
 */
 
 //DEV
-$db['ushopkit']['hostname'] = 'localhost';
-$db['ushopkit']['port'] 	= '3306';
-$db['ushopkit']['username'] = 'root';
-$db['ushopkit']['password'] = '';
-$db['ushopkit']['database'] = 'ushopcms';
-$db['ushopkit']['dbdriver'] = 'mysql';
-$db['ushopkit']['dbprefix'] = '';
-$db['ushopkit']['pconnect'] = TRUE;
-$db['ushopkit']['db_debug'] = TRUE;
-$db['ushopkit']['cache_on'] = FALSE;
-$db['ushopkit']['cachedir'] = '';
-$db['ushopkit']['char_set'] = 'utf8';
-$db['ushopkit']['dbcollat'] = 'utf8_general_ci';
-$db['ushopkit']['swap_pre'] = '';
-$db['ushopkit']['autoinit'] = TRUE;
-$db['ushopkit']['stricton'] = FALSE;
-
-//SAE
-/*
-$db['ushopkit']['hostname'] = SAE_MYSQL_HOST_M;
-$db['ushopkit']['port'] 	= SAE_MYSQL_PORT;
-$db['ushopkit']['username'] = SAE_MYSQL_USER;
-$db['ushopkit']['password'] = SAE_MYSQL_PASS;
-$db['ushopkit']['database'] = SAE_MYSQL_DB;
-$db['ushopkit']['dbdriver'] = 'mysql';
-$db['ushopkit']['dbprefix'] = '';
-$db['ushopkit']['pconnect'] = FALSE;
-$db['ushopkit']['db_debug'] = TRUE;
-$db['ushopkit']['cache_on'] = FALSE;
-$db['ushopkit']['cachedir'] = '';
-$db['ushopkit']['char_set'] = 'utf8';
-$db['ushopkit']['dbcollat'] = 'utf8_general_ci';
-$db['ushopkit']['swap_pre'] = '';
-$db['ushopkit']['autoinit'] = TRUE;
-$db['ushopkit']['stricton'] = FALSE;
-*/
+$db['ushopcms']['hostname'] = 'localhost';
+$db['ushopcms']['port'] 	= '3306';
+$db['ushopcms']['username'] = 'root';
+$db['ushopcms']['password'] = '';
+$db['ushopcms']['database'] = 'ushopcms';
+$db['ushopcms']['dbdriver'] = 'mysql';
+$db['ushopcms']['dbprefix'] = '';
+$db['ushopcms']['pconnect'] = TRUE;
+$db['ushopcms']['db_debug'] = TRUE;
+$db['ushopcms']['cache_on'] = FALSE;
+$db['ushopcms']['cachedir'] = '';
+$db['ushopcms']['char_set'] = 'utf8';
+$db['ushopcms']['dbcollat'] = 'utf8_general_ci';
+$db['ushopcms']['swap_pre'] = '';
+$db['ushopcms']['autoinit'] = TRUE;
+$db['ushopcms']['stricton'] = FALSE;
 
 /* End of file database.php */
 /* Location: ./application/config/database.php */

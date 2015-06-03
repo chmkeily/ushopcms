@@ -1,28 +1,18 @@
 <?php
 
-class User_model extends CI_Model
+class Coupon_model extends CI_Model
 {
-	var $TableName = 'tb_user';
+	var $TableName = 'tb_coupon';
     var $FieldMatrix = array(
-            'user_id'       => 'ID',
-            'user_email'    => 'Email',
-            'user_secret'   => 'Secret',
-            'user_type'     => 'Type',
-            'user_name'     => 'Name',
-            'user_icon'     => 'Icon',
-            'user_phone'    => 'Phone',
-            'user_contact'  => 'Contact',
-            'user_address'  => 'Address',
-            'user_location' => 'Location',
-            'user_status'   => 'Status',
-            'user_brief'    => 'Brief',
-            'user_intro'    => 'Intro',
-            'user_license'  => 'License',
-            'user_pid'      => 'ProviderID',
-            'user_verified' => 'Verified',
-            'user_warranted'  => 'Warranted',
-            'user_fieldtag'   => 'FieldTag',
-            'user_permission' => 'Permission',
+            'coupon_id'         => 'ID',
+            'coupon_providerid' => 'ProviderID',
+            'coupon_title'      => 'Title',
+            'coupon_icon'       => 'Icon',
+            'coupon_content'    => 'Content',
+            'coupon_begintime'  => 'BeginTime',
+            'coupon_endtime'    => 'EndTime',
+            'coupon_status'     => 'Status',
+            'coupon_ctime'      => 'CreatedTime',
         );
 
     public function __construct()
@@ -32,9 +22,9 @@ class User_model extends CI_Model
     }
 
     //增加
-    function add($user)
+    function add($coupon)
     {
-        $row = XFORMAT($user, $this->FieldMatrix);
+        $row = XFORMAT($coupon, $this->FieldMatrix);
         if(FALSE == $this->db->insert($this->TableName, $row))
         {   
             return FALSE;
@@ -43,16 +33,16 @@ class User_model extends CI_Model
         return $this->db->insert_id();
     }
     
-    function remove($user_id)
+    function remove($coupon_id)
     {
-		$this->db->where('ID',$user_id)->delete($this->TableName);
+		$this->db->where('ID',$coupon_id)->delete($this->TableName);
     }
     
     ///查询
     /**
     * @return array or FALSE
     */
-    function get_user_by_email($email)
+    function get_coupon_by_email($email)
     {
         $row = $this->db->where('Email', $email)->get($this->TableName)->row_array();
         if (empty($row))
@@ -66,9 +56,9 @@ class User_model extends CI_Model
     /**
     * @return array or FALSE
     */
-	function get_user_by_id($user_id)
+	function get_coupon_by_id($user_id)
 	{
-		$row = $this->db->where('ID', $user_id)->get($this->TableName)->row_array();
+		$row = $this->db->where('ID', $coupon_id)->get($this->TableName)->row_array();
         if (empty($row))
         {
             return FALSE;
@@ -82,9 +72,9 @@ class User_model extends CI_Model
      */
     function create_query($conditions)
     {
-        if (!empty($conditions['userid']))
+        if (!empty($conditions['provider_id']))
         {
-            $this->db->where('ID', $conditions['userid']);
+            $this->db->where('ID', $conditions['provider_id']);
             return $this->db;
         }
 
@@ -99,9 +89,9 @@ class User_model extends CI_Model
     /**
      * 
      */
-    function get_users($conditions = array(), $limit = 10, $offset = 0)
+    function get_coupons($conditions = array(), $limit = 10, $offset = 0)
     {
-        $this->db->select('ID,Type,Email,Name,Phone,Contact,Address,Status,Brief,License,FieldTag');
+        $this->db->select('ID,ProviderID,Title,Icon,Content,Status');
         $rows = $this->create_query($conditions)->get($this->TableName, $limit, $offset)->result_array();
         $items = array();
         foreach ($rows as $row)
@@ -115,7 +105,7 @@ class User_model extends CI_Model
     /**
      * @brief 更新信息
      */
-    function update($userid, $updates = array())
+    function update($couponid, $updates = array())
     {
         $ufields = XFORMAT($updates, $this->FieldMatrix);
         if (empty($ufields))
@@ -123,7 +113,7 @@ class User_model extends CI_Model
             return false;
         }
 
-        $this->db->where('ID', $userid)->update($this->TableName, $ufields);
+        $this->db->where('ID', $couponid)->update($this->TableName, $ufields);
         return $this->db->affected_rows();
     }
 }
