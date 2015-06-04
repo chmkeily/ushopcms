@@ -25,14 +25,21 @@
           </div>
         </div>
         <div class="main">
-            <form class="form-horizontal span8" method="post" action="/provider/coupon">
+            <form class="form-horizontal" method="post" action="/provider/coupon">
                 <fieldset>
 				<div class="control-group">
 					<label class="control-label">标题</label>
                     <div class="controls">
                         <input type="text" name="kw_title" class="inputbox" value=""/>
 					</div>
+                </div>
+
+		        <div class="control-group">
+					<div class="controls">
+						<button type="submit" class="btn btn-primary">提交</button>
+					</div>
 				</div>
+           
     			</fieldset>
 		    </form>
 
