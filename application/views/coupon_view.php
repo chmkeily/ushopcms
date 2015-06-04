@@ -31,11 +31,6 @@
 					<label class="control-label">标题</label>
                     <div class="controls">
                         <input type="text" name="kw_title" class="inputbox" value=""/>
-					</div>
-                </div>
-
-		        <div class="control-group">
-					<div class="controls">
 						<button type="submit" class="btn btn-primary">提交</button>
 					</div>
 				</div>
