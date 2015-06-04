@@ -31,7 +31,8 @@
 					<label class="control-label">标题</label>
                     <div class="controls">
                         <input type="text" name="kw_title" class="inputbox" value=""/>
-						<button type="submit" class="btn btn-primary">提交</button>
+						<button type="submit" class="btn btn-primary">查询</button>
+						<a class="btn btn-primary" href="#">添加</a>
 					</div>
 				</div>
            
