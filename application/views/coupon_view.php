@@ -25,7 +25,17 @@
           </div>
         </div>
         <div class="main">
-     
+            <form class="form-horizontal span8" method="post" action="/provider/coupon">
+                <fieldset>
+				<div class="control-group">
+					<label class="control-label">标题</label>
+                    <div class="controls">
+                        <input type="text" name="kw_title" class="inputbox" value=""/>
+					</div>
+				</div>
+    			</fieldset>
+		    </form>
+
 			<table class="table table-bordered table-striped table-hover table-condensed">
 				<thead style="background: #CCCCCC url(/asset/images/treetable/bg-table-thead.png) repeat-x;">
 					<tr>
