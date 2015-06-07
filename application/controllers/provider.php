@@ -18,23 +18,20 @@ class Provider extends CI_Controller {
 	* @brief 服务商注册申请
 	*  <pre>
 	*	接受的表单数据：
+	*		email				邮箱
+	*		secret				密码
 	*		name				服务商名称
 	*		phone				电话
-	*		email				邮箱
 	*		contact 			联系人
-	*		address				地址
-    *		brief				简介
-    *		...
     *  </pre>
 	*/
 	function register()
 	{
+		$email		= trim($this->input->get_post('email', TRUE));
+		$secret		= trim($this->input->get_post('name', TRUE));
 		$name		= trim($this->input->get_post('name', TRUE));
 		$phone		= trim($this->input->get_post('phone', TRUE));
-		$email		= trim($this->input->get_post('email', TRUE));
 		$contact 	= trim($this->input->get_post('contact', TRUE));
-		$address	= trim($this->input->get_post('address', TRUE));
-		$brief		= trim($this->input->get_post('brief', TRUE));
 
 		if (empty($name))
 		{
@@ -42,7 +39,14 @@ class Provider extends CI_Controller {
 			$_RSP['msg'] = 'mising name';
 			exit(json_encode($_RSP));
 		}
-		
+        
+        if (empty($secret))
+		{
+			$_RSP['ret'] = 101;
+			$_RSP['msg'] = 'mising password';
+			exit(json_encode($_RSP));
+        }
+
 		if (empty($phone))
 		{
 			$_RSP['ret'] = 102;
@@ -59,12 +63,13 @@ class Provider extends CI_Controller {
 		
 		$user = array(
 			'user_email' 	=> $email,
+			'user_secret' 	=> $secret,
 			'user_phone'	=> $phone,
 			'user_name'		=> $name,
 			'user_contact'	=> $contact,
 			'user_type'		=> 0,
-			'user_address'	=> $address,
-            'user_brief'	=> $brief,
+			'user_address'	=> 'null',
+            'user_brief'	=> 'null',
             'user_intro'    => 'null'
 			);
 

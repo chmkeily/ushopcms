@@ -25,7 +25,21 @@
      
 		<form class="form-horizontal span8" method="post" action="/provider/register">
 			<fieldset>
-				<div class="control-group">
+			    <div class="control-group">
+					<label class="control-label">邮箱</label>
+					<div class="controls">
+						<input type="text" name="email" class="inputbox" value=""/>
+					</div>
+                </div>
+                
+                <div class="control-group">
+					<label class="control-label">密码</label>
+					<div class="controls">
+						<input type="passwd" name="secret" class="inputbox" value=""/>
+					</div>
+                </div>
+
+		        <div class="control-group">
 					<label class="control-label">服务商名称</label>
 					<div class="controls">
 						<input type="text" name="name" class="inputbox" value=""/>
@@ -36,13 +50,6 @@
 					<label class="control-label">电话</label>
 					<div class="controls">
 						<input type="text" name="phone" class="inputbox" value=""/>
-					</div>
-				</div>
-				
-				<div class="control-group">
-					<label class="control-label">邮箱</label>
-					<div class="controls">
-						<input type="text" name="email" class="inputbox" value=""/>
 					</div>
 				</div>
 				
