@@ -28,7 +28,7 @@ class Provider extends CI_Controller {
 	function register()
 	{
 		$email		= trim($this->input->get_post('email', TRUE));
-		$secret		= trim($this->input->get_post('name', TRUE));
+		$secret		= trim($this->input->get_post('secret', TRUE));
 		$name		= trim($this->input->get_post('name', TRUE));
 		$phone		= trim($this->input->get_post('phone', TRUE));
 		$contact 	= trim($this->input->get_post('contact', TRUE));
