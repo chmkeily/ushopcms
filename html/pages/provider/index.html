@@ -6,7 +6,6 @@
     <title>个人信息中心</title>
     <link rel="stylesheet" type="text/css" href="/html/css/pc.css" media="screen">
 	<link rel="stylesheet" type="text/css" href="/asset/bootstrap/css/bootstrap.min.css" media="screen">
-	<!-- link rel="stylesheet" type="text/css" href="/asset/bootstrap/css/bootstrap-custom.css" media="screen" -->
 </head>
 <body id="home">
     <div class="header_min">
@@ -18,17 +17,43 @@
     <div class="manage_container">
         <div class="aside">
             <div class="menu">
-                <a class="menu_item active">基本资料</a>
-                <a class="menu_item" href="/provider/coupon">优惠劵</a>
-                <a class="menu_item" href="/provider/requirement">订单管理</a>
-                <a class="menu_item" href="/provider/shopcase">案例管理</a>
-                <a class="menu_item">更多服务</a>
+                <a class="menu_item active" onclick="on_menu_action('mid_base')">基本资料</a>
+                <a class="menu_item" onclick="on_menu_action('mid_coupon')">优惠劵</a>
+                <a class="menu_item" onclick="on_menu_action('mid_order')">订单管理</a>
+                <a class="menu_item" onclick="on_menu_action('mid_scase')">案例管理</a>
+                <a class="menu_item" onclick="on_menu_action('mid_more')">更多服务</a>
             </div>
         </div>
-        <div class="main">
-        	<iframe style="width:100%;height:100%;" src="/provider/index"></iframe>
+		<div class="main">
+        	<iframe id="id_main_frm" style="border:none;width:100%;height:100%;" src="/provider/index"></iframe>
         </div>
     </div>
 	
+	<script src="/html/js/jquery-1.6.1.min.js"></script>
+	<script type="text/javascript">
+		function on_menu_action(evt)
+		{
+			switch(evt)
+			{
+				case 'mid_base':
+					$('#id_main_frm').attr('src', "/provider/index");
+					break;
+				case 'mid_coupon':
+					$('#id_main_frm').attr('src', "/provider/coupon");
+					break;
+				case 'mid_require':
+					$('#id_main_frm').attr('src', "/provider/requirement");
+					break;
+				case 'mid_scase':
+					$('#id_main_frm').attr('src', "/provider/shopcase");
+					break;
+				case 'mid_more':
+					alert('正在玩命开发中.../汗流浃背');
+					break;
+				default:
+					break;
+			}
+		}
+	</script>
 </body>
 </html>
