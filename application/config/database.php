@@ -45,46 +45,26 @@
 | the active record class
 */
 
-//$active_group = 'default';
-$active_group = 'ushopcms';
+$active_group = 'ushopkit';
 $active_record = TRUE;
 
-/*
-$db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'root';
-$db['default']['password'] = 'chm';
-$db['default']['database'] = 'ushopcms';
-$db['default']['dbdriver'] = 'mysql';
-$db['default']['dbprefix'] = '';
-$db['default']['pconnect'] = TRUE;
-$db['default']['db_debug'] = TRUE;
-$db['default']['cache_on'] = FALSE;
-$db['default']['cachedir'] = '';
-$db['default']['char_set'] = 'utf8';
-$db['default']['dbcollat'] = 'utf8_general_ci';
-$db['default']['swap_pre'] = '';
-$db['default']['autoinit'] = TRUE;
-$db['default']['stricton'] = FALSE;
-*/
-
 //USHOPKIT
-$db['ushopcms']['hostname'] = 'localhost';
-$db['ushopcms']['port'] 	= '3306';
-$db['ushopcms']['username'] = 'root';
-$db['ushopcms']['password'] = '';
-$db['ushopcms']['database'] = 'ushopkit';
-$db['ushopcms']['dbdriver'] = 'mysql';
-$db['ushopcms']['dbprefix'] = '';
-$db['ushopcms']['pconnect'] = TRUE;
-$db['ushopcms']['db_debug'] = TRUE;
-$db['ushopcms']['cache_on'] = FALSE;
-$db['ushopcms']['cachedir'] = '';
-$db['ushopcms']['char_set'] = 'utf8';
-$db['ushopcms']['dbcollat'] = 'utf8_general_ci';
-$db['ushopcms']['swap_pre'] = '';
-$db['ushopcms']['autoinit'] = TRUE;
-$db['ushopcms']['stricton'] = FALSE;
-
+$db['ushopkit']['hostname'] = 'localhost';
+$db['ushopkit']['port'] 	= '3306';
+$db['ushopkit']['username'] = 'root';
+$db['ushopkit']['password'] = '';
+$db['ushopkit']['database'] = 'ushopkit';
+$db['ushopkit']['dbdriver'] = 'mysql';
+$db['ushopkit']['dbprefix'] = '';
+$db['ushopkit']['pconnect'] = TRUE;
+$db['ushopkit']['db_debug'] = TRUE;
+$db['ushopkit']['cache_on'] = FALSE;
+$db['ushopkit']['cachedir'] = '';
+$db['ushopkit']['char_set'] = 'utf8';
+$db['ushopkit']['dbcollat'] = 'utf8_general_ci';
+$db['ushopkit']['swap_pre'] = '';
+$db['ushopkit']['autoinit'] = TRUE;
+$db['ushopkit']['stricton'] = FALSE;
 
 //USHOPCMS
 $db['ushopcms']['hostname'] = 'localhost';
