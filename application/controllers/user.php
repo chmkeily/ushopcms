@@ -66,7 +66,11 @@ class User extends CI_Controller {
 	function logout()
 	{
 		$this->load->library('auth');
-		$this->auth->destroy_session();
+        $this->auth->destroy_session();
+
+        $_RSP['ret'] = 0;
+        $_RSP['msg'] = 'logged out';
+        exit(json_encode($_RSP));
 	}
 
 	/**

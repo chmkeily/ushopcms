@@ -22,6 +22,7 @@
                 <a class="menu_item" onclick="on_menu_action('mid_require')">订单管理</a>
                 <a class="menu_item" onclick="on_menu_action('mid_scase')">案例管理</a>
                 <a class="menu_item" onclick="on_menu_action('mid_more')">更多服务</a>
+                <a class="menu_item" onclick="on_logout(true)">退出</a>
             </div>
         </div>
 		<div class="main">
@@ -53,7 +54,22 @@
 				default:
 					break;
 			}
-		}
+        }
+
+        function logout(prompt)
+        {
+            $.ajax({
+                url:"/user/logout",
+                type:"post",
+                dataType:"json",
+                success:function(result){
+                    location.href = "/html/index.html";
+                },
+                error:function(e){
+                    //do nothing
+                }
+            });
+        }
 	</script>
 </body>
 </html>
