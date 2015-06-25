@@ -9,24 +9,8 @@
 	<!-- link rel="stylesheet" type="text/css" href="/asset/bootstrap/css/bootstrap-custom.css" media="screen" -->
 </head>
 <body id="home">
-    <div class="header_min">
-        <div class="topnav">
-            <h1><a class="logo" href="/html" title="店之宝">店之宝</a></h1>
-            <strong class="subnav">个人中心</strong>
-        </div>
-    </div>
-    <div class="manage_container">
-        <div class="aside">
-            <div class="menu">
-                <a class="menu_item active">基本资料</a>
-                <a class="menu_item" href="/provider/coupon">优惠劵</a>
-                <a class="menu_item" href="/provider/requirement">订单管理</a>
-                <a class="menu_item" href="/provider/shopcase">案例管理</a>
-                <a class="menu_item">更多服务</a>
-            </div>
-        </div>
-        <div class="main">
-     
+    
+	<div>
 		<form class="form-horizontal span8">
 			<fieldset>
 				<div class="control-group">
@@ -93,8 +77,7 @@
 			</fieldset>
 		</form>
 		
-        </div>
-    </div>
+	</div>
 	
 </body>
 </html>

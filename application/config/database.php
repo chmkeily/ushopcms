@@ -67,7 +67,26 @@ $db['default']['autoinit'] = TRUE;
 $db['default']['stricton'] = FALSE;
 */
 
-//DEV
+//USHOPKIT
+$db['ushopcms']['hostname'] = 'localhost';
+$db['ushopcms']['port'] 	= '3306';
+$db['ushopcms']['username'] = 'root';
+$db['ushopcms']['password'] = '';
+$db['ushopcms']['database'] = 'ushopkit';
+$db['ushopcms']['dbdriver'] = 'mysql';
+$db['ushopcms']['dbprefix'] = '';
+$db['ushopcms']['pconnect'] = TRUE;
+$db['ushopcms']['db_debug'] = TRUE;
+$db['ushopcms']['cache_on'] = FALSE;
+$db['ushopcms']['cachedir'] = '';
+$db['ushopcms']['char_set'] = 'utf8';
+$db['ushopcms']['dbcollat'] = 'utf8_general_ci';
+$db['ushopcms']['swap_pre'] = '';
+$db['ushopcms']['autoinit'] = TRUE;
+$db['ushopcms']['stricton'] = FALSE;
+
+
+//USHOPCMS
 $db['ushopcms']['hostname'] = 'localhost';
 $db['ushopcms']['port'] 	= '3306';
 $db['ushopcms']['username'] = 'root';
