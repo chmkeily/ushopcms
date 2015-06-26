@@ -77,7 +77,10 @@
             type:'post',
             dataType:'json',
             success:function(result){
-                //to-do
+                if (0 != result.ret)
+                {
+                    location.href = '/html/login.html';
+                }
             },
             error:function(e){
                 location.href = '/html/login.html';
