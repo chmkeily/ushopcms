@@ -237,6 +237,7 @@ class User extends CI_Controller {
         	}
 		}
 
+		$this->load->model('user_model');
         $profile = $this->user_model->get_profile_by_id($userid);
         if (false === $profile)
         {
