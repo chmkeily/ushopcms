@@ -214,31 +214,40 @@ class User extends CI_Controller {
 
     ///////以下主要为业务内容
     /**
-     * @brief 查询服务商用户列表
+     * @brief 查询用户个人资料
      * <pre>
      *  接受的表单参数:
      *      userid       用户id
-     *      status       用户状态(注册中,修改/资料审核中,运营中等)
      * </pre>
      * @return 操作结果
      */
-    function profiles()
+    function profile()
     {
 		$userid 	= trim($this->input->get_post('userid', TRUE));
-        $status 	= trim($this->input->get_post('status', TRUE));
 
-        $conditions = array();
-        if (!empty($userid))
+		if (empty($userid))
+		{
+			$this->load->library('auth');
+        	$userid = $this->auth->get_userid();
+        	if (null === $userid)
+        	{
+        	    $_RSP['ret'] = ERR_NO_SESSION;
+        	    $_RSP['msg'] = 'you have to login first';
+        	    exit(json_encode($_RSP));
+        	}
+		}
+
+        $profile = $this->user_model->get_profile_by_id($userid);
+        if (false === $profile)
         {
-            $conditions['userid'] = $userid;
-        }
-        if (!empty($status))
-        {
-            $conditions['status'] = $status;
+        	$_RSP['ret'] = -1;
+        	$_RSP['msg'] = 'system error';
+        	exit(json_encode($_RSP));
         }
 
-        $userinfos = $this->user_model->get_users($conditions);
-        //TODO
+        $_RSP['ret'] = 0;
+        $_RSP['profile'] = $profile;
+        exit(json_encode($_RSP));
     }
 }
 

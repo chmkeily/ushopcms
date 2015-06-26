@@ -43,9 +43,9 @@ class User_model extends CI_Model
         return $this->db->insert_id();
     }
     
-    function remove($user_id)
+    function remove($userid)
     {
-		$this->db->where('ID',$user_id)->delete($this->TableName);
+		$this->db->where('ID', $userid)->delete($this->TableName);
     }
     
     ///查询
@@ -66,9 +66,24 @@ class User_model extends CI_Model
     /**
     * @return array or FALSE
     */
-	function get_user_by_id($user_id)
+	function get_user_by_id($userid)
 	{
-		$row = $this->db->where('ID', $user_id)->get($this->TableName)->row_array();
+		$row = $this->db->where('ID', $userid)->get($this->TableName)->row_array();
+        if (empty($row))
+        {
+            return FALSE;
+        }
+
+        return XFORMAT($row, $this->FieldMatrix, FALSE);
+    }
+
+    /**
+    * @return 获取用户基本信息
+    */
+    function get_profile_by_id($userid)
+    {
+        $this->db->select('ID,Type,Email,Name,Phone,Contact');
+        $row = $this->db->where('ID', $userid)->get($this->TableName)->row_array();
         if (empty($row))
         {
             return FALSE;
