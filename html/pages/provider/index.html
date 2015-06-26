@@ -71,5 +71,18 @@
             });
         }
 	</script>
+    <script type="text/javascript">
+        $.ajax({
+            url:'/user/profile',
+            type:'post',
+            dataType:'json',
+            success:function(result){
+                //to-do
+            },
+            error:function(e){
+                location.href = '/html/login.html';
+            }
+        });
+    </script>
 </body>
 </html>
