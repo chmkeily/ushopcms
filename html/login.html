@@ -45,70 +45,76 @@
     <script src="js/jquery-1.6.1.min.js"></script>
     <script src="js/jquery.md5.js"></script>
     <script>
-        $(document).ready(function(){
-            $('#login_btn').bind('click', function(){
-                var account = $('#usr_account').val();
-                var password = $('#usr_passwd').val();
-                var timestamp = Math.floor( (new Date()).getTime()/1000 );
-                var secret = $.md5(password + timestamp);
-                var url = "/user/login";
+        function login()
+        {
+            var account = $('#usr_account').val();
+            var password = $('#usr_passwd').val();
+            var timestamp = Math.floor( (new Date()).getTime()/1000 );
+            var secret = $.md5(password + timestamp);
+            var url = "/user/login";
 
-                //#0 使用原始Ajax函数
-                $.ajax({
-                    url:url,
-                    type:"post",
-                    data:{
-                        email:account,
-                        secret:secret,
-                        timestamp:timestamp
-                    },
-                    dataType:"json",
-                    success: function(result){
-                        if (0 == result.ret)
-                        {
-                            location.href = "/html/pages/provider/index.html";
-                        }
-                        else
-                        {
-                            alert("登录失败(ret:" + result.ret + ")");
-                        }
-                    },
-                    error:function(e){
-                        alert("[error]" + e);
+            //#0 使用原始Ajax函数
+            $.ajax({
+                url:url,
+                type:"post",
+                data:{
+                    email:account,
+                    secret:secret,
+                    timestamp:timestamp
+                },
+                dataType:"json",
+                success: function(result){
+                    if (0 == result.ret)
+                    {
+                        location.href = "/html/pages/provider/index.html";
                     }
-                });
-
-                //#1 使用post方法发送post请求
-                /*$.post(url, {
-                        email:account,
-                        secret:password,
-                        timestamp:1430462931
-                    },
-                    function(result){
-                        alert(result.ret);
-                    }, "json");*/
-
-                //var requrl = "/user/login?email=" + account + "&secret=" + password + "&timestamp=" + 1430462931;
-                //#2 使用getJSON方法发送get请求
-				/*$.getJSON(requrl, function(rsp){
-					alert(rsp.ret);
-				});*/
-
-                //#3 使用eval自行解析json
-                /*var htmlobj = $.ajax({
-                    url:requrl,
-                    async:false,
-					dataType:'json'
-                });
-				var jsonobj = eval("(" + htmlobj.responseText + ")");
-				alert(jsonobj.ret);*/
+                    else
+                    {
+                        alert("登录失败(ret:" + result.ret + ")");
+                    }
+                },
+                error:function(e){
+                    alert("[error]" + e);
+                }
             });
 
+            //#1 使用post方法发送post请求
+            /*$.post(url, {
+                    email:account,
+                    secret:password,
+                    timestamp:1430462931
+                },
+                function(result){
+                    alert(result.ret);
+                }, "json");*/
+
+            //var requrl = "/user/login?email=" + account + "&secret=" + password + "&timestamp=" + 1430462931;
+            //#2 使用getJSON方法发送get请求
+            /*$.getJSON(requrl, function(rsp){
+                alert(rsp.ret);
+            });*/
+
+            //#3 使用eval自行解析json
+            /*var htmlobj = $.ajax({
+                url:requrl,
+                async:false,
+                dataType:'json'
+            });
+            var jsonobj = eval("(" + htmlobj.responseText + ")");
+            alert(jsonobj.ret);*/
+        }
+
+        $(document).ready(function(){
+            //点击登陆
+            $('#login_btn').bind('click', function(){
+                login();
+            });
+
+            //回车登录
             $('#usr_passwd').keypress(function(evt){
                 if (13 == evt.keyCode)
                 {
-                    //TO-DO
-                    alert('请点击登陆!让我先偷下懒...');
+                    login();
                 }
             });
         });
