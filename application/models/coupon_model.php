@@ -18,7 +18,7 @@ class Coupon_model extends CI_Model
     public function __construct()
     {
         parent::__construct();
-        $this->load->database('ushopkit');
+        $this->load->database('ushopcms');
     }
 
     //增加
