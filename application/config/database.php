@@ -45,26 +45,8 @@
 | the active record class
 */
 
-$active_group = 'ushopkit';
+$active_group = 'ushopcms';
 $active_record = TRUE;
-
-//USHOPKIT
-$db['ushopkit']['hostname'] = 'localhost';
-$db['ushopkit']['port'] 	= '3306';
-$db['ushopkit']['username'] = 'root';
-$db['ushopkit']['password'] = '';
-$db['ushopkit']['database'] = 'ushopkit';
-$db['ushopkit']['dbdriver'] = 'mysql';
-$db['ushopkit']['dbprefix'] = '';
-$db['ushopkit']['pconnect'] = TRUE;
-$db['ushopkit']['db_debug'] = TRUE;
-$db['ushopkit']['cache_on'] = FALSE;
-$db['ushopkit']['cachedir'] = '';
-$db['ushopkit']['char_set'] = 'utf8';
-$db['ushopkit']['dbcollat'] = 'utf8_general_ci';
-$db['ushopkit']['swap_pre'] = '';
-$db['ushopkit']['autoinit'] = TRUE;
-$db['ushopkit']['stricton'] = FALSE;
 
 //USHOPCMS
 $db['ushopcms']['hostname'] = 'localhost';
