@@ -51,10 +51,7 @@ class Requirement extends CI_Controller {
 		}
 
         $conditions = array();
-        if (!empty($userid))
-        {
-            $conditions['requirement_providerid'] = $userid;
-        }
+        $conditions['requirement_providerid'] = $providerid;
         if (!empty($type))
         {
             $conditions['requirement_type'] = $type;
