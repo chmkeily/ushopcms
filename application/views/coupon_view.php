@@ -43,8 +43,8 @@
                         	<?php echo $coupon['coupon_id']; ?></a>
                         </td>
                         <td><?php echo $coupon['coupon_title']; ?></td>
-                        <td><img style="width=20px;height=20px;" src="<?php echo $coupon['coupon_icon']; ?>"/></td>
-                        <td><?php echo substr($coupon['coupon_content'], 0, 20); ?></td>
+                        <td><img style="width=10px;height=10px;" src="<?php echo $coupon['coupon_icon']; ?>"/></td>
+                        <td><?php echo substr($coupon['coupon_content'], 0, 50); ?></td>
                         <td><?php echo date('Y-m-d H:i:s', $coupon['coupon_begintime']); ?></td>
                         <td><?php echo date('Y-m-d H:i:s', $coupon['coupon_endtime']); ?></td>
                         <td><?php echo $coupon['coupon_status']; ?></td>
