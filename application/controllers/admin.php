@@ -289,6 +289,13 @@ class Admin extends CI_Controller {
         }
         $userid = $user['user_id'];
 
+        if (10 == $user['user_status'])
+        {
+            $_RSP['ret'] = -2;
+            $_RSP['msg'] = '此状态下不能发布';
+            exit(json_encode($_RSP));
+        }
+
         $provider = array(
                 'provider_id'        => $user['user_id'],
                 'provider_name'      => $user['user_name'],
@@ -308,7 +315,7 @@ class Admin extends CI_Controller {
             $id = $this->provider_model->add($provider);
             if (false === $id)
             {
-                $_RSP['ret'] = -2;
+                $_RSP['ret'] = -3;
                 $_RSP['msg'] = '发布到生产环境失败';
                 exit(json_encode($_RSP));
             }
