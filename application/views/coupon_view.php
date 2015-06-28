@@ -27,7 +27,6 @@
 				<thead style="background: #CCCCCC url(/asset/images/treetable/bg-table-thead.png) repeat-x;">
 					<tr>
 						<th><span>ID</span></th>
-						<th><span>服务商</span></th>
 						<th><span>标题</span></th>
 						<th><span>图标</span></th>
 						<th><span>内容</span></th>
@@ -41,7 +40,6 @@
             <?php foreach ($coupons as $coupon): ?>
                     <tr id="u<?php echo $coupon['coupon_id']; ?>">
                         <td><?php echo $coupon['coupon_id']; ?></td>
-                        <td><?php echo $coupon['coupon_providerid']; ?></td>
                         <td><?php echo $coupon['coupon_title']; ?></td>
                         <td><img style="width=20px;height=20px;" src="<?php echo $coupon['coupon_icon']; ?>"/></td>
                         <td><?php echo substr($coupon['coupon_content'], 0, 20); ?></td>
