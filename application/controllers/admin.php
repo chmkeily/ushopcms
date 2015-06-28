@@ -289,11 +289,23 @@ class Admin extends CI_Controller {
         }
         $userid = $user['user_id'];
 
+        $provider = array(
+                'provider_id'        => $user['user_id'],
+                'provider_name'      => $user['user_name'],
+                'provider_icon'      => $user['user_icon'],
+                'provider_license'   => $user['user_license'],
+                'provider_location'  => $user['user_location'],
+                'provider_contact'   => $user['user_contact'],
+                'provider_address'   => $user['user_address'],
+                'provider_brief'     => $user['user_brief'],
+                'provider_intro'     => $user['user_intro'],
+            );
+
         $this->load->model('provider_model');
         if (0 === $user['user_status'])
         {
             //初次发布
-            $id = $this->provider_model->add($user);
+            $id = $this->provider_model->add($provider);
             if (false === $id)
             {
                 $_RSP['ret'] = -2;
@@ -304,7 +316,7 @@ class Admin extends CI_Controller {
         else
         {
             //发布更新
-            $this->provider_model->update($userid, $user);
+            $this->provider_model->update($userid, $provider);
         }
 
         //更新状态
