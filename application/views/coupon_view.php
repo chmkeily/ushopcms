@@ -9,7 +9,7 @@
 </head>
 <body id="home">
 		<div>
-            <form class="form-horizontal" method="post" action="/provider/coupon">
+            <form class="form-horizontal" method="post" action="/coupon/index">
                 <fieldset>
 				<div class="control-group">
 					<label class="control-label">标题</label>

@@ -21,6 +21,7 @@ class Coupon extends CI_Controller {
 	*	接受的表单数据：
 	*		start_idx	列表开始下标
 	*		length		页大小/列表长度
+    *       kw_title    标题查询关键字(可选)
 	*  </pre>
 	* @return 操作结果
 	*/
@@ -28,6 +29,7 @@ class Coupon extends CI_Controller {
 	{
 		$offset		= trim($this->input->get_post('start_idx', TRUE));
 		$length		= trim($this->input->get_post('length', TRUE));
+        $kw_title   = trim($this->input->get_post('kw_title', TRUE));
 
 		//检查&修正参数
 		if (!is_numeric($offset))
