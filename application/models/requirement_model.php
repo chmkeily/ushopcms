@@ -57,6 +57,11 @@ class Requirement_model extends CI_Model
             $this->db->where('OwnerID', $conditions['requirement_ownerid']);
         }
 
+        if( !empty($conditions["requirement_providerid"]) )
+        {
+            $this->db->where('ProviderID', $conditions['requirement_providerid']);
+        }
+
         if( !empty($conditions["requirement_type"]) )
         {
             $this->db->where('Type', $conditions['requirement_type']);
