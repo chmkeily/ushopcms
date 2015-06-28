@@ -60,8 +60,7 @@ class Coupon_model extends CI_Model
     {
         if (!empty($conditions['provider_id']))
         {
-            $this->db->where('ID', $conditions['provider_id']);
-            return $this->db;
+            $this->db->where('ProviderID', $conditions['provider_id']);
         }
 
         if (!empty($conditions['status']))
