@@ -17,11 +17,11 @@
     <div class="manage_container">
         <div class="aside">
             <div class="menu">
-                <a class="menu_item active" onclick="on_menu_action('mid_base')">基本资料</a>
-                <a class="menu_item" onclick="on_menu_action('mid_coupon')">优惠劵</a>
-                <a class="menu_item" onclick="on_menu_action('mid_require')">订单管理</a>
-                <a class="menu_item" onclick="on_menu_action('mid_scase')">案例管理</a>
-                <a class="menu_item" onclick="on_menu_action('mid_more')">更多服务</a>
+                <a id="menu_1" class="menu_item active" onclick="on_menu_action(1)">基本资料</a>
+                <a id="menu_2" class="menu_item" onclick="on_menu_action(2)">优惠劵</a>
+                <a id="menu_3" class="menu_item" onclick="on_menu_action(3)">订单管理</a>
+                <a id="menu_4" class="menu_item" onclick="on_menu_action(4)">案例管理</a>
+                <a id="menu_5" class="menu_item" onclick="on_menu_action(5)">更多服务</a>
                 <a class="menu_item" onclick="logout(true)">退出</a>
             </div>
         </div>
@@ -32,28 +32,35 @@
 	
 	<script src="/html/js/jquery-1.6.1.min.js"></script>
 	<script type="text/javascript">
-		function on_menu_action(evt)
+		function on_menu_action(mid)
 		{
-			switch(evt)
+			switch(mid)
 			{
-				case 'mid_base':
+				case 1:
 					$('#id_main_frm').attr('src', "/provider/index");
 					break;
-				case 'mid_coupon':
+				case 2:
 					$('#id_main_frm').attr('src', "/coupon/index");
 					break;
-				case 'mid_require':
-					$('#id_main_frm').attr('src', "/provider/requirement");
+				case 3:
+					$('#id_main_frm').attr('src', "/requirement/index");
 					break;
-				case 'mid_scase':
-					$('#id_main_frm').attr('src', "/provider/shopcase");
+				case 4:
+					$('#id_main_frm').attr('src', "shopcase/index");
 					break;
-				case 'mid_more':
+				case 5:
 					alert('正在玩命开发中.../汗流浃背');
 					break;
 				default:
 					break;
 			}
+
+            //切换选中到菜单
+            for (var i = 1; i < 6; ++ i)
+            {
+                $("#menu_"+i).removeClass("active");
+            }
+            $("#menu_"+mid).addClass("active");
         }
 
         function logout(prompt)
