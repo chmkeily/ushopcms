@@ -217,23 +217,6 @@ class Provider extends CI_Controller {
             $this->load->view('provider_edit', $viewdata);
         }
     }
-
-    /**
-     * @brief 订单管理
-     */
-    function requirement()
-    {
-
-    }
-
-    /**
-     * @brief 案例管理
-     *
-     */
-    function shopcase()
-    {
-
-    }
 }
 
 /* End of file provider.php */

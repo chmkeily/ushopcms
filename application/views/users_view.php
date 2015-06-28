@@ -28,7 +28,6 @@
 			<table class="table table-bordered table-striped table-hover table-condensed">
 				<thead style="background: #CCCCCC url(/asset/images/treetable/bg-table-thead.png) repeat-x;">
 					<tr>
-						<th><span>选择</span></th>
 						<th><span>邮箱</span></th>
 						<th><span>名称</span></th>
 						<th><span>类型</span></th>
@@ -38,13 +37,13 @@
 						<th><span>状态</span></th>
 						<th><span>简介</span></th>
 						<th><span>执照</span></th>
+                        <th><span>操作</span></th>
 					</tr>
 				</thead>
 			<?php if(isset($userinfos)): ?>
 				<tbody>
             <?php foreach ($userinfos as $userinfo): ?>
                     <tr id="u<?php echo $userinfo['user_id']; ?>">
-                        <td><input type="checkbox" class="tc-checkbox"></td>
                         <td><?php echo $userinfo['user_email']; ?></td>
                         <td><?php echo $userinfo['user_name']; ?></td>
                         <td><?php echo $userinfo['user_type']; ?></td>
@@ -54,6 +53,7 @@
                         <td><?php echo $userinfo['user_status']; ?></td>
                         <td><?php echo substr($userinfo['user_brief'], 0, 20); ?></td>
                         <td><a href="<?php echo $userinfo['user_license']; ?>">查看</a></td>
+                        <td><button class="btn" onclick="publish(<?php echo $userinfo['user_id']; ?>)"></button></td>
                     </tr>
             <?php endforeach; ?>
                 </tbody>
@@ -61,6 +61,24 @@
 			</table>
         </div>
     </div>
+
+    <script src="/html/js/jquery-1.6.1.min.js"></script>
+    <script type="text/javascript">
+        function publish(userid)
+        {
+            var url = '/admin/publish?providerid=' + userid;
+            $.getJSON(url, function(rsp){
+                if (0 == rsp.ret)
+                {
+                    alert('发布成功！');
+                }
+                else
+                {
+                    alert('发布失败, msg：' + rsp.msg);
+                }
+            });
+        }
+    </script>
 	
 </body>
 </html>

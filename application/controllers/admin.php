@@ -266,7 +266,55 @@ class Admin extends CI_Controller {
 
         exit(json_encode($_RSP));
     }
+
+    /// after 2016-06-28
+
+    /**
+    * @brief 发布/同步服务商到生产环境(正式表)
+    * <pre>
+    *   接受表单数据:
+    *       providerid  服务商ID
+    * </pre>
+    */
+    function publish()
+    {
+        $providerid = trim($this->input->get_post('providerid', TRUE));
+
+        $user = $this->user_model->get_user_by_id($providerid);
+        if (false === $user)
+        {
+            $_RSP['ret'] = -1;
+            $_RSP['msg'] = '获取服务商数据失败';
+            exit(json_encode($_RSP));
+        }
+        $userid = $user['user_id'];
+
+        $this->load->model('provider_model');
+        if (0 === $user['user_status'])
+        {
+            //初次发布
+            $id = $this->provider_model->add($user);
+            if (false === $id)
+            {
+                $_RSP['ret'] = -2;
+                $_RSP['msg'] = '发布到生产环境失败';
+                exit(json_encode($_RSP));
+            }
+
+            $updates = array('user_status', 10);
+            $this->user_model->update($userid, $updates);
+        }
+        else
+        {
+            //发布更新
+            $this->provider_model->update($userid, $user);
+        }
+
+        $_RSP['ret'] = 0;
+        $_RSP['msg'] = '发布成功';
+        exit(json_encode($_RSP));
+    }
 }
 
-/* End of file user.php */
-/* Location: ./application/controllers/user.php */
+/* End of file admin.php */
+/* Location: ./application/controllers/admin.php */
