@@ -55,7 +55,7 @@
                         <td><a href="<?php echo $userinfo['user_license']; ?>">查看</a></td>
                         <td>
                         <?php if (10 != $userinfo['user_status']): ?>
-                            <button class="btn" onclick="publish(<?php echo $userinfo['user_id']; ?>)">发布</button>
+                            <a onclick="publish(<?php echo $userinfo['user_id']; ?>)" href="#">发布</a>
                         <?php endif ?>
                         </td>
                     </tr>
