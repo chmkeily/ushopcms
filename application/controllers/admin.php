@@ -300,15 +300,16 @@ class Admin extends CI_Controller {
                 $_RSP['msg'] = '发布到生产环境失败';
                 exit(json_encode($_RSP));
             }
-
-            $updates = array('user_status', 10);
-            $this->user_model->update($userid, $updates);
         }
         else
         {
             //发布更新
             $this->provider_model->update($userid, $user);
         }
+
+        //更新状态
+        $updates = array('user_status', 10);
+        $this->user_model->update($userid, $updates);
 
         $_RSP['ret'] = 0;
         $_RSP['msg'] = '发布成功';
