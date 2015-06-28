@@ -39,8 +39,7 @@
 				<tbody>
             <?php foreach ($coupons as $coupon): ?>
                     <tr id="u<?php echo $coupon['coupon_id']; ?>">
-                        <td><a href="/coupon/details?coupon_id=<?php echo $coupon['coupon_id']; ?>">
-                        	<?php echo $coupon['coupon_id']; ?></a>
+                        <td><a href="/coupon/details?coupon_id=<?php echo $coupon['coupon_id']; ?>"><?php echo $coupon['coupon_id']; ?></a>
                         </td>
                         <td><?php echo $coupon['coupon_title']; ?></td>
                         <td><img style="width:20px;height:20px;" src="<?php echo $coupon['coupon_icon']; ?>"/></td>

@@ -42,7 +42,7 @@ class Coupon_model extends CI_Model
     /**
     * @return array or FALSE
     */
-	function get_coupon_by_id($user_id)
+	function get_coupon_by_id($coupon_id)
 	{
 		$row = $this->db->where('ID', $coupon_id)->get($this->TableName)->row_array();
         if (empty($row))
