@@ -95,7 +95,7 @@ class Coupon extends CI_Controller {
     */
     function create()
     {
-    	$title   	= trim($this->input->get_post('coupon_id', TRUE));
+    	$title   	= trim($this->input->get_post('title', TRUE));
     	$iconurl	= trim($this->input->get_post('icon', TRUE));
     	$begintime	= trim($this->input->get_post('begintime', TRUE));
     	$endtime	= trim($this->input->get_post('endtime', TRUE));
