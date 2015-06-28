@@ -4,8 +4,6 @@
     <meta name="keywords" content="店之宝,开店,我要开店,店管家,POST机,收银软件,店铺帮手">
     <meta name="description" content="店之宝，提供开店必备软硬件信息。">
     <title>管理中心</title>
-   <!--  <link rel="shortcut icon" href="images/fav.ico">
-    <link rel="bookmark" href="images/fav.ico"> -->
     <link rel="stylesheet" type="text/css" href="/html/css/pc.css" media="screen">
 	<link rel="stylesheet" type="text/css" href="/asset/bootstrap/css/bootstrap.min.css" media="screen">
 	<!-- link rel="stylesheet" type="text/css" href="/asset/bootstrap/css/bootstrap-custom.css" media="screen" -->
