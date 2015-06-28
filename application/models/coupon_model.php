@@ -42,20 +42,6 @@ class Coupon_model extends CI_Model
     /**
     * @return array or FALSE
     */
-    function get_coupon_by_email($email)
-    {
-        $row = $this->db->where('Email', $email)->get($this->TableName)->row_array();
-        if (empty($row))
-        {
-            return FALSE;
-        }
-
-        return XFORMAT($row, $this->FieldMatrix, FALSE);
-    }
-	
-    /**
-    * @return array or FALSE
-    */
 	function get_coupon_by_id($user_id)
 	{
 		$row = $this->db->where('ID', $coupon_id)->get($this->TableName)->row_array();
@@ -87,11 +73,11 @@ class Coupon_model extends CI_Model
     }
 
     /**
-     * 
+     * @brief 查询优惠劵
      */
     function get_coupons($conditions = array(), $limit = 10, $offset = 0)
     {
-        $this->db->select('ID,ProviderID,Title,Icon,Content,Status,BeginTime,EndTime');
+        $this->db->select('ID,ProviderID,Title,Icon,Content,Status,BeginTime,EndTime,CreatedTime');
         $rows = $this->create_query($conditions)->get($this->TableName, $limit, $offset)->result_array();
         $items = array();
         foreach ($rows as $row)

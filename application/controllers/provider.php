@@ -219,31 +219,6 @@ class Provider extends CI_Controller {
     }
 
     /**
-     * @brief 优惠劵管理
-     * <pre>
-     *  接受的表单数据:
-     *      暂无，想不了那么多，后续再慢慢加
-     * </pre>
-     */
-    function coupon()
-    {
-        $this->load->library('auth');
-        $userid = $this->auth->get_userid();
-        if (null === $userid)
-        {
-            $_RSP['ret'] = ERR_NO_SESSION;
-            $_RSP['msg'] = 'not logined yet';
-            exit(json_encode($_RSP));
-        }
-        
-        $this->load->model('coupon_model');
-        $conditions['provider_id'] = $userid;
-        $coupons = $this->coupon_model->get_coupons($conditions);
-        $viewdata['coupons'] = $coupons;
-        $this->load->view('coupon_view', $viewdata);
-    }
-
-    /**
      * @brief 订单管理
      */
     function requirement()
