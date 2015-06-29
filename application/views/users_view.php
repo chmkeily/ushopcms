@@ -9,22 +9,7 @@
 	<!-- link rel="stylesheet" type="text/css" href="/asset/bootstrap/css/bootstrap-custom.css" media="screen" -->
 </head>
 <body id="home">
-    <div class="header_min">
-        <div class="topnav">
-            <h1><a class="logo" href="/html/index.html" title="店之宝">店之宝</a></h1>
-            <strong class="subnav">管理中心</strong>
-        </div>
-    </div>
-    <div class="manage_container">
-        <div class="aside">
-            <div class="menu">
-                <a class="menu_item active">服务商管理</a>
-                <a class="menu_item">需求管理</a>
-                <a class="menu_item">案例管理</a>
-            </div>
-        </div>
-        <div class="main">
-     
+    <div>
 			<table class="table table-bordered table-striped table-hover table-condensed">
 				<thead style="background: #CCCCCC url(/asset/images/treetable/bg-table-thead.png) repeat-x;">
 					<tr>
@@ -59,7 +44,6 @@
                 </tbody>
 			<?php endif ?>
 			</table>
-        </div>
     </div>
 
     <script src="/html/js/jquery-1.6.1.min.js"></script>
