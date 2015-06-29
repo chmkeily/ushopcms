@@ -168,7 +168,19 @@ class Provider extends CI_Controller {
             exit(json_encode($_RSP));
         }
 
-        $updates['user_status'] = 1; //1:已更新
+        //状态更新策略检查
+        $_user = $this->user_model->get_user_by_id($userid);
+        if (empty($_user))
+        {
+            $_RSP['ret'] = ERR_NO_OBJECT;
+            $_RSP['msg'] = 'no such user';
+            exit(json_encode($_RSP));
+        }
+        //如果该服务商还没被发布到现网，保持为状态0
+        if (0 != $_user['user_status'])
+        {
+            $updates['user_status'] = 1; //1:已更新
+        }
 
         $ret = $this->user_model->update($userid, $updates);
         if (false === $ret)

@@ -82,7 +82,7 @@ class User_model extends CI_Model
     */
     function get_profile_by_id($userid)
     {
-        $this->db->select('ID,Type,Email,Name,Phone,Contact');
+        $this->db->select('ID,Type,Email,Name,Phone,Contact,Status');
         $row = $this->db->where('ID', $userid)->get($this->TableName)->row_array();
         if (empty($row))
         {
