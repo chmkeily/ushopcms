@@ -266,7 +266,7 @@ class Admin extends CI_Controller {
         }
 
         $viewdata['userinfo'] = $userinfo;
-        $this->load->view('provider_info', $viewdata);
+        $this->load->view('user_profile', $viewdata);
     }
 
     /// after 2015-06-28
