@@ -250,7 +250,7 @@ class Admin extends CI_Controller {
     function profile()
     {
         $userid 	= trim($this->input->get_post('userid', TRUE));
-        if (!empty($userid) && is_numeric($userid))
+        if (empty($userid) || !is_numeric($userid))
         {
             $_RSP['ret'] = ERR_INVALID_VALUE;
             $_RSP['msg'] = 'A valid user id is required.';
