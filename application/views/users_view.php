@@ -30,7 +30,7 @@
             <?php foreach ($userinfos as $userinfo): ?>
                     <tr id="u<?php echo $userinfo['user_id']; ?>">
                         <td><?php echo $userinfo['user_email']; ?></td>
-                        <td><?php echo $userinfo['user_name']; ?></td>
+                        <td><a href="/admin/profile?userid=<?php echo $userinfo['user_id']; ?>"><?php echo $userinfo['user_name']; ?></a></td>
                         <td><?php echo $userinfo['user_type']; ?></td>
                         <td><?php echo $userinfo['user_phone']; ?></td>
                         <td><?php echo $userinfo['user_contact']; ?></td>
