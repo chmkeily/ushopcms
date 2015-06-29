@@ -211,7 +211,7 @@ class Admin extends CI_Controller {
 
     ///////以下主要为业务内容
     /**
-     * @brief 查询用户列表
+     * @brief 查询服务商/用户列表
      * <pre>
      *  接受的表单参数:
      *      userid       用户id
@@ -219,7 +219,7 @@ class Admin extends CI_Controller {
      * </pre>
      * @return 操作结果
      */
-    function userinfos()
+    function providers()
     {
 		$userid 	= trim($this->input->get_post('userid', TRUE));
         $status 	= trim($this->input->get_post('status', TRUE));
@@ -240,31 +240,33 @@ class Admin extends CI_Controller {
     }
 
     /**
-     * @brief 查询用户信息
+     * @brief 查询服务商用户信息
      * <pre>
      *  接受的表单参数:
      *      userid       用户id
      * </pre>
      * @return 操作结果
      */
-    function userprofile()
+    function profile()
     {
         $userid 	= trim($this->input->get_post('userid', TRUE));
         if (!empty($userid) && is_numeric($userid))
         {
-            $viewdata['ret'] = ERR_INVALID_VALUE;
-            $viewdata['err_msg'] = 'A valid user id is reguired.';
+            $_RSP['ret'] = ERR_INVALID_VALUE;
+            $_RSP['msg'] = 'A valid user id is required.';
+            exit(json_encode($_RSP));
         }
 
-        $_RSP['ret'] = -1;
         $userinfo = $this->user_model->get_user_by_id($userid);
-        if (!empty($userinfo))
+        if (empty($userinfo))
         {
-            $_RSP['ret'] = 0;
-            $_RSP['userinfo'] = $userinfo;
+            $_RSP['ret'] = ERR_NO_OBJECT;
+            $_RSP['msg'] = 'no such provider!';
+            exit(json_encode($_RSP));
         }
 
-        exit(json_encode($_RSP));
+        $viewdata['userinfo'] = $userinfo;
+        $this->load->view('provider_info', $viewdata);
     }
 
     /// after 2015-06-28
