@@ -267,7 +267,7 @@ class Admin extends CI_Controller {
         exit(json_encode($_RSP));
     }
 
-    /// after 2016-06-28
+    /// after 2015-06-28
 
     /**
     * @brief 发布/同步服务商到生产环境(正式表)
@@ -309,7 +309,7 @@ class Admin extends CI_Controller {
             );
 
         $this->load->model('provider_model');
-        if (0 === $user['user_status'])
+        if (0 == $user['user_status'])
         {
             //初次发布
             $id = $this->provider_model->add($provider);
@@ -327,7 +327,7 @@ class Admin extends CI_Controller {
         }
 
         //更新状态
-        $updates = array('user_status', 10);
+        $updates = array('user_status'=>10);
         $this->user_model->update($userid, $updates);
 
         $_RSP['ret'] = 0;

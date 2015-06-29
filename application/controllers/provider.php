@@ -70,7 +70,9 @@ class Provider extends CI_Controller {
 			'user_type'		=> 0,
 			'user_address'	=> 'null',
             'user_brief'	=> 'null',
-            'user_intro'    => 'null'
+            'user_intro'    => 'null',
+            'user_location' => 27,
+            'user_icon'     => 'null',
 			);
 
 		$this->load->model('user_model');
@@ -111,6 +113,7 @@ class Provider extends CI_Controller {
 		$phone 		= trim($this->input->get_post('phone', TRUE));
 		$contact	= trim($this->input->get_post('contact', TRUE));
 		$city	    = trim($this->input->get_post('city', TRUE));
+		$address	= trim($this->input->get_post('address', TRUE));
 		$brief	    = trim($this->input->get_post('brief', TRUE));
 		$intro	    = trim($this->input->get_post('intro', TRUE));
 		$license    = trim($this->input->get_post('license', TRUE));
@@ -141,6 +144,10 @@ class Provider extends CI_Controller {
         {
             $updates['user_location'] = $city;
         }
+        if (!empty($address))
+        {
+            $updates['user_address'] = $address;
+        }
         if (!empty($brief))
         {
             $updates['user_brief'] = $brief;
@@ -161,7 +168,7 @@ class Provider extends CI_Controller {
             exit(json_encode($_RSP));
         }
 
-        $updates['user_status'] = 10; //10:已更新
+        $updates['user_status'] = 1; //1:已更新
 
         $ret = $this->user_model->update($userid, $updates);
         if (false === $ret)
