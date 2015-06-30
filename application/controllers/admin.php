@@ -209,7 +209,7 @@ class Admin extends CI_Controller {
     *       length      列表最大长度
     * </pre>
     */
-    function requirments()
+    function requirements()
     {
         $offset     = trim($this->input->get_post('start_idx', TRUE));
         $length     = trim($this->input->get_post('length', TRUE));
