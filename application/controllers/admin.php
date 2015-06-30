@@ -70,144 +70,7 @@ class Admin extends CI_Controller {
 		$this->auth->destroy_session();
 	}
 
-	/**
-	* @brief 用户注册
-	*  <pre>
-	*	接受的表单数据：
-	*		email				登录邮箱
-	*		secret				秘钥约定(算法待定)
-	*		name 				昵称
-	*		contact 			联系方式
-	*		version				API版本(可选)
-    *  </pre>
-    *  <pre>
-    *		@ 2015-04-19
-    *		可设置version为2启用openssl_rsa公钥对secret进行加密 (公钥另行获取)
-    *  </pre>
-	*/
-	function register()
-	{
-		$email		= trim($this->input->get_post('email', TRUE));
-		$secret		= trim($this->input->get_post('secret', TRUE));
-		$name 		= trim($this->input->get_post('name', TRUE));
-		$contact	= trim($this->input->get_post('contact', TRUE));
-		$version	= trim($this->input->get_post('version', TRUE));
 
-		if (empty($email))
-		{
-			$_RSP['ret'] = 101;
-			$_RSP['msg'] = 'mising param(s)';
-			exit(json_encode($_RSP));
-		}
-
-		if (!preg_match('/\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/', $email))
-		{
-			$_RSP['ret'] = 100;
-			$_RSP['msg'] = 'invalid email';
-			exit(json_encode($_RSP));
-        }
-
-        if ($version == 2)
-        {
-            $this->load->library('encrypt');
-            $this->encrypt->private_decrypt(base64_decode($secret), $secret);
-        }
-
-		if (empty($name))
-		{
-			$name="user_" . time() % 9999;
-		}
-
-		$user = array(
-			'user_email' 	=> $email,
-			'user_secret'	=> $secret,
-			'user_name'		=> $name,
-			'user_contact'	=> $contact,
-			'user_type'		=> 99,
-			'user_location'	=> 0
-			);
-
-		$this->load->model('user_model');
-		$id = $this->user_model->add($user);
-		if (FALSE == $id)
-		{
-			$_RSP['ret'] = 1000;
-			$_RSP['msg'] = 'DB exception';
-			exit(json_encode($_RSP));
-		}
-
-		unset($user['user_secret']);
-		$_RSP['ret'] = 0;
-		$_RSP['user'] = array(
-			'userr_id'	=> $id,
-			'user_name'	=> $name,
-			);
-		exit(json_encode($_RSP));
-    }
-
-    /**
-     * @brief 修改帐号信息
-     * <pre>
-     *  接受的表单参数:
-     *      name        用户昵称
-     *      phone       联系方式(手机/电话)
-     *      contact     联系人
-     *      city        所在城市编码 (optional)
-     * </pre>
-     * @return 操作结果
-     */
-    function update()
-    {
-		$name 		= trim($this->input->get_post('name', TRUE));
-		$phone 		= trim($this->input->get_post('phone', TRUE));
-		$contact	= trim($this->input->get_post('contact', TRUE));
-		$city	    = trim($this->input->get_post('city', TRUE));
-        
-        $this->load->library('auth');
-        $userid = $this->auth->get_userid();
-        if (null === $userid)
-        {
-            $_RSP['ret'] = ERR_NO_SESSION;
-            $_RSP['msg'] = 'not logined yet';
-            exit(json_encode($_RSP));
-        }
-
-        $updates = array();
-        if (!empty($name))
-        {
-            $updates['user_name'] = $name;
-        }
-        if (!empty($phone))
-        {
-            $updates['use_phone'] = $phone;
-        }
-        if (!empty($contact))
-        {
-            $updates['user_contact'] = $contact;
-        }
-        if (!empty($city))
-        {
-            $updates['user_location'] = $city;
-        }
-
-        if (empty($updates))
-        {
-            $_RSP['ret'] = ERR_MISSING_PARM;
-            $_RSP['msg'] = 'missing params';
-            exit(json_encode($_RSP));
-        }
-
-        $ret = $this->user_model->update($userid, $updates);
-        if (false === $ret)
-        {
-            $_RSP['ret'] = ERR_DB_OPERATION_FAILED;
-            $_RSP['msg'] = 'database exception';
-            exit(json_encode($_RSP));
-        }
-
-        $_RSP['ret'] = 0;
-        exit(json_encode($_RSP));
-    }
 
     ///////以下主要为业务内容
     /**
@@ -270,7 +133,6 @@ class Admin extends CI_Controller {
     }
 
     /// after 2015-06-28
-
     /**
     * @brief 发布/同步服务商到生产环境(正式表)
     * <pre>
@@ -336,6 +198,9 @@ class Admin extends CI_Controller {
         $_RSP['msg'] = '发布成功';
         exit(json_encode($_RSP));
     }
+
+
+    ///需求类借口
 }
 
 /* End of file admin.php */
