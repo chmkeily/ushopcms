@@ -59,6 +59,7 @@
                 if (0 == rsp.ret)
                 {
                     alert('发布成功！');
+                    location.href = '#';
                 }
                 else
                 {
