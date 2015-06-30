@@ -38,7 +38,11 @@
                         <td><?php echo $userinfo['user_status']; ?></td>
                         <td><?php echo substr($userinfo['user_brief'], 0, 20); ?></td>
                         <td><a href="<?php echo $userinfo['user_license']; ?>">查看</a></td>
-                        <td><a href="/admin/publish?providerid=<?php echo $userinfo['user_id']; ?>" href="#">发布</a></td>
+                        <td>
+						<?php if(10 != $userinfo['user_status']): ?>
+							<a href="/admin/publish?providerid=<?php echo $userinfo['user_id']; ?>" href="#">发布</a>
+						<?php endif ?>
+						</td>
                     </tr>
             <?php endforeach; ?>
                 </tbody>
