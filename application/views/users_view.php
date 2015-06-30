@@ -13,6 +13,7 @@
 			<table class="table table-bordered table-striped table-hover table-condensed">
 				<thead style="background: #CCCCCC url(/asset/images/treetable/bg-table-thead.png) repeat-x;">
 					<tr>
+                        <th><span>ID</span></th>
 						<th><span>邮箱</span></th>
 						<th><span>名称</span></th>
 						<th><span>类型</span></th>
@@ -29,6 +30,7 @@
 				<tbody>
             <?php foreach ($userinfos as $userinfo): ?>
                     <tr id="u<?php echo $userinfo['user_id']; ?>">
+                        <td><?php echo $userinfo['user_id']; ?></td>
                         <td><?php echo $userinfo['user_email']; ?></td>
                         <td><a href="/admin/profile?userid=<?php echo $userinfo['user_id']; ?>"><?php echo $userinfo['user_name']; ?></a></td>
                         <td><?php echo $userinfo['user_type']; ?></td>

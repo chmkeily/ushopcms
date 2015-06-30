@@ -200,7 +200,37 @@ class Admin extends CI_Controller {
     }
 
 
-    ///需求类借口
+    ///需求类接口
+    /**
+    * @brief 查询需求列表
+    * <pre>
+    *   参数列表：
+    *       start_idx   开始索引下标
+    *       length      列表最大长度
+    * </pre>
+    */
+    function requirments()
+    {
+        $offset     = trim($this->input->get_post('start_idx', TRUE));
+        $length     = trim($this->input->get_post('length', TRUE));
+
+        if (!is_numeric($offset))
+        {
+            $offset = 0;
+        }
+
+        if (!is_numeric($length)
+            || 1 > $length || 20 < $length)
+        {
+            $length = 10;
+        }
+
+        $this->load->model('requirement_model');
+        $conditions = array();
+        $requirments = $this->requirement_model->get_requirements($conditions, $length, $offset);
+        $viewdata['requirements'] = $requirments;
+        $this->load->view('requirment_view', $viewdata);
+    }
 }
 
 /* End of file admin.php */
