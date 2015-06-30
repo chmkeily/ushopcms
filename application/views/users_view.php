@@ -16,7 +16,6 @@
                         <th><span>ID</span></th>
 						<th><span>邮箱</span></th>
 						<th><span>名称</span></th>
-						<th><span>类型</span></th>
 						<th><span>电话</span></th>
 						<th><span>联系人</span></th>
 						<th><span>地址</span></th>
@@ -33,7 +32,6 @@
                         <td><?php echo $userinfo['user_id']; ?></td>
                         <td><?php echo $userinfo['user_email']; ?></td>
                         <td><a href="/admin/profile?userid=<?php echo $userinfo['user_id']; ?>"><?php echo $userinfo['user_name']; ?></a></td>
-                        <td><?php echo $userinfo['user_type']; ?></td>
                         <td><?php echo $userinfo['user_phone']; ?></td>
                         <td><?php echo $userinfo['user_contact']; ?></td>
                         <td><?php echo $userinfo['user_address']; ?></td>
