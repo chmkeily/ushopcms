@@ -43,7 +43,7 @@ class Shopcase_model extends CI_Model
      */
     function select_abstract()
     {
-        $this->db->select('ID,Name,Image,Intro,ProviderID,CreatedTIme,Status');
+        $this->db->select('ID,Name,Image,Intro,ProviderID,CreatedTime,Status');
     }
 
     /**
