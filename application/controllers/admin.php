@@ -227,9 +227,9 @@ class Admin extends CI_Controller {
 
         $this->load->model('requirement_model');
         $conditions = array();
-        $requirments = $this->requirement_model->get_requirements($conditions, $length, $offset);
-        $viewdata['requirements'] = $requirments;
-        $this->load->view('requirment_view', $viewdata);
+        $requirements = $this->requirement_model->get_requirements($conditions, $length, $offset);
+        $viewdata['requirements'] = $requirements;
+        $this->load->view('requirement_view', $viewdata);
     }
 }
 
