@@ -97,7 +97,7 @@ class Admin extends CI_Controller {
             $conditions['status'] = $status;
         }
 
-        $userinfos = $this->user_model->get_users($conditions);
+        $userinfos = $this->user_model->get_users($conditions,1000,0);
         $viewdata['userinfos'] = $userinfos;
         $this->load->view('users_view', $viewdata);
     }
