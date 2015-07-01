@@ -84,13 +84,16 @@ class Provider extends CI_Controller {
 			exit(json_encode($_RSP));
 		}
 
-		unset($user['user_secret']);
+        //暂时重定向到登陆页
+        header('Location: /html/login.html');
+
+		/*unset($user['user_secret']);
 		$_RSP['ret'] = 0;
 		$_RSP['user'] = array(
 			'userr_id'	=> $id,
 			'user_name'	=> $name,
 			);
-		exit(json_encode($_RSP));
+		exit(json_encode($_RSP));*/
     }
 
     /**
