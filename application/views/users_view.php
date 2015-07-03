@@ -50,7 +50,7 @@
 			</table>
 
             <?php if($count > $pagesize): ?>
-            <div>
+            <div align="center">
             <?php for ($i = 1; $pagesize * $i < $count + $pagesize; $i ++): ?>
             <?php $offset = $pagesize * ($i - 1); ?>
             <?php if($i == $currpage): ?>
