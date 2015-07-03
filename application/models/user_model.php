@@ -100,7 +100,6 @@ class User_model extends CI_Model
         if (!empty($conditions['userid']))
         {
             $this->db->where('ID', $conditions['userid']);
-            return $this->db;
         }
 
         if (!empty($conditions['status']))
@@ -132,7 +131,7 @@ class User_model extends CI_Model
     */
     function count($conditions = array())
     {
-        return $this->create_query($conditions)->count_all($this->TableName);
+        return $this->create_query($conditions)->count_all_results($this->TableName);
     }
 
     /**
