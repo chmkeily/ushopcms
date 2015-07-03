@@ -50,7 +50,7 @@
 			</table>
 
             <?php if($count > $pagesize): ?>
-            <div align="center">
+            <div align="center">总共<?php echo ceil($count/$pagesize); ?>页[
             <?php for ($i = 1; $pagesize * $i < $count + $pagesize; $i ++): ?>
             <?php $offset = $pagesize * ($i - 1); ?>
             <?php if($i == $currpage): ?>
@@ -58,7 +58,7 @@
             <?php else: ?>
                 <a href="/admin/providers?offset=<?php echo $offset; ?>&length=<?php echo $pagesize; ?>"><span><?php echo $i; ?></span></a>
             <?php endif ?>
-            <?php endfor ?>
+            <?php endfor ?>]
             </div>
             <?php endif?>
     </div>
