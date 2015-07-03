@@ -48,6 +48,19 @@
                 </tbody>
 			<?php endif ?>
 			</table>
+
+            <?php if($count > $pagesize): ?>
+            <div>
+            <?php for (var $i = 1; $pagesize * $i < $count + $pagesize; $i ++): ?>
+            <?php $offset = $pagesize * ($i - 1); ?>
+            <?php if($i == ): ?>
+                <span><?php echo $i; ?></span>
+            <?php else ?>
+                <a href="/admin/providers?offset=<?php echo $offset; ?>&length=<?php echo $pagesize; ?>"></a>
+            <?php endif ?>
+            <?php endfor ?>
+            </div>
+            <?php endif?>
     </div>
 
     <script src="/html/js/jquery-1.6.1.min.js"></script>

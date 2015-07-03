@@ -77,6 +77,8 @@ class Admin extends CI_Controller {
      * @brief 查询服务商/用户列表
      * <pre>
      *  接受的表单参数:
+     *      offset       开始下标
+     *      length       列表长度
      *      userid       用户id
      *      status       用户状态(注册中,修改/资料审核中,运营中等)
      * </pre>
@@ -84,8 +86,20 @@ class Admin extends CI_Controller {
      */
     function providers()
     {
+        $offset     = trim($this->input->get_post('offset', TRUE));
+        $length     = trim($this->input->get_post('length', TRUE));
 		$userid 	= trim($this->input->get_post('userid', TRUE));
         $status 	= trim($this->input->get_post('status', TRUE));
+
+        //检查参数
+        if (empty($offset) || !is_numeric($offset) || $offset < 0)
+        {
+            $offset = 0;
+        }
+        if (empty($length) || !is_numeric($length) || $length < 1 || $length > 100)
+        {
+            $length = 10;
+        }
 
         $conditions = array();
         if (!empty($userid))
@@ -97,7 +111,11 @@ class Admin extends CI_Controller {
             $conditions['status'] = $status;
         }
 
-        $userinfos = $this->user_model->get_users($conditions,1000,0);
+        $count = $this->user_model->count();
+        $userinfos = $this->user_model->get_users($conditions, $length, $offset);
+        $viewdata['count']     = $count;
+        $viewdata['pagesize']  = $length;
+        $viewdata['currpage']  = ceil($offset / $pagesize) + 1;
         $viewdata['userinfos'] = $userinfos;
         $this->load->view('users_view', $viewdata);
     }
@@ -205,13 +223,13 @@ class Admin extends CI_Controller {
     * @brief 查询需求列表
     * <pre>
     *   参数列表：
-    *       start_idx   开始索引下标
+    *       offset      开始索引下标
     *       length      列表最大长度
     * </pre>
     */
     function requirements()
     {
-        $offset     = trim($this->input->get_post('start_idx', TRUE));
+        $offset     = trim($this->input->get_post('offset', TRUE));
         $length     = trim($this->input->get_post('length', TRUE));
 
         if (!is_numeric($offset))
