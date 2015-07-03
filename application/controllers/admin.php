@@ -115,7 +115,7 @@ class Admin extends CI_Controller {
         $userinfos = $this->user_model->get_users($conditions, $length, $offset);
         $viewdata['count']     = $count;
         $viewdata['pagesize']  = $length;
-        $viewdata['currpage']  = ceil($offset / $pagesize) + 1;
+        $viewdata['currpage']  = ceil($offset / $length) + 1;
         $viewdata['userinfos'] = $userinfos;
         $this->load->view('users_view', $viewdata);
     }

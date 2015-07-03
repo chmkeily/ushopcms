@@ -53,7 +53,7 @@
             <div>
             <?php for (var $i = 1; $pagesize * $i < $count + $pagesize; $i ++): ?>
             <?php $offset = $pagesize * ($i - 1); ?>
-            <?php if($i == ): ?>
+            <?php if($i == $currpage): ?>
                 <span><?php echo $i; ?></span>
             <?php else ?>
                 <a href="/admin/providers?offset=<?php echo $offset; ?>&length=<?php echo $pagesize; ?>"></a>
