@@ -51,7 +51,7 @@
 
             <?php if($count > $pagesize): ?>
             <div>
-            <?php for (var $i = 1; $pagesize * $i < $count + $pagesize; $i ++): ?>
+            <?php for ($i = 1; $pagesize * $i < $count + $pagesize; $i ++): ?>
             <?php $offset = $pagesize * ($i - 1); ?>
             <?php if($i == $currpage): ?>
                 <span><?php echo $i; ?></span>
