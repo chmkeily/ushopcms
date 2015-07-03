@@ -14,7 +14,7 @@
  */
 if ( ! function_exists('XFORMAT'))
 {
-	function XFORMAT($original, $matrix, $direction = TRUE)
+	function XFORMAT(&$original, &$matrix, $direction = TRUE)
 	{
 		$RESULT = array();
 
@@ -40,6 +40,14 @@ if ( ! function_exists('XFORMAT'))
 		}
 
 		return $RESULT;
+	}
+}
+
+if ( ! function_exists('XGETVAL'))
+{
+	function XGETVAL(&$val)
+	{
+		return (isset($val) ? ($val) : '');
 	}
 }
 

@@ -128,6 +128,14 @@ class User_model extends CI_Model
     }
 
     /**
+    * @brief 统计总数
+    */
+    function count($conditions = array())
+    {
+        return $this->create_query($conditions)->count_all($this->TableName);
+    }
+
+    /**
      * @brief 更新信息
      */
     function update($userid, $updates = array())
