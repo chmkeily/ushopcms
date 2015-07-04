@@ -117,7 +117,7 @@ class Admin extends CI_Controller {
         $viewdata['pagesize']  = $length;
         $viewdata['currpage']  = ceil($offset / $length) + 1;
         $viewdata['userinfos'] = $userinfos;
-        $this->load->view('users_view', $viewdata);
+        $this->load->view('amin/users_view', $viewdata);
     }
 
     /**
@@ -147,7 +147,7 @@ class Admin extends CI_Controller {
         }
 
         $viewdata['userinfo'] = $userinfo;
-        $this->load->view('user_profile', $viewdata);
+        $this->load->view('admin/user_profile', $viewdata);
     }
 
     /// after 2015-06-28
