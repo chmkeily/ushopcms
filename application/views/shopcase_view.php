@@ -40,7 +40,7 @@
                     <tr id="u<?php echo $shopcase['shopcase_id']; ?>">
                         <td><a href="/shopcase/details?caseid=<?php echo $shopcase['shopcase_id']; ?>"><?php echo $shopcase['shopcase_id']; ?></a></td>
                         <td><?php echo $shopcase['shopcase_name']; ?></td>
-                        <td><?php echo substr($shopcase['shopcase_intro'],0,50); ?></td>
+                        <td><?php echo mb_substr($shopcase['shopcase_intro'],0,50); ?></td>
                         <td><?php echo $shopcase['shopcase_providerid']; ?></td>
                         <td><?php echo date('Y-m-d H:i:s', $shopcase['shopcase_ctime']); ?></td>
                         <td><?php echo $shopcase['shopcase_status']; ?></td>
