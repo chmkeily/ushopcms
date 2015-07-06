@@ -108,8 +108,8 @@ class Coupon extends CI_Controller {
     	}
 
     	$this->load->library('auth');
-        $userid = $this->auth->get_userid();
-        if (null === $userid)
+        $usd = $this->auth->get_session();
+        if (null === $usd)
         {
             $_RSP['ret'] = ERR_NO_SESSION;
             $_RSP['msg'] = 'you have to login first';
@@ -117,7 +117,8 @@ class Coupon extends CI_Controller {
         }
 
     	$coupon = array(
-    		'coupon_providerid' => $userid,
+    		'coupon_providerid'   => $usd['user_id'],
+            'coupon_providername' => $usd['user_name'],
     		'coupon_title'		=> $title,
     		'coupon_icon'		=> $iconurl,
     		'coupon_content'	=> $content,

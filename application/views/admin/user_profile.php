@@ -10,66 +10,42 @@
 <body id="home">
     
 	<div>
-		<form class="form-horizontal span8">
-			<fieldset>
-				<div class="control-group">
-					<label class="control-label">名称</label>
-                    <div class="controls">
-                        <span><?php echo $userinfo['user_name']; ?></span>
-					</div>
-				</div>
-
-				<div class="control-group">
-					<label class="control-label">电话</label>
-					<div class="controls">
-                        <span><?php echo $userinfo['user_phone']; ?></span>
-					</div>
-				</div>
-				
-				<div class="control-group">
-					<label class="control-label">邮箱</label>
-					<div class="controls">
-                        <span><?php echo $userinfo['user_email']; ?></span>
-					</div>
-				</div>
-				
-				<div class="control-group">
-					<label class="control-label">联系人</label>
-					<div class="controls">
-                        <span><?php echo $userinfo['user_contact']; ?></span>
-					</div>
-				</div>
-				
-				<div class="control-group">
-					<label class="control-label">地址</label>
-					<div class="controls">
-                        <span><?php echo $userinfo['user_address']; ?></span>
-					</div>
-				</div>
-				
-				<div class="control-group">
-					<label class="control-label">简介</label>
-					<div class="controls">
-                        <span><?php echo $userinfo['user_brief']; ?></span>
-					</div>
-                </div>
-                
-        		<div class="control-group">
-					<label class="control-label">详情</label>
-					<div class="controls">
-                        <span><?php echo $userinfo['user_intro']; ?></span>
-					</div>
-				</div>
- 
-                <div class="control-group">
-					<label class="control-label">营业执照</label>
-                    <div class="controls">
-                        <a href="<?php echo $userinfo['user_license']; ?>"> <img style="width:80px;height:60px;" src="<?php echo $userinfo['user_license']; ?>"></img> </a>
-					</div>
-                </div>
-			</fieldset>
-		</form>
-		
+		<table class="table table-bordered table-striped table-hover table-condensed">
+			<tbody>
+				<tr>
+					<td><span>名称</span></td>
+					<td><span><?php echo $userinfo['user_name']; ?></span></td>
+				</tr>
+				<tr>
+					<td><span>电话</span></td>
+					<td><span><?php echo $userinfo['user_phone']; ?></span></td>
+				</tr>
+				<tr>
+					<td><span>邮箱</span></td>
+					<td><span><?php echo $userinfo['user_email']; ?></span></td>
+				</tr>
+				<tr>
+					<td><span>联系人</span></td>
+					<td><span><?php echo $userinfo['user_contact']; ?></span></td>
+				</tr>
+				<tr>
+					<td><span>地址</span></td>
+					<td><span><?php echo $userinfo['user_address']; ?></span></td>
+				</tr>
+				<tr>
+					<td><span>简介</span></td>
+					<td><span><?php echo $userinfo['user_brief']; ?></span></td>
+				</tr>
+				<tr>
+					<td><span>详情</span></td>
+					<td><span><?php echo $userinfo['user_intro']; ?></span></td>
+				</tr>
+				<tr>
+					<td><span>营业执照</span></td>
+					<td><a href="<?php echo $userinfo['user_license']; ?>"> <img style="width:80px;height:60px;" src="<?php echo $userinfo['user_license']; ?>"></img></a></td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
 	
 </body>
