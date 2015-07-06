@@ -9,7 +9,7 @@
 
 	<style type="text/css">
 		th {
-			width: 100px;
+			width: 80px;
 		}
 	</style>
 </head>
