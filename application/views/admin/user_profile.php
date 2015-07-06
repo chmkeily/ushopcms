@@ -6,6 +6,12 @@
     <title>服务商信息</title>
     <link rel="stylesheet" type="text/css" href="/html/css/pc.css" media="screen">
 	<link rel="stylesheet" type="text/css" href="/asset/bootstrap/css/bootstrap.min.css" media="screen">
+
+	<style type="text/css">
+		th {
+			width: 100px;
+		}
+	</style>
 </head>
 <body id="home">
     
@@ -13,36 +19,40 @@
 		<table class="table table-bordered table-striped table-hover table-condensed">
 			<tbody>
 				<tr>
-					<td><span>名称</span></td>
+					<th><span>名称</span></th>
 					<td><span><?php echo $userinfo['user_name']; ?></span></td>
 				</tr>
 				<tr>
-					<td><span>电话</span></td>
+					<th><span>电话</span></th>
 					<td><span><?php echo $userinfo['user_phone']; ?></span></td>
 				</tr>
 				<tr>
-					<td><span>邮箱</span></td>
+					<th><span>邮箱</span></th>
 					<td><span><?php echo $userinfo['user_email']; ?></span></td>
 				</tr>
 				<tr>
-					<td><span>联系人</span></td>
+					<th><span>联系人</span></th>
 					<td><span><?php echo $userinfo['user_contact']; ?></span></td>
 				</tr>
 				<tr>
-					<td><span>地址</span></td>
+					<th><span>地址</span></th>
 					<td><span><?php echo $userinfo['user_address']; ?></span></td>
 				</tr>
 				<tr>
-					<td><span>简介</span></td>
+					<th><span>简介</span></th>
 					<td><span><?php echo $userinfo['user_brief']; ?></span></td>
 				</tr>
 				<tr>
-					<td><span>详情</span></td>
+					<th><span>详情</span></th>
 					<td><span><?php echo $userinfo['user_intro']; ?></span></td>
 				</tr>
 				<tr>
-					<td><span>营业执照</span></td>
+					<th><span>营业执照</span></th>
 					<td><a href="<?php echo $userinfo['user_license']; ?>"> <img style="width:80px;height:60px;" src="<?php echo $userinfo['user_license']; ?>"></img></a></td>
+				</tr>
+				<tr>
+					<th><span>状态</span></th>
+					<td><span><?php echo $userinfo['user_status']; ?></span></td>
 				</tr>
 			</tbody>
 		</table>
