@@ -48,7 +48,7 @@
 				</tr>
 				<tr>
 					<th><span>营业执照</span></th>
-					<td><a href="<?php echo $userinfo['user_license']; ?>"> <img style="width:80px;height:60px;" src="<?php echo $userinfo['user_license']; ?>"></img></a></td>
+					<td><a href="<?php echo $userinfo['user_license']; ?>"> <img alt="图片无效" style="width:80px;height:60px;" src="<?php echo $userinfo['user_license']; ?>"></img></a></td>
 				</tr>
 				<tr>
 					<th><span>状态</span></th>
