@@ -21,7 +21,6 @@
 						<th><span>地址</span></th>
 						<th><span>状态</span></th>
 						<th><span>简介</span></th>
-						<th><span>执照</span></th>
                         <th><span>操作</span></th>
 					</tr>
 				</thead>
@@ -34,10 +33,9 @@
                         <td><a href="/admin/profile?userid=<?php echo $userinfo['user_id']; ?>"><?php echo $userinfo['user_name']; ?></a></td>
                         <td><?php echo $userinfo['user_phone']; ?></td>
                         <td><?php echo $userinfo['user_contact']; ?></td>
-                        <td><?php echo $userinfo['user_address']; ?></td>
+                        <td><?php echo mb_substr($userinfo['user_address'], 0, 10); ?> ...</td>
                         <td><?php echo $statuswordings[$userinfo['user_status']]; ?></td>
-                        <td><?php echo mb_substr($userinfo['user_brief'], 0, 20); ?></td>
-                        <td><a href="<?php echo $userinfo['user_license']; ?>">查看</a></td>
+                        <td><?php echo mb_substr($userinfo['user_brief'], 0, 10); ?> ...</td>
                         <td>
 						<?php if(10 != $userinfo['user_status']): ?>
 							<a onclick="publish(<?php echo $userinfo['user_id']; ?>)" href="#">发布</a>
