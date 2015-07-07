@@ -26,4 +26,3 @@ define('ERR_NO_OBJECT',					601);
 define('ERR_DB_OPERATION_FAILED',		1000);
 
 /* End of file error_code.php */
-/* Location: ./application/config/bizconfig/error_code.php */

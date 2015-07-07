@@ -77,10 +77,11 @@ class Admin extends CI_Controller {
      * @brief 查询服务商/用户列表
      * <pre>
      *  接受的表单参数:
-     *      offset       开始下标
-     *      length       列表长度
-     *      userid       用户id
-     *      status       用户状态(注册中,修改/资料审核中,运营中等)
+     *      offset      开始下标
+     *      length      列表长度
+     *      userid      用户id
+     *      status      用户状态(注册中,修改/资料审核中,运营中等)
+     *      format      返回格式(json)
      * </pre>
      * @return 操作结果
      */
@@ -90,6 +91,7 @@ class Admin extends CI_Controller {
         $length     = trim($this->input->get_post('length', TRUE));
 		$userid 	= trim($this->input->get_post('userid', TRUE));
         $status 	= trim($this->input->get_post('status', TRUE));
+        $format     = trim($this->input->get_post('format', TRUE));
 
         //检查参数
         if (empty($offset) || !is_numeric($offset) || $offset < 0)
@@ -117,7 +119,16 @@ class Admin extends CI_Controller {
         $viewdata['pagesize']  = $length;
         $viewdata['currpage']  = ceil($offset / $length) + 1;
         $viewdata['userinfos'] = $userinfos;
-        $this->load->view('admin/users_view', $viewdata);
+        $viewdata['statuswordings'] = $this->config->item('wordings_provider_status');
+
+        if ('json' == $format)
+        {
+            exit(json_encode($viewdata));
+        }
+        else
+        {
+            $this->load->view('admin/users_view', $viewdata);
+        }
     }
 
     /**

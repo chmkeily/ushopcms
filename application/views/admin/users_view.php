@@ -35,7 +35,7 @@
                         <td><?php echo $userinfo['user_phone']; ?></td>
                         <td><?php echo $userinfo['user_contact']; ?></td>
                         <td><?php echo $userinfo['user_address']; ?></td>
-                        <td><?php echo $userinfo['user_status']; ?></td>
+                        <td><?php echo $statuswordings[$userinfo['user_status']]; ?></td>
                         <td><?php echo mb_substr($userinfo['user_brief'], 0, 20); ?></td>
                         <td><a href="<?php echo $userinfo['user_license']; ?>">查看</a></td>
                         <td>
