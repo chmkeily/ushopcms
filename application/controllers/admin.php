@@ -100,7 +100,7 @@ class Admin extends CI_Controller {
         }
         if (empty($length) || !is_numeric($length) || $length < 1 || $length > 100)
         {
-            $length = 10;
+            $length = 20;
         }
 
         $conditions = array();
@@ -115,11 +115,11 @@ class Admin extends CI_Controller {
 
         $count = $this->user_model->count();
         $userinfos = $this->user_model->get_users($conditions, $length, $offset);
+        $viewdata['statuswordings'] = $this->config->item('wordings_provider_status');
         $viewdata['count']     = $count;
         $viewdata['pagesize']  = $length;
         $viewdata['currpage']  = ceil($offset / $length) + 1;
         $viewdata['userinfos'] = $userinfos;
-        $viewdata['statuswordings'] = $this->config->item('wordings_provider_status');
 
         if ('json' == $format)
         {
