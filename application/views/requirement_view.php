@@ -44,7 +44,7 @@
                         <td><?php echo $requirement['requirement_title']; ?></td>
                         <td><?php echo $requirement['requirement_type']; ?></td>
                         <td><?php echo $requirement['requirement_ownername']; ?></td>
-                        <td><?php echo $requirement['requirement_st']; ?></td>
+                        <td><?php echo date('Y-m-d H:i:s', $requirement['requirement_st']); ?></td>
                         <td><?php echo $requirement['requirement_shopcate']; ?></td>
                         <td><?php echo XGETVAL($locations[$requirement['requirement_shopcity']]['desc']); ?></td>
                         <td><?php echo $requirement['requirement_budget']; ?></td>
