@@ -44,7 +44,7 @@
 				</tr>
 				<tr>
 					<th><span>店铺面积(平方米)</span></th>
-					<td><span><?php echo $requirement['requirement_area']; ?></span></td>
+					<td><span><?php echo $requirement['requirement_shoparea']; ?></span></td>
 				</tr>
 				<tr>
 					<th><span>所在城市</span></th>
