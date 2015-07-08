@@ -48,7 +48,7 @@
 				</tr>
 				<tr>
 					<th><span>所在城市</span></th>
-					<td><span><?php echo $requirement['requirement_shopcity']; ?></span></td>
+					<td><span><?php echo $locations[$requirement['requirement_shopcity']]['desc']; ?></span></td>
 				</tr>
 				<tr>
 					<th><span>预算（元）</span></th>

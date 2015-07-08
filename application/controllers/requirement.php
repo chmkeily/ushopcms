@@ -88,6 +88,7 @@ class Requirement extends CI_Controller {
         }
 
         $viewdata['requirement'] = $requirement;
+        $viewdata['locations'] = $this->config->item('locations');
         $this->load->view('requirement_details', $viewdata);
     }
     
