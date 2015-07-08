@@ -9,7 +9,7 @@
 
 	<style type="text/css">
 		th {
-			width: 80px;
+			width: 120px;
 		}
 	</style>
 </head>
@@ -51,7 +51,7 @@
 					<td><span><?php echo $requirement['requirement_shopcity']; ?></span></td>
 				</tr>
 				<tr>
-					<th><span>预算（CNY）</span></th>
+					<th><span>预算（元）</span></th>
 					<td><span><?php echo $requirement['requirement_budget']; ?></span></td>
 				</tr>
 				<tr>
