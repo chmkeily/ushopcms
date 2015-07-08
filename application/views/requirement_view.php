@@ -31,7 +31,7 @@
 						<th><span>发布时间</span></th>
 						<th><span>店铺类型</span></th>
 						<th><span>店铺城市</span></th>
-						<th><span>预算</span></th>
+						<th><span>预算(元)</span></th>
 						<th><span>状态</span></th>
 						<th><span>服务商</span></th>
 					</tr>
