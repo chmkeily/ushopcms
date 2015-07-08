@@ -46,7 +46,7 @@
                         <td><?php echo $requirement['requirement_ownername']; ?></td>
                         <td><?php echo $requirement['requirement_st']; ?></td>
                         <td><?php echo $requirement['requirement_shopcate']; ?></td>
-                        <td><?php echo $requirement['requirement_shopcity']; ?></td>
+                        <td><?php echo XGETVAL($locations[$requirement['requirement_shopcity']]['desc']); ?></td>
                         <td><?php echo $requirement['requirement_budget']; ?></td>
                         <td><?php echo $requirement['requirement_status']; ?></td>
                         <td><?php echo $requirement['requirement_providerid']; ?></td>
