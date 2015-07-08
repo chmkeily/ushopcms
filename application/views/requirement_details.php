@@ -51,7 +51,7 @@
 					<td><span><?php echo XGETVAL($locations[$requirement['requirement_shopcity']]['desc']); ?></span></td>
 				</tr>
 				<tr>
-					<th><span>预算（元）</span></th>
+					<th><span>预算(元)</span></th>
 					<td><span><?php echo $requirement['requirement_budget']; ?></span></td>
 				</tr>
 				<tr>
