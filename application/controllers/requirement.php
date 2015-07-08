@@ -15,7 +15,7 @@ class Requirement extends CI_Controller {
 	}
 	
 	/**
-	* @brief 需求查询
+	* @brief 服务商所属需求查询
 	*  <pre>
 	*	接受的表单数据：
 	*		start_idx	列表开始下标
