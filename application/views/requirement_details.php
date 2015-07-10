@@ -64,7 +64,7 @@
 				</tr>
 				<tr>
 					<th><span>需求有效时间至</span></th>
-					<td><span><?php echo date('Y-m-d H:i:s', $requirement['requirement_et']); ?></span></td>
+					<td><span><?php echo ((0 == $requirement['requirement_et']) ? '无' : date('Y-m-d H:i:s', $requirement['requirement_et'])); ?></span></td>
 				</tr>
 				<tr>
 					<th><span>状态</span></th>
