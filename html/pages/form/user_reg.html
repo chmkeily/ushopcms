@@ -1,76 +1,109 @@
 <!Doctype html>
-<html lang="zh-CN"><head>
+<html lang="zh-CN">
+<head>
     <meta charset="UTF-8">
     <meta name="keywords" content="店之宝,开店,我要开店,店管家,POST机,收银软件,店铺帮手">
     <meta name="description" content="店之宝，提供开店必备软硬件信息。">
-    <title>服务商注册申请</title>
+    <title>服务商登录 - 您的店铺好帮手</title>
+   <!--  <link rel="shortcut icon" href="images/fav.ico">
+    <link rel="bookmark" href="images/fav.ico"> -->
     <link rel="stylesheet" type="text/css" href="/html/css/pc.css" media="screen">
-	<link rel="stylesheet" type="text/css" href="/asset/bootstrap/css/bootstrap.min.css" media="screen">
-	<!-- link rel="stylesheet" type="text/css" href="/asset/bootstrap/css/bootstrap-custom.css" media="screen" -->
+    <link rel="stylesheet" type="text/css" href="/asset/bootstrap/css/bootstrap.min.css" media="screen">
+    <script src="/js/globalcfg.js"></script>
 </head>
 <body id="home">
-    <div class="header_min">
-        <div class="topnav">
-            <h1><a class="logo" href="/html" title="店之宝">店之宝</a></h1>
-            <strong class="subnav">注册中心</strong>
-        </div>
-    </div>
-    <div class="manage_container">
-        <div class="aside">
-            <div class="menu">
-                <a class="menu_item active">服务商注册</a>
+    <div class="header">
+        <div class="nav_wrap">
+            <div class="navigation">
+                <a class="logo" href="/html"><img src="/html/images/logo.png" alt="店之宝"></a>
+                <ul>
+                    <li><a href="/html/index.html">首页</a></li>
+                    <li><a href="/html/login.html">服务商登录</a></li>
+                    <li><a href="/html/pages/form/user_reg.html" class="active">服务商注册</a></li>
+                </ul>
             </div>
         </div>
-        <div class="main">
-     
-		<form class="form-horizontal span8" method="post" action="/provider/register">
-			<fieldset>
-			    <div class="control-group">
-					<label class="control-label">邮箱</label>
-					<div class="controls">
-						<input type="text" name="email" class="inputbox" value=""/>
-					</div>
-                </div>
-                
-                <div class="control-group">
-					<label class="control-label">密码</label>
-					<div class="controls">
-						<input type="password" name="secret" class="inputbox" value=""/>
-					</div>
-                </div>
+        <div class="banner_wrap">
+            <div class="banner login_bg">
+                <div class="left" style="padding-top: 0; width: 60%;">
+                    <div class="reg_wrap">
+                        <form class="form-horizontal" method="post" id="form" action="/provider/register">
+                            <fieldset>
+                                <div class="control-group">
+                                    <label class="control-label">邮箱</label>
+                                    <div class="controls">
+                                        <input type="text" name="email" class="inputbox" value="" data-check="empty;email" />
+                                        <span class="red">*</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="control-group">
+                                    <label class="control-label">密码</label>
+                                    <div class="controls">
+                                        <input type="password" name="secret" class="inputbox" value=""/>
+                                        <span class="red">*</span>
+                                    </div>
+                                </div>
 
-		        <div class="control-group">
-					<label class="control-label">服务商名称</label>
-					<div class="controls">
-						<input type="text" name="name" class="inputbox" value=""/>
-					</div>
-				</div>
+                                <div class="control-group">
+                                    <label class="control-label">服务商名称</label>
+                                    <div class="controls">
+                                        <input type="text" name="name" class="inputbox" value=""/>
+                                        <span class="red">*</span>
+                                    </div>
+                                </div>
 
-				<div class="control-group">
-					<label class="control-label">电话</label>
-					<div class="controls">
-						<input type="text" name="phone" class="inputbox" value=""/>
-					</div>
-				</div>
-				
-				<div class="control-group">
-					<label class="control-label">联系人</label>
-					<div class="controls">
-						<input type="text" name="contact" class="inputbox" value=""/>
-					</div>
-				</div>
-            
-				<div class="control-group">
-					<div class="controls">
-						<button type="reset" class="btn">重置</button>
-						<button type="submit" class="btn btn-primary">注册</button>
-					</div>
-				</div>
-			</fieldset>
-		</form>
-		
+                                <div class="control-group">
+                                    <label class="control-label">电话</label>
+                                    <div class="controls">
+                                        <input type="text" name="phone" class="inputbox" value=""/>
+                                        <span class="red">*</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="control-group">
+                                    <label class="control-label">联系人</label>
+                                    <div class="controls">
+                                        <input type="text" name="contact" class="inputbox" value=""/>
+                                    </div>
+                                </div>
+                            
+                                <div class="control-group">
+                                    <div class="controls">
+                                        <button type="button" class="btn btn-primary" id="reg_btn">注册</button>&nbsp;&nbsp;&nbsp;
+                                        <button type="reset" class="btn">重置</button>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+                <div class="right ta_c" style="padding-top: 0; width: 40%;">
+                    <img src="/html/images/login_pic.png" alt="店之宝">
+                </div>
+                <div class="clear"></div>
+            </div>
         </div>
     </div>
-	
+    <div class="footer">
+        <div class="container">
+            <p style="text-align: center;"><a href="pages/aboutus.html">关于我们</a> | <a href="pages/contactus.html">联系我们</a></p>
+            <p class="copyright">深圳市萌虎科技有限公司版权所有 深ICP备13010468号</p>
+        </div>
+    </div>
+
+    <script src="/html/js/jquery-1.6.1.min.js"></script>
+    <script src="/html/cloudJs/js/cloudjs.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('#reg_btn').bind('click', function(){
+                cloudjs('.inputbox').validate({
+                    success: function(){
+                        $('#form').submit();
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>

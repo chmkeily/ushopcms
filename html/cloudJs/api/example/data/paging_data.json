@@ -1,0 +1,5 @@
+﻿[
+    { "name": "paging", "title": "分页组件" },
+    { "name": "draggable", "title": "拖动组件" },
+    { "name": "resizable", "title": "缩放组件" }
+]

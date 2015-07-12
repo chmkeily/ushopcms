@@ -1,0 +1,7 @@
+.combo_container{ display:inline-block; position:relative; border:1px solid #6fa7d2; white-space:nowrap; }
+.combo_container .combo_text{ border:0; outline:0; }
+.combo_container .combo_arrow{ display:inline-block; width:18px; height:18px; text-align:center; }
+.combo_container .combo_arrow span{ display:inline-block; width:0; height:0; border:5px solid #6fa7d2; background:none; border-color:#6fa7d2 transparent transparent; }
+.combo_container .combo_panel{ display:none; position:absolute; border:1px solid #6fa7d2; background:#FFFFFF; overflow: auto; }
+.combo_container .combo_panel .combo_item{line-height: 25px; cursor: default;}
+.combo_container .combo_panel .combo_item_hover{background: #6fa7d2;}

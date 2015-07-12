@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>tips提示组件</title>
+    <link rel="stylesheet" href="../css/global.css"/>
+    <link rel="stylesheet" href="../css/solarized_light.css"/>
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/cloudjs.js"></script>
+    <script src="../js/highlight.pack.js"></script>
+    <script src="../js/global.js"></script>
+</head>
+<body>  
+    <div class="tips_div7" title="我是外层" style="display: block; height: 150px; width: 200px; padding-top: 50px; background: #ccc;">
+        <div title="我是内层" style="margin: 0 auto; width: 100px; height:100px; background: #f00;" >鼠标移到这里，再移开到右边空白位置，内层tips不会消失</div>
+    </div>
+    <div>
+        <script>
+            cloudjs('.tips_div7').tips({ isContainer: true });
+        </script>
+    </div>
+
+    <div class="tips_div8" style="margin-top: 10px;">
+        <style>
+            .tips_div8 p{display: inline-block; margin: 10px;}
+        </style>
+        <p class="tips_one tips_two" title="段落1">第一个段落</p>
+        <p class="tips_one" title="段落2">第二个段落</p>
+        <p class="tips_two" title="段落3">第三个段落</p>
+        <br />
+        <input type="button" value="不取消绑定的情况下，再重复绑定，更改的参数不能生效" id="tips_button8" />
+
+    </div>
+    <script>
+        cloudjs('.tips_one').tips({ isContainer: true, position: 'up' });
+        cloudjs('.tips_two').tips({ isContainer: true, position: 'down', title: '自定义的' });
+
+        $('#tips_button8').click(function(){
+            cloudjs('.tips_two').tips({ isContainer: true, position: 'right', hover: true });
+        });
+    </script>
+</body>
+</html>

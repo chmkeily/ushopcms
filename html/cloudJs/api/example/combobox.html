@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>下拉组件</title>
+	<link rel="stylesheet" href="../css/global.css"/>
+	<link rel="stylesheet" href="../css/prettify.css"/>
+	<script src="../../js/jquery.min.js"></script>
+	<script src="../../js/cloudjs.js"></script>
+	<script src="../js/prettify.js"></script>
+	<script src="../js/global.js"></script>
+
+    <style>
+        body{padding: 10px;}
+    </style>
+</head>
+<body class="body_bg">
+    <div class="comps_header">
+        <h2 class="comps_name">下拉组件</h2>
+    </div>
+    <div class="comps_summary">
+        <h3>cloudjs(selector).combobox([options]) <i class="gray">options={'属性名':'属性值',...}</i></h3>
+    </div>
+    <div class="detail_content">
+		<h4>属性</h4>
+		<div class="param_table_box">
+			<table class="param_table">
+				<tbody>
+					<tr>
+						<th>属性名</th>
+						<th>类型</th>
+						<th>默认值</th>
+						<th>说明</th>
+					</tr>
+					<tr>
+                        <td>modal</td>
+                        <td>boolean</td>
+                        <td>false</td>
+                        <td>是否模态窗口打开，如果是则弹出框后面会有一层遮罩，页面的内容会被遮住不可点</td>
+                    </tr>
+					<tr>
+						<td>title</td>
+						<td>string</td>
+						<td></td>
+						<td>设置对话框标题</td>
+					</tr>
+					<tr>
+                        <td>width</td>
+                        <td>number</td>
+                        <td>220</td>
+                        <td>设置对话框的宽</td>
+                    </tr>
+					<tr>
+                        <td>height</td>
+                        <td>number/string</td>
+                        <td>auto</td>
+                        <td>设置对话框的高</td>
+                    </tr>
+					<tr>
+						<td>buttons</td>
+						<td>object</td>
+						<td>null</td>
+						<td>对话框的按钮，对应的按钮设置为{“按钮名称”：“回调方法”，“按钮名称”：“回调方法”}</td>
+					</tr>
+					<tr>
+	                     <td>draggable</td>
+	                     <td>boolean</td>
+	                     <td>true</td>
+	                     <td>对话框是否可以拖动</td>
+                    </tr>
+                    <tr>
+	                     <td>resizable</td>
+	                     <td>boolean</td>
+	                     <td>true</td>
+	                     <td>对话框是否可以改变大小</td>
+                    </tr>
+                    <tr>
+	                     <td>animate</td>
+	                     <td>boolean</td>
+	                     <td>false</td>
+	                     <td>是否通过动画打开对话框</td>
+                    </tr>
+                    <tr>
+	                     <td>fullscreen</td>
+	                     <td>boolean</td>
+	                     <td>false</td>
+	                     <td>是否支持全屏模式</td>
+                    </tr>
+                    <tr>
+	                     <td>relative</td>
+	                     <td>string/object</td>
+	                     <td></td>
+	                     <td>对话框的相对元素，不设置时默认在窗口中间打开</td>
+                    </tr>
+                    <tr>
+	                     <td>posiiton</td>
+	                     <td>string</td>
+	                     <td></td>
+	                     <td>对话框相对元素的位置，up、down、left、top，只在relative有实际元素时生效</td>
+                    </tr>
+                    <tr>
+	                     <td>onCreate</td>
+	                     <td>function()</td>
+	                     <td>null</td>
+	                     <td>在对话框刚刚创建时调用，该方法在对话框的生命周期中只会调用一次。</td>
+                    </tr>
+                    <tr>
+	                     <td>onOpen</td>
+	                     <td>function()</td>
+	                     <td>null</td>
+	                     <td>在对话框打开时创建，对于被close的对话框，在通过动作open打开时，该方法也会调用</td>
+                    </tr>
+                    <tr>
+	                     <td>onClose</td>
+	                     <td>function()</td>
+	                     <td>null</td>
+	                     <td>在对话框被关闭时调用，一个destroy的对话框，onClose方法会发生在onDestroy之前</td>
+                    </tr>
+                    <tr>
+	                     <td>onDestroy</td>
+	                     <td>function()</td>
+	                     <td>null</td>
+	                     <td>一个对话框被销毁时调用，该方法在对话框的生命周期中只会调用一次。</td>
+                    </tr>
+                    <tr>
+	                     <td>onResize</td>
+	                     <td>function()</td>
+	                     <td>null</td>
+	                     <td>改变对话框大小时调用的方法，该方法有两个参数，第一个是普通的Event对象，第二个是装载了当前对话框高度宽度的对象 </td>
+                    </tr>
+                    <tr>
+	                     <td>onFullscreen</td>
+	                     <td>function()</td>
+	                     <td>null</td>
+	                     <td>当全屏时触发的事件</td>
+                    </tr>
+                    <tr>
+	                     <td>onRecover</td>
+	                     <td>function()</td>
+	                     <td>null</td>
+	                     <td>当从全屏还原时触发的事件</td>
+                    </tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	
+	<div class="comps_summary">
+        <h3>cloudjs(selector).dialog('方法名', [args])</h3>
+    </div>
+    
+    <div class="detail_content">
+        <h4>方法</h4>
+        <div class="param_table_box">
+            <table class="param_table">
+                <tbody>
+                    <tr>
+                        <th>方法名</th>
+                        <th>参数</th>
+                        <th>说明</th>
+                    </tr>
+                    <tr>
+                        <td>destroy</td>
+                        <td></td>
+                        <td>彻底销毁弹出框，不可再通过open打开</td>
+                    </tr>
+                    <tr>
+                        <td>close</td>
+                        <td></td>
+                        <td>隐藏弹出框，可通过open方法再次打开，不会清除填写的内容 </td>
+                    </tr>
+                    <tr>
+                        <td>open</td>
+                        <td></td>
+                        <td>与close功能相反，重新打开的弹出框会保持之前的内容，要通过代码去修改内容。</td>
+                    </tr>
+                    <tr>
+                        <td>setData</td>
+                        <td>{'属性名':'属性值',...}</td>
+                        <td>重新设置dialog的各种参数</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="detail_content">
+        <h4>示例</h4>
+        <div>
+            <h5>示例1：默认下拉列表</h5>
+            <div class="example_html_1"> 
+                <input type="text" value="" id="combox_input1" />
+            </div>
+            <br />
+            <div class="example_html_1"> 
+                <select id="combox_select1">
+                    <option value="sz">深圳</option>
+                </select>
+            </div>
+            <br />
+            <div class="example_html_1"> 
+                <input type="text" value="" id="combox_input2" />
+            </div>
+            <br />
+            <br />
+            <div class="example_html_1"> 
+                <input type="text" value="" id="combox_input3" />
+            </div>
+            <br />
+            <div class="example_html_1"> 
+                <textarea value="" id="combox_input5" /></textarea>
+            </div>
+            <br />
+            <div class="example_html_1"> 
+                <select id="combox_select2" multiple="multiple" size="5">
+                    <option value="0">小学</option>
+                    <option value="1">初中</option>
+                    <option value="2">高中</option>
+                    <option value="3">中专</option>
+                    <option value="4">大专</option>
+                    <option value="5">本科</option>
+                    <option value="6">研究生</option>
+                    <option value="7">博士</option>
+                    <option value="8">博士后</option>
+                    <option selected>请选择</option>
+                    <option value="0">小学</option>
+                    <option value="1">初中</option>
+                    <option value="2">高中</option>
+                    <option value="3">中专</option>
+                    <option value="4">大专</option>
+                    <option value="5">本科</option>
+                    <option value="6">研究生</option>
+                    <option value="7">博士</option>
+                    <option value="8">博士后</option>
+                    <option selected>请选择</option>
+                </select>
+            </div>
+            <br />
+            <input type="button" id="btn1" value="89900" />
+            <input type="button" id="btn2" value="90000" />
+            <input type="button" id="btn3" value="delData" />
+            <br /><br /><br />
+            <script class="example_js_1">
+                var data1 = [
+                    {key: 'sz1', value: '深圳1'},
+                    {key: 'sz', value: '深圳'},
+                    {key: 'gz', value: '广州'}
+                ]
+                cloudjs('#combox_input1').combobox({
+                    defaultKey: 'sz;gz;cs;',
+                    data: data1,
+                    checkKey: true,
+                    onSelect: function(v){
+                        //alert(v);
+                    },
+                    onOpen: function(){
+                        console.log('open');
+                    },
+                    onClose: function(){
+                        console.log('close');
+                    }
+                });
+                cloudjs('#combox_select1').combobox();
+
+                cloudjs('#combox_input2').combobox({
+                    isMulti: true,
+                    defaultKey: 'sz;gz;cs;',
+                    checkKey: true,
+                    onSelect: function(v){
+
+                    },
+                    url: 'data/combobox_data.json'
+                });
+
+                cloudjs('#combox_input3').combobox({
+                    isMulti: true,
+                    defaultKey: 'sz;gz;cs;sz;gz;',
+                    comkey: 'key1',
+                    comvalue: 'value1',
+                    data: [{key1: 'cs', value1: '长沙'},{key1: 'gz', value1: '广州'},{key1: 'sz', value1: '深圳'}],
+                    onOpen: function(){
+                        console.log('open');
+                    },
+                    onClose: function(){
+                        console.log('close');
+                    }
+                });
+                $('#btn1').bind('click', function(){
+                    //cloudjs('#combox_input3').combobox('addData', [{key1: 'sz;gz'}]);
+                    //cloudjs('#combox_input3').combobox('setValue', 'sz;gz');
+                    // cloudjs('#combox_input3').combobox('getValue', function(data){
+                    //     alert(data.key1);
+                    //     alert(data.value1);
+                    // });
+                    cloudjs('#combox_input3').combobox('addData', [{key1: 'tj', value1: '天津'}]);
+                    cloudjs('#combox_input3').combobox('setValue', 'tj');
+                    cloudjs('#combox_input3').combobox('disable');
+                });
+                $('#btn2').bind('click', function(){
+                    cloudjs('#combox_input3').combobox('enable');
+                });
+                $('#btn3').bind('click', function(){
+                    cloudjs('#combox_input3').combobox('delData', 'cs');
+                });
+
+                cloudjs('#combox_input5').combobox({
+                    isMulti: true,
+                    defaultKey: 'sz;gz;cs;',
+                    checkKey: true,
+                    data: {'sz': '深圳','gz': '广州'},
+                    onSelect: function(v){
+
+                    },
+                    url: 'data/combobox_data.json'
+                });
+
+                cloudjs('#combox_select2').combobox({
+                    showAll: false
+                });
+                $('#combox_select2').bind('change', function(){
+                    
+                });
+
+                //cloudjs('#combox_select3').combobox();
+            </script>
+        </div>
+
+        
+    </div>
+</body>
+</html>

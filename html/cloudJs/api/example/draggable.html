@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>draggable拖动组件</title>
+	<link rel="stylesheet" href="../css/global.css"/>
+	<link rel="stylesheet" href="../css/prettify.css"/>
+	<script src="../../js/jquery.min.js"></script>
+	<script src="../../js/cloudjs.js"></script>
+	<script src="../js/prettify.js"></script>
+	<script src="../js/global.js"></script>
+</head>
+<body class="body_bg">
+    <div class="comps_header">
+        <h2 class="comps_name">draggable拖动组件</h2>
+        <p>让元素可通过鼠标拖动改变其位置</p>
+    </div>
+    <div class="comps_summary">
+        <h3>cloudjs(selector).draggable([options]) <i class="gray">options={'属性名':'属性值',...}</i></h3>
+    </div>
+    <div class="detail_content">
+		<h4>属性</h4>
+		<div class="param_table_box">
+			<table class="param_table">
+				<tbody>
+					<tr>
+						<th>属性名</th>
+						<th>类型</th>
+						<th>默认值</th>
+						<th>说明</th>
+					</tr>
+					<tr>
+						<td>containment</td>
+						<td>string/boolean</td>
+						<td>false</td>
+						<td>局限在某个容器内拖动</td>
+					</tr>
+					<tr>
+						<td>cursor</td>
+						<td>string</td>
+						<td>auto</td>
+						<td>设置拖动时的鼠标样式</td>
+					</tr>
+					<tr>
+	                     <td>opacity</td>
+	                     <td>number/boolean</td>
+	                     <td>false</td>
+	                     <td>当被拖动时不透明度</td>
+                       </tr>
+					<tr>
+	                     <td>axis</td>
+	                     <td>string/boolean</td>
+	                     <td>false</td>
+	                     <td>指定拖动时只能按在某个轴方向上拖动，('y'、'x')</td>
+                    </tr>
+                    <tr>
+                         <td>grid</td>
+                         <td>array/boolean</td>
+                         <td>false</td>
+                         <td>拖动时的网格间距，默认是平滑的拖动效果，如设置为[3, 6]，则在x轴以每次3像素的位移拖动，在y轴以每次6像素的位移拖动</td>
+                    </tr>
+                    <tr>
+                         <td>handle</td>
+                         <td>string/element/boolean</td>
+                         <td>false</td>
+                         <td>在该元素上的一个拖动把手，鼠标只有在该把手上才能拖动元素，把手必须是该元素内的节点。如一个对话框，只想鼠标在对话框头部时才能拖动整个对话框，则需要设置handle为头部元素</td>
+                    </tr>
+                    <tr>
+                         <td>create</td>
+                         <td>function(event)</td>
+                         <td></td>
+                         <td>当元素被初始化为可拖动时触发, event为Event类型</td>
+                    </tr>
+                    <tr>
+                         <td>start</td>
+                         <td>function(event, ui)</td>
+                         <td></td>
+                         <td>每次开始拖动元素时触发, event为Event类型，ui为Object，可通过ui.position和ui.offset获取到当前的css位置和偏移值</td>
+                    </tr>
+                    <tr>
+                         <td>drag</td>
+                         <td>function(event, ui)</td>
+                         <td></td>
+                         <td>在拖动期间当鼠标移动时触发, event为Event类型，ui为Object，可通过ui.position和ui.offset获取到当前的css位置和偏移值</td>
+                    </tr>
+                    <tr>
+                         <td>stop</td>
+                         <td>function(event, ui)</td>
+                         <td></td>
+                         <td>每次停止拖动时触发, event为Event类型，ui为Object，可通过ui.position和ui.offset获取到当前的css位置和偏移值</td>
+                    </tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+    <div class="comps_summary">
+        <h3>cloudjs(selector).draggable('方法名', [args])</h3>
+    </div>
+	
+	<div class="detail_content">
+        <h4>方法</h4>
+        <div class="param_table_box">
+            <table class="param_table">
+                <tbody>
+                    <tr>
+                        <th>方法名</th>
+                        <th>参数</th>
+                        <th>说明</th>
+                    </tr>
+                    <tr>
+                        <td>destroy</td>
+                        <td>无</td>
+                        <td>完全移除拖动功能，会把元素返回到它的预初始化状态</td>
+                    </tr>
+                    <tr>
+                        <td>disable</td>
+                        <td>无</td>
+                        <td>禁用 draggable，这会阻止元素的拖动功能，除非是destroy后重新绑定拖动，否则只能通过enable来再次启动拖动功能 </td>
+                    </tr>
+                    <tr>
+                        <td>enable</td>
+                        <td>无</td>
+                        <td>启用 draggable，和disable类似一对开关</td>
+                    </tr>
+                    <tr>
+                        <td>option</td>
+                        <td>由属性和属性值组成的键值对</td>
+                        <td>动态设置元素的拖动属性</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+		
+		
+    <div class="detail_content">
+        <h4>示例</h4>
+        
+        <div>
+            <h5>示例1：让一个div元素变得可以拖动</h5>
+            <div class="h200 w200">
+<div class="example_html_1"> 
+<div id="drag_div1" class="h200 w200 bd bgc"></div>
+</div>
+            </div>
+            <script class="example_js_1">
+cloudjs('#drag_div1').draggable();
+            </script>
+            <script>writeCode('.example_html_1');writeCode('.example_js_1');</script>
+        </div>		
+			
+        <div class="mt60">
+            <h5>示例2：让元素局限在父元素内拖动</h5>
+<div class="h200 w200 bd example_html_2">
+<div id="drag_div2" class="h100 w100 bd bgc"></div>
+</div>
+            <script class="example_js_2">
+cloudjs('#drag_div2').draggable({
+    containment:'parent'
+});
+            </script>
+            <script>writeCode('.example_html_2');writeCode('.example_js_2');</script>
+        </div>
+        
+        <div class="mt60">
+            <h5>示例3：拖动过程的事件捕获</h5>
+<div class="example_html_3">
+<div class="h200 w200 bd">
+    <div id="drag_div3" class="h100 w100 bd bgc"></div>
+    <span></span>，<span></span>，<span></span>，<span></span>
+</div>
+</div>
+            <script class="example_js_3">
+var spans = $('.example_html_3').find('span');
+
+cloudjs('#drag_div3').draggable({
+    create: function(event){
+        spans.eq(0).text('create');
+    },
+    start: function(event, ui){
+        spans.eq(1).text(ui.offset.left);
+    },
+    stop: function(event, ui){
+        spans.eq(2).text(ui.offset.left);
+    },
+    drag: function(event, ui){
+        spans.eq(3).text(ui.offset.left);
+    }
+});
+            </script>
+            <script>writeCode('.example_html_3');writeCode('.example_js_3');</script>
+        </div>
+        
+        <div class="mt60">
+            <h5>示例4：disable等方法示例</h5>
+<div class="example_html_4">
+<div class="h200 w200 bd">
+    <div id="drag_div4" class="h100 w100 bd bgc"></div>
+</div>
+<input type="button" onclick="javascript:bindDrag();" value="绑定拖动"/>
+<input type="button" onclick="javascript:disableDrag();" value="禁用拖动"/>
+<input type="button" onclick="javascript:enableDrag();" value="启用拖动"/>
+<input type="button" onclick="javascript:destroyDrag();" value="移除拖动"/>
+</div>
+            <script class="example_js_4">
+
+function bindDrag(){
+    cloudjs('#drag_div4').draggable();
+}
+
+function disableDrag(){
+    cloudjs('#drag_div4').draggable('disable');
+}
+
+function enableDrag(){
+    cloudjs('#drag_div4').draggable('enable');
+}
+
+function destroyDrag(){
+    cloudjs('#drag_div4').draggable('destroy');
+}
+            </script>
+            <script>writeCode('.example_html_4');writeCode('.example_js_4');</script>
+        </div>
+        
+        <div class="mt60">
+            <h5>示例5：其他示例</h5>
+<div class="example_html_5">
+<div class="h200 w200 bd">
+    <div id="drag_div5" class="h100 w100 bd bgc">
+        <div id="drag_div5_handle" style="height:30px;background-color:#457C86;"></div>
+    </div>
+</div>
+<input type="button" onclick="javascript:resetOption();" value="重置属性"/>
+</div>
+            <script class="example_js_5">
+cloudjs('#drag_div5').draggable({
+    cursor: 'move', //设置拖动时鼠标变拖动形状
+    opacity: 0.38, //设置拖动时不透明度为0.38
+    axis: 'x', //设置拖动时只能沿着X轴水平拖动
+    handle: '#drag_div5_handle', //设置拖动的把手
+    grid: [50, 20]  //在x轴上一每次50px的位移移动，y轴上以每次20px的像素移动，因为上面设置了axis的值为x，所以在y轴上的设置无效
+});
+
+function resetOption(){
+    cloudjs('#drag_div5').draggable('option', {
+        cursor: 'default',
+        opacity: 0.9,
+        axis: 'y'
+    });
+}
+
+            </script>
+            <script>writeCode('.example_html_5');writeCode('.example_js_5');</script>
+        </div>
+        
+    </div>
+</body>
+</html>

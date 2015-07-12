@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>cookie浏览器缓存组件</title>
+    <link rel="stylesheet" href="../css/global.css"/>
+    <link rel="stylesheet" href="../css/prettify.css"/>
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/cloudjs.js"></script>
+    <script src="../js/prettify.js"></script>
+    <script src="../js/global.js"></script>
+</head>
+<body class="body_bg">
+    <div class="comps_header">
+        <h2 class="comps_name">cookie浏览器缓存组件</h2>
+        <p></p>
+    </div>
+    <div class="comps_summary">
+        <h3>cloudjs.cookie('方法名', [args])</h3>
+    </div>
+    
+    <div class="detail_content">
+        <h4>方法</h4>
+        <div class="param_table_box">
+            <table class="param_table">
+                <tbody>
+                    <tr>
+                        <th>方法名</th>
+                        <th>参数</th>
+                        <th>说明</th>
+                    </tr>
+                    <tr>
+                        <td>setCookie</td>
+                        <td>对象<br/>{ name:'', value:'', expires:0, allPath:false }</td>
+                        <td>设置cookie<br/>
+                        name:cookieName，必填<br/>
+                        value:cookieValue，可以是字符串、数组或对象，必填<br/>
+                        expires:有效天数，默认0表示永久（直到清空浏览器缓存）,默认为0可省略<br/>
+                        allPath:为false表示同目录下的文件都可以获取该cookie,true表示同一主机名下文件都可以获取该cookie，默认为false可省略
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>getCookie</td>
+                        <td>cookieName,回调函数</td>
+                        <td>获取指定cookie值,字符串</td>
+                    </tr>
+                    <tr>
+                        <td>getCookieObj</td>
+                        <td>cookieName,回调函数</td>
+                        <td>获取指定cookie值，把原来存储的值转换成对象返回</td>
+                    </tr>
+                    <tr>
+                        <td>removeCookie</td>
+                        <td>cookieName</td>
+                        <td>删除指定cookie</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+        
+        
+    <div class="detail_content">
+        <h4>示例</h4>
+        
+        <div>
+<div class="example_html_1"> 
+<input type="button" value="设置cookie" onclick="doCookie('setCookie')">
+<input type="button" value="获取cookie" onclick="doCookie('getCookie')">
+<input type="button" value="获取cookieObj" onclick="doCookie('getCookieObj')">
+<input type="button" value="删除cookie" onclick="doCookie('removeCookie')">
+</div>
+
+            <script class="example_js_1">
+function doCookie(methodName){
+    switch(methodName){
+        case 'setCookie':  //设置cookie
+            cloudjs.cookie(methodName, { 
+                name: 'testCookie1', 
+                value: [{ id: 3, title: 'wudi' }, { id: 8, title: 'ami' }]
+            });
+            alert('设置成功，cookName为testCookie1');
+            break;
+        case 'getCookie':      //获取cookie，返回字符串
+        case 'getCookieObj':  //获取cookie，返回对象
+            cloudjs.cookie(methodName, 'testCookie1', function(data){
+                alert(data);
+                console.log('getCookie', data);
+            });
+            break;
+        case methodName:  //删除cookie
+            cloudjs.cookie('removeCookie', 'testCookie1');
+            alert('删除成功');
+            break;
+        default:
+    }
+}
+
+
+            </script>
+            <script>writeCode('.example_html_1');writeCode('.example_js_1');</script>
+        </div>
+</body>
+</html>

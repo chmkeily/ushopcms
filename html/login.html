@@ -11,24 +11,27 @@
 </head>
 <body id="home">
     <div class="header">
-        <div class="container">
+        <div class="nav_wrap">
             <div class="navigation">
                 <a class="logo" href="/html"><img src="images/logo.png" alt="店之宝"></a>
                 <ul>
                     <li><a href="index.html">首页</a></li>
-                    <li><a href="user_reg.html">服务商注册</a></li>
+                    <li><a href="login.html" class="active">服务商登录</a></li>
+                    <li><a href="/html/pages/form/user_reg.html">服务商注册</a></li>
                 </ul>
             </div>
-            <div class="banner">
-                <div class="left">
-                    <img src="images/title.png" alt="店之宝">
-                    <div class="clear"></div>
+        </div>
+        <div class="banner_wrap">
+            <div class="banner login_bg">
+                <div class="left ta_c" style="padding-top: 0;">
+                    <img src="images/login_pic.png" alt="店之宝">
                 </div>
                 <div class="right">
                     <div class="login">
-                        <div class="input_div">邮箱 <input id="usr_account" type="text" /></div>
-                        <div class="input_div">密码 <input id="usr_passwd" type="password" /></div>
-                        <div style="padding-left:50px; padding-top: 10px;">&nbsp;&nbsp;&nbsp; <input id="login_btn" type="button" value="登 录" style="padding: 5px 10px; font-size: 14px; cursor: pointer;" /></div>
+                        <div class="input_div"><input id="usr_account" type="text" placeholder="邮箱" /></div>
+                        <div class="input_div"><input id="usr_passwd" type="password" placeholder="密码" /></div>
+                        <div class="input_div"><input id="login_btn" type="button" value="登 录" class="orange_btn db" /></div>
+                        <div style="padding-left: 30px;"><a href="#">忘记密码</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/html/pages/form/user_reg.html">快速注册</a></div>
                     </div>
                 </div>
                 <div class="clear"></div>
@@ -43,10 +46,19 @@
     </div>
 
     <script src="js/jquery-1.6.1.min.js"></script>
+    <script src="cloudJs/js/cloudjs.js"></script>
     <script src="js/jquery.md5.js"></script>
     <script>
-        function login()
-        {
+        function login(){
+            if($.trim($('#usr_account').val()) === ''){
+                cloudjs.message({content: '请输入邮箱！', type: 'warn'});
+                return;
+            }
+            if($.trim($('#usr_passwd').val()) === ''){
+                cloudjs.message({content: '请输入密码！', type: 'warn'});
+                return;
+            }
+
             var account = $('#usr_account').val();
             var password = $('#usr_passwd').val();
             var timestamp = Math.floor( (new Date()).getTime()/1000 );

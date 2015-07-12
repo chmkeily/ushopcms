@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>resizable缩放组件</title>
+    <link rel="stylesheet" href="../css/global.css"/>
+    <link rel="stylesheet" href="../css/prettify.css"/>
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/cloudjs.js"></script>
+    <script src="../js/prettify.js"></script>
+    <script src="../js/global.js"></script>
+</head>
+<body class="body_bg">
+    <div class="comps_header">
+        <h2 class="comps_name">resizable缩放组件</h2>
+        <p>让元素可通过鼠标缩放改变其宽高</p>
+    </div>
+    <div class="comps_summary">
+        <h3>cloudjs(selector).resizable([options]) <i class="gray">options={'属性名':'属性值',...}</i></h3>
+    </div>
+    <div class="detail_content">
+        <h4>属性</h4>
+        <div class="param_table_box">
+            <table class="param_table">
+                <tbody>
+                    <tr>
+                        <th>属性名</th>
+                        <th>类型</th>
+                        <th>默认值</th>
+                        <th>说明</th>
+                    </tr>
+                    <tr>
+	                    <td>animate</td>
+	                    <td>boolean</td>
+	                    <td>false</td>
+	                    <td>缩放时是否有动画</td>
+	                </tr>
+	                <tr>
+                        <td>animateDuration</td>
+                        <td>number/string</td>
+                        <td>slow</td>
+                        <td>当设置了animate为true时，缩放动画的持续时间，可设置数字，单位ms，字符串可设置('slow', 'fast')</td>
+                    </tr>
+	                <tr>
+	                    <td>containment</td>
+	                    <td>string/boolean</td>
+	                    <td>false</td>
+	                    <td>局限在某个容器内缩放</td>
+	                </tr>
+	                <tr>
+	                    <td>maxHeight</td>
+	                    <td>number</td>
+	                    <td>null</td>
+	                    <td>缩放最大的高度</td>
+	                </tr>
+	                <tr>
+	                    <td>maxWidth</td>
+	                    <td>number</td>
+	                    <td>null</td>
+	                    <td>缩放最大的宽度</td>
+	                </tr>
+	                <tr>
+	                    <td>minHeight</td>
+	                    <td>number</td>
+	                    <td>10</td>
+	                    <td>缩放最小的高度</td>
+	                </tr>
+	                <tr>
+	                    <td>minWidth</td>
+	                    <td>number</td>
+	                    <td>10</td>
+	                    <td>缩放最小的宽度</td>
+	                </tr>
+	                <tr>
+	                    <td>aspectRatio</td>
+	                    <td>number/boolean</td>
+	                    <td>false</td>
+	                    <td>宽高缩放的比例</td>
+	                </tr>
+	                <tr>
+                        <td>ghost</td>
+                        <td>boolean</td>
+                        <td>false</td>
+                        <td>在缩放时，是否需要显示一个半透明的辅助元素</td>
+                    </tr>
+                    <tr>
+                        <td>grid</td>
+                        <td>array/boolean</td>
+                        <td>false</td>
+                        <td>缩放时的网格间距，默认是平滑的缩放效果，如设置为[3, 6]，则在x轴以每次3像素的间距缩放，在y轴以每次6像素的间距缩放</td>
+                    </tr>
+                    <tr>
+                        <td>handles</td>
+                        <td>string</td>
+                        <td>e,s,se</td>
+                        <td>该元素四边可缩放的方位(右、下、左、上，分别对应e、s、w、n，四个角分别用ne、se、sw、nw表示)，有8个值可组合选取(n、e、s、w、ne、se、sw、nw)，另可用all代表8个值全选</td>
+                    </tr>
+                    <tr>
+                         <td>start</td>
+                         <td>function(event, ui)</td>
+                         <td></td>
+                         <td>每次开始缩放元素时触发, event为Event类型，ui为Object，可通过ui.size获取到元素的width和height</td>
+                    </tr>
+                    <tr>
+                         <td>drag</td>
+                         <td>function(event, ui)</td>
+                         <td></td>
+                         <td>在缩放期间当鼠标移动时触发, event为Event类型，ui为Object，可通过ui.size获取到元素的width和height</td>
+                    </tr>
+                    <tr>
+                         <td>stop</td>
+                         <td>function(event, ui)</td>
+                         <td></td>
+                         <td>每次停止缩放时触发, event为Event类型，ui为Object，可通过ui.size获取到元素的width和height</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <div class="comps_summary">
+        <h3>cloudjs(selector).resizable('方法名', [args])</h3>
+    </div>
+    <div class="detail_content">
+        <h4>方法</h4>
+        <div class="param_table_box">
+            <table class="param_table">
+                <tbody>
+                    <tr>
+                        <th>方法名</th>
+                        <th>参数</th>
+                        <th>说明</th>
+                    </tr>
+                    <tr>
+                        <td>destroy</td>
+                        <td>无</td>
+                        <td>完全移除缩放功能，会把元素返回到它的预初始化状态</td>
+                    </tr>
+                    <tr>
+                        <td>disable</td>
+                        <td>无</td>
+                        <td>禁用 resizable，这会阻止元素的缩放功能，除非是destroy后重新绑定缩放，否则只能通过enable来再次启动缩放功能 </td>
+                    </tr>
+                    <tr>
+                        <td>enable</td>
+                        <td>无</td>
+                        <td>启用 resizable，和disable类似一对开关</td>
+                    </tr>
+                    <tr>
+                        <td>option</td>
+                        <td>由属性和属性值组成的键值对</td>
+                        <td>动态设置元素的缩放属性</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="detail_content">
+        <h4>示例</h4>
+        <div>
+            <h5>示例1：让一个div元素变得可以缩放</h5>
+            <div class="h200 w200">
+<div class="example_html_1">
+<div id="resize_div1" class="h200 w200 bd bgc"></div>
+</div>
+            </div>
+            <script class="example_js_1">
+cloudjs('#resize_div1').resizable();
+            </script>
+            <script>writeCode('.example_html_1');writeCode('.example_js_1');</script>
+        </div>      
+            
+        <div class="mt60">
+            <h5>示例2：让元素局限在父元素内缩放</h5>
+<div class="example_html_2">
+<div class="h200 w200 bd">
+    <div id="resize_div2" class="h100 w100 bgc bd"></div>
+</div>
+</div>
+            <script class="example_js_2">
+cloudjs('#resize_div2').resizable({
+    containment:'parent'
+});
+            </script>
+            <script>writeCode('.example_html_2');writeCode('.example_js_2');</script>
+         </div>
+        
+         <div class="mt60">
+            <h5>示例3：缩放过程的事件捕获</h5>
+<div class="example_html_3">
+<div class="h200 w200 bd">
+    <div id="resize_div3" class="h100 w100 bd bgc"></div>
+    <span></span>，<span></span>，<span></span>，<span></span>
+</div>
+</div>
+            <script class="example_js_3">
+var spans = $('.example_html_3').find('span');
+
+cloudjs('#resize_div3').resizable({
+    create: function(event){
+        spans.eq(0).text('create');
+    },
+    start: function(event, ui){
+        spans.eq(1).text(ui.size.width);
+    },
+    stop: function(event, ui){
+        spans.eq(2).text(ui.size.width);
+    },
+    resize: function(event, ui){
+        spans.eq(3).text(ui.size.width);
+    }
+});
+            </script>
+            <script>writeCode('.example_html_3');writeCode('.example_js_3');</script>
+        </div>
+        
+        <div class="mt60">
+            <h5>示例4：disable等方法示例</h5>
+<div class="example_html_4">
+<div class="h200 w200 bd">
+    <div id="resize_div4" class="h100 w100 bd bgc"></div>
+</div>
+<input type="button" onclick="javascript:bindResize();" value="绑定缩放"/>
+<input type="button" onclick="javascript:disableResize();" value="禁用缩放"/>
+<input type="button" onclick="javascript:enableResize();" value="启用缩放"/>
+<input type="button" onclick="javascript:destroyResize();" value="移除缩放"/>
+</div>
+            <script class="example_js_4">
+
+function bindResize(){
+    cloudjs('#resize_div4').resizable();
+}
+
+function disableResize(){
+    cloudjs('#resize_div4').resizable('disable');
+}
+
+function enableResize(){
+    cloudjs('#resize_div4').resizable('enable');
+}
+
+function destroyResize(){
+    cloudjs('#resize_div4').resizable('destroy');
+}
+            </script>
+            <script>writeCode('.example_html_4');writeCode('.example_js_4');</script>
+        </div>
+        
+        <div class="mt60">
+            <h5>示例5：其他示例</h5>
+<div class="example_html_5">
+<div class="h200 w200 bd">
+    <div id="resize_div5" class="h100 w100 bd bgc"></div>
+</div>
+<input type="button" onclick="javascript:resetOption();" value="重置属性"/>
+</div>
+            <script class="example_js_5">
+cloudjs('#resize_div5').resizable({
+    animate: true, //设置缩放时是否有动画
+    animateDuration: 'fast', //设置缩放时的动画时长
+    maxHeight: '300', //设置缩放最大的高度为300px
+    ghost: true, //设置缩放时是否有半透明的辅助元素
+    handles: 'all', //全方位都可以作为缩放的把手
+    aspectRatio: 9/4 //设置缩放的比例 宽/高
+});
+
+function resetOption(){
+    cloudjs('#resize_div5').resizable('option', {
+        animate: false,
+        maxHeight: null,
+        ghost: false
+    });
+}
+            </script>
+            <script>writeCode('.example_html_5');writeCode('.example_js_5');</script>
+        </div>
+        
+    </div>
+</body>
+</html>

@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>消息组件</title>
+    <link rel="stylesheet" href="../css/prettify.css"/>
+    <link rel="stylesheet" href="../css/global.css"/>
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/cloudjs.js?rand=0.12323358787"></script>
+    <script src="../js/prettify.js"></script>
+    <script src="../js/global.js"></script>
+</head>
+<body class="body_bg">
+    <div class="comps_header">
+        <h2 class="comps_name">message消息组件</h2>
+        <p></p>
+    </div>
+    <div class="comps_summary">
+        <h3>cloudjs(selector).message([options]) <i class="gray">options={'属性名':'属性值',...}</i></h3>
+    </div>
+    <div class="detail_content">
+        <h4>属性</h4>
+        <div class="param_table_box">
+            <table class="param_table">
+                <tbody>
+                    <tr>
+                        <th>属性名</th>
+                        <th>类型</th>
+                        <th>默认值</th>
+                        <th>说明</th>
+                    </tr>
+                    <tr>
+                        <td>type</td>
+                        <td>string</td>
+                        <td>success</td>
+                        <td>消息提示类型，分为'success','warn','error'</td>
+                    </tr>
+                    <tr>
+                        <td>content</td>
+                        <td>string</td>
+                        <td>提示信息</td>
+                        <td>消息正文</td>
+                    </tr>
+                    <tr>
+                         <td>duration</td>
+                         <td>number</td>
+                         <td>3000</td>
+                         <td>延迟自动消失的时间，若为0，则默认不自动消失</td>
+                    </tr>
+                    <tr>
+                        <td>isShowIcon</td>
+                        <td>boolean</td>
+                        <td>false</td>
+                        <td>设置消息组件左上角是否展示icon</td>
+                    </tr>
+                    <tr>
+                         <td>relative</td>
+                         <td>string/jquery对象</td>
+                         <td>document</td>
+                         <td>消息框所在的容器</td>
+                    </tr>
+                    <tr>
+                         <td>offsetLeft</td>
+                         <td>number</td>
+                         <td>0</td>
+                         <td>偏离容器中心的位移，若isFull属性为true，则此属性无效</td>
+                    </tr>
+                    <tr>
+                         <td>offsetTop</td>
+                         <td>number</td>
+                         <td>0</td>
+                         <td>偏离容器顶部的位移</td>
+                    </tr>
+                    <tr>
+                        <td>isFull</td>
+                        <td>boolean</td>
+                        <td>false</td>
+                        <td>消息框宽度是否为100%</td>
+                    </tr>
+                    <tr>
+                        <td>position</td>
+                        <td>string</td>
+                        <td>in_top</td>
+                        <td>消息框和容器的相对位置，in_top为容器内顶部，up，down，left，right，分别表示容器上下左右位置，若满足以下两个条件之一：<br>1、isFull设置为true<br>2、relative未设置或设置为document<br>则此参数设置无效，默认用in_top</td>
+                    </tr>
+                    <tr>
+                        <td>isTriggerClose</td>
+                        <td>string</td>
+                        <td>false</td>
+                        <td>设置是否点击页面其他元素自动关闭消息框</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="comps_summary">
+        <h3>cloudjs(selector).message('方法名', [args])</h3>
+    </div>
+
+    <div class="detail_content">
+        <h4>方法</h4>
+        <div class="param_table_box">
+            <table class="param_table">
+                <tbody>
+                <tr>
+                    <th>方法名</th>
+                    <th>参数</th>
+                    <th>说明</th>
+                </tr>
+                <tr>
+                    <td>close</td>
+                    <td>对象</td>
+                    <td>关闭指定id对应的提示消息框，对象的参数key为id，value可为字符串或数组，若无参数，则关闭全部提示消息框</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+        
+    <div class="detail_content">
+        <h4>示例</h4>
+        <div>
+            <h5>示例1：最简单的调用方式，只需传content参数</h5>
+    <div class="example_html_1">
+<input type="button" id="base_btn" value="最简单的消息提示框" />
+    </div>
+            <script class="example_js_1">
+$('#base_btn').bind('click', function(e){
+    cloudjs.message({content: '这是最简单的消息提示框'});
+});
+            </script>
+            <script>writeCode('.example_html_1');writeCode('.example_js_1');</script>
+        </div>
+                
+        <div>
+            <h5>示例2：设置不同的type值，生成不同类型的消息提示框</h5>
+<div class="example_html_2">
+<input type="button" id="succ_btn" value="success消息提示框" />
+<input type="button" id="warn_btn" value="warn消息提示框" />
+<input type="button" id="error_btn" value="error消息提示框" />
+</div>
+<script class="example_js_2">
+$('#succ_btn').bind('click', function(e){
+    cloudjs.message({content: '这是success的消息提示框', type: 'success'});
+});
+$('#warn_btn').bind('click', function(e){
+    cloudjs.message({content: '这是warn的消息提示框', type: 'warn'});
+});
+$('#error_btn').bind('click', function(e){
+    cloudjs.message({content: '这是error的消息提示框', type: 'error'});
+});
+</script>
+            <script>writeCode('.example_html_2');writeCode('.example_js_2');</script>
+        </div>
+        
+        <div>
+            <h5>示例3：设置duration属性，控制消息提示框的保留时间</h5>
+<div class="example_html_3">
+<input type="button" id="du_2000_btn" value="保留2秒" />
+<input type="button" id="du_5000_btn" value="保留5秒" />
+<input type="button" id="du_0_btn" value="不自动隐藏" />
+</div>
+<script class="example_js_3">
+$('#du_2000_btn').bind('click', function(e){
+    cloudjs.message({content: '消息提示框将在2秒后自动隐藏', duration: 2000});
+});
+$('#du_5000_btn').bind('click', function(e){
+    cloudjs.message({content: '消息提示框将在5秒后自动隐藏', duration: 5000});
+});
+$('#du_0_btn').bind('click', function(e){
+    cloudjs.message({content: '消息提示框不会自动隐藏', duration: 0});
+});
+</script>
+            <script>writeCode('.example_html_3');writeCode('.example_js_3');</script>
+        </div>
+
+        <div>
+            <h5>示例4：设置isShowIcon属性，控制是否在消息组件左侧显示相应的小图标</h5>
+            <div class="example_html_4">
+<input type="button" id="success_icon_btn"  value="带success图标" />
+<input type="button" id="warn_icon_btn"  value="带warn图标" />
+<input type="button" id="error_icon_btn"  value="带error图标" />
+            </div>
+            <script class="example_js_4">
+$('#success_icon_btn').bind('click', function(e){
+    cloudjs.message({content: '带success图标', type: 'success', isShowIcon: true});
+});
+$('#warn_icon_btn').bind('click', function(e){
+    cloudjs.message({content: '带warn图标', type: 'warn', isShowIcon: true});
+});
+$('#error_icon_btn').bind('click', function(e){
+    cloudjs.message({content: '带error图标', type: 'error', isShowIcon: true});
+});
+            </script>
+            <script>writeCode('.example_html_4');writeCode('.example_js_4');</script>
+        </div>
+
+
+        <div>
+            <h5>示例5：设置ralative属性，改变提示框的所在的容器,可传id或class，或jquery对象</h5>
+<div class="example_html_5">
+<div id="mes_container" style="width:400px;height:100px;border:1px solid #000;margin:10px;"></div>
+<input type="button" id="in_doc_btn" value="在屏幕顶端显示" />
+<input type="button" id="in_mctn_btn" value="在容器中显示" />
+</div>
+            <script class="example_js_5">
+$('#in_doc_btn').bind('click', function(e){
+    cloudjs.message({content: '在屏幕顶端显示'});
+});
+$('#in_mctn_btn').bind('click', function(e){
+    cloudjs.message({content: '在指定容器中显示', relative: '#mes_container'});
+});
+            </script>
+            <script>writeCode('.example_html_5');writeCode('.example_js_5');</script>
+        </div>
+       
+        <div>
+            <h5>示例6：设置offsetLeft和offsetTop属性，改变消息提示框中心偏移量</h5>
+<div class="example_html_6">
+<input type="button" id="offset_btn" value="偏移一定距离显示" />
+</div>
+<script class="example_js_6">
+$('#offset_btn').bind('click', function(e){
+    cloudjs.message({content: '靠右100px,靠下20px显示', offsetLeft: 100, offsetTop: 20});
+});
+</script>
+            <script>writeCode('.example_html_6');writeCode('.example_js_6');</script>
+        </div>
+
+
+        <div>
+            <h5>示例7：设置isFull属性，在容器顶部占据全部宽度显示</h5>
+            <div class="example_html_7">
+                <input type="button" id="full_btn"  value="全宽度显示" />
+            </div>
+<script class="example_js_7">
+$('#full_btn').bind('click', function(e){
+    cloudjs.message({content: '占据全部宽度了', isFull: true});
+});
+</script>
+            <script>writeCode('.example_html_7');writeCode('.example_js_7');</script>
+        </div>
+
+        <div>
+            <h5>示例8：生成message时候可以设置id值，生成之后可依据id值关闭指定的消息提示框,若不指定id，则关闭全部消息提示框</h5>
+            <div class="example_html_8">
+<input type="button" id="set_id_btn"  value="生成指定id消息提示框" />
+<input type="button" id="close_id_btn" value="指定id关闭" />
+<input type="button" id="close_all_btn" value="关闭全部" />
+            </div>
+<script class="example_js_8">
+$('#set_id_btn').bind('click', function(e){
+    cloudjs.message({content: '此消息框带id值，可以依据id值关闭此消息框', id: 'test_mes_box', duration: 0});
+});
+$('#close_id_btn').bind('click', function(e){
+    cloudjs.message('close', {id: 'test_mes_box'});
+    //若要关闭多个，可将id的值设为数组，如：cloudjs.message('close',{id:['test_mes_box','test_mes_box2']});
+});
+$('#close_all_btn').bind('click', function(e){
+    cloudjs.message('close');
+});
+</script>
+            <script>writeCode('.example_html_8');writeCode('.example_js_8');</script>
+        </div>
+
+
+        <div>
+            <h5>示例9：设置position属性，改变消息弹出框相对于指定元素的位置</h5>
+            <div class="example_html_9">
+<input type="button" id="up_pos_btn" value="在顶部弹出" style="margin-left:50px;"/>
+<input type="button" id="down_pos_btn" value="在底部弹出" style="margin-left:50px;" />
+<input type="button" id="left_pos_btn"  value="在左部弹出" style="margin-left:50px;" />
+<input type="button" id="right_pos_btn" value="在右部弹出" style="margin-left:50px;" />
+            </div>
+            <script class="example_js_9">
+$('#up_pos_btn').bind('click', function(e){
+    cloudjs.message({content: '在顶部弹出', relative:'#up_pos_btn', position:'up'});
+});
+$('#down_pos_btn').bind('click', function(e){
+    cloudjs.message({content: '在底部弹出', relative:'#down_pos_btn', position:'down'});
+});
+$('#left_pos_btn').bind('click', function(e){
+    cloudjs.message({content: '在左部弹出', relative:'#left_pos_btn', position:'left'});
+});
+$('#right_pos_btn').bind('click', function(e){
+    cloudjs.message({content: '在右部弹出', relative:'#right_pos_btn', position:'right'});
+});
+            </script>
+            <script>writeCode('.example_html_9');writeCode('.example_js_9');</script>
+        </div>
+
+        <div>
+            <h5>示例10：设置isTriggerClose属性，点击页面空白处可关闭此对话框</h5>
+            <div class="example_html_10">
+<input type="button" id="trigger_close_btn" value="点击空白可自动关闭的消息框"/>
+            </div>
+            <script class="example_js_10">
+$('#trigger_close_btn').bind('click', function(e){
+    cloudjs.message({content: '点击空白可自动关闭的消息框', duration:0, isTriggerClose:true});
+});
+            </script>
+            <script>writeCode('.example_html_10');writeCode('.example_js_10');</script>
+        </div>
+
+
+
+
+    </div>
+</body>
+</html>

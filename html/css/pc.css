@@ -1,34 +1,38 @@
 ﻿body {
 	margin: 0;
 	padding: 0;
+	min-width: 1000px;
+	color: #333;
+	font: 14px/1.5 'Microsoft YaHei','微软雅黑',simsun,tahoma;
 }
+
+*{margin: 0; padding: 0;}
+a{color: #0F3F94; text-decoration: none;}
+a:hover{text-decoration: underline;}
+img{border: 0;}
+input, select, textarea, button{font: 14px/1.5 'Microsoft YaHei','微软雅黑',simsun,tahoma;}
+input[type="text"], input[type="password"]{height: 1.5em; line-height: 1.4em; border: 1px solid #D5D5D5; padding: 5px 3px; background-color: #fff; width: 200px; font-size: 14px;}
 
 .ta_c{text-align: center;}
 .ta_r{text-align: right;}
 .ta_l{text-align: left;}
-
-.container {
-	width: 1000px;
-	margin: 0 auto;
-}
-
-.header {
-	height: 654px;
-	background: url(../images/header-bg.jpg) no-repeat scroll center top;
-}
+.db{display: block; width: 100%;}
 
 .header .navigation .logo {
 	display: block;
 	float: left;
-	padding: 16px 0;
 }
 
 .header .navigation .logo img {
 	display: block;
 }
 
+.header .nav_wrap{background: #fff; border-bottom: 2px solid #FABF27;}
+
 .header .navigation {
-	height: 94px;
+	height: 70px;
+	width: 1000px;
+	margin: 0 auto;
 }
 
 .header .navigation ul {
@@ -44,21 +48,20 @@
 	display: block;
 	float: left;
 	height: 100%;
-	padding: 0 25px;
-	/*background: url(../images/nav-divider.gif) no-repeat right center;*/
+	padding: 0 35px;
 }
 
 .header .navigation ul li a {
 	display: block;
 	width: 100%;
 	height: 100%;
-	color: white;
+	color: #333;
 	text-decoration: none;
-	font: bold 14px/94px 'Microsoft YaHei';
+	font: bold 16px/90px 'Microsoft YaHei';
 }
 
-.header .navigation ul li a:hover {
-	color: #ff8502;
+.header .navigation ul li a:hover, .header .navigation ul li a.active {
+	color: #FABF27;
 }
 
 .header .navigation ul.share {
@@ -96,26 +99,28 @@
 	display: none;
 }
 
+.header .banner_wrap{background: #FABF27;}
+
 .header .banner {
 	height: 472px;
 	padding-top: 88px;
+	width: 1000px;
+	margin: 0 auto;
 }
 
 .header .banner .left {
 	float: left;
 	width: 50%;
-	padding-top: 100px;
+	padding-top: 40px;
 }
 
 .header .banner .left .download-area {
-	width: 370px;
+	width: 380px;
 	margin-top: 10px;
 }
 
 .header .banner .left .qrcode {
 	float: left;
-	width: 140px;
-	height: 140px;
 }
 
 .header .banner .left .download {
@@ -123,13 +128,10 @@
 	width: 220px;
 }
 
-.header .banner .left .download img {
-	display: block;
-	float: left;
-	width: 220px;
-	height: 55px;
-	margin-bottom: 10px;
-}
+.download a{border: 2px solid #fff; display: inline-block; margin: 8px 0;}
+.download a:hover{ background: #FFD15A; border-color: #F0F0F0;}
+.download a:last-child{margin-bottom: 0;}
+.download a img{vertical-align: bottom;}
 
 .header .banner .right {
 	float: right;
@@ -137,126 +139,23 @@
 }
 
 .footer {
-	height: 50px;
 	border-top: 1px solid #ccc;
+	min-width: 1000px;
+	padding-top: 20px;
+	padding-bottom: 10px;
+	color: #666;
 }
+.footer a{color: #666; text-align: }
 
-.footer ul {
-	display: block;
-	margin: 0 auto;
-	padding: 30px 0 0 0;
-	list-style: none;
-	height: 174px;
-	width: 750px;
-}
-
-.footer ul li {
-	display: block;
-	margin: 0;
-	padding: 0;
-	float: left;
-	width: 33.333333%;
-}
-
-.footer ul li h3 {
-	color: #c6c5c5;
-	font: 100 14px 'Microsoft YaHei';
-	background: url(../images/footer-list-title-bg.gif) no-repeat scroll left bottom;
-	margin: 0;
-	padding: 0 0 15px 0;
-}
-
-.footer ul li h3 a {
-	color: #c6c5c5;
-}
-
-.footer ul li ul {
-	width: auto;
-	height: auto;
-	padding: 20px 0 0 0;
-}
-
-.footer ul li ul li {
-	float: none;
-	display: list-item;
-	width: auto;
-	background: url(../images/footer-list-style.gif) no-repeat left center;
-	padding: 0 0 0 10px;
-	margin: 0 0 5px 0;
-}
-
-.footer ul li ul li,
-.footer ul li ul li a {
-	color: #c6c5c5;
-	font: 100 12px 'Microsoft YaHei';
-	text-decoration: none;
-}
-
-.footer ul li ul li a {
-	display: block;
-	width: 100%;
-}
-
-.footer ul li ul li a:hover {
-	text-decoration: underline;
-}
-
-.footer ul li ul li.icon {
-	background: none;
-	padding: 0;
-	width: 34px;
-	float: left;
-	margin-right: 10px;
-}
-
-.footer ul li ul li.icon a:hover {
-	position: relative;
-}
-
-.footer ul li ul li.icon a:hover img.popup {
-	position: absolute;
-	display: block;
-	bottom: 30px;
-	left: -82px;
-}
-
-.footer ul li ul li.icon a img.popup {
-	display: none;
-}
-
-.footer ul li ul li.icon-text {
-	background: none;
-	padding: 0;
-}
-
-.footer ul li ul li.icon-text a {
-	height: 34px;
-}
-
-.footer ul li ul li.icon-text a img {
-	display: block;
-	float: left;
-}
-
-.footer ul li ul li.icon-text a span {
-	display: block;
-	line-height: 34px;
-	float: left;
-	margin-left: 10px;
-}
-
-.footer ul li ul li.icon-text a:hover span {
-	text-decoration: underline;
-}
+.footer .container{width: 1000px; margin: 0 auto;}
 
 .footer .copyright {
 	clear: both;
 	text-align: center;
-	color: #919090;
-	font: 100 12px/30px 'Microsoft YaHei';
+	color: #999;
+	font: 12px/30px 'Microsoft YaHei';
 	margin: 0;
 	padding: 0;
-	height: 50px;
 }
 
 .clear {
@@ -487,9 +386,11 @@
 	background: url(../images/sina.png) left top no-repeat;
 }
 
-.login{display: block; height:200px; width:400px; background: #fff; border: 2px solid #eee; border-radius:5px; padding-top: 50px;}
-.login .input_div{padding: 10px 10px 10px 50px;}
-.login .input_div input{padding: 5px;}
+.login{display: block; height:260px; width:400px; background: #fff; border: 2px solid #eee; border-radius:5px; padding-top: 10px;}
+.login .input_div{padding: 10px 30px;}
+.login #login_btn{line-height: 50px; height: 50px; font-size: 20px; border-radius: 5px;}
+.login .input_div input[type="text"], .login .input_div input[type="password"]{line-height: 3em; height: 3em; padding: 5px 10px;  border-radius: 5px; width: 316px;}
+.header .login_bg{/*background: url(../images/login_bg.jpg) center top no-repeat;*/height: 350px;}
 .topnav{height:45px;background-color:#27303f;padding:0 15px 0 200px}
 .topnav h1 {height:36px;font-size:14px;line-height:36px;color:#f2f3f4;position:relative;float:left;margin:10px 0 0 -200px}
 .topnav h1 .logo {position:absolute;width:80px;height:30px;line-height:100;overflow:hidden;left:7px;top:0;background-image:url(../images/logo_min.png)}
@@ -520,3 +421,6 @@
 .tc-table-fixed .tc-table-fixed-body {border-bottom:1px solid #d1d5de}
 .tc-table-fixed .tc-table-fixed-body tr.tc-table-last-row th,.tc-table-fixed .tc-table-fixed-body tr.tc-table-last-row td {border-bottom:none}
 .tc-table-cfg td{height: auto; padding: 10px 5px;}
+
+.orange_btn{background: #FABF27; border: #F8DA8D solid 1px; color: #fff; line-height: 40px; height: 40px; font-size: 16px; cursor: pointer;}
+.orange_btn:hover{background: #FFCB46;}

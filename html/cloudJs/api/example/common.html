@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>cloudJs公共方法</title>
+    <link rel="stylesheet" href="../css/global.css"/>
+    <link rel="stylesheet" href="../css/prettify.css"/>
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/cloudjs.js"></script>
+    <script src="../js/prettify.js"></script>
+    <script src="../js/global.js"></script>
+</head>
+<body class="body_bg">
+    <div class="comps_header">
+        <h2 class="comps_name">cloudJs公共方法</h2>
+        <p>调用方式：cloudjs.util.方法名(args)</p>
+    </div>
+    <div class="detail_content">
+        <div class="param_table_box">
+            <table class="param_table">
+                <tbody>
+	                <tr>
+	                    <th>方法名</th>
+	                    <th>参数</th>
+	                    <th>功能说明</th>
+	                </tr>
+	                <tr>
+	                    <td>isEndWith</td>
+	                    <td>string,string</td>
+	                    <td>判断字符串str是否以某字符串start开始</td>
+	                </tr>
+	                <tr>
+	                    <td>isStartWith</td>
+	                    <td>string,string</td>
+	                    <td>判断字符串str是否以某字符串start开始</td>
+	                </tr>
+	                <tr>
+	                    <td>indexOf</td>
+	                    <td>string|array, point, fromIndex</td>
+	                    <td>兼容低于IE9版本浏览器中Array的indexOf方法，使用此方法可以查找数组或字符串，point为查找目标，fromIndex表示查找的起始点</td>
+	                </tr>
+	                 <tr>
+	                    <td>log</td>
+	                    <td>*(任意参数和类型)</td>
+	                    <td>解决了console.log在IE6、7下会报错的问题。作用和浏览器默认的console.log一致，把传入的值一一打印出来</td>
+	                </tr>
+	                <tr>
+	                    <td>error</td>
+	                    <td>*(任意参数和类型)</td>
+	                    <td>解决了console.error在IE6、7下会报错的问题。和浏览器默认的console.error一致，把传入的值一一设置成错误标志并打印出来</td>
+	                </tr>
+	                <tr>
+	                    <td>trace</td>
+	                    <td>*(任意参数和类型)</td>
+	                    <td>解决了console.trace在IE6、7下会报错的问题。和浏览器默认的console.trace一致，把传入的值一一打印出来，并能打印出调用栈</td>
+	                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>validate格式校验组件</title>
+	<link rel="stylesheet" href="../css/global.css"/>
+	<link rel="stylesheet" href="../css/prettify.css"/>
+	<script src="../../js/jquery.min.js"></script>
+	<script src="../../js/cloudjs.js"></script>
+	<script src="../js/prettify.js"></script>
+	<script src="../js/global.js"></script>
+</head>
+<body class="body_bg">
+    <div class="comps_header">
+        <h2 class="comps_name">validate格式校验组件</h2>
+        <p>用于页面输入框的格式校验</p>
+    </div>
+    <div class="comps_summary">
+        <h3>cloudjs(selector).validate([options]) <i class="gray">options={'属性名':'属性值',...}</i></h3>
+    </div>
+    <div class="detail_content">
+		<h4>属性</h4>
+		<div class="param_table_box">
+			<table class="param_table">
+				<tbody>
+					<tr>
+						<th>属性名</th>
+						<th>类型</th>
+						<th>默认值</th>
+						<th>说明</th>
+					</tr>
+					<tr>
+                        <td>checkType</td>
+                        <td>string</td>
+                        <td>empty</td>
+                        <td>元素默认的校验类型，元素可以通过data-check来设置元素的检验类型</td>
+                    </tr>
+					<tr>
+						<td>warn</td>
+						<td>boolean</td>
+						<td>true</td>
+						<td>是否显示错误信息</td>
+					</tr>
+					<tr>
+                        <td>errmsgType</td>
+                        <td>number</td>
+                        <td>1</td>
+                        <td>页面错误信息提示的方式，1是弹tips，2是直接跟在元素后面或在指定的区域显示，如果设置了2，元素可以通过data-wraper属性设置错误提示显示的地方，如将错误信息显示在一个id为myerr的元素上，则data-wraper="#myerr"（warn为true时生效）</td>
+                    </tr>
+					<tr>
+                        <td>posiiton</td>
+                        <td>string</td>
+                        <td>up</td>
+                        <td>Tips在元素的提示位置，up表示上方，left表示左方，right表示右方，down表示下方，优先是down，组件会自动计算出现的位置，以确保出现的提示不会超出页面边界（元素也可以通过设置data-position来设置显示的位置）（warn为true并且errmsg为1时生效）</td>
+                    </tr>
+					<tr>
+						<td>delay</td>
+						<td>number</td>
+						<td>0</td>
+						<td>错误提示多久自动消失，0表示不自动消失，单位ms（wran为true时生效）</td>
+					</tr>
+					<tr>
+	                     <td>rule</td>
+	                     <td>null</td>
+	                     <td>组件自己的默认校验规则(非空empty、日期date、时间time、链接url、数字num、整数inum、正整数uinum、非负整数ginum、单ip、多ips、邮箱email、手机号码phone、命名naming、最大长度maxlen[x]、最小长度minlen[x]、)</td>
+	                     <td>自定义校验规则和错误信息，每种校验类型对应rule的一个属性，该属性值对应一个设置对象，这个对象有三个属性，errmsg,format和check，errmsg对应一个方法,该方法返回一个错误提示字符串，format对应多种格式,用于比如校验多种日期格式的选择,check对应一个校验方法,该方法返回是否校验通过，errmsg和check两个方内部都通过传入的参数获取到当前被校验的输入框对象</td>
+                    </tr>
+					<tr>
+	                     <td>success</td>
+	                     <td>function()</td>
+	                     <td></td>
+	                     <td>校验成功后调用的方法</td>
+                    </tr>
+                    <tr>
+                         <td>fail</td>
+                         <td>function(errObj)</td>
+                         <td></td>
+                         <td>校验失败时调用的方法，会传入校验失败的详细信息，把校验失败的元素和错误提示信息封装成数组的一个个对象，然后将数组传给fail方法</td>
+                    </tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	
+	<div class="comps_summary">
+        <h3>cloudjs(selector).validate('方法名')</h3>
+    </div>
+    
+    <div class="detail_content">
+        <h4>方法</h4>
+        <div class="param_table_box">
+            <table class="param_table">
+                <tbody>
+                    <tr>
+                        <th>方法名</th>
+                        <th>参数</th>
+                        <th>说明</th>
+                    </tr>
+                    <tr>
+                        <td>setData</td>
+                        <td></td>
+                        <td>重新设置属性值，分永久设置和临时设置，永久设置会作用于后面重新弹出的提示信息，而临时设置作用于当前弹出的提示信息</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="detail_content">
+        <h4>示例</h4>
+        
+        <div>
+            <h5>示例1：校验输入框是否为空</h5>
+<div class="example_html_1"> 
+<input type="text" class="validate_input1">
+<input type="text" class="validate_input1 ml20">
+<input type="button" class="validate_btn1 ml20" value="&nbsp;校验&nbsp;">
+</div>
+            <script class="example_js_1">
+$('.validate_btn1').click(function(){
+    cloudjs('.validate_input1').validate({
+        success: function(){
+            alert('校验通过');
+            //do something
+        },
+        fail: function(result){
+            //校验不通过
+        }
+    });
+});
+            </script>
+            <script>writeCode('.example_html_1');writeCode('.example_js_1');</script>
+        </div>		
+			
+        <div class="mt60">
+            <h5>示例2：默认支持的各种校验格式</h5>
+<div class="example_html_2 mb20">
+<span class="ml20 mt45">非空</span><input type="text" class="validate_input2 mt10 ml10" data-check="empty" value="hello">
+<span class="ml20 mt45">日期</span><input type="text" class="validate_input2 mt10 ml10" data-check="date" value="2014-12-12">
+<span class="ml20 mt45">时间</span><input type="text" class="validate_input2 mt10 ml10" data-check="time" value="2014-12-12 12:00:00"><br> 
+<span class="ml20 mt45">链接</span><input type="text" class="validate_input2 mt45 ml10" data-check="url" value="http://www.qq.com">
+<span class="ml20 mt45">数字</span><input type="text" class="validate_input2 mt45 ml10" data-check="num" value="8.8">
+<span class="ml20 mt45">整数</span><input type="text" class="validate_input2 mt45 ml10" data-check="inum" value="8"><br> 
+<span class="ml20 mt45">单ip</span><input type="text" class="validate_input2 mt45 ml10" data-check="ip" value="22.22.22.22">
+<span class="ml20 mt45">多ip</span><input type="text" class="validate_input2 mt45 ml10" data-check="ips" value="22.22.22.22;11.11.11.11">
+<span class="ml20 mt45">邮箱</span><input type="text" class="validate_input2 mt45 ml10" data-check="email" value="generzhang@tencent.com"><br> 
+<span class="ml20 mt45">命名</span><input type="text" class="validate_input2 mt45 ml10" data-check="naming" value="$cloudjs_1">
+<span class="ml20 mt45">正整数</span><input type="text" class="validate_input2 mt45 ml10" data-check="uinum" value="22">
+<span class="ml20 mt45">非负整数</span><input type="text" class="validate_input2 mt45 ml10" data-check="ginum" value="0"><br> 
+<span class="ml20 mt45">最大长度</span><input type="text" class="validate_input2 mt45 ml10" data-check="maxlen" value="a01234567890123456789">
+<span class="ml20 mt45">最小长度</span><input type="text" class="validate_input2 mt45 ml10" data-check="minlen" value="a1234">
+<span class="ml20 mt45">手机号</span><input type="text" class="validate_input2 mt45 ml10" data-check="phone" value="13888888888">
+<input type="button" class="validate_btn2 ml20 mt45" value="&nbsp;校验&nbsp;">
+</div>
+            <script class="example_js_2">
+$('.validate_btn2').click(function(){
+    cloudjs('.validate_input2').validate({
+        success: function(){
+            alert('校验通过');
+            //do something
+        },
+        fail: function(result){
+            //校验不通过
+        }
+    });
+});
+            </script>
+            <script>writeCode('.example_html_2');writeCode('.example_js_2');</script>
+        </div>
+        
+        <div class="mt60">
+            <h5>示例3：混合校验示例</h5>
+<div class="example_html_3">
+<input type="text" class="validate_input3" data-check="empty;date">    <!-- 格式之间用分号来分隔 -->
+<input type="button" class="validate_btn3 ml20" value="&nbsp;校验&nbsp;">
+</div>
+            <script class="example_js_3">
+$('.validate_btn3').click(function(){
+    cloudjs('.validate_input3').validate({
+        success: function(){
+            alert('校验通过');
+            //do something
+        },
+        fail: function(result){
+            //校验不通过
+        }
+    });
+});
+            </script>
+            <script>writeCode('.example_html_3');writeCode('.example_js_3');</script>
+        </div>
+        
+        <div class="mt60">
+            <h5>示例4：自定义校验类型</h5>
+<div class="example_html_4">
+<!-- jpg格式的可以通过校验 -->
+<input type="text" class="validate_input4" data-check="image" value="hello.jpg">
+<!-- png格式的不能通过校验 -->
+<input type="text" class="validate_input4 ml20" data-check="image" value="hello.png">
+<input type="text" class="validate_input4 ml20" data-check="minlen">
+<input type="button" class="validate_btn4 ml20" value="&nbsp;校验&nbsp;">
+</div>
+            <script class="example_js_4">
+$('.validate_btn4').click(function(){
+    cloudjs('.validate_input4').validate({
+        success: function(){
+            alert('校验通过');
+            //do something
+        },
+        fail: function(result){
+            //校验不通过
+        },
+        rule: {
+            image: {  //新增的一种校验格式，用于校验输入的内容是否是jpg格式的文件名
+                check: function(ele){
+                    if(!$.trim(ele.val()) || cloudjs.util.isEndWith('.jpg', ele.val().toLowerCase())){
+                        return true;
+                    }else{
+                        return false;
+                    }
+                },
+                errmsg: function(ele){
+                    return '必须是jpg类型的图片'
+                }
+            },
+            minlen: { //覆盖系统默认的校验类型，修改最小长度的校验为10，系统默认的是6
+                check: function(ele){
+                    if($.trim(ele.val()).length < 10){
+                        return false;
+                    }
+                    return true;
+                },
+                errmsg: function(ele){
+                    return '最小长度不能小于10';
+                }
+            }
+        }
+    });
+});
+            </script>
+            <script>writeCode('.example_html_4');writeCode('.example_js_4');</script>
+        </div>
+        
+        <div class="mt60">
+            <h5>示例5：设置错误提示信息的位置和消失时间</h5>
+<div class="example_html_5">
+<!-- 通过data-position="down"设置提示信息在元素的上方，也就是箭头指向下down -->
+<input type="text" class="validate_input5" data-position="up">
+<input type="button" class="validate_btn5 ml20" value="&nbsp;校验&nbsp;">
+</div>
+            <script class="example_js_5">
+$('.validate_btn5').click(function(){
+    cloudjs('.validate_input5').validate({
+        success: function(){
+            alert('校验通过');
+            //do something
+        },
+        fail: function(result){
+            //校验不通过
+        },
+        delay: 1000 //设置1秒后，提示信息自动消失
+    });
+});
+            </script>
+            <script>writeCode('.example_html_5');writeCode('.example_js_5');</script>
+        </div>
+        
+        
+        <div class="mt60">
+            <h5>示例6：设置错误提示的方式</h5>
+<div class="example_html_6">
+<!-- 当设置errmsgType为2时，元素有data-wraper属性，则错误信息会显示在相应的容器内 -->
+<input type="text" class="validate_input6" data-wraper="#input6_wraper"><font color=red>*</font>
+<span id="input6_wraper"></span>
+<!-- 当设置errmsgType为2时，元素没有设置data-wraper属性，则默认将错误信息追加到紧邻元素之后 -->
+<input type="text" class="validate_input6 ml30"><font color=red>*</font>
+<input type="button" class="validate_btn6 ml20" value="&nbsp;校验&nbsp;">
+
+<!-- 请注意留意有date-wraper属性和没有这个属性的区别，第一个校验不通过的提示信息是在红星后面 -->
+<!-- 第二个是在红星前面，显然第一个才是我们要的效果，所以在实际应用中要合理利用data-wraper属性 -->
+</div>
+            <script class="example_js_6">
+$('.validate_btn6').click(function(){
+    cloudjs('.validate_input6').validate({
+        success: function(){
+            alert('校验通过');
+            //do something
+        },
+        fail: function(result){
+            //校验不通过
+        },
+        errmsgType: 2 //通过errmsgType设置错误信息的展示方式为非tips，默认是1表示弹tips，如前面的例子都是tips
+    });
+});
+            </script>
+            <script>writeCode('.example_html_6');writeCode('.example_js_6');</script>
+        </div>
+        
+        <div class="mt60">
+            <h5>示例7：通过checkType属性设置默认的校验类型</h5>
+<div class="example_html_7">
+<!-- 这里我们并没有指定data-check属性，所以校验的类型用默认的类型 -->
+<input type="text" class="validate_input7" value="-8">
+<input type="text" class="validate_input7 ml30" value="0">    <!-- 同上 -->
+<input type="button" class="validate_btn7 ml20" value="&nbsp;校验&nbsp;">
+</div>
+            <script class="example_js_7">
+$('.validate_btn7').click(function(){
+    cloudjs('.validate_input7').validate({
+        success: function(){
+            alert('校验通过');
+            //do something
+        },
+        fail: function(result){
+            //校验不通过
+        },
+        //设置默认的校验类型为正整数，当所有的字段校验都是正整数时，用这种统一设置默认校验类型的方式比较方便
+        checkType: 'uinum'
+    });
+});
+            </script>
+            <script>writeCode('.example_html_7');writeCode('.example_js_7');</script>
+        </div>
+        
+        <div class="mt60">
+            <h5>示例8：调用方法清除错误提示</h5>
+<div class="example_html_8">
+<input type="text" class="validate_input8" id="validate_input8a">
+<input type="text" class="validate_input8 ml30" id="validate_input8b">
+<input type="button" class="validate_btn8 ml20" value="&nbsp;校验&nbsp;" id="validate_btn8a">
+<input type="button" class="validate_btn8 ml20" value="&nbsp;清除所有错误提示&nbsp;" id="validate_btn8b">
+<input type="button" class="validate_btn8 ml20" value="&nbsp;只清除某个错误提示&nbsp;" id="validate_btn8c">
+</div>
+            <script class="example_js_8">
+$('#validate_btn8a').click(function(){
+    cloudjs('.validate_input8').validate({
+        success: function(){
+            alert('校验通过');
+            //do something
+        },
+        fail: function(result){
+            //校验不通过
+        }
+    });
+});
+
+$('#validate_btn8b').click(function(){
+    //cloudjs('.validate_input8')代表作用的是所有的元素 
+    cloudjs('.validate_input8').validate('removeErrmsg');
+});
+
+$('#validate_btn8c').click(function(){
+    //cloudjs('#validate_input8a')代表作用的仅仅是id为validate_input8a的元素
+    cloudjs('#validate_input8a').validate('removeErrmsg');
+});
+
+
+            </script>
+            <script>writeCode('.example_html_8');writeCode('.example_js_8');</script>
+        </div>
+        
+         <div class="mt60">
+            <h5>示例9：使用自定义的错误提示方式</h5>
+<div class="example_html_9">
+<input type="text" class="validate_input9" id="validate_input9a">
+<input type="text" class="validate_input9 ml30" id="validate_input9b" data-check="url" value="hello">
+<input type="text" class="validate_input9 ml30" id="validate_input9c" data-check="date" value="hello">
+<input type="button" class="validate_btn9 ml20" value="&nbsp;校验&nbsp;">
+</div>
+            <script class="example_js_9">
+$('.validate_btn9').click(function(){
+    cloudjs('.validate_input9').validate({
+        success: function(){
+            alert('校验通过');
+            //do something
+        },
+        fail: function(result){
+            alert(result);
+            //校验不通过
+        },
+        //设置warn属性为false，就不会有错误提示信息了，用户可自行处理这些信息，
+        //通过fail方法返回的result数组，里面包含了所有的错误信息
+        warn: false
+    });
+});
+            </script>
+            <script>writeCode('.example_html_9');writeCode('.example_js_9');</script>
+        </div>
+        
+        
+        <div class="mt60">
+            <h5>示例10：表单form校验</h5>
+<div class="example_html_10">
+<form id="validate_form10">  <!-- 对于校验form内的输入框的场景，只需要传入form即可，form内的输入框被自动被校验 -->
+	<input type="text" data-check="minlen">
+	<input type="text" class="ml30"><br>
+	<input type="text" class="mt45">
+	<!-- never是不需要校验的类型，其实是用来过滤的，因为form内的元素都会被校验，只要写上了never，该元素就会被忽略 -->
+	<input type="text" class="ml30 mt45" data-check="never"><br>
+	<textarea class="mt45"></textarea>
+	<input type="button" class="validate_btn10 ml20 mt45" value="&nbsp;校验&nbsp;">
+</form>
+</div>
+            <script class="example_js_10">
+$('.validate_btn10').click(function(){
+    cloudjs('#validate_form10').validate({
+        success: function(){
+            alert('校验通过');
+            //do something
+        },
+        fail: function(result){
+            //校验不通过
+        }
+    });
+});
+            </script>
+            <script>writeCode('.example_html_10');writeCode('.example_js_10');</script>
+        </div>
+        
+        
+        <div class="mt60">
+            <h5>示例11：很全的最大长度最小长度功能</h5>
+<div class="example_html_11">
+<!-- 这个例子主要说明validate组件对最大长度和最小长度校验的支持，从1到200都支持的 -->
+
+<!-- 调用方式就是在minlen或maxlen后面加相应的数字，以满足用户各种长度需求，如例子 -->
+
+<input class="validate_input11 mt10" type="text" data-check="minlen8">
+<input class="validate_input11 mt10 ml45" type="text" data-check="minlen16">
+<input class="validate_input11 mt10 ml45" type="text" data-check="minlen32">
+<input class="validate_input11 mt10 ml45" type="text" data-check="minlen64"><br>
+<input class="validate_input11 mt45 ml45" type="text" data-check="minlen128">
+<input class="validate_input11 mt45 ml4" type="text" data-check="maxlen8" value="123456789">
+<input class="validate_input11 mt45 ml4" type="text" data-check="maxlen16" value="123456789,123456789">
+<input class="validate_input11 mt45 ml4" type="text" data-check="maxlen32"><br>
+<input class="validate_input11 mt45 ml4" type="text" data-check="maxlen64">
+<input class="validate_input11 mt45 ml4" type="text" data-check="maxlen128">
+<input type="button" class="validate_btn11 ml20" value="&nbsp;校验&nbsp;">
+</div>
+            <script class="example_js_11">
+$('.validate_btn11').click(function(){
+    cloudjs('.validate_input11').validate({
+        success: function(){
+            alert('校验通过');
+            //do something
+        },
+        fail: function(result){
+            //校验不通过
+        }
+    });
+});
+            </script>
+            <script>writeCode('.example_html_11');writeCode('.example_js_11');</script>
+        </div>
+        
+    </div>
+</body>
+</html>

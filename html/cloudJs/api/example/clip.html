@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>clip复制到粘贴板组件</title>
+    <link rel="stylesheet" href="../css/global.css"/>
+    <link rel="stylesheet" href="../css/prettify.css"/>
+    <style>
+    input.hover{ color:#f00; }
+    </style>
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/cloudjs.js"></script>
+    <script src="../js/prettify.js"></script>
+    <script src="../js/global.js"></script>
+</head>
+<body class="body_bg">
+    <div class="comps_header">
+        <h2 class="comps_name">clip复制到粘贴板组件</h2>
+        <p style="color:red">注意：该组件无法在本地使用无效，必须配置环境才可正常使用</p>
+    </div>
+    <div class="comps_summary">
+        <h3>cloudjs(selector).clip([options]) <i class="gray">options={'属性名':'属性值',...}</i></h3>
+    </div>
+    <div class="detail_content">
+        <h4>属性</h4>
+        <div class="param_table_box">
+            <table class="param_table">
+                <tbody>
+                    <tr>
+                        <th>属性名</th>
+                        <th>类型</th>
+                        <th>默认值</th>
+                        <th>说明</th>
+                    </tr>
+                    <tr>
+                        <td>swfPath</td>
+                        <td>string</td>
+                        <td>Clipboard.swf</td>
+                        <td>falsh文件相对当前页面的路径</td>
+                    </tr>
+                    <tr>
+                        <td>hoverClass</td>
+                        <td>string</td>
+                        <td>hover</td>
+                        <td>鼠标移到复制按钮上的className</td>
+                    </tr>
+                    <tr>
+                         <td>activeClass</td>
+                         <td>string</td>
+                         <td>active</td>
+                         <td>点击复制按钮上的className</td>
+                    </tr>
+                    <tr>
+                         <td>zIndex</td>
+                         <td>number</td>
+                         <td>99</td>
+                         <td>生成flash相关html代码时的zIndex值</td>
+                    </tr>
+                    <tr>
+                         <td>onCopy</td>
+                         <td>function</td>
+                         <td></td>
+                         <td>要复制的内容，通过return返回</td>
+                    </tr>
+                    <tr>
+                         <td>onCopyBefore</td>
+                         <td>function</td>
+                         <td></td>
+                         <td>复制前要进行的操作</td>
+                    </tr>
+                    <tr>
+                         <td>onCopyAfter</td>
+                         <td>function</td>
+                         <td></td>
+                         <td>复制后要进行的操作</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="comps_summary">
+        <h3>cloudjs(selector).clip('方法名', [args])</h3>
+    </div>
+    
+    <div class="detail_content">
+        <h4>方法</h4>
+        <div class="param_table_box">
+            <table class="param_table">
+                <tbody>
+                    <tr>
+                        <th>方法名</th>
+                        <th>参数</th>
+                        <th>说明</th>
+                    </tr>
+                    <tr>
+                        <td>hide</td>
+                        <td></td>
+                        <td>隐藏复制按钮与flash对象</td>
+                    </tr>
+                    <tr>
+                        <td>show</td>
+                        <td></td>
+                        <td>显示复制按钮与flash对象</td>
+                    </tr>
+                    <tr>
+                        <td>destroy</td>
+                        <td></td>
+                        <td>销毁复制按钮与flash对象</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+           
+    <div class="detail_content">
+        <h4>示例</h4>
+        <div>
+            <h5>示例1：最简单常用的场景，设置swfPath,onCopy,onCopyAfter</h5>
+<div class="example_html_1">
+<textarea rows="5" cols="50">我就是被复制的对象</textarea>
+<input id="page_div1" type="button" value="复制textarea里面的内容"/>
+</div>
+            <script class="example_js_1">
+cloudjs('#page_div1').clip({ 
+    swfPath: '../../js/Clipboard.swf', 
+    onCopy: function(){
+        return $(this).prev().val();
+    }, 
+    onCopyAfter: function(){
+        cloudjs.message({ content: '复制成功', relative:this, position:'right', duration: 1000 });
+    }
+});
+            </script>
+            <script>writeCode('.example_html_1');writeCode('.example_js_1');</script>
+        </div>
+                
+        <div>
+            <h5>示例2：多个同时使用</h5>
+<div class="example_html_2">
+<ul>
+    <li><a href="paging.html">分页组件</a> <input class="page_div2" type="button" value="复制上一个元素的href"/></li>
+    <li><a href="http://www.qq.com">腾讯QQ</a> <input class="page_div2" type="button" value="复制上一个元素的href"/></li>
+    <li><a href="../../js/cloudjs.js">cloudjs</a> <input class="page_div2" type="button" value="复制上一个元素的href"/></li>
+</ul>
+</div>
+<script class="example_js_2">
+cloudjs('.page_div2').clip({
+    swfPath: '../../js/Clipboard.swf', 
+    onCopy: function(){
+        return $(this).prev().attr('href');
+    },
+    onCopyBefore: function(){
+        $(this).parent().css('background','#ff0');
+    },
+    onCopyAfter: function(){
+        $(this).parent().css('background','none');
+        cloudjs.message({ content: '复制成功', relative: this, position: 'right', duration: 1000 });
+    } 
+});
+</script>
+            <script>writeCode('.example_html_2');writeCode('.example_js_2');</script>
+        </div>
+        
+        <div class="html_3_box">
+            <h5>示例3：设置onCopyBefore</h5>
+<div class="example_html_3">
+<input id="page_div3" type="button" value="复制当前的js代码"/>
+</div>
+<script class="example_js_3">
+cloudjs('#page_div3').clip({
+    swfPath: '../../js/Clipboard.swf', 
+    onCopy: function(){
+        return $(this).parent().next().html();
+    },
+    onCopyBefore: function(){
+        $('.html_3_box').css('background','#ff0');
+    },
+    onCopyAfter: function(){
+        $('.html_3_box').css('background','none');
+        cloudjs.message({ content: '复制成功', relative: this, position: 'right', duration: 1000 });
+    } 
+});
+</script>
+            <script>writeCode('.example_html_3');writeCode('.example_js_3');</script>
+        </div>
+
+        <div>
+            <h5>示例4：hide,show,destroy方法的使用</h5>
+<div class="example_html_4">
+<input class="page_div4" type="button" value="复制当前文字1"/>
+<input class="page_div4" type="button" value="复制当前文字2"/>
+<input class="page_div4" type="button" value="复制当前文字3"/>
+<br/><br/>   
+<input type="button" value="隐藏" onclick="cloudjs('.page_div4').clip('hide')"/>
+<input type="button" value="显示"  onclick="cloudjs('.page_div4').clip('show')"/>
+<input type="button" value="销毁" onclick="cloudjs('.page_div4').clip('destroy')"/>
+</div>
+            <script class="example_js_4">
+cloudjs('.page_div4').clip({
+    swfPath: '../../js/Clipboard.swf', 
+    onCopy: function(){
+        return $(this).val();
+    },
+    onCopyAfter: function(){
+        cloudjs.message({ content: '复制成功', relative: this, position: 'right', duration: 1000 });
+    } 
+});
+            </script>
+            <script>writeCode('.example_html_4');writeCode('.example_js_4');</script>
+        </div>
+    </div>
+</body>
+</html>
+
