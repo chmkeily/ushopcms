@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="/html/css/pc.css" media="screen">
 	<link rel="stylesheet" type="text/css" href="/asset/bootstrap/css/bootstrap.min.css" media="screen">
 </head>
-<body id="home">
+<body class="iframe_body">
     <div> 
 		<form class="form-horizontal span8" method="post" action="/provider/update">
             <fieldset>

@@ -13,10 +13,10 @@
 		}
 	</style>
 </head>
-<body id="home">
+<body class="iframe_body">
     
 	<div>
-		<table class="table table-bordered table-striped table-hover table-condensed">
+		<table class="search_table table table-bordered table-striped table-hover table-condensed">
 			<tbody>
 				<tr>
 					<th><span>名称</span></th>

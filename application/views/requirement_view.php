@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="/html/css/pc.css" media="screen">
 	<link rel="stylesheet" type="text/css" href="/asset/bootstrap/css/bootstrap.min.css" media="screen">
 </head>
-<body id="home">
+<body class="iframe_body">
 		<div>
             <form class="form-horizontal" method="post" action="/requirement/index">
                 <fieldset>
@@ -21,7 +21,7 @@
     			</fieldset>
 		    </form>
 
-			<table class="table table-bordered table-striped table-hover table-condensed">
+			<table class="search_table table table-bordered table-striped table-hover table-condensed">
 				<thead style="background: #CCCCCC url(/asset/images/treetable/bg-table-thead.png) repeat-x;">
 					<tr>
 						<th><span>需求ID</span></th>
@@ -31,7 +31,7 @@
 						<th><span>发布时间</span></th>
 						<th><span>店铺类型</span></th>
 						<th><span>店铺城市</span></th>
-						<th><span>预算(元)</span></th>
+						<th><span>预算</span></th>
 						<th><span>状态</span></th>
 						<th><span>服务商</span></th>
 					</tr>
@@ -44,9 +44,9 @@
                         <td><?php echo $requirement['requirement_title']; ?></td>
                         <td><?php echo $requirement['requirement_type']; ?></td>
                         <td><?php echo $requirement['requirement_ownername']; ?></td>
-                        <td><?php echo date('Y-m-d H:i:s', $requirement['requirement_st']); ?></td>
+                        <td><?php echo $requirement['requirement_st']; ?></td>
                         <td><?php echo $requirement['requirement_shopcate']; ?></td>
-                        <td><?php echo XGETVAL($locations[$requirement['requirement_shopcity']]['desc']); ?></td>
+                        <td><?php echo $requirement['requirement_shopcity']; ?></td>
                         <td><?php echo $requirement['requirement_budget']; ?></td>
                         <td><?php echo $requirement['requirement_status']; ?></td>
                         <td><?php echo $requirement['requirement_providerid']; ?></td>

@@ -15,7 +15,7 @@ class Requirement extends CI_Controller {
 	}
 	
 	/**
-	* @brief 服务商所属需求查询
+	* @brief 需求查询
 	*  <pre>
 	*	接受的表单数据：
 	*		start_idx	列表开始下标
@@ -59,7 +59,6 @@ class Requirement extends CI_Controller {
 
 		$requirements = $this->requirement_model->get_requirements($conditions, $length, $offset);
         $viewdata['requirements'] = $requirements;
-        $viewdata['locations'] = $this->config->item('locations');
         $this->load->view('requirement_view', $viewdata);
     }
 
@@ -89,7 +88,6 @@ class Requirement extends CI_Controller {
         }
 
         $viewdata['requirement'] = $requirement;
-        $viewdata['locations'] = $this->config->item('locations');
         $this->load->view('requirement_details', $viewdata);
     }
     

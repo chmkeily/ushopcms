@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="/html/css/pc.css" media="screen">
 	<link rel="stylesheet" type="text/css" href="/asset/bootstrap/css/bootstrap.min.css" media="screen">
 </head>
-<body id="home">
+<body class="iframe_body">
 		<div>
             <form class="form-horizontal" method="post" action="/coupon/index">
                 <fieldset>
@@ -23,7 +23,7 @@
     			</fieldset>
 		    </form>
 
-			<table class="table table-bordered table-striped table-hover table-condensed">
+			<table class="search_table table table-bordered table-striped table-hover table-condensed">
 				<thead style="background: #CCCCCC url(/asset/images/treetable/bg-table-thead.png) repeat-x;">
 					<tr>
 						<th><span>ID</span></th>
