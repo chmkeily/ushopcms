@@ -12,12 +12,13 @@
     <script src="../js/global.js"></script>
 </head>
 <body class="body_bg">
+    <div class="primary">
     <div class="comps_header">
         <h2 class="comps_name">resizable缩放组件</h2>
         <p>让元素可通过鼠标缩放改变其宽高</p>
     </div>
     <div class="comps_summary">
-        <h3>cloudjs(selector).resizable([options]) <i class="gray">options={'属性名':'属性值',...}</i></h3>
+        <h3>cloudjs(selector).resizable([options])</h3>
     </div>
     <div class="detail_content">
         <h4>属性</h4>
@@ -34,25 +35,25 @@
 	                    <td>animate</td>
 	                    <td>boolean</td>
 	                    <td>false</td>
-	                    <td>缩放时是否有动画</td>
+	                    <td>缩放时是否有动画，详见<a href="#eg9" class="exp">示例9</a></td>
 	                </tr>
 	                <tr>
                         <td>animateDuration</td>
                         <td>number/string</td>
                         <td>slow</td>
-                        <td>当设置了animate为true时，缩放动画的持续时间，可设置数字，单位ms，字符串可设置('slow', 'fast')</td>
+                        <td>当设置了animate为true时，缩放动画的持续时间，可设置数字，单位ms，字符串可设置('slow', 'fast')，详见<a href="#eg9" class="exp">示例9</a></td>
                     </tr>
 	                <tr>
 	                    <td>containment</td>
 	                    <td>string/boolean</td>
 	                    <td>false</td>
-	                    <td>局限在某个容器内缩放</td>
+	                    <td>局限在某个容器内缩放，详见<a href="#eg2" class="exp">示例2</a></td>
 	                </tr>
 	                <tr>
 	                    <td>maxHeight</td>
 	                    <td>number</td>
 	                    <td>null</td>
-	                    <td>缩放最大的高度</td>
+	                    <td>缩放最大的高度，详见<a href="#eg5" class="exp">示例5</a></td>
 	                </tr>
 	                <tr>
 	                    <td>maxWidth</td>
@@ -76,13 +77,13 @@
 	                    <td>aspectRatio</td>
 	                    <td>number/boolean</td>
 	                    <td>false</td>
-	                    <td>宽高缩放的比例</td>
+	                    <td>宽高缩放的比例，详见<a href="#eg5" class="exp">示例5</a></td>
 	                </tr>
 	                <tr>
                         <td>ghost</td>
                         <td>boolean</td>
                         <td>false</td>
-                        <td>在缩放时，是否需要显示一个半透明的辅助元素</td>
+                        <td>在缩放时，是否需要显示一个半透明的辅助元素，详见<a href="#eg5" class="exp">示例5</a></td>
                     </tr>
                     <tr>
                         <td>grid</td>
@@ -94,25 +95,25 @@
                         <td>handles</td>
                         <td>string</td>
                         <td>e,s,se</td>
-                        <td>该元素四边可缩放的方位(右、下、左、上，分别对应e、s、w、n，四个角分别用ne、se、sw、nw表示)，有8个值可组合选取(n、e、s、w、ne、se、sw、nw)，另可用all代表8个值全选</td>
+                        <td>该元素四边可缩放的方位(右、下、左、上，分别对应e、s、w、n，四个角分别用ne、se、sw、nw表示)，有8个值可组合选取(n、e、s、w、ne、se、sw、nw)，另可用all代表8个值全选，详见<a href="#eg5" class="exp">示例5</a></td>
                     </tr>
                     <tr>
                          <td>start</td>
                          <td>function(event, ui)</td>
                          <td></td>
-                         <td>每次开始缩放元素时触发, event为Event类型，ui为Object，可通过ui.size获取到元素的width和height</td>
+                         <td>每次开始缩放元素时触发, event为Event类型，ui为Object，可通过ui.size获取到元素的width和height，详见<a href="#eg3" class="exp">示例3</a></td>
                     </tr>
                     <tr>
-                         <td>drag</td>
+                         <td>resize</td>
                          <td>function(event, ui)</td>
                          <td></td>
-                         <td>在缩放期间当鼠标移动时触发, event为Event类型，ui为Object，可通过ui.size获取到元素的width和height</td>
+                         <td>在缩放期间当鼠标移动时触发, event为Event类型，ui为Object，可通过ui.size获取到元素的width和height，详见<a href="#eg3" class="exp">示例3</a></td>
                     </tr>
                     <tr>
                          <td>stop</td>
                          <td>function(event, ui)</td>
                          <td></td>
-                         <td>每次停止缩放时触发, event为Event类型，ui为Object，可通过ui.size获取到元素的width和height</td>
+                         <td>每次停止缩放时触发, event为Event类型，ui为Object，可通过ui.size获取到元素的width和height，详见<a href="#eg3" class="exp">示例3</a></td>
                     </tr>
                 </tbody>
             </table>
@@ -135,22 +136,22 @@
                     <tr>
                         <td>destroy</td>
                         <td>无</td>
-                        <td>完全移除缩放功能，会把元素返回到它的预初始化状态</td>
+                        <td>完全移除缩放功能，会把元素返回到它的预初始化状态，详见<a href="#eg4" class="exp">示例4</a></td>
                     </tr>
                     <tr>
                         <td>disable</td>
                         <td>无</td>
-                        <td>禁用 resizable，这会阻止元素的缩放功能，除非是destroy后重新绑定缩放，否则只能通过enable来再次启动缩放功能 </td>
+                        <td>禁用 resizable，这会阻止元素的缩放功能，除非是destroy后重新绑定缩放，否则只能通过enable来再次启动缩放功能 ，详见<a href="#eg4" class="exp">示例4</a></td>
                     </tr>
                     <tr>
                         <td>enable</td>
                         <td>无</td>
-                        <td>启用 resizable，和disable类似一对开关</td>
+                        <td>启用 resizable，和disable类似一对开关，详见<a href="#eg4" class="exp">示例4</a></td>
                     </tr>
                     <tr>
                         <td>option</td>
                         <td>由属性和属性值组成的键值对</td>
-                        <td>动态设置元素的缩放属性</td>
+                        <td>动态设置元素的缩放属性，详见<a href="#eg5" class="exp">示例5</a></td>
                     </tr>
                 </tbody>
             </table>
@@ -160,12 +161,14 @@
     <div class="detail_content">
         <h4>示例</h4>
         <div>
-            <h5>示例1：让一个div元素变得可以缩放</h5>
-            <div class="h200 w200">
+            <h5><a name="eg1"></a>示例1：让一个div元素变得可以缩放</h5>
+            
 <div class="example_html_1">
-<div id="resize_div1" class="h200 w200 bd bgc"></div>
+<div class="h200 w200">
+    <div id="resize_div1" class="h200 w200 bd bgc"></div>
 </div>
-            </div>
+</div>
+            
             <script class="example_js_1">
 cloudjs('#resize_div1').resizable();
             </script>
@@ -173,7 +176,7 @@ cloudjs('#resize_div1').resizable();
         </div>      
             
         <div class="mt60">
-            <h5>示例2：让元素局限在父元素内缩放</h5>
+            <h5><a name="eg2"></a>示例2：让元素局限在父元素内缩放</h5>
 <div class="example_html_2">
 <div class="h200 w200 bd">
     <div id="resize_div2" class="h100 w100 bgc bd"></div>
@@ -188,7 +191,7 @@ cloudjs('#resize_div2').resizable({
          </div>
         
          <div class="mt60">
-            <h5>示例3：缩放过程的事件捕获</h5>
+            <h5><a name="eg3"></a>示例3：缩放过程的事件捕获</h5>
 <div class="example_html_3">
 <div class="h200 w200 bd">
     <div id="resize_div3" class="h100 w100 bd bgc"></div>
@@ -217,7 +220,7 @@ cloudjs('#resize_div3').resizable({
         </div>
         
         <div class="mt60">
-            <h5>示例4：disable等方法示例</h5>
+            <h5><a name="eg4"></a>示例4：disable等方法示例</h5>
 <div class="example_html_4">
 <div class="h200 w200 bd">
     <div id="resize_div4" class="h100 w100 bd bgc"></div>
@@ -249,7 +252,7 @@ function destroyResize(){
         </div>
         
         <div class="mt60">
-            <h5>示例5：其他示例</h5>
+            <h5><a name="eg5"></a>示例5：其他示例</h5>
 <div class="example_html_5">
 <div class="h200 w200 bd">
     <div id="resize_div5" class="h100 w100 bd bgc"></div>
@@ -278,5 +281,9 @@ function resetOption(){
         </div>
         
     </div>
+    </div>
 </body>
 </html>
+
+
+

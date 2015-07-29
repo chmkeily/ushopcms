@@ -1,3 +1,9 @@
+/**
+ * 复制到粘贴板组件
+ * author: amixu@tencent.com
+ * date: 2015-07-01
+ */
+
 cloudjs.define({
     clip: function(options){
         if($.isPlainObject(options)){
@@ -7,38 +13,37 @@ cloudjs.define({
                 activeClass: 'active',  //鼠标点击时的className
                 zIndex: 99,     //flash文件的zIndex
                 onCopy: $.noop, //函数，要复制的内容，通过return返回
-                onCopyBefore: $.noop, //函数，复制前要进行的操作
-                onCopyAfter: $.noop //函数，复制后要进行的操作
+                beforeCopy: $.noop, //函数，复制前要进行的操作
+                afterCopy: $.noop //函数，复制后要进行的操作
             };
             $.extend(defaults, options);
             
             return this.each(function(){
-                var $self = $(this);
-                if ($self.is(':visible')){
+                var self = $(this);
+                if (self.is(':visible')){
                     ZeroClipboard.setDefaultValue(defaults);
                     var clip = new ZeroClipboard.Client();
     
-                    $self.bind('cloudJs_clip_copy', defaults.onCopy);
-                    $self.bind('cloudJs_clip_beforeCopy', defaults.onCopyBefore);
-                    $self.bind('cloudJs_clip_afterCopy', defaults.onCopyAfter);
+                    self.bind('cloudJs_clip_copy', defaults.onCopy);
+                    self.bind('cloudJs_clip_beforeCopy', defaults.beforeCopy);
+                    self.bind('cloudJs_clip_afterCopy', defaults.afterCopy);
         
                     clip.setHandCursor(true);
                     clip.setCSSEffects(true);
                     clip.addEventListener('mouseOver', function(){
-                        $self.trigger('mouseenter');
+                        self.trigger('mouseenter');
                     });
                     clip.addEventListener('mouseOut', function(){
-                        $self.trigger('mouseleave');
+                        self.trigger('mouseleave');
                     });
                     clip.addEventListener('mouseDown', function(){
-                        clip.setText($self.triggerHandler('cloudJs_clip_copy'));                        
-                        $self.trigger('cloudJs_clip_beforeCopy');
+                        clip.setText(self.triggerHandler('cloudJs_clip_copy'));                        
+                        self.trigger('cloudJs_clip_beforeCopy');
                     });
                     clip.addEventListener('complete', function(client, text){
-                        $self.trigger('cloudJs_clip_afterCopy');
+                        self.trigger('cloudJs_clip_afterCopy');
                     });
-                    clip.glue($self[0], $self.parent()[0]);
-                    
+                    clip.glue(self[0], self.parent()[0]);
                     $(window).bind('load resize',function(){
                         clip.reposition();
                     });
@@ -46,19 +51,18 @@ cloudjs.define({
             });
         }else{
             return this.each(function(){
-                var $self = $(this);
-                var clipId = $self.data('clipId');
+                var self = $(this);
+                var clipId = self.data('clipId');
                 var clipElm = $('#' + clipId + '.clip_div');
-                if(options === "destroy"){
-                    $self.remove();
+                if(options === 'destroy'){
+                    self.remove();
                     clipElm.remove();
-                }else if(options === "hide"){
-                    $self.hide();
+                }else if(options === 'hide'){
+                    self.hide();
                     clipElm.hide();
-                }else if(options === "show"){
-                    $self.show();
+                }else if(options === 'show'){
+                    self.show();
                     clipElm.show();
-                    
                 }
             });
         }
@@ -97,7 +101,7 @@ var ZeroClipboard = {
                 return this;
             };
             thingy.hasClass = function(name){
-                return !!this.className.match(new RegExp("\\s*" + name + "\\s*"));
+                return !!this.className.match(new RegExp('\\s*' + name + '\\s*'));
             };
         }
         return thingy;
@@ -127,16 +131,16 @@ var ZeroClipboard = {
 
         if(obj && (obj != stopObj)){
             info.left += obj.offsetLeft;
-            info.top += obj.offsetTop;
+            info.top += (obj.offsetTop - 5);
         }
         return info;
     },
-    Client: function(elem){
+    Client: function(ele){
         this.handlers = {};
-        this.id = ZeroClipboard.index ++;
+        this.id = ZeroClipboard.index++;
         this.movieId = 'ClipboardSwf_' + this.id;
         ZeroClipboard.register(this.id, this);
-        if(elem) this.glue(elem);
+        if(ele) this.glue(ele);
     }
 };
 
@@ -148,8 +152,8 @@ ZeroClipboard.Client.prototype = {
     handCursorEnabled: true,
     cssEffects: true,
     handlers: null,
-    glue: function(elem, appendElem, stylesToAdd){
-        this.domElement = ZeroClipboard.$(elem);
+    glue: function(ele, appendElem, stylesToAdd){
+        this.domElement = ZeroClipboard.$(ele);
         var zIndex = ZeroClipboard.zIndex;
         if(this.domElement.style.zIndex){
             zIndex = parseInt(this.domElement.style.zIndex, 10) + 1;
@@ -162,15 +166,15 @@ ZeroClipboard.Client.prototype = {
 
         var box = ZeroClipboard.getDOMObjectPosition(this.domElement, appendElem);
         this.div = document.createElement('div');
-        this.div.className = "clip_div";
-        this.div.id = "clip_" + this.movieId;
+        this.div.className = 'clip_div';
+        this.div.id = 'clip_' + this.movieId;
         $(this.domElement).data('clipId', 'clip_' + this.movieId);
         var style = this.div.style;
         style.position = 'absolute';
-        style.left = '' + box.left + 'px';
-        style.top = '' + box.top + 'px';
-        style.width = '' + box.width + 'px';
-        style.height = '' + box.height + 'px';
+        style.left = box.left + 'px';
+        style.top = box.top + 'px';
+        style.width = box.width + 'px';
+        style.height = box.height + 'px';
         style.zIndex = zIndex;
 
         if(typeof(stylesToAdd) === 'object'){
@@ -183,7 +187,6 @@ ZeroClipboard.Client.prototype = {
     },
     getHTML: function(width, height){
         var html = '', flashvars = 'id=' + this.id + '&width=' + width + '&height=' + height;
-
         if(navigator.userAgent.match(/MSIE/)){
             var protocol = location.href.match(/^https/i) ? 'https://' : 'http://';
             html += '<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="' + protocol + 'download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,0,0" width="' + width + '" height="' + height + '" id="' + this.movieId + '" align="middle"><param name="allowScriptAccess" value="always" /><param name="allowFullScreen" value="false" /><param name="movie" value="' + ZeroClipboard.swfPath + '" /><param name="loop" value="false" /><param name="menu" value="false" /><param name="quality" value="best" /><param name="bgcolor" value="#ffffff" /><param name="flashvars" value="' + flashvars + '"/><param name="wmode" value="transparent"/></object>';
@@ -198,16 +201,16 @@ ZeroClipboard.Client.prototype = {
     show: function(){
         this.reposition();
     },
-    reposition: function(elem){
-        if(elem){
-            this.domElement = ZeroClipboard.$(elem);
+    reposition: function(ele){
+        if(ele){
+            this.domElement = ZeroClipboard.$(ele);
             if(!this.domElement) this.hide();
         }
         if(this.domElement && this.div){
             var box = ZeroClipboard.getDOMObjectPosition(this.domElement);
             var style = this.div.style;
-            style.left = '' + box.left + 'px';
-            style.top = '' + box.top + 'px';
+            style.left = box.left + 'px';
+            style.top = box.top + 'px';
         }
     },
     setText: function(newText){
@@ -231,8 +234,8 @@ ZeroClipboard.Client.prototype = {
         switch (eventName){
         case 'load':
             this.movie = document.getElementById(this.movieId);
+            var self = this;
             if(!this.movie){
-                var self = this;
                 setTimeout(function(){
                     self.receiveEvent('load', null);
                 }, 1);
@@ -240,7 +243,6 @@ ZeroClipboard.Client.prototype = {
             }
 
             if(!this.ready && navigator.userAgent.match(/Firefox/) && navigator.userAgent.match(/Windows/)){
-                var self = this;
                 setTimeout(function(){
                     self.receiveEvent('load', null);
                 }, 100);
@@ -288,7 +290,7 @@ ZeroClipboard.Client.prototype = {
         }
         
         if(this.handlers[eventName]){
-            for(var idx = 0, len = this.handlers[eventName].length; idx < len; idx ++){
+            for(var idx = 0, len = this.handlers[eventName].length; idx < len; idx++){
                 var func = this.handlers[eventName][idx];
                 if(typeof(func) === 'function'){
                     func(this, args);

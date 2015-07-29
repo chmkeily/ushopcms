@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>menu菜单组件</title>
+    <link rel="stylesheet" href="../css/global.css"/>
+    <link rel="stylesheet" href="../css/prettify.css"/>
+    <script src="data/menu_data.js"></script>
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/cloudjs.js"></script>
+    <script src="../js/prettify.js"></script>
+    <script src="../js/global.js"></script>
+</head>
+<body class="body_bg">
+    <div class="primary">
+    <div class="comps_header">
+        <h2 class="comps_name">menu菜单组件</h2>
+    </div>
+    <div class="comps_summary">
+        <h3>cloudjs(selector).menu([options])</h3>
+    </div>
+    <div class="detail_content">
+        <h4>属性</h4>
+        <div class="param_table_box">
+            <table class="param_table">
+                <tbody>
+                    <tr>
+                        <th>属性名</th>
+                        <th>类型</th>
+                        <th>默认值</th>
+                        <th>说明</th>
+                    </tr>
+                    <tr>
+                        <td colspan="4" style="background:#ccc">第一种类型菜单的参数(<a href="#eg1" class="exp">示例1</a>和<a href="#eg2" class="exp">示例2</a>)</td>
+                    </tr>
+                    <tr>
+                        <td>data</td>
+                        <td>jsonArray</td>
+                        <td></td>
+                        <td><i>必填</i>，下拉菜单的数据，数据格式为<a href="data/menu_data.js" target="_blank" class="exp">data/menu_data.js</a>，详见<a href="#eg1" class="exp">示例1</a></td>
+                    </tr>
+                    <tr>
+                        <td>type</td>
+                        <td>string</td>
+                        <td></td>
+                        <td>下拉菜单的类型，横向或纵向，默认为横向(见示例1)，type等于vertical为纵向菜单，详见<a href="#eg2" class="exp">示例2</a></td>
+                    </tr>
+                    <tr>
+                        <td>isPreLoad</td>
+                        <td>boolean</td>
+                        <td>false</td>
+                        <td>是否提前加载菜单数据，false表示鼠标移到菜单上才加载数据，true表示调用组件时就加载数据，如果对菜单内容加click事件，则需要设置isPreLoad为true，或者采用live('click')，详见<a href="#eg2" class="exp">示例2</a></td>
+                    </tr>
+                    <tr>
+                        <td>css</td>
+                        <td>object</td>
+                        <td>{ top1:,left1,top2:,left2: }</td>
+                        <td>top1,left1为第一级菜单相对于父节点li的top和left值，top2,left2为第一级以后的菜单相对于父节点li的top和left值，当菜单与菜单直接的距离没有衔接上时(即上一级ul设置padding或border时)，可以通过这4个值来调节距离，详见<a href="#eg3" class="exp">示例3</a></td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" style="background:#ccc">第二种类型菜单的参数(见<a href="#eg4" class="exp">示例4</a>和<a href="#eg5" class="exp">示例5</a>)</td>
+                    </tr>
+                    <tr>
+                         <td>relativeTop</td>
+                         <td>string</td>
+                         <td></td>
+                         <td>隐藏内容相对top，默认效果见<a href="#eg4" class="exp">示例4</a>，relativeTop等于current的效果见<a href="#eg5" class="exp">示例5</a></td>
+                    </tr>
+                    <tr>
+                         <td>css</td>
+                         <td>objcet</td>
+                         <td>{ width:500, height:, top:, left: }</td>
+                         <td>width,height,top,left分别为隐藏元素的宽度,高度,top和left值,一般情况下只需要指定width，其他三个值组件会默认计算出来</td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" style="background:#ccc">第三种类型菜单的参数(见<a href="#eg6" class="exp">示例6</a>和<a href="#eg7" class="exp">示例7</a>)</td>
+                    </tr>
+                    <tr>
+                         <td>position</td>
+                         <td>string</td>
+                         <td></td>
+                         <td>隐藏元素相对展示元素的位置,默认为左对齐,值为right,center分别表示右对齐和居中对齐，见<a href="#eg7" class="exp">示例7</a></td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" style="background:#ccc">第四种类型菜单的参数(见<a href="#eg8" class="exp">示例8</a>，<a href="#eg9" class="exp">示例9</a>，<a href="#eg10" class="exp">示例10</a>)</td>
+                    </tr>
+                    <tr>
+                         <td>type</td>
+                         <td>string</td>
+                         <td></td>
+                         <td><i>必填</i>，必须指定type的值为tree，才会调用第四种类型菜单</td>
+                    </tr>
+                    <tr>
+                         <td>data</td>
+                         <td>jsonArray</td>
+                         <td></td>
+                         <td><i>必填</i>，如果页面用ul写了第一级菜单，则data为二维数组，见<a href="#eg8" class="exp">示例8</a>，如果页面没有写第一级菜单，则data为一维数组，详见<a href="#eg9" class="exp">示例9</a></td>
+                    </tr>
+                    <tr>
+                         <td>isHideOther</td>
+                         <td>boolean</td>
+                         <td>true</td>
+                         <td>点击节点时，是否隐藏同级节点的子节点，见<a href="#eg10" class="exp">示例10</a></td>
+                    </tr>
+                    <tr>
+                         <td>selectedName</td>
+                         <td>string</td>
+                         <td>href</td>
+                         <td>默认指定选中节点时要比较对象的name<a href="#eg10" class="exp">示例10</a></td>
+                    </tr>
+                    <tr>
+                         <td>selectedValue</td>
+                         <td>string</td>
+                         <td></td>
+                         <td>默认指定选择的节点时比较的值，如果设定selectedValue:'paging.html',那么初始化组件时，在data中只有寻找到obj[selectedName]=='paging.html'的对象，就会把该对象生成的a元素加上class="selected"的标签，详见<a href="#eg10" class="exp">示例10</a></td>
+                    </tr>
+                    <tr>
+                         <td>onClick</td>
+                         <td>function(obj)</td>
+                         <td></td>
+                         <td>点击菜单节点时触发的事件，返回当前点击的节点，详见<a href="#eg8" class="exp">示例8</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+           
+    <div class="detail_content">
+        <h4>示例</h4>
+        <div>
+            <h5>示例1：横向菜单 </h5>
+<div class="example_html_1">
+<ul id="menu_box_1">
+    <li><a href="#;">菜单1</a></li>
+    <li><a href="#;">菜单2</a></li>
+    <li><a href="#;">菜单3</a></li>
+    <li><a href="#;">菜单4</a></li>
+</ul>
+</div>
+            <script class="example_js_1">
+cloudjs('#menu_box_1').menu({
+    data: dataArr1
+});
+            </script>
+            <script>writeCode('.example_html_1');writeCode('.example_js_1');</script>
+        </div>
+        <div>
+                    <h5>示例2：纵向菜单并且,默认加载数据,增加菜单元素的click事件</h5>
+<div class="example_html_2">
+<ul id="menu_box_2">
+    <li><a href="#;">菜单1</a></li>
+    <li><a href="#;">菜单2</a></li>
+    <li><a href="#;">菜单3</a></li>
+</ul>
+</div>
+<script class="example_js_2">
+cloudjs('#menu_box_2').menu({
+    data: dataArr2,
+    isPreLoad: true,
+    type: 'vertical'
+},function(self){
+    self.find('a').click(function(){
+        alert($(this).text());
+    });
+});
+
+</script>
+            <script>writeCode('.example_html_2');writeCode('.example_js_2');</script>
+        </div>
+                
+        <div>
+            <h5>示例3：通过css: { top1:,left1,top2:,left2: } 来调节菜单的相对位置</h5>
+<div class="example_html_3">
+<ul id="menu_box_3">
+    <li><a href="#;">菜单1</a></li>
+    <li><a href="#;">菜单2</a></li>
+</ul>
+</div>
+<script class="example_js_3">
+cloudjs('#menu_box_3').menu({
+    data: dataArr3,
+    css: { top1: 3, left1: 40, left2: 5 }
+});
+
+</script>
+<script>writeCode('.example_html_3');writeCode('.example_js_3');</script>
+        </div>
+
+        <div class="html_4_box">
+            <h5>示例4：隐藏的内容高度相对当前对象定位</h5>
+            <div class="example_html_4">
+<div id="menu_box_4">
+    <ul>
+        <li><a href="#;">家电</a></li>
+        <li><a href="#;">手机、数码</a></li>
+        <li><a href="#;">电脑、办公</a></li>
+        <li><a href="#;">家具、厨具</a></li>
+        <li><a href="#;">男装、女装</a></li>
+        <li><a href="#;">护肤</a></li>
+        <li><a href="#;">鞋帽</a></li>
+        <li><a href="#;">母婴</a></li>
+    </ul>
+    <div>111</div>
+    <div>112<br/><br/><br/><br/><br/><br/>112<br/><br/><br/><br/><br/><br/><br/>112</div>
+    <div>113</div>
+    <div>114</div>
+    <div>115</div>
+    <div>116</div>
+    <div>117</div>
+    <div>118</div>
+</div>
+            </div>
+            <script class="example_js_4">
+cloudjs('#menu_box_4').menu({
+    css: { width: 400 }
+});
+            </script>
+            <script>writeCode('.example_html_4');writeCode('.example_js_4');</script>
+        </div>
+
+        <div class="html_5_box">
+            <h5>示例5：隐藏的内容高度相对当前选中的菜单定位，并自定义右侧图标</h5>
+            <div class="example_html_5">
+<div id="menu_box_5">
+    <ul>
+        <li><a href="#;">家电</a><span class="cloudjs_icon"></span></li>
+        <li><a href="#;">手机、数码</a><span class="cloudjs_icon"></span></li>
+        <li><a href="#;">电脑、办公</a><span class="cloudjs_icon"></span></li>
+        <li><a href="#;">家具、厨具</a><span class="cloudjs_icon"></span></li>
+        <li><a href="#;">男装、女装</a><span class="cloudjs_icon"></span></li>
+        <li><a href="#;">护肤</a><span class="cloudjs_icon"></span></li>
+        <li><a href="#;">鞋帽</a><span class="cloudjs_icon"></span></li>
+        <li><a href="#;">母婴</a><span class="cloudjs_icon"></span></li>
+    </ul>
+    <div>111</div>
+    <div>112<br/><br/><br/><br/><br/><br/>112<br/><br/><br/><br/><br/><br/><br/>112</div>
+    <div>113</div>
+    <div>114</div>
+    <div>115</div>
+    <div>116</div>
+    <div>117</div>
+    <div>118</div>
+</div>
+</div>
+            <script class="example_js_5">
+cloudjs('#menu_box_5').menu({
+    relativeTop: 'current',
+    css: { width: 400 }
+});
+            </script>
+            <script>writeCode('.example_html_5');writeCode('.example_js_5');</script>
+        </div>
+        <div>
+            <h5>示例6：采用class同时调用多个</h5>
+            <div class="example_html_6" style="height:30px">
+<div class="menu_box_6" style="width:40%;margin-right:10px;">
+    <div>网站导航1</div>
+    <div>内容<br/>内容<br/>内容<br/>内容<br/></div>
+</div>
+<div class="menu_box_6" style="width:200px;">
+    <div><span style="float:left">网站导航2</span><span class="cloudjs_icon"></span></div>
+    <div style="width:198px">内容<br/>内容<br/>内容<br/>内容<br/>内容<br/></div>
+</div>
+
+            </div>
+            <script class="example_js_6">
+cloudjs('.menu_box_6').menu();
+            </script>
+            <script>writeCode('.example_html_6');writeCode('.example_js_6');</script>
+        </div>
+        <div>
+            <h5>示例7：隐藏元素相对展示元素居中对齐和居右对齐</h5>
+            <div class="example_html_7" style="height:30px;">
+<div id="menu_box_7" style="width:40%;margin-right:10px;">
+    <div>网站导航1</div>
+    <div><a href="#;">帮助中心1</a><a href="#;">在线客服1</a></div>
+</div>
+<div id="menu_box_07" style="width:40%;">
+    <div>网站导航1</div>
+    <div><a href="#;">帮助中心1</a><a href="#;">在线客服1</a></div>
+</div>
+            </div>
+            <script class="example_js_7">
+cloudjs('#menu_box_7').menu({ position: 'center'});
+cloudjs('#menu_box_07').menu({ position: 'right'});
+            </script>
+            <script>writeCode('.example_html_7');writeCode('.example_js_7');</script>
+        </div>
+        <div>
+<h5>示例8：带点击事件的树形菜单(数据不包含第一级菜单)</h5>
+<div class="example_html_8">
+<ul id="menu_box_8">
+    <li class="selected"><a href="#;">菜单1</a></li>
+    <li><a href="#;">菜单2</a></li>
+    <li><a href="#;">菜单3</a></li>
+    <li><a href="#;">菜单4</a></li>
+</ul>
+</div>
+<script class="example_js_8">
+cloudjs('#menu_box_8').menu({
+    data: dataArr1,
+    type: 'tree',
+    onClick: function(obj){
+        alert($(obj).text());
+    }
+});
+</script>
+            <script>writeCode('.example_html_8');writeCode('.example_js_8');</script>
+        </div>
+        
+        <div>
+<h5>示例9：带点击事件的树形菜单(数据包含所有菜单)</h5>
+<div class="example_html_9">
+<div id="menu_box_9"></div>
+</div>
+<script class="example_js_9">
+cloudjs('#menu_box_9').menu({
+    data: dataArr4,
+    type: 'tree'
+});
+</script>
+            <script>writeCode('.example_html_9');writeCode('.example_js_9');</script>
+        </div>
+        
+         <div>
+<h5>示例10：设定树形菜单的默认值</h5>
+<p>第一个展开子菜单时，不会隐藏相邻菜单的子菜单。第二个会</p>
+<div class="example_html_10" style="height:280px;">
+<div id="menu_box_10" style="float:left;width:240px;"></div>
+<div id="menu_box_10_2" style="float:left;width:240px;"></div>
+</div>
+<script class="example_js_10">
+var dataArr10 = [
+    { text: "UI组件库", children: [
+        { href: "common.html", text: "公共方法" }, 
+        { href: "calendar.html", text: "日历组件" }
+    ]},
+    { text: "CloudJs", isOpen: true, children: [
+           { href: "paging.html", text: "分页组件" },
+           { href: "tips.html", text: "提示组件" },
+           { href: "dialog.html", text: "弹出框组件" },
+           { href: 'message.html', text: '消息组件' },
+           { href: "menu.html", text: "菜单组件" }
+   ]}
+];
+cloudjs('#menu_box_10').menu({
+    data: dataArr10,
+    type: 'tree',
+    isHideOther: false,
+    selectedValue: 'tips.html'
+});
+cloudjs('#menu_box_10_2').menu({
+    data: dataArr10,
+    type: 'tree',
+    selectedName: 'text',
+    selectedValue: '弹出框组件'   
+});
+</script>
+            <script>writeCode('.example_html_10');writeCode('.example_js_10');</script>
+        </div>
+    </div>
+    </div>
+</body>
+</html>
+
+
+
+

@@ -1,13 +1,21 @@
+/**
+ * cloudjs
+ * author: generzhang@tencent.com
+ * date: 2015-07-01
+ */
 (function(global, undefined){
     
     var projectName = 'cloudjs', //default name
-        compVerFileName = '', //if has version file
-        compsPath = './'; //relative path of project
+        compVerFileName = './version.js', //if has version file
+        compsPath = './', //relative path of project
+        compsCssPath = '../css/', //the path of comp css file
+        defaultThemes = 'blue', //the default themes of comp
+        defaultZIndex = 1000;
     
     if(global[projectName]) return;
     
-    var project, charset, force, env, uniq, preload,
-        _keyword, _comps, _this, _preload, _noop, _inited, _state, _args, _init, _uri, _proxy, _doc, _html, _comRes,  _debug, _srcs, _toString, _aliasMap, _compEnv,
+    var project, charset, remove, force, env, themes, uniq, preload, resolve,
+        _projectSrc, _loadedComps, _keyword, _comps, _this, _preload, _noop, _inited, _state, _args, _init, _uri, _proxy, _doc, _html, _comRes,  _debug, _srcs, _toString, _aliasMap, _compEnv,
         _isFun, _isArr, _isObj, _isBoo, _isStr, _isNum, _isHop, _arrPro,  _loadHandler, _cacheHandler, _taskArr, _defaultVer = '__default_ver_',
         _state_ = '_state_', _args_ = '_args_', _project_ = '_'+projectName+'_', prejectAttr = 'data-'+projectName, _require_ = 'require',
         PRELOAD = 0, PRELOADING = 1, PRELOADED = 2, LOADING = 3, LOADED = 4;
@@ -36,25 +44,65 @@
     _isHop = function(o, p){return o.hasOwnProperty(p)};
     _arrPro = [];
     _taskArr = [];
+    _loadedComps = [];
         
     /**
      * public components
      */
-    _comps = ['resizable', 'draggable', 'paging', 'cascade', 'menu', 'clip', 
-              'cookie', 'calendar', 'tab', 'slide', 'message', 'dialog', 
-              'tips', 'validate', 'combobox', 'autocomp', 'ajaxbtn', 'calculate', 'string'];
+    _comps = {
+    	resizable:'resizable.css', 
+    	draggable:'', 
+    	paging:'paging.css', 
+        table:'paging.css', 
+    	cascade:'',
+    	menu:'menu.css',
+    	clip:'', 
+    	cookie:'',
+    	calendar:'calendar.css',
+    	monthpicker:'calendar.css',
+    	tab:'tab.css',
+    	ctab:'ctab.css',
+    	slide:'slide.css',
+    	message:'message.css',
+    	dialog:'dialog.css', 
+    	tips:'tips.css',
+    	validate:'validate.css',
+    	combobox:'combobox.css',
+    	totop:'',
+    	mask:'mask.css',
+    	calculate:'',
+    	string:'',
+    	progressbar:'progressbar.css'
+   	};
     
     _comps_default_version = { 
-            resizable:'201503241433', draggable:'201503241433', paging:'201503241433', 
-            cascade:'201503241433', menu:'201503241433', clip:'201503241433', cookie:'201503241433', 
-            calendar:'201503241433', tab:'201503241433', slide:'201503241433', message:'201503241433', 
-            dialog:'20150324143344', tips:'201503241433', validate:'201503241433', combobox:'201503241433', 
-            autocomp:'201503241433', ajaxbtn:'201503241433', calculate:'201503241433', string:'201503241433'
+        resizable:'201503241433',
+        draggable:'201503241433',
+        paging:'201503241433', 
+        table:'201503241433',
+        cascade:'201503241433',
+        menu:'201503241433',
+        clip:'201503241433',
+        cookie:'201503241433', 
+        calendar:'201503241433',
+        monthpicker:'201503241433',
+        tab:'201503241433',
+        ctab:'201503241433',
+        slide:'201503241433', 
+        dialog:'20150324143344',
+        tips:'201503241433',
+        validate:'201503241433',
+        combobox:'201503241433', 
+        message:'201503241433',
+        totop:'201503241433',
+        calculate:'201503241433', 
+        string:'201503241433',
+        progressbar:'201503241433'
     };
     /**
      * define keyword, developer cant't use
      */
-    _keyword = ['charset', 'force', 'include', 'env', 'uniq', 'get', 'define', 'callback'];
+    _keyword = ['charset', 'force', 'include', 'env', 'themes', 'uniq', 'get', 'define', 'callback'];
 
     /**
      * constructor
@@ -65,7 +113,7 @@
         if(args.length === 0){
             _this = undefined;
         }else if(typeof jQuery !== 'undefined'){// if use jquery
-            _this = get.apply(global, args);
+            _this = jQuery.apply(global, args);
         }else{
             _this = args[0];
         }
@@ -74,17 +122,6 @@
     };
 
     _noop = function(){};
-    
-    /******
-     * support ;
-     */
-    get = project.get = function(){
-        var selector = arguments[0], context = arguments[1];
-        if(_isStr(selector)){
-            selector = selector.replace(new RegExp(';','gm'),',');
-        }
-        return jQuery(selector, context);
-    };
     
     function _extend(target, source, deep) {
         
@@ -122,6 +159,16 @@
         return _doc.getElementsByTagName(tag);
     }
     
+    	
+	project.zIndex = function(zIndex){
+		if(zIndex){
+			defaultZIndex = zIndex;
+		}else{
+			defaultZIndex ++;
+		}
+		return defaultZIndex;
+	};
+    
     /**
      * set root path
      */
@@ -135,6 +182,50 @@
         }
         return _env_;
     };
+    
+    /**
+     * set themes
+     */
+    project.themes = function(_themes){
+        var _themes_ = themes;
+        if(_themes){
+        	themes = _themes.replace(/(^\s*)|(\s*$)/g, "");
+        	_changeCompThemes();
+        }
+        return _themes_;
+    };
+    
+    /**
+     * change comp themes
+     */
+    function _changeCompThemes(){
+    	var reloadCss = [], css;
+    	for(var i=0; i<_loadedComps.length; i++){
+    		if(css=_comps[_loadedComps[i]]){
+    			if(!_isArr(css)){
+    				css = [css];
+    			}
+    			for(var k=0; k<css.length; k++){
+    				reloadCss.push(resolve(compsCssPath+themes+'/'+css[k]+'?r_'+cloudjs.uniq(), _projectSrc));
+    			}
+    		}
+    	}
+    	force(reloadCss, true);
+    }
+    
+    function _addToLoadedComps(comp){
+    	var fonud = false;
+    	for(var i=0; i<_loadedComps.length; i++){
+    		if(_loadedComps[i] === comp){
+    			fonud = true;
+    			break;
+    		}
+    	}
+    	
+    	if(!fonud && comp){
+    		_loadedComps.push(comp);
+    	}
+    }
     
     /**
      * set charset
@@ -369,6 +460,7 @@
             if(_force){
                 if(suffix === 'css'){
                     _appendCss(obj.name);
+                    _appr();
                 }else if(suffix==='js'){
                     arr = _loadHandler[obj.name];
                     delete _loadHandler[obj.name];
@@ -392,17 +484,20 @@
         }else{
             _loadHandler[obj.name] = [success];
         }
-
-        obj.state = LOADING;
-
-        res = _load(obj, function(fn){
-            _dealHandler(obj, LOADED, _loadHandler);
-        }, fail);
-        if(obj.comp){
-            _comRes[obj.comp] = _comRes[obj.comp]||{};
-            _comRes[obj.comp][obj.name] = res;
-            _addResAttr(res, obj.comp);
+        
+        function _appr(){
+        	obj.state = LOADING;
+			res = _load(obj, function(fn){
+			    _dealHandler(obj, LOADED, _loadHandler);
+			}, fail);
+			if(obj.comp){
+			    _comRes[obj.comp] = _comRes[obj.comp]||{};
+			    _comRes[obj.comp][obj.name] = res;
+			    _addResAttr(res, obj.comp);
+			}
         }
+        
+        _appr();
     }
 
     function _each(arr, callback){
@@ -520,6 +615,9 @@
         if(target){
             _html.appendChild(target.cloneNode(true));
             target.parentNode.removeChild(target);
+            return true;
+        }else{
+        	return false;
         }
     }
     
@@ -543,7 +641,7 @@
 
         var i, len, r, v = project._comps_version[c]||'', env = project.env(_compEnv[c]);
         for(i=0,len=rs.length; i<len; i++){
-            r = _resolve(rs[i], _srcs[c]);
+            r = resolve(rs[i], _srcs[c]);
             
             if(v=v||''){
                 rs[i] = r.split('?')[0] + '?' + v;
@@ -626,7 +724,7 @@
     /**
      * resolve path
      */
-    function _resolve(path, _uri, isDir){
+    resolve = project.resolve = function(path, _uri, isDir){
         var ret, first, m;
         
         if(!isDir){
@@ -651,7 +749,7 @@
         }
 
         return ret;
-    }
+    };
     
     function _endWith(end, str){    
         return new RegExp(end+'$').test(str);        
@@ -715,8 +813,43 @@
                     (function(fun){
                         _fun = obj[p] = function(){
                             (function(args, _t, ret, callback, _callback, reqs, comps){
+                            	var cssReqs = [], jsReqs = [], req;
                                 reqs = _reqs(_filterRes(fun[_require_].apply(_t, args)||[], comps=[]), _fun._comp);
-                                force(reqs, _fun._comp, function(){
+                                
+                                while(req=reqs.shift()){
+                                	if(project.util.isEndWith('.css', req) || req.indexOf('.css?') > 0){
+                                		cssReqs.push(req);
+                                	}else{
+                                		jsReqs.push(req);
+                                	}
+                                }
+                                
+                                if(jsReqs.length){
+                                	force(jsReqs, _fun._comp, _css);
+                                }else{
+                                	_css();
+                                }
+                                
+                                function _css(){
+                                	if(cssReqs.length){
+                                		force(cssReqs, _fun._comp, _do);
+                            			var _t = setInterval(function(){
+                                			if(!_do.done){
+                                				force(cssReqs, _fun._comp, true, _do);
+                                			}else{
+                                				clearInterval(_t);
+                                			}
+                                		}, 500);
+                                	}else{
+                                		_do();
+                                	}
+                                }
+                                
+                                function _do(){
+                                	if(_do.done){
+                                		return;
+                                	}
+                                	_do.done = true;
                                     _uri = _srcs[_fun._comp];
                                     if(comps.length){
                                         _reqsComps(_fun._comp, comps, _f);
@@ -736,7 +869,8 @@
                                         _this = undefined;
                                     }
                                     
-                                });
+                                }
+                                
                                 return _t;
                             })(arguments, _this);
                         };
@@ -823,10 +957,11 @@
             if(!_isFun(project[comp]) && _args[comp+_state_] === undefined){
                 _args[comp+_state_] = PRELOAD;
                 _args[comp+_args_] = [];
-                _srcs[comp] = _resolve(src, _uri);
+                _srcs[comp] = resolve(src, _uri);
                 project[comp] = function(){
                     var args = arguments,
                         _t = _this;
+                    _addToLoadedComps(comp);
                     if(_taskArr){
                         _taskArr.push((function(_t, _preload, comp, args){
                             return function(){
@@ -995,13 +1130,15 @@
             },
             _main: function(){
                 (function(uri){
-                    var script = _tags('script'), flag = true, rs, main, require, reqs = [], comp, path, projectSrc;
+                    var script = _tags('script'), flag = true, rs, main, require, reqs = [], comp, path;
                     script = script[script.length-1];
-                    projectSrc = script.src;
+                    _projectSrc = script.src;
                     main = script.getAttribute('data-main');
                     require = script.getAttribute('data-require');
                     path = script.getAttribute('data-path');
+                    themes =  script.getAttribute('data-themes');
                     path = path||compsPath;
+                    themes = themes||defaultThemes;
                     
                     function d(){
                         if (_doc.addEventListener || event.type === "load" || _doc.readyState === "complete"){
@@ -1023,7 +1160,7 @@
                             require = require.replace(new RegExp(';','gm'),',').split(',');
                             for(var i=0,len=require.length; i<len; i++){
                                 if(rs=require[i]){
-                                    reqs.push(_resolve(rs, uri));
+                                    reqs.push(resolve(rs, uri));
                                 }
                             }
                             force(reqs, m);
@@ -1033,13 +1170,15 @@
                     })();
                     
                     (function(){
-                        project.env(_resolve(path, projectSrc, true));
-                        for(var i=0,len=_comps.length; i<len; i++){
-                            project.include(_comps[i]);
+                        project.env(resolve(path, _projectSrc, true));
+                        for(var p in _comps){
+                        	if(_isHop(_comps, p)){
+                        		project.include(p);
+                        	}
                         }
                         
                         if(compVerFileName){
-                            force(_resolve(compVerFileName+'?r='+uniq(), projectSrc), function(){
+                            force(resolve(compVerFileName+'?r='+uniq(), _projectSrc), function(){
                                 _extend(_comps_default_version, project._comps_version, true);
                                 _run();
                             }, _run);
@@ -1049,11 +1188,12 @@
                         
                         function _run(){
                             project._comps_version = _comps_default_version;
-                            project.env(_resolve(path, projectSrc, true));
-                            for(var i=0,len=_comps.length; i<len; i++){
-                                _setVersion(_comps[i], (project._comps_version[_comps[i]]||''));
+                            project.env(resolve(path, _projectSrc, true));
+                            for(var p in _comps){
+                            	if(_isHop(_comps, p)){
+                            		_setVersion(p, (project._comps_version[p]||''));
+                            	}
                             }
-                        
                             for(var i=0, len=_taskArr.length; i<len; i++){
                                 setTimeout(_taskArr[i], 0);
                             }
@@ -1074,7 +1214,7 @@
                     }
                     
                     function f(path, comp){
-                        force(_resolve(path||'', _uri), function(){
+                        force(resolve(path||'', _uri), function(){
                             if(_proxy !== project[comp].toString()){
                                 project[comp]();
                             }
@@ -1187,10 +1327,12 @@
      */
     util.log = function(){
         var _console = global.console;
-        if(_console && _console.log && _console.log.apply){
-            [].unshift.call(arguments, '[cloudjs.util.log]');
-            _console.log.apply(_console, arguments);
-        }
+        try{
+        	if(_console && _console.log && _console.log.apply){
+                [].unshift.call(arguments, '[cloudjs.util.log]');
+                _console.log.apply(_console, arguments);
+            }
+        }catch(e){}
     };
     
     /**
@@ -1199,10 +1341,12 @@
      */
     util.error = function(){
         var _console = global.console;
-        if(_console && _console.error && _console.error.apply){
-            [].unshift.call(arguments, '[cloudjs.util.error]');
-            _console.error.apply(_console, arguments);
-        }
+        try{
+        	if(_console && _console.error && _console.error.apply){
+                [].unshift.call(arguments, '[cloudjs.util.error]');
+                _console.error.apply(_console, arguments);
+            }
+        }catch(e){}
     }
     
     /**
@@ -1211,10 +1355,12 @@
      */
     util.trace = function(){
         var _console = global.console;
-        if(_console && _console.trace && _console.trace.apply){
-            [].unshift.call(arguments, '[cloudjs.util.trace]');
-            _console.trace.apply(_console, arguments);
-        }
+        try{
+        	if(_console && _console.trace && _console.trace.apply){
+                [].unshift.call(arguments, '[cloudjs.util.trace]');
+                _console.trace.apply(_console, arguments);
+            }
+        }catch(e){}
     }
     
 })(this);

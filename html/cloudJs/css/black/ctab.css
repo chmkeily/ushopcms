@@ -1,0 +1,203 @@
+.cloudjs_icon {
+  background-image: url(../../images/icons_new.png);
+}
+.cloudjs_btn {
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  padding: 3px 7px;
+  display: inline-block;
+  font-family: Microsoft Yahei;
+  font-size: 12px;
+  white-space: nowrap;
+  cursor: pointer;
+  zoom: 1;
+  *width: 40px;
+  *height: 24px;
+  *line-height: 1;
+  border: 1px solid #1d1b1b;
+  color: #ffffff;
+  background-color: #2d2d2d;
+}
+a.cloudjs_btn {
+  text-decoration: none;
+}
+.cloudjs_btn_white {
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  padding: 3px 7px;
+  display: inline-block;
+  font-family: Microsoft Yahei;
+  font-size: 12px;
+  white-space: nowrap;
+  cursor: pointer;
+  zoom: 1;
+  *width: 40px;
+  *height: 24px;
+  *line-height: 1;
+  border: 1px solid #999999;
+  color: #000000;
+  background-color: #ffffff;
+}
+.cloudjs_icon:hover {
+  opacity: 0.8;
+  filter: alpha(opacity=80);
+}
+.cloudjs_btn:hover {
+  opacity: 0.8;
+  filter: alpha(opacity=80);
+}
+.cloudjs_btn_white:hover {
+  border-color: #666666;
+}
+.cloudjs_btn_white_disable,
+.cloudjs_btn_white:disabled {
+  color: #aaaaaa;
+  border-color: #cfcfcf;
+  cursor: default;
+}
+.cloudjs_btn_disable,
+.cloudjs_btn_disable:hover,
+.cloudjs_btn:disabled {
+  color: #aaaaaa;
+  border-color: #cfcfcf;
+  cursor: default;
+  background: #ffffff;
+}
+.border {
+  border: 1px solid #c6c6c6;
+  box-shadow: inset 1px 2px 1px #f0f0f0;
+}
+.cloudjs_input {
+  height: 25px;
+  line-height: 25px;
+  padding: 0;
+  text-indent: 5px;
+  outline: none;
+  border: 1px solid #c6c6c6;
+  box-shadow: inset 1px 2px 1px #f0f0f0;
+}
+.cloudjs_input:focus {
+  border: solid 1px #aaa;
+}
+.ctab_div {
+  margin: 0px;
+  padding: 0px;
+  font-size: 14px;
+  display: block;
+}
+.ctab_div .ctab_wrap {
+  height: 32px;
+  position: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-color: #efefef;
+  border-bottom: 1px solid #CCCCCC;
+}
+.ctab_div .ctab_head {
+  overflow: hidden;
+  margin: 0;
+  margin-right: 3px;
+  padding: 0;
+  position: relative;
+}
+.ctab_div .ctab_wrap_with_icon ul.ctab_head {
+  margin-right: 29px;
+}
+.ctab_div .ctab_tab {
+  height: 30px;
+  float: left;
+  margin: 2px 0px 0px 5px;
+  list-style: none;
+  position: relative;
+  display: inline-block;
+  background-color: #eaeaea;
+}
+.ctab_div .ctab_selected {
+  background-color: #ffffff;
+  border-top: 4px solid #2d2d2d;
+  height: 29px;
+  line-height: 29px;
+  margin-top: 0;
+}
+.ctab_div .ctab_tab_inner {
+  border-left: 1px solid #CCCCCC;
+  border-right: 1px solid #CCCCCC;
+  border-top: 1px solid #CCCCCC;
+  padding: 0px 20px;
+  height: 100%;
+}
+.ctab_div .ctab_selected .ctab_tab_inner {
+  border-top: none;
+}
+.ctab_div .ctab_refresh_icon,
+.ctab_div .ctab_tab .ctab_close_icon,
+.ctab_div .ctab_close_other_icon {
+  position: absolute;
+  top: 0px;
+  cursor: pointer;
+  height: 16px;
+  width: 16px;
+}
+.ctab_div .ctab_tab .ctab_refresh_icon {
+  left: 6px;
+  top: 7px;
+  display: none;
+  background-position: -111px -17px;
+}
+.ctab_div .ctab_tab .ctab_close_icon {
+  right: 2px;
+  top: 9px;
+  background-position: -114px -1px;
+  opacity: 0.7;
+  filter: alpha(opacity=70);
+}
+.ctab_div .ctab_tab .ctab_close_icon:hover {
+  opacity: 1;
+  filter: alpha(opacity=100);
+}
+.ctab_div .ctab_selected .ctab_close_icon {
+  top: 7px;
+}
+.ctab_div .ctab_title {
+  margin: 0;
+  text-align: center;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: 30px;
+  cursor: default;
+}
+.ctab_div .ctab_selected .ctab_title {
+  line-height: 27px;
+}
+.ctab_div .ctab_selected .ctab_refresh_icon {
+  display: block;
+}
+.ctab_div .ctab_close_other_icon {
+  right: 0px;
+  top: 0px;
+  width: 32px;
+  height: 100%;
+  background-color: #eaeaea;
+}
+.ctab_div .ctab_close_other_icon span.ctab_icon_span {
+  display: block;
+  width: 16px;
+  height: 16px;
+  margin: 6px auto;
+  background-position: -111px 3px;
+}
+.ctab_div .ctab_body {
+  margin: 0px;
+  overflow: hidden;
+  border: 1px solid #CCCCCC;
+  border-top: none;
+}
+.ctab_div .ctab_body .ctab_panel {
+  overflow: auto;
+}

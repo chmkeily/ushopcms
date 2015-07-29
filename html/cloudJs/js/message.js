@@ -3,23 +3,25 @@ cloudjs.define({
     message: function(options){
 
         var defaults = {
-            type: 'success', // 消息框的类型，可选'success','warn','error'
+            type: 'normal', // 消息框的类型，可选'normal','success','warn','error'
             content: '提示信息', // 消息框中的提示内容
             duration: 3000, // 消息框保留的时间
-            isShowIcon: false, //左上角是否展示icon
+            showLeftIcon: false, //是否展示左边的小图标
+            showCloseIcon: false, //是否显示关闭按钮
             relative: document, // 消息框所处的容器，默认为document
             position: 'in_top',// 消息框相对于容器的位置，可选'in_top','left','right','up','down'
             offsetLeft: 0, // 消息框相对于容器顶部中心的横向偏移值
             offsetTop: 0, // 消息框相对于容器顶部的纵向偏移值
             id: null, // 自定义消息框id
-            isTriggerClose: false //是否点击页面其他元素自动关闭消息框
+            isTriggerClose: false, //是否点击页面其他元素自动关闭消息框
+            zIndex: null
         };
 
         if(options && $.isPlainObject(options)){
             $.extend(defaults, options);
         }else if(options === 'close'){
-            if(arguments[1] && arguments[1].id){
-                _hide(arguments[1].id);
+            if(arguments[1]){
+                _hide(arguments[1]);
             }else{
                 _hide('all');
             }
@@ -27,13 +29,13 @@ cloudjs.define({
         }
 
         var _msgBox = null,
-            _msgCon = null,
             _msgClose = null,
             _timeout = null,
-            _type = cloudjs.util.indexOf(['success', 'warn', 'error'], defaults.type) === -1 ? 'success' : defaults.type,
+            _type = cloudjs.util.indexOf(['normal', 'success', 'warn', 'error'], defaults.type) === -1 ? 'normal' : defaults.type,
             _content = defaults.content,
             _duration = defaults.duration < 0 ? 5000 : defaults.duration,
-            _isShowIcon = defaults.isShowIcon,
+            _showLeftIcon = defaults.showLeftIcon,
+            _showCloseIcon = defaults.showCloseIcon,
             _relative = defaults.relative,
             _position = cloudjs.util.indexOf(['in_top', 'left', 'right', 'up', 'down'], defaults.position) === -1 ? 'in_top' : defaults.position,
             _offsetLeft = defaults.offsetLeft,
@@ -41,9 +43,8 @@ cloudjs.define({
             _isFull = defaults.isFull || false,
             _id = defaults.id ? ('mes_' + defaults.id + '_' + Math.random()) : null,
             _isTriggerClose = defaults.isTriggerClose || false;
-
+            _zIndex = (defaults.zIndex !== undefined && defaults.zIndex !== null && (!isNaN(defaults.zIndex))) ? defaults.zIndex : (cloudjs.zIndex());
         _init();
-
         /**
          * 初始化消息组件
          */
@@ -57,17 +58,24 @@ cloudjs.define({
          */
         function _addBox(){
             var html = '';
-            _msgBox = $('<div></div>').addClass('message_div').addClass(Math.random().toString());
+            _msgBox = $('<div></div>').addClass('message_div ' + 'message_' +  _type).addClass(Math.random().toString());
             _id && _msgBox.attr('id', _id);
-            html = '<div class="message_con ' + (_isShowIcon ? '' : 'message_no_icon ' ) + 'message_' +  _type + '">';
-            if(_isShowIcon){
-                html += '<p class="message_icon cloud_icon"></p>'
+            if(!_showLeftIcon){
+                _msgBox.addClass('message_no_left_icon');
+            }else{
+                html += '<p class="message_icon cloudjs_icon"></p>'
             }
-            html += '<span>' + _content + '</span><p class="message_close">×</p></div>';
+            html += '<span>' + _content + '</span>';
+            if(!_showCloseIcon){
+                _msgBox.addClass('message_no_right_icon');
+            }else{
+                html += '<p class="message_close cloudjs_icon"></p>';
+            }
+
+            html += '</div>'
             _msgBox.appendTo('body')
                 .html(html);
-            _msgCon = _msgBox.children();
-            _msgClose = _msgCon.find('>.message_close');
+            _msgClose = _msgBox.find('>.message_close');
         }
 
         /**
@@ -75,15 +83,17 @@ cloudjs.define({
          */
         function _setStyle(){
             var reElem = null, oTop = 0, oLeft = 0, oWidth = 0, oHeight = 0, style = {},
-                msgWidth = 0, msgHeight = 0;
+                msgWidth = 0, msgHeight = 0, spaceWidth = 0;
+            _msgBox.css({zIndex: _zIndex});
             if(_relative.nodeType === 9){
                 reElem = $(document);
                 $(_msgBox).css({position: 'fixed'});
                 style.top = _offsetTop;
-                msgWidth = $(_msgBox).width();
+                msgWidth = $(_msgBox).outerWidth();
                 oWidth = reElem.width();
+                spaceWidth = msgWidth - $(_msgBox).width();
                 if(_isFull) {
-                    style.width = oWidth;
+                    style.width = oWidth - spaceWidth;
                     style.left = 0;
                 }else{
                     style.left = oWidth / 2 - msgWidth / 2 + _offsetLeft;
@@ -97,14 +107,16 @@ cloudjs.define({
                 oWidth = reElem.outerWidth();
                 oHeight = reElem.outerHeight();
                 msgWidth = $(_msgBox).outerWidth();
+                spaceWidth = msgWidth - $(_msgBox).width();
                 if(_isFull){
-                    style.width = oWidth;
+                    style.width = oWidth - spaceWidth;
                     style.left = oLeft;
                     style.top = oTop + _offsetTop;
                     $(_msgBox).css(style);
                 }else if((/^in_/).exec(_position)){
-                    style.width = Math.min(msgWidth, oWidth);
-                    style.left = oLeft + (oWidth - msgWidth) / 2 + parseInt(_offsetLeft);
+                    var outerWidth = Math.min(msgWidth, oWidth); 
+                    style.width = outerWidth - spaceWidth;
+                    style.left = oLeft + (oWidth - outerWidth) / 2 + parseInt(_offsetLeft);
                     style.top = oTop + _offsetTop;
                     $(_msgBox).css(style);
                 }else{
@@ -114,11 +126,11 @@ cloudjs.define({
                     switch(_position){
                         case 'up':
                             style.top = oTop - msgHeight + _offsetTop;
-                            style.left = oLeft + (oWidth - msgWidth) / 2 + parseInt(_offsetLeft) + _offsetLeft;
+                            style.left = oLeft + (oWidth - msgWidth) / 2 + parseInt(_offsetLeft);
                             break;
                         case 'down':
                             style.top = oTop + oHeight + _offsetTop;
-                            style.left = oLeft + (oWidth - msgWidth) / 2 + parseInt(_offsetLeft) + _offsetLeft;
+                            style.left = oLeft + (oWidth - msgWidth) / 2 + parseInt(_offsetLeft);
                             break;
                         case 'left':
                             style.top = oTop + _offsetTop;
@@ -143,13 +155,13 @@ cloudjs.define({
         function _show(){
             $('body').append(_msgBox);
             _setStyle();
-            _msgCon.stop().animate({top: '0px'}, 200);
+            _msgBox.stop().animate({opacity: 1}, 200);
             if(_duration > 0 && _timeout == null){
                 _timeout = setTimeout(function(){
                     _hide();
                 }, _duration);
             }
-            _msgClose.bind('click', function(){
+            _msgClose && _msgClose.bind('click', function(){
                 _hide();
             });
             var randomEvent = 'message' + Math.random();
@@ -214,12 +226,12 @@ cloudjs.define({
                 return;
             }
             obj.each(function(){
-                var $this = $(this), msgCon = $this.children('.message_con');
-                msgCon.stop().animate({top: ( - msgCon.height() - 10) + 'px'}, 200, function(){
+                var $this = $(this);
+                $this.stop().animate({opacity: 0}, 200, function(){
                     $this.remove();
                 });
             });
         }
     },
-    require: ['../css/blue/message.css']
+    require: ['../css/' + cloudjs.themes() + '/message.css']
 });

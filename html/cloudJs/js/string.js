@@ -1,3 +1,8 @@
+/**
+ * 字符串大小写转换组件
+ * author: generzhang@tencent.com
+ * date: 2015-07-01
+ */
 cloudjs.define({
     string: function(options){
         var action = arguments[0],

@@ -4,9 +4,10 @@
  * 后面时间充足再自研一套
  * 代码风格可能可能与我们其他组件有不一致之处，请忽略
  */
-/***
- * @author generzhang@tencent.com
- * 2015-04-01
+/**
+ * 拖动组件
+ * author: generzhang@tencent.com
+ * date: 2015-07-01
  */
 (function( $, undefined ) {
 

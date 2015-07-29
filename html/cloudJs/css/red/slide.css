@@ -1,0 +1,166 @@
+.cloudjs_icon {
+  background-image: url(../../images/icons_new.png);
+}
+.cloudjs_btn {
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  padding: 3px 7px;
+  display: inline-block;
+  font-family: Microsoft Yahei;
+  font-size: 12px;
+  white-space: nowrap;
+  cursor: pointer;
+  zoom: 1;
+  *width: 40px;
+  *height: 24px;
+  *line-height: 1;
+  border: 1px solid #cd403b;
+  color: #ffffff;
+  background-color: #dd514c;
+}
+a.cloudjs_btn {
+  text-decoration: none;
+}
+.cloudjs_btn_white {
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  padding: 3px 7px;
+  display: inline-block;
+  font-family: Microsoft Yahei;
+  font-size: 12px;
+  white-space: nowrap;
+  cursor: pointer;
+  zoom: 1;
+  *width: 40px;
+  *height: 24px;
+  *line-height: 1;
+  border: 1px solid #999999;
+  color: #000000;
+  background-color: #ffffff;
+}
+.cloudjs_icon:hover {
+  opacity: 0.8;
+  filter: alpha(opacity=80);
+}
+.cloudjs_btn:hover {
+  opacity: 0.8;
+  filter: alpha(opacity=80);
+}
+.cloudjs_btn_white:hover {
+  border-color: #666666;
+}
+.cloudjs_btn_white_disable,
+.cloudjs_btn_white:disabled {
+  color: #aaaaaa;
+  border-color: #cfcfcf;
+  cursor: default;
+}
+.cloudjs_btn_disable,
+.cloudjs_btn_disable:hover,
+.cloudjs_btn:disabled {
+  color: #aaaaaa;
+  border-color: #cfcfcf;
+  cursor: default;
+  background: #ffffff;
+}
+.border {
+  border: 1px solid #c6c6c6;
+  box-shadow: inset 1px 2px 1px #f0f0f0;
+}
+.cloudjs_input {
+  height: 25px;
+  line-height: 25px;
+  padding: 0;
+  text-indent: 5px;
+  outline: none;
+  border: 1px solid #c6c6c6;
+  box-shadow: inset 1px 2px 1px #f0f0f0;
+}
+.cloudjs_input:focus {
+  border: solid 1px #aaa;
+}
+.slide_div {
+  position: relative;
+  overflow: hidden;
+}
+.slide_div .slide_content {
+  overflow: hidden;
+}
+.slide_div.slide_x .slide_item {
+  float: left;
+  position: relative;
+  display: block;
+}
+.slide_div .slide_arrow {
+  display: none;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 1000;
+  background: #000000;
+  opacity: 0.8;
+  cursor: pointer;
+  filter: alpha(opacity=80);
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.slide_div.slide_x .slide_arrow {
+  padding: 10px 5px;
+}
+.slide_div.slide_y .slide_arrow {
+  padding: 5px 10px;
+}
+.slide_div.slide_x .slide_arrow_icon {
+  width: 13px;
+  height: 24px;
+}
+.slide_div.slide_y .slide_arrow_icon {
+  width: 24px;
+  height: 13px;
+}
+.slide_div.slide_x .slide_arrow_prev .slide_arrow_icon {
+  background-position: -147px 0px;
+}
+.slide_div.slide_x .slide_arrow_next .slide_arrow_icon {
+  background-position: -129px 0px;
+}
+.slide_div.slide_y .slide_arrow_prev .slide_arrow_icon {
+  background-position: -260px -33px;
+}
+.slide_div.slide_y .slide_arrow_next .slide_arrow_icon {
+  background-position: -292px -33px;
+}
+.slide_div .slide_nav {
+  position: absolute;
+  z-index: 1000;
+}
+.slide_div.slide_x .slide_anchor_box {
+  padding: 10px 0px;
+}
+.slide_div.slide_y .slide_anchor_box {
+  padding: 0px 10px;
+}
+.slide_div.slide_x .slide_anchor_box .slide_anchor {
+  float: left;
+  margin: 0px 3px;
+}
+.slide_div.slide_y .slide_anchor_box .slide_anchor {
+  margin: 3px 0px;
+}
+.slide_div .slide_anchor_box .slide_anchor {
+  width: 10px;
+  height: 10px;
+  cursor: pointer;
+  background: #FFF;
+  border-radius: 5px;
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+}
+.slide_div .slide_anchor_box .slide_anchor_active {
+  opacity: 1;
+  filter: alpha(opacity=100);
+}

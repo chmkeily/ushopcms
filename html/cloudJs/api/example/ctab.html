@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>ctab选项卡组件</title>
+    <link rel="stylesheet" href="../css/global.css"/>
+    <link rel="stylesheet" href="../css/prettify.css"/>
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/cloudjs.js"></script>
+    <script src="../js/prettify.js"></script>
+    <script src="../js/global.js"></script>
+</head>
+<body class="body_bg">
+    <div class="primary">
+    <div class="comps_header">
+        <h2 class="comps_name">ctab选项卡组件</h2>
+        <p>复杂的类浏览器tab选项卡组件</p>
+    </div>
+    <div class="comps_summary">
+        <h3>cloudjs(selector).ctab([options])</h3>
+    </div>
+    <div class="detail_content">
+        <h4>属性</h4>
+        <div class="param_table_box">
+            <table class="param_table">
+                <tbody>
+                    <tr>
+                        <th>属性名</th>
+                        <th>类型</th>
+                        <th>默认值</th>
+                        <th>说明</th>
+                    </tr>
+                    <tr>
+                        <td>width</td>
+                        <td>number</td>
+                        <td></td>
+                        <td>tab容器的宽度。<a href="#eg2" class="exp">示例2</a></td>
+                    </tr>
+                    <tr>
+                        <td>height</td>
+                        <td>number</td>
+                        <td></td>
+                        <td>tab容器的高度。<a href="#eg2" class="exp">示例2</a></td>
+                    </tr>
+                    <tr>
+                        <td>showCloseOtherIcon</td>
+                        <td>boolean</td>
+                        <td>false</td>
+                        <td>是否展示关闭其他按钮。<a href="#eg3" class="exp">示例3</a></td>
+                    </tr>
+                    <tr>
+                        <td>disableClose</td>
+                        <td>boolean</td>
+                        <td>false</td>
+                        <td>控制所有tab都不显示关闭按钮。<a href="#eg3" class="exp">示例3</a></td>
+                    </tr>
+                    <tr>
+                         <td>enableHover</td>
+                         <td>boolean</td>
+                        <td>false</td>
+                         <td>鼠标挪到tab上是否会触发tab切换。<a href="#eg4" class="exp">示例4</a></td>
+                    </tr>
+                    <tr>
+                        <td>hoverDelay</td>
+                        <td>number</td>
+                        <td>200</td>
+                        <td>在允许hover切换的情况下，鼠标挪到tab上触发选中的延迟时间。<a href="#eg4" class="exp">示例4</a></td>
+                    </tr>
+                    <tr>
+                         <td>isSortable</td>
+                         <td>boolean</td>
+                         <td>false</td>
+                         <td>允许选项卡拖动排序。<a href="#eg2" class="exp">示例2</a></td>
+                    </tr>
+                    <tr>
+                         <td>maxNum</td>
+                         <td>number</td>
+                         <td>Infinity</td>
+                         <td>允许打开的最多的tab个数。<a href="#eg3" class="exp">示例3</a></td>
+                    </tr>
+                    <tr>
+                         <td>onInitTab</td>
+                         <td>function</td>
+                         <td></td>
+                         <td>初始化tab之后的回调函数，函数带的参数为新增的tab页的信息。<a href="#eg2" class="exp">示例2</a></td>
+                    </tr>
+                    <tr>
+                         <td>panels</td>
+                         <td>object|array</td>
+                         <td></td>
+                         <td>
+                             <p>各个选项卡的详细信息，可为对象或对象数组，其对象结构如下:</p>
+                             <p>{</p>
+                             <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type: 'html',&nbsp;&nbsp;&nbsp;&nbsp;//选项卡类型，可为html，iframe，ajax，默认为html</p>
+                             <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;title: '',&nbsp;&nbsp;&nbsp;&nbsp;//选项卡标题</p>
+                             <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;html: '',&nbsp;&nbsp;&nbsp;&nbsp;//选项卡的html内容</p>
+                             <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;url: '',&nbsp;&nbsp;&nbsp;&nbsp;//iframe或ajax请求的url</p>
+                             <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;showCloseIcon: true,&nbsp;&nbsp;&nbsp;&nbsp;//是否展示关闭按钮</p>
+                             <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;showRefreshIcon: false,&nbsp;&nbsp;&nbsp;&nbsp;//是否展示刷新按钮</p>
+                             <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;isSelected: false&nbsp;&nbsp;&nbsp;&nbsp;//是否默认被选中，若多个tab加了select属性或者都不加，则默认打开最后一个</p>
+                             <p>}</p>
+                             <a href="#eg5" class="exp">示例5</a>
+                         </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="comps_summary">
+        <h3>cloudjs(selector).ctab('方法名', [args])</h3>
+    </div>
+
+    <div class="detail_content">
+        <h4>方法</h4>
+        <div class="param_table_box">
+            <table class="param_table">
+                <tbody>
+                <tr>
+                    <th>方法名</th>
+                    <th>参数</th>
+                    <th>说明</th>
+                </tr>
+                <tr>
+                    <td>addTab</td>
+                    <td>object | array</td>
+                    <td>添加tab选项卡，对象中的参数为panels和onAddTab方法，其中panels和初始化tab的panels参数一样（参见上面panels参数），onAddTab方法是添加完tab之后的回调函数。<a href="#eg6" class="exp">示例6</a></td>
+                </tr>
+                <tr>
+                    <td>selectTab</td>
+                    <td>object</td>
+                    <td>选中符合条件的tab选项卡，参数的key值可为title,url,selected,index,onSelectTab方法，其中title,url可使用正则匹配，onSelectTab方法是选中tab之后的回调函数。<a href="#eg6" class="exp">示例6</a></td>
+                </tr>
+                <tr>
+                    <td>removeTab</td>
+                    <td>object</td>
+                    <td>关闭并销毁符合条件的tab选项卡，参数的key值可为title,url,selected,index,onSelectTab方法，其中title,url可使用正则匹配，onRemoveTab方法是关闭tab之后的回调函数。<a href="#eg6" class="exp">示例6</a></td>
+                </tr>
+                <tr>
+                    <td>refreshTab</td>
+                    <td>object</td>
+                    <td>刷新符合条件的tab选项卡，参数的key值可为title,url,selected,index,onSelectTab方法，其中title,url可使用正则匹配，onRefreshTab方法是刷新tab之后的回调函数。<a href="#eg6" class="exp">示例6</a></td>
+                </tr>
+                <tr>
+                    <td>updateTab</td>
+                    <td>object</td>
+                    <td>更新符合条件的tab选项卡，参数的key值可为title,url,selected,index,panelonSelectTab方法，其中title,url可使用正则匹配，panel为tab的新数据，onUpdateTab方法是更新tab之后的回调函数。<a href="#eg6" class="exp">示例6</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+           
+    <div class="detail_content">
+        <h4>示例</h4>
+        <div>
+            <h5>示例1：简单的ctab选项卡</h5>
+            <p>调用ctab方法，可将页面节点直接渲染成tab，或通过panels参数引入选项卡。</p>
+<div class="example_html_1">
+<div id="tab_1_1" style="width:800px;height:200px;margin:20px;">
+    <ul>
+        <li>test0</li>
+        <li>test1</li>
+        <li>test2</li>
+    </ul>
+    <div>
+        <div>这是测试环境0</div>
+        <div>这是测试环境1</div>
+        <div>这是测试环境2</div>
+    </div>
+</div>
+<div id="tab_1_2" style="width:800px;height:200px;margin:20px;"></div>
+</div>
+            <script class="example_js_1">
+cloudjs('#tab_1_1').ctab({diableClose: true});
+cloudjs('#tab_1_2').ctab({
+    panels:[
+        {
+            type: 'html',
+            title:'test3',
+            html:'这是测试环境3'
+        },{
+            type: 'html',
+            title:'test4',
+            html:'这是测试环境4'
+        }
+    ]
+});
+/*
+ctabd的panels参数也支持直接用对象参数，如下：
+cloudjs('#tab_1_2').ctab({
+    panels:{
+        type: 'html',
+        title:'test3',
+        html:'这是测试环境3'
+    }
+});
+*/
+            </script>
+            <script>writeCode('.example_html_1');writeCode('.example_js_1');</script>
+        </div>
+                
+        <div>
+            <h5>示例2：重新设置tab组件的宽高度，允许拖动排序，选项卡加载完调用回调函数</h5>
+<div class="example_html_2">
+<div id="tab_2_1" style="margin:20px;">
+    <ul>
+        <li>test0</li>
+        <li>test1</li>
+        <li>test2</li>
+    </ul>
+    <div>
+        <div>这是测试环境0</div>
+        <div>这是测试环境1</div>
+        <div>这是测试环境2</div>
+    </div>
+</div>
+<script class="example_js_2">
+cloudjs('#tab_2_1').ctab({
+    width: 800,
+    height: 200,
+    isSortable: true,
+    onInitTab: function(data){
+        console.log(data);
+    }
+});
+</script>
+            <script>writeCode('.example_html_2');writeCode('.example_js_2');</script>
+        </div>
+</div>
+
+        <div>
+            <h5>示例3：显示“关闭其他”按钮，控制允许打开的最多tab个数，控制tab都禁止显示关闭按钮</h5>
+            <p>showCloseOtherIcon控制是否显示关闭其他按钮，maxNum，允许打开的最多tab个数，disableClose，都不显示关闭按钮</p>
+            <div class="example_html_3">
+<div id="tab_3_1" style="width:800px;height:200px;margin:20px;"></div>
+            </div>
+            <script class="example_js_3">
+cloudjs('#tab_3_1').ctab({
+    showCloseOtherIcon: true,
+    maxNum: 5,
+    disableClose:true,
+    panels:[
+        {type: 'html',html:'这是测试环境0',title: 'test0'},
+        {type: 'html',html:'这是测试环境1',title: 'test1'},
+        {type: 'html',html:'这是测试环境2',title: 'test2'},
+        {type: 'html',html:'这是测试环境3',title: 'test3'},
+        {type: 'html',html:'这是测试环境4',title: 'test4'},
+        {type: 'html',html:'这是测试环境5',title: 'test5'}
+    ],
+    onInitTab:function(data){
+        console.log(data);
+    }
+});
+            </script>
+            <script>writeCode('.example_html_3');writeCode('.example_js_3');</script>
+        </div>
+
+
+        <div>
+            <h5>示例4：鼠标移入选中tab，并控制移入选中的延迟时间</h5>
+            <p>通过enableHover和hoverDelay参数控制</p>
+<div class="example_html_4">
+    <div id="tab_4_1" style="width:800px;height:200px;margin:20px;"></div>
+</div>
+            <script class="example_js_4">
+cloudjs('#tab_4_1').ctab({
+    enableHover: true,
+    hoverDelay:100,
+    panels:[
+        {type: 'html',html:'这是测试环境0',title: 'test0'},
+        {type: 'html',html:'这是测试环境1',title: 'test1'},
+        {type: 'html',html:'这是测试环境2',title: 'test2'},
+        {type: 'html',html:'这是测试环境3',title: 'test3'},
+        {type: 'html',html:'这是测试环境4',title: 'test4'},
+        {type: 'html',html:'这是测试环境5',title: 'test5'}
+    ]
+});
+            </script>
+            <script>writeCode('.example_html_4');writeCode('.example_js_4');</script>
+        </div>
+
+        <div>
+            <h5>示例5：设置panels各个参数，生成不同类型的选项卡</h5>
+            <p>panels可设置的参数，title：tab的标题，type：html表示tab内容为写好的html内容，iframe表示tab内容为url相应的iframe，ajax表示将tab内容为url异步加载进来的内容。showRefreshIcon：是否显示刷新按钮，showCloseIcon:是否显示关闭按钮，isSelected：是否默认被选中</p>
+            <div class="example_html_5">
+<div id="tab_5_1" style="width:800px;height:200px;margin:20px;"></div>
+            </div>
+            <script class="example_js_5">
+cloudjs('#tab_5_1').ctab({
+    panels:[
+        {type: 'iframe',url: 'http://www.qq.com', title: 'qq.com', showRefreshIcon: true, isSelected: true, showCloseIcon: false},
+        {type: 'ajax', url:'./data/ctab_data.html', title: 'ajax_test'},
+        {type: 'html', html:'这是测试环境2', title: 'test2'}
+    ]
+});
+            </script>
+            <script>writeCode('.example_html_5');writeCode('.example_js_5');</script>
+        </div>
+
+        <div>
+            <h5>示例6：添加，关闭，更新，刷新，选中，获取选项卡操作</h5>
+            <p>addTab方法，添加tab；selectTab方法，选中符合条件的tab；removeTab方法，关闭并销毁符合条件的tab；updateTab方法，更新符合条件的tab，refreshTab方法，刷新符合条件的tab。选择tab的条件包括 title，url，selected，index，其中title和url支持使用正则表达式，index为tab索引值，selected表示选中状态，若条件为空，则默认选全部</p>
+            <div class="example_html_6">
+<div id="tab_6_1" style="width:800px;height:200px;margin:20px;"></div>
+<input type="button" id="tab_add_1_btn" value="增加1个tab" />
+<input type="button" id="tab_add_2_btn" value="增加2个tab" />
+<input type="button" id="tab_select_btn" value="选中test开头的tab" />
+<input type="button" id="tab_remove_btn" value="删除title为new_test的tab" />
+<input type="button" id="tab_update_btn" value="更新标题为test1的tab的标题" />
+<input type="button" id="tab_refresh_btn" value="刷新选中的tab" />
+<input type="button" id="tab_get_btn" value="获取所有的tab信息" />
+            </div>
+            <script class="example_js_6">
+cloudjs('#tab_6_1').ctab({
+    panels:[
+        {type: 'iframe',url: 'http://www.qq.com', title: 'qq.com', isSelected: true},
+        {type: 'html', html:'这是测试环境1', title: 'test1'},
+        {type: 'html', html:'这是测试环境2', title: 'test2'}
+    ]
+});
+$('#tab_add_1_btn').bind('click', function(){
+    cloudjs('#tab_6_1').ctab(
+        'addTab',
+        {
+            panels:[
+                {type: 'html', html:'这是新测试环境', title: 'new_test_page'}
+            ],
+            onAddTab: function(data){
+                console.log(data);
+            }
+        }
+    );
+});
+$('#tab_add_2_btn').bind('click', function(){
+    cloudjs('#tab_6_1').ctab(
+        'addTab',
+        {
+            panels:[
+                {type: 'html', html:'这是新测试环境', title: 'new_test_page'},
+                {type: 'html', html:'这是新测试环境', title: 'new_test_page'}
+            ],
+            onAddTab: function(data){
+                console.log(data);
+            }
+        }
+    );
+});
+$('#tab_select_btn').bind('click', function(){
+    cloudjs('#tab_6_1').ctab(
+        'selectTab',
+        {
+            title:/^test/,
+            onAddTab: function(data){
+                console.log(data);
+            }
+        }
+    );
+});
+$('#tab_remove_btn').bind('click', function(){
+    cloudjs('#tab_6_1').ctab(
+        'removeTab',
+        {
+            title:/^new_test/,
+            onRemoveTab: function(data){
+                console.log(data);
+            }
+        }
+    );
+});
+$('#tab_update_btn').bind('click', function(){
+    cloudjs('#tab_6_1').ctab(
+        'updateTab',
+        {
+            title:'test1',
+            panel:{
+                title:'update_test_1'
+            },
+            onUpdateTab: function(data){
+                console.log(data);
+            }
+        }
+    );
+});
+$('#tab_refresh_btn').bind('click', function(){
+    cloudjs('#tab_6_1').ctab(
+        'refreshTab',
+        {
+            selected:true,
+            onRefreshTab: function(data){
+                console.log(data);
+            }
+        }
+    );
+});
+$('#tab_get_btn').bind('click', function(){
+    cloudjs('#tab_6_1').ctab(
+            'getTab',
+            {
+                onGetTab: function(data){
+                    console.log(data);
+                }
+            }
+    );
+});
+            </script>
+            <script>writeCode('.example_html_6');writeCode('.example_js_6');</script>
+        </div>
+    </div>
+    </div>
+</body>
+</html>
+
+
+
+

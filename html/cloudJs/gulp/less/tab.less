@@ -1,0 +1,81 @@
+@import "./public";
+
+.tab_div,
+.tab_div .tab_wap,
+.tab_div .tab_head,
+.tab_div .tab_tab{
+    margin:0px;
+    padding:0px;
+}
+.tab_div{
+    margin:0px;
+    padding:0px;
+    font-size:13px;
+    overflow: hidden;
+}
+.tab_div .tab_head{
+    display: block;
+}
+.tab_div.tab_div_x .tab_head{
+    height:35px;
+    border-bottom:1px solid #CCCCCC;
+}
+.tab_div.tab_div_y .tab_head{
+    width: 150px;
+    float:left;
+    border-right:1px solid #CCCCCC;
+}
+.tab_div .tab_tab{
+    list-style: none;
+    text-align: center;
+    font-size:14px;
+    color:@hoverFont;
+    padding:0px 1em;
+    cursor: default;
+    height:36px;
+    line-height: 35px;
+    border: 1px solid #CCC;
+    cursor: pointer;
+}
+
+.tab_div.tab_div_x .tab_tab{
+    display: inline-block;
+    float:left;
+    height:35px;
+    border-bottom: 0;
+    margin-right:5px;
+}
+.tab_div.tab_div_y .tab_tab{
+    display: block;
+    border-left: 1px solid #CCC;
+    border-right: 1px solid #CCC;
+    border-top: 1px solid #CCC;
+    width:150px;
+    padding:0;
+    border-right: 0;
+    margin-bottom:5px;
+
+}
+.tab_div.tab_div_x .tab_panel{
+    border: 1px solid #CCC;
+    border-top:0;
+}
+.tab_div.tab_div_y .tab_panel{
+    margin-left:151px;
+    border: 1px solid #CCC;
+    border-left:0;
+}
+.tab_div .tab_selected{
+    color:@activeFont;
+    background-color:@activeBg;
+}
+.tab_div.tab_div_x .tab_selected{
+    border:1px solid @activeBg;
+    border-bottom:0;
+    height:35px;
+}
+.tab_div.tab_div_y .tab_selected{
+    border:1px solid @activeBg;
+    border-right:0;
+    width:150px;
+}

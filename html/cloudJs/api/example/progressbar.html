@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>progress进度条组件</title>
+	<link rel="stylesheet" href="../css/global.css"/>
+	<link rel="stylesheet" href="../css/prettify.css"/>
+	<script src="../../js/jquery.min.js"></script>
+	<script src="../../js/cloudjs.js"></script>
+	<script src="../js/prettify.js"></script>
+	<script src="../js/global.js"></script>
+</head>
+<body class="body_bg">
+    <div class="primary">
+    <div class="comps_header">
+        <h2 class="comps_name">progress进度条组件</h2>
+        <p>页面操作的进度条</p>
+    </div>
+    <div class="comps_summary">
+        <h3>cloudjs(selector).progressbar([options])</h3>
+    </div>
+    <div class="detail_content">
+		<h4>属性</h4>
+		<div class="param_table_box">
+			<table class="param_table">
+				<tbody>
+					<tr>
+						<th>属性名</th>
+						<th>类型</th>
+						<th>默认值</th>
+						<th>说明</th>
+					</tr>
+					<tr>
+                        <td>duration</td>
+                        <td>number</td>
+                        <td>5000</td>
+                        <td>进度条动画的时长，组件自动算出每段时间对应的百分比。<br/>注意，当设置duration为0时，进度条组件的进度会全部交由外部控制，外部可通过setValue，和setText方法来动态改变进度条的进度，详见<a href="#eg2" class="exp">示例2</a></td>
+                    </tr>
+					<tr>
+						<td>step</td>
+						<td>number</td>
+						<td>1</td>
+						<td>步长，如每次依次增加5%，或10%等，默认步长为1%，详见<a href="#eg3" class="exp">示例3</a></td>
+					</tr>
+					<tr>
+                        <td>autoClose</td>
+                        <td>boolean</td>
+                        <td>true</td>
+                        <td>是否到达100%后自动关闭，详见<a href="#eg6" class="exp">示例6</a></td>
+                    </tr>
+					<tr>
+                        <td>delay</td>
+                        <td>number</td>
+                        <td>0</td>
+                        <td>延迟多少时间之后出现进度条，因为有的时候，比如500毫秒内有响应的基本不需要进度条的，突然有个进度条一闪而过也不大友好，详见<a href="#eg4" class="exp">示例4</a></td>
+                    </tr>
+					<tr>
+						<td>isDialog</td>
+						<td>boolean</td>
+						<td>true</td>
+						<td>进度条以弹框的形式打开和非弹框形式打开，详见<a href="#eg5" class="exp">示例5</a></td>
+					</tr>
+					<tr>
+	                     <td>closable</td>
+	                     <td>boolean</td>
+	                     <td>false</td>
+	                     <td>进度条是否可关闭的，详见<a href="#eg6" class="exp">示例6</a></td>
+                    </tr>
+                    <tr>
+	                     <td>width</td>
+	                     <td>number</td>
+	                     <td>200</td>
+	                     <td>进度条的宽，详见<a href="#eg7" class="exp">示例7</a></td>
+                    </tr>
+                    <tr>
+	                     <td>height</td>
+	                     <td>number</td>
+	                     <td>20</td>
+	                     <td>进度条的高，详见<a href="#eg7" class="exp">示例7</a></td>
+                    </tr>
+                    <tr>
+	                     <td>onCreate</td>
+	                     <td>function()</td>
+	                     <td></td>
+	                     <td>当进度条被创建时调用，此时可能还没开始计算进度，详见<a href="#eg8" class="exp">示例8</a></td>
+                    </tr>
+                    <tr>
+	                     <td>onOpen</td>
+	                     <td>function()</td>
+	                     <td></td>
+	                     <td>当进度条打开时调用，详见<a href="#eg8" class="exp">示例8</a></td>
+                    </tr>
+                    <tr>
+	                     <td>onStart</td>
+	                     <td>function()</td>
+	                     <td></td>
+	                     <td>当进度条开始计算进度时调用，详见<a href="#eg8" class="exp">示例8</a></td>
+                    </tr>
+                    <tr>
+	                     <td>onChange</td>
+	                     <td>function()</td>
+	                     <td></td>
+	                     <td>当进度条进度发生变化时调用，传入的参数是当前进度条的进度，详见<a href="#eg8" class="exp">示例8</a></td>
+                    </tr>
+                    <tr>
+	                     <td>onComplete</td>
+	                     <td>function()</td>
+	                     <td></td>
+	                     <td>当进度条到达100%时调用，详见<a href="#eg8" class="exp">示例8</a></td>
+                    </tr>
+                    <tr>
+	                     <td>onClose</td>
+	                     <td>function()</td>
+	                     <td></td>
+	                     <td>当进度条关闭时的回调方法，详见<a href="#eg8" class="exp">示例8</a></td>
+                    </tr>
+                    <tr>
+	                     <td>onDestroy</td>
+	                     <td>function()</td>
+	                     <td></td>
+	                     <td>当进度条被销毁时调用的方法，详见<a href="#eg8" class="exp">示例8</a></td>
+                    </tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	
+	<div class="comps_summary">
+        <h3>cloudjs(selector).progressbar('方法名', [args])</h3>
+    </div>
+    
+    <div class="detail_content">
+        <h4>方法</h4>
+        <div class="param_table_box">
+            <table class="param_table">
+                <tbody>
+                    <tr>
+                        <th>方法名</th>
+                        <th>参数</th>
+                        <th>说明</th>
+                    </tr>
+                    <tr>
+                        <td>destroy</td>
+                        <td></td>
+                        <td>彻底销毁进度条组件，会连dom元素都一并删除，详见<a href="#eg8" class="exp">示例8</a></td>
+                    </tr>
+                    <tr>
+                        <td>close</td>
+                        <td></td>
+                        <td>关闭进度条组件，不会删除dom元素，详见<a href="#eg4" class="exp">示例4</a> </td>
+                    </tr>
+                    <tr>
+                        <td>open</td>
+                        <td></td>
+                        <td>打开进度条组件，只是显示，不管上次关闭时在哪个位置，重新打开后都会重新从0%开始，详见<a href="#eg8" class="exp">示例8</a></td>
+                    </tr>
+                    <tr>
+                        <td>getValue</td>
+                        <td></td>
+                        <td>获取进度条进度，详见<a href="#eg9" class="exp">示例9</a></td>
+                    </tr>
+                    <tr>
+                        <td>setValue</td>
+                        <td>number</td>
+                        <td>设置进度条进度，详见<a href="#eg9" class="exp">示例9</a></td>
+                    </tr>
+                    <tr>
+                        <td>getText</td>
+                        <td></td>
+                        <td>获取进度条提示信息，详见<a href="#eg9" class="exp">示例9</a></td>
+                    </tr>
+                    <tr>
+                        <td>setText</td>
+                        <td>string</td>
+                        <td>设置进度条提示信息，详见<a href="#eg9" class="exp">示例9</a></td>
+                    </tr>
+                     <tr>
+                        <td>pause</td>
+                        <td></td>
+                        <td>设置进度条暂停滚动，详见<a href="#eg11" class="exp">示例11</a></td>
+                    </tr>
+                    <tr>
+                        <td>run</td>
+                        <td></td>
+                        <td>让进度条继续滚动，详见<a href="#eg11" class="exp">示例11</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="detail_content">
+        <h4>示例</h4>
+        
+        <div>
+            <h5><a name="eg1"></a>示例1：默认的进度条，并设置自动关闭</h5>
+<div class="example_html_1"> 
+<input type="button" value="点我进度条" class="progressbar_btn1">
+<div class="progressbar_div1" style="display:none;">
+	正在发布，请稍候...
+</div>
+</div>
+            <script class="example_js_1">
+$('.progressbar_btn1').click(function(){
+  //最简单的用法
+    cloudjs('.progressbar_div1').progressbar();
+});
+            </script>
+            <script>writeCode('.example_html_1');writeCode('.example_js_1');</script>
+        </div>		
+			
+        <div class="mt60">
+            <h5><a name="eg2"></a>示例2：设置进度条动画时间</h5>
+<div class="example_html_2 mb20">
+<input type="button" value="点我进度条" class="progressbar_btn2">
+<div class="progressbar_div2" style="display:none;">
+	正在发布，请稍候...
+</div>
+</div>
+            <script class="example_js_2">
+$('.progressbar_btn2').click(function(){
+    cloudjs('.progressbar_div2').progressbar({duration: 3000});
+});
+            </script>
+            <script>writeCode('.example_html_2');writeCode('.example_js_2');</script>
+        </div>
+        
+        <div class="mt60">
+            <h5><a name="eg3"></a>示例3：设置进度条步长</h5>
+<div class="example_html_3 mb20">
+<input type="button" value="点我进度条" class="progressbar_btn3">
+<div class="progressbar_div3" style="display:none;">
+	正在发布，请稍候...
+</div>
+</div>
+            <script class="example_js_3">
+$('.progressbar_btn3').click(function(){
+    cloudjs('.progressbar_div3').progressbar({step: 5});
+});
+            </script>
+            <script>writeCode('.example_html_3');writeCode('.example_js_3');</script>
+        </div>
+        
+        <div class="mt60">
+            <h5><a name="eg4"></a>示例4：设置延迟打开进度条</h5>
+<div class="example_html_4 mb20">
+<input type="button" value="点我进度条" class="progressbar_btn4a">
+<input type="button" value="点我关闭进度条" class="progressbar_btn4b">
+<div class="progressbar_div4" style="display:none;">
+	正在发布，请稍候...
+</div>
+</div>
+            <script class="example_js_4">
+$('.progressbar_btn4a').click(function(){
+    cloudjs('.progressbar_div4').progressbar({delay: 1000});
+});
+$('.progressbar_btn4b').click(function(){
+    cloudjs('.progressbar_div4').progressbar('close');
+});
+            </script>
+            <script>writeCode('.example_html_4');writeCode('.example_js_4');</script>
+        </div>
+        
+        <div class="mt60">
+            <h5><a name="eg5"></a>示例5：设置进度条打开方式</h5>
+<div class="example_html_5 mb20">
+<input type="button" value="点我进度条" class="progressbar_btn5a">
+<input type="button" value="点我关闭进度条" class="progressbar_btn5b">
+<div class="progressbar_div5" style="display:none;">
+	正在发布，请稍候...
+</div>
+</div>
+            <script class="example_js_5">
+$('.progressbar_btn5a').click(function(){
+    cloudjs('.progressbar_div5').progressbar({isDialog: false});
+});
+$('.progressbar_btn5b').click(function(){
+    cloudjs('.progressbar_div5').progressbar('close');
+});
+            </script>
+            <script>writeCode('.example_html_5');writeCode('.example_js_5');</script>
+        </div>
+        
+        <div class="mt60">
+            <h5><a name="eg6"></a>示例6：设置进度条是否可关闭的，仅针对dialog方式的</h5>
+<div class="example_html_6 mb20">
+<input type="button" value="点我进度条" class="progressbar_btn6">
+<div class="progressbar_div6" style="display:none;">
+	正在发布，请稍候...
+</div>
+</div>
+            <script class="example_js_6">
+$('.progressbar_btn6').click(function(){
+    cloudjs('.progressbar_div6').progressbar({autoClose: false, closable: true});
+});
+            </script>
+            <script>writeCode('.example_html_6');writeCode('.example_js_6');</script>
+        </div>
+        
+        <div class="mt60">
+            <h5><a name="eg7"></a>示例7：设置进度条UI宽高</h5>
+<div class="example_html_7 mb20">
+<input type="button" value="点我进度条" class="progressbar_btn7">
+<div class="progressbar_div7" style="display:none;">
+	正在发布，请稍候...
+</div>
+</div>
+            <script class="example_js_7">
+$('.progressbar_btn7').click(function(){
+    cloudjs('.progressbar_div7').progressbar({width: 150, height: 30});
+});
+            </script>
+            <script>writeCode('.example_html_7');writeCode('.example_js_7');</script>
+        </div>
+        
+        <div class="mt60">
+            <h5><a name="eg8"></a>示例8：监听事件onCreate、onOpen、onStart、onChange、onComplete、onClose、onDestroy</h5>
+<div class="example_html_8 mb20">
+<input type="button" value="点我生成进度条" class="progressbar_btn8a">
+<input type="button" value="点我打开进度条" class="progressbar_btn8b">
+<input type="button" value="点我销毁进度条" class="progressbar_btn8c">
+<div><span class="progressbar_span8a"></span><span class="progressbar_span8b"></span></div>
+<div class="progressbar_div8" style="display:none;">
+	正在发布，请稍候...
+</div>
+</div>
+            <script class="example_js_8">
+$('.progressbar_btn8a').click(function(){
+    cloudjs('.progressbar_div8').progressbar({
+        closable: true,
+        autoClose: false, 
+        onCreate: function(){
+            $('.progressbar_span8a').append('onCreate、');
+        },
+        onOpen: function(){
+            $('.progressbar_span8a').append('onOpen、');
+        },
+        onStart: function(){
+            $('.progressbar_span8a').append('onStart、');
+        },
+        onComplete: function(value){
+            $('.progressbar_span8a').append('onComplete、');
+        },
+        onClose: function(value){
+            $('.progressbar_span8a').append('onClose、');
+        },
+        onDestroy: function(value){
+            $('.progressbar_span8a').append('onDestroy、');
+        },
+        onChange: function(value){
+            $('.progressbar_span8b').html(value);
+        }
+    });
+});
+$('.progressbar_btn8b').click(function(){
+    cloudjs('.progressbar_div8').progressbar('open');
+});
+$('.progressbar_btn8c').click(function(){
+    cloudjs('.progressbar_div8').progressbar('destroy');
+});
+            </script>
+            <script>writeCode('.example_html_8');writeCode('.example_js_8');</script>
+        </div>
+        
+        <div class="mt60">
+            <h5><a name="eg9"></a>示例9：调用方法getValue、setValue、getText、setText</h5>
+<div class="example_html_9 mb20">
+<input type="button" value="点我生成进度条" class="progressbar_btn9">
+<div><span class="progressbar_span9a"></span><span class="progressbar_span9b"></span></div>
+<div class="progressbar_div9" style="display:none;">
+	正在发布，请稍候...
+</div>
+</div>
+            <script class="example_js_9">
+$('.progressbar_btn9').click(function(){
+    cloudjs('.progressbar_div9').progressbar({
+		onChange: function(value){
+		    if(value == 20){
+		        this.setValue(50);
+		      //功能同cloudjs('.progressbar_div9').progressbar('setValue', '50');
+		        this.setText('正在执行后置脚本...');
+		      //功能同cloudjs('.progressbar_div9').progressbar('setText', '正在执行后置脚本...');
+		    }else if(value == 60){
+		        cloudjs('.progressbar_div9').progressbar('setValue', '70');
+		    }else if(value == '90'){
+		        cloudjs('.progressbar_div9').progressbar('setText', '即将发布完成...');
+		    }
+		},
+		onComplete: function(){
+		    cloudjs('.progressbar_div9').progressbar('setText', '发布完成 ');
+		},
+		closable: true,
+		autoClose: false, 
+    });
+    
+    setTimeout(function(){
+        cloudjs('.progressbar_div9').progressbar('getValue', function(value){
+            $('.progressbar_span9a').html(value);
+        });
+        cloudjs('.progressbar_div9').progressbar('getText', function(text){
+            $('.progressbar_span9b').html(text);
+        });
+    }, 1000);
+    
+});
+            </script>
+            <script>writeCode('.example_html_9');writeCode('.example_js_9');</script>
+        </div>
+        
+        <div class="mt60">
+            <h5><a name="eg10"></a>示例10：自定义方式，只借用进度条组件的逻辑，只需设置duration、step、onStart、onChange、onComplete等属性</h5>
+<div class="example_html_10 mb20">
+<input type="button" value="点击提交 " class="progressbar_btn10">
+</div>
+            <script class="example_js_10">
+$('.progressbar_btn10').click(function(){
+    cloudjs.progressbar({
+        duration: 20000,
+        step: 2,
+        onStart: function(){
+            $('.progressbar_btn10')[0].disabled = true;
+        },
+        onChange: function(value){
+            $('.progressbar_btn10').val('正在提交（'+value+'%）');
+        },
+        onComplete: function(){
+            $('.progressbar_btn10')[0].disabled = false;
+            $('.progressbar_btn10').val('提交完成');
+        }
+    });
+});
+            </script>
+            <script>writeCode('.example_html_10');writeCode('.example_js_10');</script>
+        </div>
+        
+        <div class="mt60">
+            <h5><a name="eg11"></a>示例11：设置进度条暂停滚动和继续滚动</h5>
+<div class="example_html_11 mb20">
+<input type="button" value="点我进度条" class="progressbar_btn11">
+<div class="progressbar_div11" style="display:none;">
+	正在发布，请稍候...
+</div>
+</div>
+            <script class="example_js_11">
+$('.progressbar_btn11').click(function(){
+    cloudjs('.progressbar_div11').progressbar({onChange: function(value){
+        if(value == 98){
+            //当检测到进度条滚动到98%的时候让进度条卡住3秒
+        	cloudjs('.progressbar_div11').progressbar('pause');
+        	setTimeout(function(){//3秒后继续滚动
+                cloudjs('.progressbar_div11').progressbar('run');
+            }, 3000);
+        }
+    }});
+});
+            </script>
+            <script>writeCode('.example_html_11');writeCode('.example_js_11');</script>
+        </div>
+        
+        <div class="mt60">
+            <h5><a name="eg12"></a>示例12：设置进度条时间和进度完全由外部动态改变</h5>
+<div class="example_html_12 mb20">
+<input type="button" value="点我进度条" class="progressbar_btn12">
+<div class="progressbar_div12" style="display:none;">
+	正在发布，请稍候...
+</div>
+</div>
+            <script class="example_js_12">
+
+$('.progressbar_btn12').click(function(){
+    var progress = 0;
+    cloudjs('.progressbar_div12').progressbar({
+        closable: true,
+        duration: 0 //设置duration为0时，表示进度条不再自己滚动，由外部控制进度
+    });
+    
+    $('body').unbind('click').bind('click', function(){
+        cloudjs('.progressbar_div12').progressbar('setValue', progress++);
+    });
+    
+});
+            </script>
+            <script>writeCode('.example_html_12');writeCode('.example_js_12');</script>
+        </div>
+       
+        
+    </div>
+    </div>
+</body>
+</html>
+
+
+

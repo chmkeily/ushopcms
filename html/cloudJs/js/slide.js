@@ -13,13 +13,30 @@ cloudjs.define({
             isShowArrow: true, //是否显示先前向后箭头
             anchorOffsetLeft: null, //锚点偏移左上角横向距离
             anchorOffsetTop: null, //锚点偏移左上角竖向距离
+            enableMouseEnter:true, //控制鼠标移入是否暂停自动轮播
             onChange: $.noop //每次轮播后执行的回调
         };
 
+        var _self = this,
+            _direction,
+            _duration,
+            _effects,
+            _isAuto,
+            _order,
+            _interval,
+            _startIndex,
+            _isCycle,
+            _isShowArrow,
+            _isShowAnchor,
+            _anchorOffsetLeft,
+            _anchorOffsetTop,
+            _enableMouseEnter,
+            _onChange;
+
+
         if(!options || $.isPlainObject(options)){
             $.extend(defaults, options);
-            var self = this;
-            $(self).each(function(i, ele){
+            $(_self).each(function(i, ele){
                 this._cloudjsSlideObj = {
                     count: 0,
                     activeIndex: 0,
@@ -31,44 +48,44 @@ cloudjs.define({
                     content: 0,
                     items: 0,
                     isMouseEnter: false,
-                    toNext: next,
-                    toPrev: prev,
-                    toIndex: slideTo
+                    toNext: _toNext,
+                    toPrev: _toPrev,
+                    toIndex: _toIndex
                 }
             });
         }else{
-            var self = this, args = arguments;
+            var args = arguments;
             if(options === 'toNext' || options === 'toPrev'){
-                $(self).each(function(i, ele){
+                $(_self).each(function(i, ele){
                     this._cloudjsSlideObj && this._cloudjsSlideObj[options] && this._cloudjsSlideObj[options].call(this);
                 });
-                return self;
+                return _self;
             }else if(options === 'toIndex'){
-                $(self).each(function(i, ele){
+                $(_self).each(function(i, ele){
                     if(args[1] !== undefined && args[1] !== null){
                         this._cloudjsSlideObj && this._cloudjsSlideObj[options] && this._cloudjsSlideObj['toIndex'].call(this, args[1]);
                     }
                 });
-                return self;
+                return _self;
             }else{
                 return;
             }
         }
+        _direction = cloudjs.util.indexOf(['x', 'y'], defaults.direction) !== -1 ? defaults.direction : 'x';
+        _duration = defaults.duration;
+        _effects = cloudjs.util.indexOf(['slide', 'fade', 'cutout'], defaults.effects) !== -1 ? defaults.effects : 'slide';
+        _isAuto = defaults.isAuto;
+        _order = cloudjs.util.indexOf(['forward', 'reverse'], defaults.order) !== -1 ? defaults.order : 'forward';
+        _interval = defaults.interval >= 0 ? defaults.interval : 5000;
+        _startIndex = defaults.startIndex ? defaults.startIndex : 0;
+        _isCycle = defaults.isCycle;
+        _isShowArrow = defaults.isShowArrow || false;
+        _isShowAnchor = defaults.isShowAnchor || false;
+        _anchorOffsetLeft = defaults.anchorOffsetLeft;
+        _anchorOffsetTop = defaults.anchorOffsetTop;
+        _enableMouseEnter = defaults.enableMouseEnter;
+        _onChange = $.isFunction(defaults.onChange) ? defaults.onChange : $.noop;
 
-        var _self = this,
-            _direction = cloudjs.util.indexOf(['x', 'y'], defaults.direction) !== -1 ? defaults.direction : 'x',
-            _duration = defaults.duration,
-            _effects = cloudjs.util.indexOf(['slide', 'fade', 'cutout'], defaults.effects) !== -1 ? defaults.effects : 'slide',
-            _isAuto = defaults.isAuto,
-            _order = cloudjs.util.indexOf(['forward', 'reverse'], defaults.order) !== -1 ? defaults.order : 'forward',
-            _interval = defaults.interval >= 0 ? defaults.interval : 5000,
-            _startIndex = defaults.startIndex ? defaults.startIndex : 0,
-            _isCycle = defaults.isCycle,
-            _isShowArrow = defaults.isShowArrow || false,
-            _isShowAnchor = defaults.isShowAnchor || false,
-            _onChange = $.isFunction(defaults.onChange) ? defaults.onChange : $.noop,
-            _anchorOffsetLeft = defaults.anchorOffsetLeft,
-            _anchorOffsetTop = defaults.anchorOffsetTop;
         _init();
         return _self;
 
@@ -108,7 +125,7 @@ cloudjs.define({
             if(_isShowArrow){
                 cObj.arrPrev = $('<div/>').addClass('slide_arrow slide_arrow_prev').appendTo($(self));
                 cObj.arrNext = $('<div/>').addClass('slide_arrow slide_arrow_next').appendTo($(self));
-                cObj.arrPrev.add(cObj.arrNext).html('<div class="slide_arrow_icon cloud_icon"></div>');
+                cObj.arrPrev.add(cObj.arrNext).html('<div class="slide_arrow_icon cloudjs_icon"></div>');
             }
             if(_isShowAnchor){
                 if(anchorDom.length){
@@ -181,7 +198,7 @@ cloudjs.define({
                 }else{
                     left = (oWidth - arrWidth) / 2;
                     cObj.arrPrev.css({ top: 0, left: left });
-                    cObj.arrNext.css({ top: oHeight -arrHeight, left: left });
+                    cObj.arrNext.css({ top: oHeight - arrHeight, left: left });
                 }
             }
             if(_isShowAnchor){
@@ -233,20 +250,20 @@ cloudjs.define({
                 cObj.arrPrev.add(cObj.arrNext).mouseenter(function(){
                     $(this).stop().animate({ opacity: 1 }, 300);
                 }).mouseleave(function(){
-                    $(this).stop().animate({ opacity: 0.8 }, 300);
+                    $(this).stop().animate({ opacity: 0.7 }, 300);
                 });
                 cObj.arrPrev.click(function(){
-                    prev.call(self);
+                    _toPrev.call(self);
                 });
                 cObj.arrNext.click(function(){
-                    next.call(self);
+                    _toNext.call(self);
                 });
             }
             if(_isShowAnchor){
                 cObj.anchorBox.children('.slide_anchor').click(function(e){
                     e.stopPropagation();
                     var index = $(this).data('index');
-                    slideTo.call(self, index);
+                    _toIndex.call(self, index);
                 });
             }
             $(window).resize(function(){
@@ -254,13 +271,15 @@ cloudjs.define({
                 cObj.content.css(style);
                 _resetAbsStyle.call(self);
             });
-            $(self).mouseenter(function(){
-                cObj.isMouseEnter = true;
-                _clearInterval.call(self);
-            }).mouseleave(function(){
-                cObj.isMouseEnter = false;
-                _setInterval.call(self);
-            })
+            if(_enableMouseEnter){
+                $(self).mouseenter(function(){
+                    cObj.isMouseEnter = true;
+                    _clearInterval.call(self);
+                }).mouseleave(function(){
+                    cObj.isMouseEnter = false;
+                    _setInterval.call(self);
+                });
+            }
         }
 
         /**
@@ -286,9 +305,9 @@ cloudjs.define({
                 if(!cObj.isMouseEnter){
                     cObj._slideInteval = setInterval(function(){
                         if(_order === 'forward'){
-                            next.call(self, 1);
+                            _toNext.call(self, 1);
                         }else{
-                            prev.call(self, 1);
+                            _toPrev.call(self, 1);
                         }
                     }, _interval);
                 }
@@ -300,7 +319,7 @@ cloudjs.define({
          * @param {boolean} autoFlag 区分是自动轮播的还是用户触发的向下轮播
          * @return {boolean} 若上一页索引超出且不允许循环，返回false；否则返回true
          */
-        function prev(autoFlag){
+        function _toPrev(autoFlag){
             var self = this, cObj = self._cloudjsSlideObj;
             autoFlag = autoFlag || 0;
             var preIndex;
@@ -313,7 +332,7 @@ cloudjs.define({
                     return false;
                 }
             }
-            slideTo.call(self, preIndex, autoFlag);
+            _toIndex.call(self, preIndex, autoFlag);
             return true;
         }
 
@@ -322,7 +341,7 @@ cloudjs.define({
          * @param {boolean} autoFlag 区分是自动轮播的还是用户触发的向上轮播
          * @return {boolean} 若下一页索引超出且不允许循环，返回false；否则返回true
          */
-        function next(autoFlag){
+        function _toNext(autoFlag){
             var self = this, cObj = self._cloudjsSlideObj;
             autoFlag = autoFlag || 0;
             var nextIndex;
@@ -335,7 +354,7 @@ cloudjs.define({
                     return false;
                 }
             }
-            slideTo.call(self, nextIndex, autoFlag);
+            _toIndex.call(self, nextIndex, autoFlag);
             return true;
         }
 
@@ -351,9 +370,9 @@ cloudjs.define({
             }
             var style = {};
             if(_direction === 'x'){
-                style.marginLeft = - index * cObj.items.eq(0).width();
+                style.marginLeft = -index * cObj.items.eq(0).width();
             }else{
-                style.marginTop = - index * cObj.items.eq(0).height();
+                style.marginTop = -index * cObj.items.eq(0).height();
             }
             return style;
         }
@@ -363,7 +382,7 @@ cloudjs.define({
          * @param {number} index 轮播到的索引位置 ,
          * @param {boolean} autoFlag 区分是自动轮播的还是用户触发的轮播
          */
-        function slideTo(index, autoFlag){
+        function _toIndex(index, autoFlag){
             index = parseInt(index);
             var self = this, cObj = self._cloudjsSlideObj;
             var style = _getNewStyle.call(self, index);
@@ -372,9 +391,9 @@ cloudjs.define({
             }
             if(!_isCycle && _isShowArrow){
                 cObj.arrPrev.add(cObj.arrNext).removeClass('slide_disable').show();
-                if(index === 0 ){
+                if(index === 0){
                     cObj.arrPrev.addClass('slide_disable').hide();
-                }else if( index === cObj._count - 1){
+                }else if(index === cObj._count - 1){
                     cObj.arrNext.addClass('slide_disable').hide();
                 }
             }
@@ -403,5 +422,5 @@ cloudjs.define({
             }
         }
     },
-    require: ['../css/blue/slide.css']
+    require: ['../css/' + cloudjs.themes() + '/slide.css']
 });

@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../css/global.css"/>
     <link rel="stylesheet" href="../css/prettify.css"/>
     <style>
+    .clptbtn{ background:#ccc;}
     input.hover{ color:#f00; }
     </style>
     <script src="../../js/jquery.min.js"></script>
@@ -15,12 +16,13 @@
     <script src="../js/global.js"></script>
 </head>
 <body class="body_bg">
+    <div class="primary">
     <div class="comps_header">
         <h2 class="comps_name">clip复制到粘贴板组件</h2>
-        <p style="color:red">注意：该组件无法在本地使用无效，必须配置环境才可正常使用</p>
+        <p style="color:red">注意：该组件无法在本地使用，必须配置环境才可正常使用</p>
     </div>
     <div class="comps_summary">
-        <h3>cloudjs(selector).clip([options]) <i class="gray">options={'属性名':'属性值',...}</i></h3>
+        <h3>cloudjs(selector).clip([options])</h3>
     </div>
     <div class="detail_content">
         <h4>属性</h4>
@@ -64,13 +66,13 @@
                          <td>要复制的内容，通过return返回</td>
                     </tr>
                     <tr>
-                         <td>onCopyBefore</td>
+                         <td>beforeCopy</td>
                          <td>function</td>
                          <td></td>
                          <td>复制前要进行的操作</td>
                     </tr>
                     <tr>
-                         <td>onCopyAfter</td>
+                         <td>afterCopy</td>
                          <td>function</td>
                          <td></td>
                          <td>复制后要进行的操作</td>
@@ -116,22 +118,22 @@
     <div class="detail_content">
         <h4>示例</h4>
         <div>
-            <h5>示例1：最简单常用的场景，设置swfPath,onCopy,onCopyAfter</h5>
+            <h5>示例1：最简单常用的场景，设置swfPath,onCopy,afterCopy</h5>
 <div class="example_html_1">
 <textarea rows="5" cols="50">我就是被复制的对象</textarea>
 <input id="page_div1" type="button" value="复制textarea里面的内容"/>
 </div>
-            <script class="example_js_1">
+<script class="example_js_1">
 cloudjs('#page_div1').clip({ 
     swfPath: '../../js/Clipboard.swf', 
     onCopy: function(){
         return $(this).prev().val();
     }, 
-    onCopyAfter: function(){
+    afterCopy: function(){
         cloudjs.message({ content: '复制成功', relative:this, position:'right', duration: 1000 });
     }
 });
-            </script>
+</script>
             <script>writeCode('.example_html_1');writeCode('.example_js_1');</script>
         </div>
                 
@@ -141,7 +143,7 @@ cloudjs('#page_div1').clip({
 <ul>
     <li><a href="paging.html">分页组件</a> <input class="page_div2" type="button" value="复制上一个元素的href"/></li>
     <li><a href="http://www.qq.com">腾讯QQ</a> <input class="page_div2" type="button" value="复制上一个元素的href"/></li>
-    <li><a href="../../js/cloudjs.js">cloudjs</a> <input class="page_div2" type="button" value="复制上一个元素的href"/></li>
+    <li><a href="../../js/cloudjs.js">cloudjs</a> <a class="page_div2 clptbtn">复制上一个元素的href</a></li>
 </ul>
 </div>
 <script class="example_js_2">
@@ -150,11 +152,7 @@ cloudjs('.page_div2').clip({
     onCopy: function(){
         return $(this).prev().attr('href');
     },
-    onCopyBefore: function(){
-        $(this).parent().css('background','#ff0');
-    },
-    onCopyAfter: function(){
-        $(this).parent().css('background','none');
+    afterCopy: function(){
         cloudjs.message({ content: '复制成功', relative: this, position: 'right', duration: 1000 });
     } 
 });
@@ -163,7 +161,7 @@ cloudjs('.page_div2').clip({
         </div>
         
         <div class="html_3_box">
-            <h5>示例3：设置onCopyBefore</h5>
+            <h5>示例3：设置beforeCopy</h5>
 <div class="example_html_3">
 <input id="page_div3" type="button" value="复制当前的js代码"/>
 </div>
@@ -173,10 +171,10 @@ cloudjs('#page_div3').clip({
     onCopy: function(){
         return $(this).parent().next().html();
     },
-    onCopyBefore: function(){
+    beforeCopy: function(){
         $('.html_3_box').css('background','#ff0');
     },
-    onCopyAfter: function(){
+    afterCopy: function(){
         $('.html_3_box').css('background','none');
         cloudjs.message({ content: '复制成功', relative: this, position: 'right', duration: 1000 });
     } 
@@ -202,7 +200,7 @@ cloudjs('.page_div4').clip({
     onCopy: function(){
         return $(this).val();
     },
-    onCopyAfter: function(){
+    afterCopy: function(){
         cloudjs.message({ content: '复制成功', relative: this, position: 'right', duration: 1000 });
     } 
 });
@@ -210,6 +208,10 @@ cloudjs('.page_div4').clip({
             <script>writeCode('.example_html_4');writeCode('.example_js_4');</script>
         </div>
     </div>
+    </div>
 </body>
 </html>
+
+
+
 

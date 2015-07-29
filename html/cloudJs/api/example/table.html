@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>表格组件</title>
+    <link rel="stylesheet" href="../css/global.css"/>
+    <link rel="stylesheet" href="../css/prettify.css"/>
+    <style>
+    .paging_ul{ margin:10px 0; border:1px solid #ccc; border-bottom:0; }
+    .paging_ul li{ padding-left:20px; border-bottom:1px solid #ccc; }
+    .paging_ul li span{ display:inline-block; width:180px; }
+    .paging_ul li:first-child{ background:#dddddd; }
+    </style>
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/cloudjs.js"></script>
+    <script src="../js/prettify.js"></script>
+    <script src="../js/global.js"></script>
+</head>
+<body class="body_bg">
+    <div class="primary">
+    <div class="comps_header">
+        <h2 class="comps_name">表格组件</h2>
+        <p></p>
+    </div>
+    <div class="comps_summary">
+        <h3>cloudjs(selector).paging([options])</h3>
+    </div>
+    <div class="detail_content">
+        <h4>属性</h4>
+        <div class="param_table_box">
+            <table class="param_table">
+                <tbody>
+                    <tr>
+                        <th>属性名</th>
+                        <th>类型</th>
+                        <th>默认值</th>
+                        <th>说明</th>
+                    </tr>
+                    <tr>
+                        <td>pagingFlag</td>
+                        <td>number</td>
+                        <td>0</td>
+                        <td>分页标识，负数不分页，0静态分页，正数动态分页</td>
+                    </tr>
+                    <tr>
+                        <td>tableData</td>
+                        <td>jsonarray</td>
+                        <td>[{title:'',key:'',className:'',sort:'',defaultSort}]</td>
+                        <td>数组的json对象保存着列元素信息,详细配置见<a href="#eg1" class="exp">示例1</a></td>
+                    </tr>
+                    <tr>
+                         <td>emptyData</td>
+                         <td>string</td>
+                         <td>没有数据</td>
+                         <td>没有数据时的文字提示</td>
+                    </tr>
+                    <tr>
+                         <td>onHeadChange</td>
+                         <td>function(jqobj)</td>
+                         <td></td>
+                         <td>重构thead后触发的事件,jqobj是thead的jquery对象</td>
+                    </tr>
+                    <tr>
+                         <td>onBodyChange</td>
+                         <td>function(jqobj)</td>
+                         <td></td>
+                         <td>重构tbody和tfoot后触发的事件,jqobj是tbody的jquery对象</td>
+                    </tr>
+                    
+                    <tr>
+                         <td>onAjax</td>
+                         <td>function(data)</td>
+                         <td></td>
+                         <td>data是ajax请求的数据，该函数要返回表格的数据。</td>
+                    </tr>
+                    <tr>
+                        <td>first</td>
+                        <td>string</td>
+                        <td></td>
+                        <td>首页文字，留空则不显示首页</td>
+                    </tr>
+                    <tr>
+                        <td>prev</td>
+                        <td>string</td>
+                        <td>上一页</td>
+                        <td>上一页文字，留空则不显示上一页</td>
+                    </tr>
+                    <tr>
+                         <td>next</td>
+                         <td>string</td>
+                         <td>下一页</td>
+                         <td>下一页文字，留空则不显示下一页</td>
+                    </tr>
+                    <tr>
+                         <td>last</td>
+                         <td>string</td>
+                         <td></td>
+                         <td>末页文字，留空则不显示末页</td>
+                    </tr>
+                    <tr>
+                         <td>showDetails</td>
+                         <td>boolean</td>
+                         <td>true</td>
+                         <td>是否显示分页后面那一串内容</td>
+                    </tr>
+                    <tr>
+                         <td>showIcons</td>
+                         <td>boolean</td>
+                         <td>false</td>
+                         <td>首末上下页是否用图标</td>
+                    </tr>
+                    <tr>
+                         <td>useSimple</td>
+                         <td>boolean</td>
+                         <td>false</td>
+                         <td>是否采用简单的分页</td>
+                    </tr>
+                    <tr>
+                         <td>totalCounts</td>
+                         <td>number|function(data)</td>
+                         <td>1000</td>
+                         <td>总记录数，可以是一个函数，函数返回的data就是请求ajaxUrl返回的数据，加入总数存放在data.total中，那么写法为totalCounts:function(data){return data.total}</td>
+                    </tr>
+                    <tr>
+                         <td>pageSize</td>
+                         <td>number</td>
+                         <td>20</td>
+                         <td>每页展示的记录数</td>
+                    </tr>
+                    <tr>
+                         <td>pageNum</td>
+                         <td>number</td>
+                         <td>1</td>
+                         <td>当前页码</td>
+                    </tr>
+                    <tr>
+                         <td>visiblePages</td>
+                         <td>number</td>
+                         <td>5</td>
+                         <td>显示的页码数量</td>
+                    </tr>
+                     <tr>
+                         <td>ajaxUrl</td>
+                         <td>string</td>
+                         <td></td>
+                         <td>请求的url，留空则需要在onPageChange事件中发起ajax请求，不留空则组件自动请求ajaxUrl，直接在onPageChange事件中通过data.data获取数据</td>
+                    </tr>
+                    <tr>
+                         <td>params</td>
+                         <td>string/object</td>
+                         <td></td>
+                         <td>请求的参数，查询操作时通过setData方法设置，在onPageChange事件中用data.params获取</td>
+                    </tr>
+                    <tr>
+                         <td>dataType</td>
+                         <td>string</td>
+                         <td>json</td>
+                         <td>请求ajaxUrl返回的数据类型，如果ajaxUrl为空，这个参数也没有意义</td>
+                    </tr>
+                    <tr>
+                         <td>sizeKey</td>
+                         <td>string</td>
+                         <td>pageSize</td>
+                         <td>组件向外传递参数pageSize的key值</td>
+                    </tr>
+                    <tr>
+                         <td>numKey</td>
+                         <td>string</td>
+                         <td>pageNum</td>
+                         <td>组件向外传递参数pageNum的key值</td>
+                    </tr>
+                    <tr>
+                         <td>maskId</td>
+                         <td>string</td>
+                         <td></td>
+                         <td>蒙版层的id，如果不为空，ajax请求返回数据前会在此id区域加一层蒙版效果</td>
+                    </tr>
+                    <tr>
+                         <td>loadImg</td>
+                         <td>string</td>
+                         <td>../../images/paging_loading.gif</td>
+                         <td>蒙版层加载图片的路径,指图片相对于使用paging组件页面的路径，而不是相对于paging.js</td>
+                    </tr>
+                    <tr>
+                         <td>disableClass</td>
+                         <td>string</td>
+                         <td>disabled</td>
+                         <td>不可点击时的样式</td>
+                    </tr>
+                    <tr>
+                         <td>activeClass</td>
+                         <td>string</td>
+                         <td>active</td>
+                         <td>当前页码的样式</td>
+                    </tr>
+                    <tr>
+                         <td>onPageChange</td>
+                         <td>function(data)</td>
+                         <td></td>
+                         <td>改变分页时触发，向外传递data.totalCounts,data.pageSize,data.pageNum,data.params和data.data</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="comps_summary">
+        <h3>cloudjs(selector).paging('方法名', [args])</h3>
+    </div>
+    
+    <div class="detail_content">
+        <h4>方法</h4>
+        <div class="param_table_box">
+            <table class="param_table">
+                <tbody>
+                    <tr>
+                        <th>方法名</th>
+                        <th>参数</th>
+                        <th>说明</th>
+                    </tr>
+                    <tr>
+                        <td>setData</td>
+                        <td>对象</td>
+                        <td>通过设置对象的参数可以达到刷新/更改/销毁组件，对象的参数和组件里面的属性一样</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+        
+        
+    <div class="detail_content">
+        <h4>示例</h4>
+        <div>
+            <h5>示例1：静态分页：url接口一次性返回所有数据</h5>
+<div id="example_html_1">
+<div id="page_div1"></div>
+</div>
+<script class="example_js_1">
+
+cloudjs('#page_div1').table({ 
+    pageSize: 5,
+    ajaxUrl:'data/table_data.json', 
+    tableData: [
+        {title: "<input type='checkbox'/>", key: function(){ return "<input type='checkbox'/>"; }, className: "center", width: '60px'},
+        {title: "日期", key: "statis_day", className: "center"},     
+        {title: "APP名称<span style='color:red' class='htips'>???</span>", key: function(){return '<a>{name}</a>'}, sort: 'string'},
+        {title: "总次数", key: "total_index", className: "integer", sort: 'number'},
+        {title: "占比", key: "cat_rank", className: "percent", sort: 'number', defaultSort: 1},
+        {title: "操作", key: function(){ return '<a class="cursor">删除</a>';}, className: "center", width: '60px'}
+    ],
+    onHeadChange: function(jqobj){
+        cloudjs('.htips',jqobj).tips({title: "这里是tips说明"});
+        $('[type=checkbox]', jqobj).change(function(){
+            var flag = this.checked;
+            jqobj.next().find('[type=checkbox]').attr('checked',flag);
+        })
+    },
+    onBodyChange: function(obj){
+        $('a',obj).click(function(){
+            alert($(this).text());
+        })
+    }
+});
+
+</script>
+<script>writeCode('.example_html_1');writeCode('.example_js_1');</script>
+        </div>
+        
+        <div>
+            <h5>示例2：动态分页：url接口只返回页面显示的数据</h5>
+<div id="example_html_2">
+<input type="text" name="key"/> <input type="button" value="查询" id="keyBtn"/><br/><br/>
+<div id="page_div2"></div>
+</div>
+<script class="example_js_2">
+cloudjs('#page_div2').table({ 
+    pageSize: 10,
+    pagingFlag: 1,
+    ajaxUrl:'data/paging_table_data.jsp', 
+    tableData: [
+        {title: "id", key: "id", sort: 'number'},     
+        {title: "关键词", key: "key", sort: 'string'},
+        {title: "次数", key: "cnt", className: "integer", sort: 'number'},
+        {title: "占比", key: "rate", className: "percent", sort: 'number', defaultSort: 1},
+        {title: "操作", key: function(){ return '<a class="cursor" k="{id}">删除</a>';}, className: "center", width: '60px'}
+    ],
+    totalCounts: function(data){
+        return data.total
+    },
+    onAjax: function(data){
+        return data.table
+    },
+    onBodyChange: function(obj){
+        $('a',obj).click(function(){
+            alert($(this).attr('k'));
+        });
+    }
+});
+
+$('#keyBtn').bind('click', function(){
+    var params = $(this).prev().serialize();
+    cloudjs('#page_div2').table('setData', {params: params, pageNum: 1});
+});
+</script>
+<script>writeCode('.example_html_2');writeCode('.example_js_2');</script>
+        </div>
+           
+
+    </div>
+</div>
+</body>
+</html>
+
+
+

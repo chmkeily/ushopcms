@@ -1,3 +1,8 @@
+/**
+ * 计算器组件
+ * author: generzhang@tencent.com
+ * date: 2015-07-01
+ */
 cloudjs.define({
     calculate:function(options){
         var action = arguments[0], 

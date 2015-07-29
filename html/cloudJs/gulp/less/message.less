@@ -1,0 +1,96 @@
+@import "./public";
+
+.message_div {
+	z-index: 1000;
+	overflow: hidden;
+	padding-bottom: 10px;
+	text-align: center;
+	margin: 0;
+	padding: 6px 28px 6px 35px;
+	opacity: 0;
+	filter: alpha(opacity=0);
+	border: solid 1px;
+	.borderRadius;
+}
+
+.message_div.message_no_left_icon {
+  	padding-left: 10px;
+}
+
+.message_div.message_no_right_icon {
+  	padding-right: 10px;
+}
+
+.message_div .message_icon {
+    position: absolute;
+    top: 7px;
+    left: 6px;
+    width: 16px;
+    height: 16px;
+    background-repeat: no-repeat;
+    margin: 0;
+}
+.message_div .message_close {
+    position: absolute;
+    top: 7px;
+    right: 5px;
+    width: 15px;
+    height: 15px;
+    font-size: 18px;
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+    color: #ffffff;
+    cursor: pointer;
+}
+.message_div .message_close:hover {
+	color: inherit;
+}
+.message_div.message_normal {
+    background: #eef8ff;
+    border-color: #258cd6;
+    color: #258cd6;
+    .boxShadow(0px, 0px, 1px, #258cd6);
+}
+.message_div.message_success {
+	background: #dff0d8;
+	border-color: #558e26;
+	color: #558e26;
+	.boxShadow(0px, 0px, 1px, #558e26);
+}
+.message_div.message_warn {
+	background: #fcf8e3;
+	border-color: #d79b0d;
+	color: #d79b0d;
+	.boxShadow(0px, 0px, 1px, #d79b0d);
+}
+.message_div.message_error {
+	background: #f2dede;
+	border-color: #d33330;
+	color: #d33330;
+	.boxShadow(0px, 0px, 1px, #d33330);
+}
+.message_div.message_normal .message_icon{
+    background-position: 1px -16px;
+}
+.message_div.message_normal .message_close{
+	background-position: -1px -32px;
+}
+.message_div.message_success .message_icon {
+    background-position: -15px -16px;
+}
+.message_div.message_success .message_close {
+    background-position: -17px -32px;
+}
+.message_div.message_warn .message_icon {
+    background-position: -31px -16px;
+}
+.message_div.message_warn .message_close {
+    background-position: -33px -32px;
+}
+.message_div.message_error .message_icon {
+    background-position: -48px -16px;
+}
+.message_div.message_error .message_close {
+    background-position: -49px -32px;
+}

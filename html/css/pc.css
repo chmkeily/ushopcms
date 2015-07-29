@@ -398,10 +398,8 @@ input[type="text"], input[type="password"]{height: 1.5em; line-height: 1.4em; bo
 .topnav h1 .logo {position:absolute;width:150px;height:50px;line-height:100;overflow:hidden;left:0;top:0;background-image:url(../images/logo_min.png)}
 .topnav .subnav{position:absolute;left:150px;top:21px;font-size:14px;color:#fff;border-left:2px solid #fff;padding-left:15px;height:14px;line-height:14px}
 
-.reg_wrap{background: #fff; border: 2px solid #eee; border-radius:5px; padding-top: 20px; margin-left: 30px; margin-top: -50px;}
-.reg_wrap input[type="text"], .reg_wrap input[type="password"]{line-height: 1.5em; height: 1.5em; padding: 5px 10px;  border-radius: 5px; width: 316px;}
-.reg_wrap .form-horizontal .control-label{padding-top: 8px; width: 120px;}
-.reg_wrap .form-horizontal .controls{margin-left: 140px;}
+.reg_wrap{background: #fff; border: 2px solid #eee; border-radius:5px; padding-top: 20px; margin-left: 120px; width: 420px;}
+.reg_wrap .login{width: auto; height: 220px;}
 
 .aside {width:200px;position:absolute;top:50px;bottom:0;left:0; background: #EFEFEF; padding-top: 10px;}
 .main {position:absolute;top:50px;right:0;bottom:0;left:200px;background-color:#fff;border-radius:5px 0 0 0;}

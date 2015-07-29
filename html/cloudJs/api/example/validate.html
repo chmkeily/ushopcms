@@ -12,12 +12,13 @@
 	<script src="../js/global.js"></script>
 </head>
 <body class="body_bg">
+    <div class="primary">
     <div class="comps_header">
         <h2 class="comps_name">validate格式校验组件</h2>
         <p>用于页面输入框的格式校验</p>
     </div>
     <div class="comps_summary">
-        <h3>cloudjs(selector).validate([options]) <i class="gray">options={'属性名':'属性值',...}</i></h3>
+        <h3>cloudjs(selector).validate([options])</h3>
     </div>
     <div class="detail_content">
 		<h4>属性</h4>
@@ -34,19 +35,19 @@
                         <td>checkType</td>
                         <td>string</td>
                         <td>empty</td>
-                        <td>元素默认的校验类型，元素可以通过data-check来设置元素的检验类型</td>
+                        <td>元素默认的校验类型，元素可以通过data-check来设置元素的检验类型，详见<a href="#eg7" class="exp">示例7</a></td>
                     </tr>
 					<tr>
 						<td>warn</td>
 						<td>boolean</td>
 						<td>true</td>
-						<td>是否显示错误信息</td>
+						<td>是否显示错误信息，详见<a href="#eg9" class="exp">示例9</a></td>
 					</tr>
 					<tr>
                         <td>errmsgType</td>
                         <td>number</td>
                         <td>1</td>
-                        <td>页面错误信息提示的方式，1是弹tips，2是直接跟在元素后面或在指定的区域显示，如果设置了2，元素可以通过data-wraper属性设置错误提示显示的地方，如将错误信息显示在一个id为myerr的元素上，则data-wraper="#myerr"（warn为true时生效）</td>
+                        <td>页面错误信息提示的方式，1是弹tips，2是直接跟在元素后面或在指定的区域显示，如果设置了2，元素可以通过data-wraper属性设置错误提示显示的地方，如将错误信息显示在一个id为myerr的元素上，则data-wraper="#myerr"（warn为true时生效），详见<a href="#eg6" class="exp">示例6</a></td>
                     </tr>
 					<tr>
                         <td>posiiton</td>
@@ -58,60 +59,36 @@
 						<td>delay</td>
 						<td>number</td>
 						<td>0</td>
-						<td>错误提示多久自动消失，0表示不自动消失，单位ms（wran为true时生效）</td>
+						<td>错误提示多久自动消失，0表示不自动消失，单位ms（wran为true时生效），详见<a href="#eg5" class="exp">示例5</a></td>
 					</tr>
 					<tr>
 	                     <td>rule</td>
 	                     <td>null</td>
 	                     <td>组件自己的默认校验规则(非空empty、日期date、时间time、链接url、数字num、整数inum、正整数uinum、非负整数ginum、单ip、多ips、邮箱email、手机号码phone、命名naming、最大长度maxlen[x]、最小长度minlen[x]、)</td>
-	                     <td>自定义校验规则和错误信息，每种校验类型对应rule的一个属性，该属性值对应一个设置对象，这个对象有三个属性，errmsg,format和check，errmsg对应一个方法,该方法返回一个错误提示字符串，format对应多种格式,用于比如校验多种日期格式的选择,check对应一个校验方法,该方法返回是否校验通过，errmsg和check两个方内部都通过传入的参数获取到当前被校验的输入框对象</td>
+	                     <td>自定义校验规则和错误信息，每种校验类型对应rule的一个属性，该属性值对应一个设置对象，这个对象有三个属性，errmsg,format和check，errmsg对应一个方法,该方法返回一个错误提示字符串，format对应多种格式,用于比如校验多种日期格式的选择,check对应一个校验方法,该方法返回是否校验通过，errmsg和check两个方内部都通过传入的参数获取到当前被校验的输入框对象，详见<a href="#eg4" class="exp">示例4</a></td>
                     </tr>
 					<tr>
 	                     <td>success</td>
 	                     <td>function()</td>
 	                     <td></td>
-	                     <td>校验成功后调用的方法</td>
+	                     <td>校验成功后调用的方法，详见<a href="#eg9" class="exp">示例9</a></td>
                     </tr>
                     <tr>
                          <td>fail</td>
                          <td>function(errObj)</td>
                          <td></td>
-                         <td>校验失败时调用的方法，会传入校验失败的详细信息，把校验失败的元素和错误提示信息封装成数组的一个个对象，然后将数组传给fail方法</td>
+                         <td>校验失败时调用的方法，会传入校验失败的详细信息，把校验失败的元素和错误提示信息封装成数组的一个个对象，然后将数组传给fail方法，详见<a href="#eg9" class="exp">示例9</a></td>
                     </tr>
 				</tbody>
 			</table>
 		</div>
 	</div>
-	
-	<div class="comps_summary">
-        <h3>cloudjs(selector).validate('方法名')</h3>
-    </div>
-    
-    <div class="detail_content">
-        <h4>方法</h4>
-        <div class="param_table_box">
-            <table class="param_table">
-                <tbody>
-                    <tr>
-                        <th>方法名</th>
-                        <th>参数</th>
-                        <th>说明</th>
-                    </tr>
-                    <tr>
-                        <td>setData</td>
-                        <td></td>
-                        <td>重新设置属性值，分永久设置和临时设置，永久设置会作用于后面重新弹出的提示信息，而临时设置作用于当前弹出的提示信息</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
 
     <div class="detail_content">
         <h4>示例</h4>
         
         <div>
-            <h5>示例1：校验输入框是否为空</h5>
+            <h5><a name="eg1"></a>示例1：校验输入框是否为空</h5>
 <div class="example_html_1"> 
 <input type="text" class="validate_input1">
 <input type="text" class="validate_input1 ml20">
@@ -134,23 +111,38 @@ $('.validate_btn1').click(function(){
         </div>		
 			
         <div class="mt60">
-            <h5>示例2：默认支持的各种校验格式</h5>
+            <h5><a name="eg2"></a>示例2：默认支持的各种校验格式</h5>
 <div class="example_html_2 mb20">
-<span class="ml20 mt45">非空</span><input type="text" class="validate_input2 mt10 ml10" data-check="empty" value="hello">
-<span class="ml20 mt45">日期</span><input type="text" class="validate_input2 mt10 ml10" data-check="date" value="2014-12-12">
-<span class="ml20 mt45">时间</span><input type="text" class="validate_input2 mt10 ml10" data-check="time" value="2014-12-12 12:00:00"><br> 
-<span class="ml20 mt45">链接</span><input type="text" class="validate_input2 mt45 ml10" data-check="url" value="http://www.qq.com">
-<span class="ml20 mt45">数字</span><input type="text" class="validate_input2 mt45 ml10" data-check="num" value="8.8">
-<span class="ml20 mt45">整数</span><input type="text" class="validate_input2 mt45 ml10" data-check="inum" value="8"><br> 
-<span class="ml20 mt45">单ip</span><input type="text" class="validate_input2 mt45 ml10" data-check="ip" value="22.22.22.22">
-<span class="ml20 mt45">多ip</span><input type="text" class="validate_input2 mt45 ml10" data-check="ips" value="22.22.22.22;11.11.11.11">
-<span class="ml20 mt45">邮箱</span><input type="text" class="validate_input2 mt45 ml10" data-check="email" value="generzhang@tencent.com"><br> 
-<span class="ml20 mt45">命名</span><input type="text" class="validate_input2 mt45 ml10" data-check="naming" value="$cloudjs_1">
-<span class="ml20 mt45">正整数</span><input type="text" class="validate_input2 mt45 ml10" data-check="uinum" value="22">
-<span class="ml20 mt45">非负整数</span><input type="text" class="validate_input2 mt45 ml10" data-check="ginum" value="0"><br> 
-<span class="ml20 mt45">最大长度</span><input type="text" class="validate_input2 mt45 ml10" data-check="maxlen" value="a01234567890123456789">
-<span class="ml20 mt45">最小长度</span><input type="text" class="validate_input2 mt45 ml10" data-check="minlen" value="a1234">
-<span class="ml20 mt45">手机号</span><input type="text" class="validate_input2 mt45 ml10" data-check="phone" value="13888888888">
+<span class="ml20 mt45">非空</span>
+<input type="text" class="validate_input2 mt10 ml10" data-check="empty" value="hello">
+<span class="ml20 mt45">日期</span>
+<input type="text" class="validate_input2 mt10 ml10" data-check="date" value="2014-12-12">
+<span class="ml20 mt45">时间</span>
+<input type="text" class="validate_input2 mt10 ml10" data-check="time" value="2014-12-12 12:00:00"><br> 
+<span class="ml20 mt45">链接</span>
+<input type="text" class="validate_input2 mt45 ml10" data-check="url" value="http://www.qq.com">
+<span class="ml20 mt45">数字</span>
+<input type="text" class="validate_input2 mt45 ml10" data-check="num" value="8.8">
+<span class="ml20 mt45">整数</span>
+<input type="text" class="validate_input2 mt45 ml10" data-check="inum" value="8"><br> 
+<span class="ml20 mt45">单ip</span>
+<input type="text" class="validate_input2 mt45 ml10" data-check="ip" value="22.22.22.22">
+<span class="ml20 mt45">多ip</span>
+<input type="text" class="validate_input2 mt45 ml10" data-check="ips" value="22.22.22.22;11.11.11.11">
+<span class="ml20 mt45">邮箱</span>
+<input type="text" class="validate_input2 mt45 ml10" data-check="email" value="generzhang@tencent.com"><br> 
+<span class="ml20 mt45">命名</span>
+<input type="text" class="validate_input2 mt45 ml10" data-check="naming" value="$cloudjs_1">
+<span class="ml20 mt45">正整数</span>
+<input type="text" class="validate_input2 mt45 ml10" data-check="uinum" value="22">
+<span class="ml20 mt45">非负整数</span>
+<input type="text" class="validate_input2 mt45 ml10" data-check="ginum" value="0"><br> 
+<span class="ml20 mt45">最大长度</span>
+<input type="text" class="validate_input2 mt45 ml10" data-check="maxlen" value="a01234567890123456789">
+<span class="ml20 mt45">最小长度</span>
+<input type="text" class="validate_input2 mt45 ml10" data-check="minlen" value="a1234">
+<span class="ml20 mt45">手机号</span>
+<input type="text" class="validate_input2 mt45 ml10" data-check="phone" value="13888888888">
 <input type="button" class="validate_btn2 ml20 mt45" value="&nbsp;校验&nbsp;">
 </div>
             <script class="example_js_2">
@@ -170,7 +162,7 @@ $('.validate_btn2').click(function(){
         </div>
         
         <div class="mt60">
-            <h5>示例3：混合校验示例</h5>
+            <h5><a name="eg3"></a>示例3：混合校验示例</h5>
 <div class="example_html_3">
 <input type="text" class="validate_input3" data-check="empty;date">    <!-- 格式之间用分号来分隔 -->
 <input type="button" class="validate_btn3 ml20" value="&nbsp;校验&nbsp;">
@@ -192,7 +184,7 @@ $('.validate_btn3').click(function(){
         </div>
         
         <div class="mt60">
-            <h5>示例4：自定义校验类型</h5>
+            <h5><a name="eg4"></a>示例4：自定义校验类型</h5>
 <div class="example_html_4">
 <!-- jpg格式的可以通过校验 -->
 <input type="text" class="validate_input4" data-check="image" value="hello.jpg">
@@ -243,7 +235,7 @@ $('.validate_btn4').click(function(){
         </div>
         
         <div class="mt60">
-            <h5>示例5：设置错误提示信息的位置和消失时间</h5>
+            <h5><a name="eg5"></a>示例5：设置错误提示信息的位置和消失时间</h5>
 <div class="example_html_5">
 <!-- 通过data-position="down"设置提示信息在元素的上方，也就是箭头指向下down -->
 <input type="text" class="validate_input5" data-position="up">
@@ -268,7 +260,7 @@ $('.validate_btn5').click(function(){
         
         
         <div class="mt60">
-            <h5>示例6：设置错误提示的方式</h5>
+            <h5><a name="eg6"></a>示例6：设置错误提示的方式</h5>
 <div class="example_html_6">
 <!-- 当设置errmsgType为2时，元素有data-wraper属性，则错误信息会显示在相应的容器内 -->
 <input type="text" class="validate_input6" data-wraper="#input6_wraper"><font color=red>*</font>
@@ -298,7 +290,7 @@ $('.validate_btn6').click(function(){
         </div>
         
         <div class="mt60">
-            <h5>示例7：通过checkType属性设置默认的校验类型</h5>
+            <h5><a name="eg7"></a>示例7：通过checkType属性设置默认的校验类型</h5>
 <div class="example_html_7">
 <!-- 这里我们并没有指定data-check属性，所以校验的类型用默认的类型 -->
 <input type="text" class="validate_input7" value="-8">
@@ -324,7 +316,7 @@ $('.validate_btn7').click(function(){
         </div>
         
         <div class="mt60">
-            <h5>示例8：调用方法清除错误提示</h5>
+            <h5><a name="eg8"></a>示例8：调用方法清除错误提示</h5>
 <div class="example_html_8">
 <input type="text" class="validate_input8" id="validate_input8a">
 <input type="text" class="validate_input8 ml30" id="validate_input8b">
@@ -361,7 +353,7 @@ $('#validate_btn8c').click(function(){
         </div>
         
          <div class="mt60">
-            <h5>示例9：使用自定义的错误提示方式</h5>
+            <h5><a name="eg9"></a>示例9：使用自定义的错误提示方式</h5>
 <div class="example_html_9">
 <input type="text" class="validate_input9" id="validate_input9a">
 <input type="text" class="validate_input9 ml30" id="validate_input9b" data-check="url" value="hello">
@@ -390,7 +382,7 @@ $('.validate_btn9').click(function(){
         
         
         <div class="mt60">
-            <h5>示例10：表单form校验</h5>
+            <h5><a name="eg10"></a>示例10：表单form校验</h5>
 <div class="example_html_10">
 <form id="validate_form10">  <!-- 对于校验form内的输入框的场景，只需要传入form即可，form内的输入框被自动被校验 -->
 	<input type="text" data-check="minlen">
@@ -420,7 +412,7 @@ $('.validate_btn10').click(function(){
         
         
         <div class="mt60">
-            <h5>示例11：很全的最大长度最小长度功能</h5>
+            <h5><a name="eg11"></a>示例11：很全的最大长度最小长度功能</h5>
 <div class="example_html_11">
 <!-- 这个例子主要说明validate组件对最大长度和最小长度校验的支持，从1到200都支持的 -->
 
@@ -455,5 +447,9 @@ $('.validate_btn11').click(function(){
         </div>
         
     </div>
+    </div>
 </body>
 </html>
+
+
+

@@ -1,0 +1,132 @@
+@activeBg:#f37b1d;
+@borderColor:#e06708;
+@hoverBg:#fdbe8d;
+@activeFont:@whiteColor;
+@hoverFont:@blackColor;
+@blackColor:#000000;
+@whiteColor:#ffffff;
+
+@fontFamily:Microsoft Yahei;
+
+.iconBgImg(){ 
+    background-image: url(../../images/icons_new.png);
+}
+
+.hoverStyle(@a1:0.8,@a2:80){ 
+    opacity: @a1; filter: alpha(opacity=@a2);
+}
+
+.hoverBg(){
+    background-color:@hoverBg;
+    color:@blackColor;
+}
+
+
+.borderRadius(@radius:3px){ 
+    -moz-border-radius: @radius; 
+    -webkit-border-radius: @radius; 
+    border-radius: @radius; 
+}
+
+.boxShadow(@x:0,@y:0,@blur:1px,@color:@blackColor){ 
+    -moz-box-shadow: @arguments; 
+    -webkit-box-shadow: @arguments; 
+    box-shadow: @arguments;
+} 
+
+.baseBtn(){
+    padding: 3px 7px;
+    display: inline-block;
+    font-family: @fontFamily; 
+    font-size: 12px;
+    white-space:nowrap;
+    cursor:pointer;
+    zoom:1;
+    *width:40px;
+    *height: 24px;
+    *line-height: 1;
+}
+
+.baseBtnBg(){
+    border: 1px solid @borderColor;
+    color: @activeFont;
+    background-color:@activeBg;
+}
+
+.whiteBtnBg(){
+    border: 1px solid #999999;
+    color: @blackColor;
+    background-color:#ffffff;
+}
+
+.btnStyle(){
+    .borderRadius;
+    .baseBtn;
+    .baseBtnBg;
+}
+
+.btnWhiteStyle(){
+    .borderRadius;
+    .baseBtn;
+    .whiteBtnBg;
+}
+
+.disabledStyle(){
+    color:#aaaaaa; 
+    background-color:#eeeeee; 
+    border-color:#cccccc; 
+    cursor:not-allowed; 
+    box-shadow:0px 0px 0px #dddddd;
+}
+
+
+.cloudjs_icon{
+    .iconBgImg;
+}
+
+.cloudjs_btn{
+    .btnStyle;
+}
+
+a.cloudjs_btn{
+    text-decoration:none;
+}
+
+.cloudjs_btn_white{
+    .btnWhiteStyle;
+}
+
+.cloudjs_icon:hover{
+    .hoverStyle;
+}
+
+.cloudjs_btn:hover{
+    .hoverStyle;
+}
+
+.cloudjs_btn_white:hover{
+    border-color: #666666;
+}
+
+.cloudjs_btn_white_disable,.cloudjs_btn_white:disabled{
+    color: #aaaaaa;
+    border-color: #cfcfcf;
+    cursor: default;
+}
+
+.cloudjs_btn_disable,.cloudjs_btn_disable:hover,.cloudjs_btn:disabled{
+    color: #aaaaaa;
+    border-color: #cfcfcf;
+    cursor: default;
+    background: #ffffff;
+}
+
+.border{
+    border:1px solid #c6c6c6;
+    box-shadow: inset 1px 2px 1px #f0f0f0;  
+}
+
+.cloudjs_input{ height:25px; line-height:25px; padding:0; text-indent: 5px; outline: none; .border; }
+.cloudjs_input:focus{border:solid 1px #aaa;}
+.cloudjs_radio{}
+.cloudjs_checkbox{}

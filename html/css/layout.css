@@ -1,0 +1,41 @@
+*{ padding:0; margin:0; }
+body{ color:#3f3f3f;background:#f8f8f8; font-size:14px; font-family:Verdana, Geneva, sans-serif; }
+a{ text-decoration:none; color:#3f3f3f; outline: none; cursor:pointer; }
+a,img{ border:0; }
+ul,li{ list-style:none; }
+.fl{ float:left; }
+.fr{ float:right; }
+
+.header{height: 52px;background: #fff; padding-top:3px; }
+.logo{float: left;}
+.util{float: right;margin-top: 3px;margin-right: 30px;font-size: 12px;}
+.util .avater{height: 40px;width: 40px;border-radius: 40px;margin-right: 12px;box-shadow: 1px 1px 1px #aaa;display: inline-block;vertical-align: middle;overflow: hidden;padding:1px;}
+.util .avater img{height: 40px;width: 40px;}
+.util .user_info{float: left;}
+.util .fl a{margin-left: 30px;display: inline-block;margin-top: 11px;}
+
+.barbox{ height:55px; background:#1d6b9c; position:relative; }
+.bartitle{ text-align:center; font-family:"Microsoft Yahei"; }
+.bartitle a{ font-size:18px; color:#f8f8f8; padding:0 30px 0 55px; height:48px; line-height:40px; display:inline-block; margin:7px 10px 0 10px; background-image:url(http://beacon.gtimg.com/mig_op/beacon/images/new_icon.png); background-repeat:no-repeat; }
+.bartitle .selector{ background-color:#f8f8f8; color:#335770; -webkit-border-radius:4px 4px 0 0;-moz-border-radius:4px 4px 0 0;border-radius:4px 4px 0 0;}
+.bartitle .a1{ background-position: 20px -436px; }
+.bartitle .a2{ background-position: 20px -486px; }
+.bartitle .a3{ background-position: 20px -534px; }
+.bartitle .a1.selector{ background-position: 20px -292px; }
+.bartitle .a2.selector{ background-position: 20px -342px; }
+.bartitle .a3.selector{ background-position: 20px -390px; }
+.menubox a,.menubox span{ color:#fff; font-family:"Microsoft Yahei"; }
+.menubox ul{ padding:15px 0;background:#306a8f;}
+.menubox li{ line-height:35px; }
+.menubox li a{ display:block; padding-left:50px; font-size:14px; border-left:5px solid #306a8f; }
+.menubox li a:hover{ background-color:#35769f; border-left:5px solid #FABF27; }
+.pmenu{ height:30px; padding:20px 0 20px 18px; clear:both; background-color:#36739a; cursor:pointer; }
+.pmenu span{ line-height:30px; padding-left:40px; font-size:16px; display:block; background-image:url(http://beacon.gtimg.com/mig_op/beacon/images/new_icon.png); background-repeat:no-repeat; }
+
+
+
+.iconbox1 span{background-position:0 2px;}
+.iconbox2 span{background-position:0 -27px;}
+.iconbox3 span{background-position:0 -58px;}
+.iconbox4 span{background-position:0 -86px;}
+.iconbox5 span{background-position:0 -118px;}

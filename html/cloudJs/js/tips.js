@@ -1,3 +1,8 @@
+/**
+ * 提示组件
+ * author: generzhang@tencent.com
+ * date: 2015-07-01
+ */
 cloudjs.define({
 	tips: function(options){
 		var defaults = {
@@ -7,18 +12,25 @@ cloudjs.define({
 			hover: false, // 是否支持鼠标移动到tips上时，tips不消失。 false表示不支持失，true表示支持
 			hideOnFocus: true, // 鼠标单击目标元素时，提示信息是否消失（此时鼠标还在目标元素区域内）
 			isContainer: false, //是否是容器
+			width: '',
+			height: '',
 			loading: 'loading', //title为回调函数时显示加载的文本内容
 			showDelay: 200, // 鼠标移动到目标元素后tips多长时间内出现，默认是200表示延迟200ms出现
 			hideDelay: 300 //当鼠标离开目标元素后tips多长时间后消失，默认是300表示300ms后消失
 		}
 
-		var _self = this, 
-			TIPS_DIV = 'tips_div', 
+		var _self = this,
 			ARROW_WIDTH = 5, 
 			ARROW_DOWN = 'down', 
 			ARROW_LEFT = 'left', 
 			ARROW_RIGHT = 'right', 
 			ARROW_UP = 'up', 
+			ARROW_DOWN_LEFT = 'down_left', //下方偏左
+            ARROW_DOWN_RIGHT = 'down_right', //下方偏右
+            ARROW_UP_LEFT = 'up_left', //上方偏左
+            ARROW_UP_RIGHT = 'up_right', //上方偏右
+            LEFT_EDG = 14,
+            RIGHT_EDG = 10,
 			TITLE = 'title',
 			INIT_TITLE = 'init-title', 
 			OWN_TITLE = 'own-title', 
@@ -31,7 +43,7 @@ cloudjs.define({
 			_args1, 
 			_objsMap;
 
-		_objsMap = cloudjs._objsMap = cloudjs._objsMap || {};
+		_objsMap = cloudjs.tips._objsMap = cloudjs.tips._objsMap || {};
 
 		if(!options || $.isPlainObject(options)){
 			$.extend(true, defaults, options);
@@ -49,6 +61,8 @@ cloudjs.define({
 				_destroyTips(_self);
 			}
 		}
+		
+		cloudjs.callback.call();
 
 		/**
          * 更新title
@@ -80,6 +94,7 @@ cloudjs.define({
 					ele: ele,
 					init: function(title){
 						_initTips(this);
+						_setWidthAndHeight(this);
 						this.update(title, true, false);
 					},
 					update: function(title, change, isAction){
@@ -102,23 +117,41 @@ cloudjs.define({
 				ele.bind('mouseenter.' + ele.attr(OBJ_ID), function(){
 					_hideOtherTips(tipsObj);
 					ele.addClass(ACTIVE_ELE);
-					clearTimeout(cloudjs._tipsTimeout1);
-					clearTimeout(cloudjs._tipsTimeout2);
+					clearTimeout(cloudjs.tips._timeout1);
+					clearTimeout(cloudjs.tips._timeout2);
 					if(_initTitle(tipsObj)){// 如果title存在，才会显示tips
 						if(defaults.track){
 							_startMoveTips(tipsObj);
 						}
+						tipsObj.tips.css('zIndex', defaults.zIndex||cloudjs.zIndex());
 					}
 					_setOwnTitle(tipsObj);
 				}).bind('mouseleave.' + ele.attr(OBJ_ID), function(){
 					_reverTitle(tipsObj);
-					clearTimeout(cloudjs._tipsTimeout2);
-//						clearTimeout(cloudjs._tipsTimeout1);
+					clearTimeout(cloudjs.tips._timeout2);
+//						clearTimeout(cloudjs.tips._timeout1);
 					_hideTips(tipsObj);
 					ele.removeClass(ACTIVE_ELE);
 					_stopMoveTips(tipsObj);
 				});
 			});
+		}
+		
+		/**
+         * 设置元素宽高
+         * @param {Object} tipsObj tips对象
+         */
+		function _setWidthAndHeight(tipsObj){
+			var content = tipsObj.tips.find('.tips_content').first();
+			if(defaults.width){
+				content.width(defaults.width);
+			}
+			if(defaults.height){
+				content.height(defaults.height);
+			}
+			if(!defaults.width && !defaults.height){
+				content.css('maxWidth', '300px');
+			}
 		}
 		
 		/**
@@ -187,7 +220,7 @@ cloudjs.define({
          * @param {Object} tipsObj tips对象
          */
 		function _hideOtherTips(tipsObj){
-			$.each($('.' + TIPS_DIV), function(i, tips){
+			$.each($('.tips_div'), function(i, tips){
 				if(!tipsObj.tips || tipsObj.tips[0] !== tips){
 					$(tips).hide();
 				}
@@ -198,7 +231,7 @@ cloudjs.define({
          * 计算适合的方位
          * @param {Object} tipsObj tips对象
          */
-		function _calculatePosition(tipsObj){
+		function _calculatePosition(tipsObj, point){
 			var ele = tipsObj.ele, 
 				tips = tipsObj.tips, 
 				position = defaults.position, 
@@ -211,63 +244,147 @@ cloudjs.define({
 				eleWidth, 
 				eleHeight, 
 				tipsWidth, 
-				tipsHeight;
+				tipsHeight,
+				_position;
 
-			if(position !== ARROW_DOWN && position !== ARROW_UP && position !== ARROW_RIGHT && position !== ARROW_LEFT){
+			if(position !== ARROW_DOWN 
+					&& position !== ARROW_UP 
+					&& position !== ARROW_RIGHT 
+					&& position !== ARROW_LEFT
+					&& position !== ARROW_UP_LEFT
+            		&& position !== ARROW_UP_RIGHT
+            		&& position !== ARROW_DOWN_LEFT
+            		&& position !== ARROW_DOWN_RIGHT){
 				position = undefined;
-				scrollTop = $(window).scrollTop();
-				screenWidth = $(window).width();
-				screenHeight = $(window).height();
-				eleLeft = ele.offset().left;
-				eleTop = ele.offset().top - scrollTop;
-				eleWidth = ele.outerWidth();
-				eleHeight = ele.outerHeight();
-				tipsWidth = tips.outerWidth();
-				tipsHeight = tips.outerHeight();
-
-				positions = [
-					{
-						name: ARROW_UP,
-						isFix: function(){
-							return (eleTop - tipsHeight - ARROW_WIDTH - SPACING > 0) && _lr();
-						}
-					},
-					{
-						name: ARROW_DOWN,
-						isFix: function(){
-							return (eleTop + eleHeight + tipsHeight + ARROW_WIDTH + SPACING < screenHeight) && _lr();
-						}
-					},
-					{
-						name: ARROW_LEFT,
-						isFix: function(){
-							return (eleLeft - tipsWidth - ARROW_WIDTH - SPACING > 0) && _ud();
-						}
-					},
-					{
-						name: ARROW_RIGHT,
-						isFix: function(){
-							return (eleLeft + eleWidth + ARROW_WIDTH + SPACING < screenWidth && _ud());
-						}
-					}
-				];
-
-				function _lr(){
-					return (eleLeft + eleWidth / 2 - tipsWidth / 2 > 0) && (eleLeft + eleWidth / 2 + tipsWidth / 2 < screenWidth);
+			}
+			
+			scrollLeft = $(window).scrollLeft();
+			scrollTop = $(window).scrollTop();
+			screenWidth = $(window).width();
+			screenHeight = $(window).height();
+			eleLeft = ele.offset().left - scrollLeft;
+			eleTop = ele.offset().top - scrollTop;
+			eleWidth = ele.outerWidth();
+			eleHeight = ele.outerHeight();
+			tipsWidth = tips.outerWidth();
+			tipsHeight = tips.outerHeight();
+			
+			if(point){
+				point.x = point.x - scrollLeft;
+				point.y = point.y - scrollTop;
+			}
+			
+			positions = {};
+			
+			positions[ARROW_UP] = function(){
+				return _uu() && _lr();
+			};
+			
+			positions[ARROW_DOWN] = function(){
+				return _dd() && _lr();
+			};
+			
+			positions[ARROW_LEFT] = function(){
+				return _ll() && _ud();
+			};
+			
+			positions[ARROW_RIGHT] = function(){
+				return _rr() && _ud();
+			};
+			
+			positions[ARROW_UP_LEFT] = function(){
+				return _uu() && _cl();
+			};
+			
+			positions[ARROW_UP_RIGHT] = function(){
+				return _uu() && _cr();
+			};
+			
+			positions[ARROW_DOWN_LEFT] = function(){
+				return _dd() && _cl();
+			};
+			
+			positions[ARROW_DOWN_RIGHT] = function(){
+				return _dd() && _cr();
+			};
+			
+			function _cl(){
+				if(point){
+					return (point.x - tipsWidth + ARROW_WIDTH > 0);
+				}else{
+					return (eleLeft + eleWidth / 2 - tipsWidth + ARROW_WIDTH > 0);
 				}
-
-				function _ud(){
-					return (eleTop + eleHeight / 2 - tipsHeight / 2 > 0) && (eleTop + eleHeight / 2 + tipsHeight / 2 < screenHeight);
+			}
+			
+			function _cr(){
+				if(point){
+					return (point.x + tipsWidth - ARROW_WIDTH < screenWidth);
+				}else{
+					return (eleLeft + eleWidth / 2 + tipsWidth - ARROW_WIDTH < screenWidth);
 				}
-
-				$.each(positions, function(i, p){
-					if(!position && p.isFix()){
-						position = p.name;
-					}
-				});
+			}
+			
+			function _uu(){
+				if(point){
+					return (point.y - tipsHeight - ARROW_WIDTH - SPACING > 0);
+				}else{
+					return (eleTop - tipsHeight - ARROW_WIDTH - SPACING > 0);
+				}
+			}
+			
+			function _dd(){
+				if(point){
+					return (point.y + tipsHeight + ARROW_WIDTH + SPACING < screenHeight);
+				}else{
+					return (eleTop + eleHeight + tipsHeight + ARROW_WIDTH + SPACING < screenHeight);
+				}
+			}
+			
+			function _ll(){
+				if(point){
+					return (point.x - tipsWidth - ARROW_WIDTH - SPACING - X_SPACING > 0);
+				}else{
+					return (eleLeft - tipsWidth - ARROW_WIDTH - SPACING > 0);
+				}
+			}
+			
+			function _rr(){
+				if(point){
+					return (point.x + tipsWidth + ARROW_WIDTH + SPACING + X_SPACING< screenWidth);
+				}else{
+					return (eleLeft + eleWidth + tipsWidth + ARROW_WIDTH + SPACING < screenWidth);
+				}
 			}
 
-			tipsObj.position = position || ARROW_DOWN;
+			function _lr(){
+				if(point){
+					return (point.x - tipsWidth / 2 > 0) && (point.x + tipsWidth / 2 < screenWidth);
+				}else{
+					return (eleLeft + eleWidth / 2 - tipsWidth / 2 > 0) && (eleLeft + eleWidth / 2 + tipsWidth / 2 < screenWidth);
+				}
+			}
+
+			function _ud(){
+				if(point){
+					return (point.y - tipsHeight / 2 > 0) && (point.y + tipsHeight / 2 < screenHeight);
+				}else{
+					return (eleTop + eleHeight / 2 - tipsHeight / 2 > 0) && (eleTop + eleHeight / 2 + tipsHeight / 2 < screenHeight);
+				}
+			}
+			
+			if(position && positions[position]()){
+                _position = position;
+            }
+
+			if(!_position){
+                for(var p in positions){
+                    if(!_position && positions[p]()){
+                        _position = p;
+                    }
+                }
+            }
+
+			tipsObj.position = _position || position || ARROW_DOWN;
 		}
 
 		/**
@@ -297,10 +414,26 @@ cloudjs.define({
 					offset.left = ele.offset().left + eleWidth / 2 - tipsWidth / 2;
 					offset.top = ele.offset().top - tipsHeight - ARROW_WIDTH - SPACING;
 					break;
-				case ARROW_DOWN: //和default是同种类型
+				case ARROW_DOWN:
 					offset.left = ele.offset().left + eleWidth / 2 - tipsWidth / 2;
 					offset.top = ele.offset().top + eleHeight + ARROW_WIDTH + SPACING;
 					break;
+				case ARROW_UP_LEFT:
+                    offset.left = ele.offset().left + eleWidth / 2 - tipsWidth + ARROW_WIDTH + LEFT_EDG;
+                    offset.top = ele.offset().top - tipsHeight - ARROW_WIDTH - SPACING;
+                    break;
+                case ARROW_UP_RIGHT:
+                    offset.left = ele.offset().left + eleWidth / 2 - ARROW_WIDTH - RIGHT_EDG;
+                    offset.top = ele.offset().top - tipsHeight - ARROW_WIDTH - SPACING;
+                    break;
+                case ARROW_DOWN_LEFT:
+                	offset.left = ele.offset().left + eleWidth / 2 - tipsWidth + ARROW_WIDTH + LEFT_EDG;
+                	offset.top = ele.offset().top + eleHeight + ARROW_WIDTH + SPACING;
+                    break;
+                case ARROW_DOWN_RIGHT:
+                	offset.left = ele.offset().left + eleWidth / 2 - ARROW_WIDTH - RIGHT_EDG;
+                    offset.top = ele.offset().top + eleHeight + ARROW_WIDTH + SPACING;
+                    break;
 				default:
 					//不会到这里
 			}
@@ -336,6 +469,22 @@ cloudjs.define({
 					offsetX = -(width + ARROW_WIDTH + X_SPACING);
 					offsetY = -height / 2;
 					break;
+				case ARROW_UP_LEFT:
+					offsetX = -width + ARROW_WIDTH + LEFT_EDG;
+					offsetY = -(height + ARROW_WIDTH + Y_SPACING);
+					break;
+				case ARROW_UP_RIGHT:
+					offsetX = - ARROW_WIDTH - RIGHT_EDG;
+					offsetY = -(height + ARROW_WIDTH + Y_SPACING);
+					break;
+				case ARROW_DOWN_LEFT:
+					offsetX = -width + ARROW_WIDTH + LEFT_EDG;
+					offsetY = ARROW_WIDTH + Y_SPACING;
+					break;
+				case ARROW_DOWN_RIGHT:
+					offsetX = - ARROW_WIDTH - RIGHT_EDG;
+					offsetY = ARROW_WIDTH + Y_SPACING;
+					break;
 				default:
 					offsetX = 0;
 					offsetY = 0;
@@ -354,7 +503,7 @@ cloudjs.define({
 		function _bindTipsEvent(tipsObj){
 			if(tipsObj.tips && defaults.hover){
 				tipsObj.tips.bind('mouseenter.' + tipsObj.ele.attr(OBJ_ID), function(){
-					clearTimeout(cloudjs._tipsTimeout1);
+					clearTimeout(cloudjs.tips._timeout1);
 				}).bind('mouseleave.' + tipsObj.ele.attr(OBJ_ID), function(){
 					_hideTips(tipsObj);
 				});
@@ -401,6 +550,9 @@ cloudjs.define({
 		function _startMoveTips(tipsObj){
 			var tips = tipsObj.tips, ele = tipsObj.ele;
 			ele.unbind('mousemove.' + ele.attr(OBJ_ID)).bind('mousemove.' + ele.attr(OBJ_ID), function(e){
+				_calculatePosition(tipsObj, {x:e.pageX, y:e.pageY});
+				_resetTipsPosition(tipsObj);
+				_calculateOffset(tipsObj);
 				tips.css({
 					left: e.pageX + tipsObj.offset.x + 'px',
 					top: e.pageY + tipsObj.offset.y + 'px'
@@ -437,13 +589,12 @@ cloudjs.define({
 			var tips;
 			if(!tipsObj.tips){
 				tips = '';
-				tips += '<div class="';
-				tips += TIPS_DIV;
-				tips += '">';
+				tips += '<div class="tips_div">';
 				tips +=	'<span class="tips_content"></span>';
-				tips += '<span class="tips_arrow"></span>';
+				tips += '<span class="tips_arrow"><i></i></span>';
 				tips += '</div>';
 				tips = $(tips).appendTo('body').hide();
+				
 				tipsObj.tips = tips;
 			}
 		}
@@ -468,7 +619,7 @@ cloudjs.define({
 					tipsObj.tips.show();
 					_hideTips(tipsObj, 2000);
 				}else{
-					cloudjs._tipsTimeout2 = setTimeout(function(){
+					cloudjs.tips._timeout2 = setTimeout(function(){
 						tipsObj.tips.show();
 					}, defaults.showDelay || 0);
 				}
@@ -481,16 +632,16 @@ cloudjs.define({
          * @param {Number} hideTime 隔多长时间隐藏
          */
 		function _hideTips(tipsObj, hideTime){
-			cloudjs._tipsTimeout1 = setTimeout(function(){
+			cloudjs.tips._timeout1 = setTimeout(function(){
 				tipsObj.tips && tipsObj.tips.hide();
 			}, hideTime || defaults.hideDelay);
 		}
 
 		$('body').mousedown(function(e){
 			var ta = $(e.target);
-			if(!ta.hasClass(TIPS_DIV) && !ta.closest('.' + TIPS_DIV).length){//  假如点击的是tips，忽略，因为此时支持拷贝了
+			if(!ta.hasClass('tips_div') && !ta.closest('.tips_div').length){//  假如点击的是tips，忽略，因为此时支持拷贝了
 				if(((!ta.hasClass(ACTIVE_ELE) && !ta.closest('.' + ACTIVE_ELE).length) || defaults.hideOnFocus) && !_args1){
-					clearTimeout(cloudjs._tipsTimeout2);
+					clearTimeout(cloudjs.tips._timeout2);
 					$.each(_self, function(i, ele, tipsObj){
 						tipsObj = _objsMap[$(ele).attr(OBJ_ID)];
 						tipsObj && tipsObj.tips && tipsObj.tips.hide();
@@ -499,5 +650,5 @@ cloudjs.define({
 			}
 		});
 	},
-	require: ['../css/blue/tips.css']
+	require: ['../css/' + cloudjs.themes() + '/tips.css']
 });

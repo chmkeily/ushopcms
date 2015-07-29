@@ -3,42 +3,163 @@
 <head>
     <meta http-equiv="x-ua-compatible" content="IE=edge">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>tips提示组件</title>
-    <link rel="stylesheet" href="../css/global.css"/>
-    <link rel="stylesheet" href="../css/solarized_light.css"/>
-    <script src="../../js/jquery.min.js"></script>
-    <script src="../../js/cloudjs.js"></script>
-    <script src="../js/highlight.pack.js"></script>
-    <script src="../js/global.js"></script>
+	<title>tips提示组件</title>
+	<link rel="stylesheet" href="../css/global.css"/>
+	<link rel="stylesheet" href="../css/prettify.css"/>
+	<script src="../../js/jquery.min.js"></script>
+	<script src="../../js/cloudjs.js"></script>
+	<script src="../js/prettify.js"></script>
+	<script src="../js/global.js"></script>
 </head>
-<body>  
-    <div class="tips_div7" title="我是外层" style="display: block; height: 150px; width: 200px; padding-top: 50px; background: #ccc;">
-        <div title="我是内层" style="margin: 0 auto; width: 100px; height:100px; background: #f00;" >鼠标移到这里，再移开到右边空白位置，内层tips不会消失</div>
+<body class="body_bg">
+    <div class="primary">
+    <div class="comps_header">
+        <h2 class="comps_name">tips提示组件</h2>
+        <p>用于页面元素的信息提示</p>
     </div>
-    <div>
-        <script>
-            cloudjs('.tips_div7').tips({ isContainer: true });
-        </script>
+    <div class="comps_summary">
+        <h3>cloudjs(selector).tips([options])</h3>
+    </div>
+    <div class="detail_content">
+		<h4>属性</h4>
+		<div class="param_table_box">
+			<table class="param_table">
+				<tbody>
+					<tr>
+						<th>属性名</th>
+						<th>类型</th>
+						<th>默认值</th>
+						<th>说明</th>
+					</tr>
+					<tr>
+                        <td>track</td>
+                        <td>boolean</td>
+                        <td>false</td>
+                        <td>设置提示信息是否跟随鼠标移动，默认不随鼠标移动，详见<a href="#eg2" class="exp">示例2</a></td>
+                    </tr>
+					<tr>
+						<td>title</td>
+						<td>string/function(ele, callback)</td>
+						<td></td>
+						<td>设置提示的信息文字，如果被作用的元素本身也有title属性值，则优先使用设置的title属性值，如果两者都没有设置title，则不会出现提示信息，在这里设置的title也可以是一个方法，该方法会传入一个callback参数，调用方将要设置的title传入callback即可，详见<a href="#eg1" class="exp">示例1</a></td>
+					</tr>
+					<tr>
+                        <td>position</td>
+                        <td>string</td>
+                        <td></td>
+                        <td>设置提示信息出现的方位，有left、right、up、down、down_right、down_left、up_right、up_left八种，如果不设置，则按照组件自动计算的方位，当你设置的position会导致tips超出边界的时候，组件也会自动调整position，详见<a href="#eg2" class="exp">示例2</a></td>
+                    </tr>
+					<tr>
+						<td>hover</td>
+						<td>boolean</td>
+						<td>false</td>
+						<td>是否支持鼠标移到提示信息上时，提示信息不消失，方便拷贝，详见<a href="#eg4" class="exp">示例4</a></td>
+					</tr>
+					<tr>
+	                     <td>hideOnFocus</td>
+	                     <td>boolean</td>
+	                     <td>true</td>
+	                     <td>鼠标单击目标元素时，提示信息是否消失（此时鼠标还在目标元素区域内），详见<a href="#eg9" class="exp">示例9</a></td>
+                    </tr>
+                    <tr>
+	                     <td>isContainer</td>
+	                     <td>boolean</td>
+	                     <td>false</td>
+	                     <td>是否容器，当为容器时，内部的包含有title的元素也会被设置作用到tips，详见<a href="#eg7" class="exp">示例7</a></td>
+                    </tr>
+                    <tr>
+	                     <td>loading</td>
+	                     <td>string</td>
+	                     <td>loading</td>
+	                     <td>title为回调函数时显示加载的文本内容，详见<a href="#eg8" class="exp">示例8</a></td>
+                    </tr>
+                    <tr>
+                        <td>showDelay</td>
+                        <td>number</td>
+                        <td>200</td>
+                        <td>鼠标移动到目标元素后tips多长时间内出现，默认是200表示延迟200ms出现，详见<a href="#eg6" class="exp">示例6</a></td>
+                    </tr>
+                    <tr>
+                        <td>hideDelay</td>
+                        <td>number</td>
+                        <td>300</td>
+                        <td>当鼠标离开目标元素后tips多长时间后消失，默认是300表示300ms后消失，详见<a href="#eg6" class="exp">示例6</a></td>
+                    </tr>
+                    <tr>
+                        <td>width</td>
+                        <td>number</td>
+                        <td>300</td>
+                        <td>设置tips的宽，详见<a href="#eg2" class="exp">示例10</a></td>
+                    </tr>
+                    <tr>
+                        <td>height</td>
+                        <td>number</td>
+                        <td>150</td>
+                        <td>设置tips的高，当内容超出设置的宽高的时候，tips将会出现滚动条，详见<a href="#eg2" class="exp">示例10</a></td>
+                    </tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	
+	<div class="comps_summary">
+        <h3>cloudjs(selector).tips('方法名')</h3>
+    </div>
+    
+    <div class="detail_content">
+        <h4>方法</h4>
+        <div class="param_table_box">
+            <table class="param_table">
+                <tbody>
+                    <tr>
+                        <th>方法名</th>
+                        <th>参数</th>
+                        <th>说明</th>
+                    </tr>
+                    <tr>
+                        <td>setData</td>
+                        <td></td>
+                        <td>重新设置属性值，分永久设置和临时设置，永久设置会作用于后面重新弹出的提示信息，而临时设置作用于当前弹出的提示信息，详见<a href="#eg9" class="exp">示例9</a></td>
+                    </tr>
+                    <tr>
+                        <td>destroy</td>
+                        <td></td>
+                        <td>销毁tips，可通过传入isContainer来设置是否销毁容器内的所有tips，详见<a href="#eg10" class="exp">示例10</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 
-    <div class="tips_div8" style="margin-top: 10px;">
-        <style>
-            .tips_div8 p{display: inline-block; margin: 10px;}
-        </style>
-        <p class="tips_one tips_two" title="段落1">第一个段落</p>
-        <p class="tips_one" title="段落2">第二个段落</p>
-        <p class="tips_two" title="段落3">第三个段落</p>
-        <br />
-        <input type="button" value="不取消绑定的情况下，再重复绑定，更改的参数不能生效" id="tips_button8" />
-
+    <div class="detail_content">
+        <h4>示例</h4>
+        
+        <div>
+            <h5><a name="eg1"></a>示例1：给元素设置tips提示信息</h5>
+<div class="example_html_1"> 
+<input type="text" class="tips_input1" title="登记人: yauewu<br>审批人：heryli<br>状态：审批中<br>有效期：2015-05-16">
+</div>
+            <script class="example_js_1">
+cloudjs('.tips_input1').tips();//  最常用法
+            </script>
+            <script>writeCode('.example_html_1');writeCode('.example_js_1');</script>
+        </div>		
+			
+        <div class="mt60">
+            <h5><a name="eg2"></a>示例2：让tips跟随鼠标移动</h5>
+<div class="example_html_2 mb20">
+<input type="text" class="tips_input2" title="请输入机器所在机房地址">
+</div>
+            <script class="example_js_2">
+cloudjs('.tips_input2').tips({ track: true, position: 'right' });//  设置鼠标在目标元素内移动时tips也跟着移动
+            </script>
+            <script>writeCode('.example_html_2');writeCode('.example_js_2');</script>
+        </div>
+        
     </div>
-    <script>
-        cloudjs('.tips_one').tips({ isContainer: true, position: 'up' });
-        cloudjs('.tips_two').tips({ isContainer: true, position: 'down', title: '自定义的' });
-
-        $('#tips_button8').click(function(){
-            cloudjs('.tips_two').tips({ isContainer: true, position: 'right', hover: true });
-        });
-    </script>
+    </div>
 </body>
 </html>
+
+
+

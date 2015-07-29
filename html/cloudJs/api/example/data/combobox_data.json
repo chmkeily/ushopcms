@@ -1,84 +1,18 @@
-﻿{
-  "data": [
-    {
-      "group": "ITIL.WSD", 
-      "key": "itil.disk", 
-      "value": "itil.disk", 
-      "disabled": "true"
-    }, 
-    {
-      "group": "ITIL.WSD", 
-      "key": "itil.page", 
-      "value": "itil.page"
-    }, 
-    {
-      "group": "ITIL.WSD", 
-      "key": "itil.puv", 
-      "value": "itil.puv"
-    }, 
-    {
-      "group": "ITIL.WSD", 
-      "key": "itil.sysindex_0", 
-      "value": "itil.sysindex_0"
-    }, 
-    {
-      "group": "ITIL.WSD", 
-      "key": "itil.sysindex_1", 
-      "value": "itil.sysindex_1", 
-      "disabled": "true"
-    }, 
-    {
-      "group": "ITIL.WSD", 
-      "key": "itil.sysindex_2", 
-      "value": "itil.sysindex_2"
-    }, 
-    {
-      "group": "ITIL.WSD", 
-      "key": "itil.sysindex_3", 
-      "value": "itil.sysindex_3"
-    }, 
-    {
-      "group": "ITIL.WSD", 
-      "key": "itil.sysindex_4", 
-      "value": "itil.sysindex_4"
-    }, 
-    {
-      "group": "ITIL.WSD", 
-      "key": "itil.sysindex_5", 
-      "value": "itil.sysindex_5"
-    }, 
-    {
-      "group": "ITIL.WSD", 
-      "key": "itil.sysindex_6", 
-      "value": "itil.sysindex_6"
-    }, 
-    {
-      "group": "ITIL.WSD", 
-      "key": "itil.sysindex_7", 
-      "value": "itil.sysindex_7"
-    }, 
-    {
-      "group": "ITIL.WSD", 
-      "key": "itil.sysindex_8", 
-      "value": "itil.sysindex_8"
-    }, 
-    {
-      "group": "ITIL.WSD", 
-      "key": "itil.sysindex_9", 
-      "value": "itil.sysindex_9"
-    }, 
-    {
-      "group": "ITIL.WSD", 
-      "key": "itilog", 
-      "value": "itilog"
-    }, 
-    {
-      "group": "ITIL.WSD", 
-      "key": "itilog_as", 
-      "value": "itilog_as"
-    }
-  ], 
-  "err_msg": "", 
-  "record_cnt": 15, 
-  "ret_code": 200
-}
+﻿[
+  {
+    "en":"bj",
+    "cn":"北京:首都"
+  },
+  {
+    "en":"sh",
+    "cn":"上海:时尚大都市"
+  },
+  {
+    "en":"gz",
+    "cn":"广州:南方开放城市"
+  },
+  {
+    "en":"sz",
+    "cn":"深圳:改革开放前沿城市"
+  }
+]

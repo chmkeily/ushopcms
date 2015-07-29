@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>totop返回到顶部组件</title>
+    <link rel="stylesheet" href="../css/global.css"/>
+    <link rel="stylesheet" href="../css/prettify.css"/>
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/cloudjs.js"></script>
+    <script src="../js/prettify.js"></script>
+    <script src="../js/global.js"></script>
+</head>
+<body class="body_bg">
+    <div class="primary">
+    <div class="comps_header">
+        <h2 class="comps_name">totop返回到顶部组件</h2>
+    </div>
+    <div class="comps_summary">
+        <h3>cloudjs(selector).totop([options])</h3>
+    </div>
+    <div class="detail_content">
+        <h4>属性</h4>
+        <div class="param_table_box">
+            <table class="param_table">
+                <tbody>
+                    <tr>
+                        <th>属性名</th>
+                        <th>类型</th>
+                        <th>默认值</th>
+                        <th>说明</th>
+                    </tr>
+                    <tr>
+                         <td>bottom</td>
+                         <td>number</td>
+                         <td>0</td>
+                         <td>离屏幕底部的距离</td>
+                    </tr>
+                    <tr>
+                         <td>right</td>
+                         <td>number</td>
+                         <td>0</td>
+                         <td>离屏幕右侧的距离</td>
+                    </tr>
+                    <tr>
+                         <td>isScroll</td>
+                         <td>boolean</td>
+                         <td>true</td>
+                         <td>是否滚动后才出现返回顶部图标</td>
+                    </tr>
+                    <tr>
+                        <td>scrollHeight</td>
+                        <td>number</td>
+                        <td>200</td>
+                        <td>滚动到指定高度后才出现滚动条</td>
+                    </tr>
+                    <tr>
+                         <td>img</td>
+                         <td>string</td>
+                         <td>../../images/totop.png</td>
+                         <td>返回到顶部的图片</td>
+                    </tr>
+                    <tr>
+                         <td>hoverImg</td>
+                         <td>string</td>
+                         <td></td>
+                         <td>hover状态下的图片</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+           
+    <div class="detail_content">
+        <h4>示例</h4>
+        
+        <div>
+            
+            <h5>示例1：默认调用，滚动条向下滚动大于200px出现，否则消失</h5>
+
+<script class="example_js_1">
+cloudjs.totop();
+</script>
+            <script>writeCode('.example_js_1');</script>
+        </div>
+                
+        <div>
+            <h5>示例2：始终固定在页面指定位置，并指定默认图片</h5>
+<script class="example_js_2">
+cloudjs.totop({
+    bottom: 100,
+    right: 20,
+    img: '../images/mytop.png',
+    isScroll: false
+});
+</script>
+            <script>writeCode('.example_js_2');</script>
+        </div>
+        
+        <div class="html_3_box">
+            <h5>示例3：指定默认图片和hover状态下的图片</h5>
+<script class="example_js_3">
+cloudjs.totop({
+    bottom: 300,
+    right: 20,
+    img: '../images/mytop1.png',
+    hoverImg: '../images/mytop2.png'
+});
+</script>
+            <script>writeCode('.example_js_3');</script>
+        </div>
+
+    </div>
+    </div>
+</body>
+</html>
+
+
+
+

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>tab选项卡组件</title>
+    <link rel="stylesheet" href="../css/global.css"/>
+    <link rel="stylesheet" href="../css/prettify.css"/>
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/cloudjs.js"></script>
+    <script src="../js/prettify.js"></script>
+    <script src="../js/global.js"></script>
+</head>
+<body class="body_bg">
+    <div class="primary">
+    <div class="comps_header">
+        <h2 class="comps_name">tab选项卡组件</h2>
+        <p>简单的选项卡组件</p>
+    </div>
+    <div class="comps_summary">
+        <h3>cloudjs(selector).tab([options])</h3>
+    </div>
+    <div class="detail_content">
+        <h4>属性</h4>
+        <div class="param_table_box">
+            <table class="param_table">
+                <tbody>
+                    <tr>
+                        <th>属性名</th>
+                        <th>类型</th>
+                        <th>默认值</th>
+                        <th>说明</th>
+                    </tr>
+                    <tr>
+                        <td>axis</td>
+                        <td>string</td>
+                        <td>x</td>
+                        <td>选项卡轴向。<a href="#eg2" class="exp">示例2</a></td>
+                    </tr>
+                    <tr>
+                         <td>enableHover</td>
+                         <td>boolean</td>
+                         <td>false</td>
+                         <td>鼠标挪到tab上是否会触发tab切换。<a href="#eg3" class="exp">示例3</a></td>
+                    </tr>
+                    <tr>
+                        <td>hoverDelay</td>
+                        <td>number</td>
+                        <td>200</td>
+                        <td>在允许hover切换的情况下，鼠标挪到tab上触发选中的延迟时间。<a href="#eg3" class="exp">示例3</a></td>
+                    </tr>
+                    <tr>
+                        <td>selectIndex</td>
+                        <td>number</td>
+                        <td>0</td>
+                        <td>默认选中项的索引。<a href="#eg2" class="exp">示例2</a></td>
+                    </tr>
+                    <tr>
+                        <td>isAuto</td>
+                        <td>boolean</td>
+                        <td>false</td>
+                        <td>选项卡是否按自动按顺序切换。<a href="#eg4" class="exp">示例4</a></td>
+                    </tr>
+                    <tr>
+                        <td>inteval</td>
+                        <td>number</td>
+                        <td>200</td>
+                        <td>自动切换的时间间隔。<a href="#eg4" class="exp">示例4</a></td>
+                    </tr>
+                    <tr>
+                        <td>onChange</td>
+                        <td>function</td>
+                        <td></td>
+                        <td>切换后的回调函数，参数默认带切换后的选项卡索引。<a href="#eg4" class="exp">示例4</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+           
+    <div class="detail_content">
+        <h4>示例</h4>
+        <div>
+            <h5>示例1：简单的tab选项卡</h5>
+            <p>可将页面相应的dom元素直接渲染成tab，点击可切换，其中，dom元素需加上对应的class，选项卡ul为.tab_head，选项卡为.tab_tab，选项卡面板为.tab_panel。</p>
+<div class="example_html_1">
+<div id="tab_1" style="width:600px;margin:20px;">
+    <ul class="tab_head">
+        <li class="tab_tab">选项卡1</li>
+        <li class="tab_tab">选项卡2</li>
+        <li class="tab_tab">选项卡3</li>
+    </ul>
+    <div class="tab_panel"><p>选项卡内容1</p><br><br><br><br><br><br><br><br><br><br></div>
+    <div class="tab_panel"><p>选项卡内容2</p><br><br><br><br><br></div>
+    <div class="tab_panel"><p>选项卡内容3</p><br><br><br><br><br><br><br><br><br><br></div>
+</div>
+</div>
+            <script class="example_js_1">
+cloudjs('#tab_1').tab();
+            </script>
+            <script>writeCode('.example_html_1');writeCode('.example_js_1');</script>
+        </div>
+
+        <div>
+            <h5>示例2：控制选项卡轴向，默认第一个选中的选项卡</h5>
+            <p>axis参数可控制选项卡轴向，selectIndex可控制默认选中的选项卡。</p>
+            <div class="example_html_2">
+<div id="tab_2" style="width:600px; margin:20px;">
+    <ul class="tab_head">
+        <li class="tab_tab">选项卡1</li>
+        <li class="tab_tab">选项卡2</li>
+        <li class="tab_tab">选项卡3</li>
+    </ul>
+    <div class="tab_panel">
+        <p>选项卡内容1</p><br><br><br><br><br><br><br><br><br><br>
+    </div>
+    <div class="tab_panel">
+        <p>选项卡内容2</p><br><br><br><br><br><br><br><br><br><br>
+    </div>
+    <div class="tab_panel">
+        <p>选项卡内容3</p><br><br><br><br><br><br><br><br><br><br>
+    </div>
+</div>
+            </div>
+
+            <script class="example_js_2">
+cloudjs('#tab_2').tab({
+    axis: 'y',
+    selectIndex: 1
+});
+            </script>
+            <script>writeCode('.example_html_2');writeCode('.example_js_2');</script>
+        </div>
+
+        <div>
+            <h5>示例3：鼠标移入触发切换，并控制切换的延迟时间</h5>
+            <p>enableHover参数允许鼠标挪入触发切换，hoverDelay控制鼠标挪入触发切换的时间延迟</p>
+<div class="example_html_3">
+    <div id="tab_3" style="width:600px; margin:20px;">
+        <ul class="tab_head">
+            <li class="tab_tab">选项卡1</li>
+            <li class="tab_tab">选项卡2</li>
+            <li class="tab_tab">选项卡3</li>
+        </ul>
+        <div class="tab_panel">
+            <p>选项卡内容1</p><br><br><br><br><br><br><br><br><br><br>
+        </div>
+        <div class="tab_panel">
+            <p>选项卡内容2</p><br><br><br><br><br><br><br><br><br><br>
+        </div>
+        <div class="tab_panel">
+            <p>选项卡内容3</p><br><br><br><br><br><br><br><br><br><br>
+        </div>
+    </div>
+</div>
+
+            <script class="example_js_3">
+cloudjs('#tab_3').tab({
+    enableHover: true,
+    hoverDelay: 100
+});
+            </script>
+            <script>writeCode('.example_html_3');writeCode('.example_js_3');</script>
+        </div>
+
+        <div>
+            <h5>示例4：自动切换，可控制自动切换的时间间隔，切换后触发回调函数。</h5>
+            <p>isAuto控制自动切换，inteval控制自动切换的时间间隔，onChange为切换后的回调函数。</p>
+            <div class="example_html_4">
+<div id="tab_4" style="width:600px; margin:20px;">
+    <ul class="tab_head">
+        <li class="tab_tab">选项卡1</li>
+        <li class="tab_tab">选项卡2</li>
+        <li class="tab_tab">选项卡3</li>
+    </ul>
+    <div class="tab_panel">
+        <p>选项卡内容1</p><br><br><br><br><br><br><br><br><br><br>
+    </div>
+    <div class="tab_panel">
+        <p>选项卡内容2</p><br><br><br><br><br><br><br><br><br><br>
+    </div>
+    <div class="tab_panel">
+        <p>选项卡内容3</p><br><br><br><br><br><br><br><br><br><br>
+    </div>
+</div>
+<p>现在切换到第<span id="tab_4_span" style="color:#F00">1</span>页</p>
+            </div>
+
+            <script class="example_js_4">
+cloudjs('#tab_4').tab({
+    isAuto: true,
+    inteval: 3000,
+    onChange: function(index){
+        $('#tab_4_span').html(index + 1);
+    }
+});
+            </script>
+            <script>writeCode('.example_html_4');writeCode('.example_js_4');</script>
+        </div>
+
+        <div>
+            <h5>示例5：自定义tab</h5>
+            <p>用户覆盖默认的样式形成自定义的tab样式</p>
+            <div class="example_html_5">
+<div id="tab_5" style="width:600px; margin:20px;">
+    <ul class="tab_head" style="margin-left:1px;">
+        <li style="width:100px;line-height: 35px;float:left;margin-left:12px;font-weight: bold;">Tab标题</li>
+        <li class="tab_tab" style="float:right;margin-right:0px;">选项卡3</li>
+        <li class="tab_tab" style="float:right">选项卡2</li>
+        <li class="tab_tab" style="float:right">选项卡1</li>
+    </ul>
+    <div class="tab_panel">
+        <p>选项卡内容3</p><br><br><br><br><br><br><br><br><br><br>
+    </div>
+    <div class="tab_panel">
+        <p>选项卡内容2</p><br><br><br><br><br><br><br><br><br><br>
+    </div>
+    <div class="tab_panel">
+        <p>选项卡内容1</p><br><br><br><br><br><br><br><br><br><br>
+    </div>
+</div>
+            </div>
+
+<script class="example_js_5">
+    cloudjs('#tab_5').tab({
+        enableHover: true,
+        hoverDelay: 100,
+        selectIndex: 2
+    });
+</script>
+            <script>writeCode('.example_html_5');writeCode('.example_js_5');</script>
+        </div>
+    </div>
+    </div>
+</body>
+</html>
+
