@@ -18,12 +18,13 @@
     <script src="../js/global.js"></script>
 </head>
 <body class="body_bg">
+    <div class="primary">
     <div class="comps_header">
         <h2 class="comps_name">paging分页组件</h2>
         <p></p>
     </div>
     <div class="comps_summary">
-        <h3>cloudjs(selector).paging([options]) <i class="gray">options={'属性名':'属性值',...}</i></h3>
+        <h3>cloudjs(selector).paging([options])</h3>
     </div>
     <div class="detail_content">
         <h4>属性</h4>
@@ -80,9 +81,9 @@
                     </tr>
                     <tr>
                          <td>totalCounts</td>
-                         <td>number</td>
+                         <td>number|function(data)</td>
                          <td>1000</td>
-                         <td>总记录数</td>
+                         <td>总记录数，可以是一个函数，函数返回的data就是请求ajaxUrl返回的数据，加入总数存放在data.total中，那么写法为totalCounts:function(data){return data.total}</td>
                     </tr>
                     <tr>
                          <td>pageSize</td>
@@ -118,7 +119,7 @@
                          <td>dataType</td>
                          <td>string</td>
                          <td>json</td>
-                         <td>请求ajaxUrl返回的数据类型，如果url为空，这个参数也没有意义</td>
+                         <td>请求ajaxUrl返回的数据类型，如果ajaxUrl为空，这个参数也没有意义</td>
                     </tr>
                     <tr>
                          <td>sizeKey</td>
@@ -141,8 +142,8 @@
                     <tr>
                          <td>loadImg</td>
                          <td>string</td>
-                         <td>../../images/ajax-loading.gif</td>
-                         <td>蒙版层加载图片的路径</td>
+                         <td>../../images/paging_loading.gif</td>
+                         <td>蒙版层加载图片的路径,指图片相对于使用paging组件页面的路径，而不是相对于paging.js</td>
                     </tr>
                     <tr>
                          <td>disableClass</td>
@@ -203,18 +204,20 @@
 <div class="example_html_1">
 <div id="page_div1"></div>
 </div>
-            <script class="example_js_1">
+<script class="example_js_1">
 cloudjs('#page_div1').paging({ 
     totalCounts: 596, 
     ajaxUrl:'data/paging_data.json', 
     onPageChange: function(data){
-        cloudjs.util.log(data);
+        console.log(data);
     }
 });
-            </script>
+</script>
             <script>writeCode('.example_html_1');writeCode('.example_js_1');</script>
         </div>
-                
+           
+
+        
         <div>
             <h5>示例2：同时用两个分页并保持一致，只需把class命名一样</h5>
 <div class="example_html_2">
@@ -312,11 +315,33 @@ function createHtml(obj){
 //点击查询时需要先获取到查询参数和数据总量,通过setData传给组件,在触发onPageChange时就可以直接获取到这些参数
 function searchFun(self){
     var _params = $(self).parent().find(":input").serialize(), _counts = 5000;
+    //如果totalCounts如示例6中那样在请求ajaxUrl时返回，setData时就不需要带totalCounts参数
     cloudjs('#page_div5').paging('setData', { totalCounts: _counts, pageNum: 1, params: _params });
 }
 </script>
             <script>writeCode('.example_html_5');writeCode('.example_js_5');</script>
         </div>
+        
+        <div>
+            <h5>示例6：totalCounts在ajaxUrl中返回</h5>
+<div class="example_html_6">
+<div id="page_div6"></div>
+</div>
+            <script class="example_js_6">
+cloudjs('#page_div6').paging({ 
+    totalCounts: function(data){ return data.total; }, 
+    ajaxUrl:'data/paging_data_total.json', 
+    onPageChange: function(data){
+        console.log(data);
+    }
+});
+            </script>
+            <script>writeCode('.example_html_6');writeCode('.example_js_6');</script>
+        </div>
+    </div>
     </div>
 </body>
 </html>
+
+
+

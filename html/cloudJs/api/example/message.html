@@ -12,12 +12,13 @@
     <script src="../js/global.js"></script>
 </head>
 <body class="body_bg">
+    <div class="primary">
     <div class="comps_header">
         <h2 class="comps_name">message消息组件</h2>
         <p></p>
     </div>
     <div class="comps_summary">
-        <h3>cloudjs(selector).message([options]) <i class="gray">options={'属性名':'属性值',...}</i></h3>
+        <h3>cloudjs(selector).message([options])</h3>
     </div>
     <div class="detail_content">
         <h4>属性</h4>
@@ -34,61 +35,67 @@
                         <td>type</td>
                         <td>string</td>
                         <td>success</td>
-                        <td>消息提示类型，分为'success','warn','error'</td>
+                        <td>消息提示类型，分为'success','warn','error'。<a href="#eg2" class="exp">示例2</a></td>
                     </tr>
                     <tr>
                         <td>content</td>
                         <td>string</td>
                         <td>提示信息</td>
-                        <td>消息正文</td>
+                        <td><i>必填</i>，消息正文。<a href="#eg1" class="exp">示例1</a></td>
                     </tr>
                     <tr>
                          <td>duration</td>
                          <td>number</td>
                          <td>3000</td>
-                         <td>延迟自动消失的时间，若为0，则默认不自动消失</td>
+                         <td>延迟自动消失的时间，若为0，则默认不自动消失。<a href="#eg3" class="exp">示例3</a></td>
                     </tr>
                     <tr>
-                        <td>isShowIcon</td>
+                        <td>showLeftIcon</td>
                         <td>boolean</td>
                         <td>false</td>
-                        <td>设置消息组件左上角是否展示icon</td>
+                        <td>设置消息组件左上角是否展示icon。<a href="#eg4" class="exp">示例4</a></td>
+                    </tr>
+                    <tr>
+                        <td>showCloseIcon</td>
+                        <td>boolean</td>
+                        <td>false</td>
+                        <td>设置消息组件是否显示关闭按钮。<a href="#eg4" class="exp">示例4</a></td>
                     </tr>
                     <tr>
                          <td>relative</td>
                          <td>string/jquery对象</td>
                          <td>document</td>
-                         <td>消息框所在的容器</td>
+                         <td>消息框所在的容器。<a href="#eg5" class="exp">示例5</a></td>
                     </tr>
                     <tr>
                          <td>offsetLeft</td>
                          <td>number</td>
                          <td>0</td>
-                         <td>偏离容器中心的位移，若isFull属性为true，则此属性无效</td>
+                         <td>偏离容器中心的位移，若isFull属性为true，则此属性无效。<a href="#eg6" class="exp">示例6</a></td>
                     </tr>
                     <tr>
                          <td>offsetTop</td>
                          <td>number</td>
                          <td>0</td>
-                         <td>偏离容器顶部的位移</td>
+                         <td>偏离容器顶部的位移。<a href="#eg6" class="exp">示例6</a></td>
                     </tr>
                     <tr>
                         <td>isFull</td>
                         <td>boolean</td>
                         <td>false</td>
-                        <td>消息框宽度是否为100%</td>
+                        <td>消息框宽度是否为100%。<a href="#eg7" class="exp">示例7</a></td>
                     </tr>
                     <tr>
                         <td>position</td>
                         <td>string</td>
                         <td>in_top</td>
-                        <td>消息框和容器的相对位置，in_top为容器内顶部，up，down，left，right，分别表示容器上下左右位置，若满足以下两个条件之一：<br>1、isFull设置为true<br>2、relative未设置或设置为document<br>则此参数设置无效，默认用in_top</td>
+                        <td>消息框和容器的相对位置，in_top为容器内顶部，up，down，left，right，分别表示容器上下左右位置，若满足以下两个条件之一：<br>1、isFull设置为true<br>2、relative未设置或设置为document<br>则此参数设置无效，默认用in_top。<a href="#eg9" class="exp">示例9</a></td>
                     </tr>
                     <tr>
                         <td>isTriggerClose</td>
                         <td>string</td>
                         <td>false</td>
-                        <td>设置是否点击页面其他元素自动关闭消息框</td>
+                        <td>设置是否点击页面其他元素自动关闭消息框。<a href="#eg10" class="exp">示例10</a></td>
                     </tr>
                 </tbody>
             </table>
@@ -112,14 +119,12 @@
                 <tr>
                     <td>close</td>
                     <td>对象</td>
-                    <td>关闭指定id对应的提示消息框，对象的参数key为id，value可为字符串或数组，若无参数，则关闭全部提示消息框</td>
+                    <td>关闭指定id对应的提示消息框，对象的参数key为id，value可为字符串或数组，若无参数，则关闭全部提示消息框。<a href="#eg8" class="exp">示例8</a></td>
                 </tr>
                 </tbody>
             </table>
         </div>
     </div>
-
-
         
     <div class="detail_content">
         <h4>示例</h4>
@@ -139,19 +144,23 @@ $('#base_btn').bind('click', function(e){
         <div>
             <h5>示例2：设置不同的type值，生成不同类型的消息提示框</h5>
 <div class="example_html_2">
+<input type="button" id="nor_btn" value="normal消息提示框" />
 <input type="button" id="succ_btn" value="success消息提示框" />
 <input type="button" id="warn_btn" value="warn消息提示框" />
 <input type="button" id="error_btn" value="error消息提示框" />
 </div>
 <script class="example_js_2">
+$('#nor_btn').bind('click', function(e){
+    cloudjs.message({content: '这是normal消息提示框', type: 'normal'});
+});
 $('#succ_btn').bind('click', function(e){
-    cloudjs.message({content: '这是success的消息提示框', type: 'success'});
+    cloudjs.message({content: '这是success消息提示框', type: 'success'});
 });
 $('#warn_btn').bind('click', function(e){
-    cloudjs.message({content: '这是warn的消息提示框', type: 'warn'});
+    cloudjs.message({content: '这是warn消息提示框', type: 'warn'});
 });
 $('#error_btn').bind('click', function(e){
-    cloudjs.message({content: '这是error的消息提示框', type: 'error'});
+    cloudjs.message({content: '这是error消息提示框', type: 'error'});
 });
 </script>
             <script>writeCode('.example_html_2');writeCode('.example_js_2');</script>
@@ -179,26 +188,29 @@ $('#du_0_btn').bind('click', function(e){
         </div>
 
         <div>
-            <h5>示例4：设置isShowIcon属性，控制是否在消息组件左侧显示相应的小图标</h5>
+            <h5>示例4：设置showLeftIcon属性，控制是否在消息组件左侧显示相应的小图标,设置showCloseIcon属性，控制是否显示关闭按钮。</h5>
             <div class="example_html_4">
+<input type="button" id="normal_icon_btn"  value="带normal图标" />
 <input type="button" id="success_icon_btn"  value="带success图标" />
 <input type="button" id="warn_icon_btn"  value="带warn图标" />
 <input type="button" id="error_icon_btn"  value="带error图标" />
             </div>
             <script class="example_js_4">
+$('#normal_icon_btn').bind('click', function(e){
+    cloudjs.message({content: '带normal图标', type: 'normal', showLeftIcon: true, showCloseIcon: true, showCloseIcon: true});
+});
 $('#success_icon_btn').bind('click', function(e){
-    cloudjs.message({content: '带success图标', type: 'success', isShowIcon: true});
+    cloudjs.message({content: '带success图标', type: 'success', showLeftIcon: true, showCloseIcon: true});
 });
 $('#warn_icon_btn').bind('click', function(e){
-    cloudjs.message({content: '带warn图标', type: 'warn', isShowIcon: true});
+    cloudjs.message({content: '带warn图标', type: 'warn', showLeftIcon: true, showCloseIcon: true});
 });
 $('#error_icon_btn').bind('click', function(e){
-    cloudjs.message({content: '带error图标', type: 'error', isShowIcon: true});
+    cloudjs.message({content: '带error图标', type: 'error', showLeftIcon: true, showCloseIcon: true});
 });
             </script>
             <script>writeCode('.example_html_4');writeCode('.example_js_4');</script>
         </div>
-
 
         <div>
             <h5>示例5：设置ralative属性，改变提示框的所在的容器,可传id或class，或jquery对象</h5>
@@ -231,7 +243,6 @@ $('#offset_btn').bind('click', function(e){
             <script>writeCode('.example_html_6');writeCode('.example_js_6');</script>
         </div>
 
-
         <div>
             <h5>示例7：设置isFull属性，在容器顶部占据全部宽度显示</h5>
             <div class="example_html_7">
@@ -257,8 +268,8 @@ $('#set_id_btn').bind('click', function(e){
     cloudjs.message({content: '此消息框带id值，可以依据id值关闭此消息框', id: 'test_mes_box', duration: 0});
 });
 $('#close_id_btn').bind('click', function(e){
-    cloudjs.message('close', {id: 'test_mes_box'});
-    //若要关闭多个，可将id的值设为数组，如：cloudjs.message('close',{id:['test_mes_box','test_mes_box2']});
+    cloudjs.message('close', 'test_mes_box');
+    //若要关闭多个，可将id的值设为数组，如：cloudjs.message('close', ['test_mes_box','test_mes_box2']);
 });
 $('#close_all_btn').bind('click', function(e){
     cloudjs.message('close');
@@ -266,7 +277,6 @@ $('#close_all_btn').bind('click', function(e){
 </script>
             <script>writeCode('.example_html_8');writeCode('.example_js_8');</script>
         </div>
-
 
         <div>
             <h5>示例9：设置position属性，改变消息弹出框相对于指定元素的位置</h5>
@@ -305,10 +315,10 @@ $('#trigger_close_btn').bind('click', function(e){
             </script>
             <script>writeCode('.example_html_10');writeCode('.example_js_10');</script>
         </div>
-
-
-
-
+    </div>
     </div>
 </body>
 </html>
+
+
+

@@ -1,27 +1,33 @@
-﻿cloudjs.define({
+﻿/**
+ * 分页组件
+ * author: amixu@tencent.com
+ * date: 2015-07-01
+ */
+ 
+cloudjs.define({
     paging: function(options){
         var defaults = {
-            first: '',
-            prev: '上一页',
-            next: '下一页',
-            last: '',
-            showDetails: true,
-            showIcons: false,
-            useSimple: false,
-            totalCounts: 1000,
-            pageSize: 20,
-            pageNum: 1,
-            visiblePages: 5,
-            disableClass: 'disabled',
-            activeClass: 'active',
-            ajaxUrl: '',
-            params: '',
-            dataType: 'json',
-            sizeKey: 'pageSize',
-            numKey: 'pageNum',
-            maskId: '',
-            loadImg: '../../images/ajax-loading.gif',
-            onPageChange: $.noop
+            first: '',                //首页文字，留空则不显示首页
+            prev: '上一页',           //上一页文字，留空则不显示上一页
+            next: '下一页',           //下一页文字，留空则不显示下一页
+            last: '',                 //末页文字，留空则不显示末页
+            showDetails: true,        //是否显示详细的分页即分页后面那一串内容
+            showIcons: false,         //首末上下页是否用图标
+            useSimple: false,         //是否采用简单的分页
+            totalCounts: 1000,        //总记录数
+            pageSize: 20,             //每页展示的记录数
+            pageNum: 1,               //当前页码
+            visiblePages: 5,          //显示的页码数量
+            disableClass: 'disabled', //不可点击时的样式
+            activeClass: 'active',    //当前页码的样式
+            ajaxUrl: '',              //请求的url，留空则需要在onPageChange事件中发起ajax请求，不留空则组件自动请求ajaxUrl，直接在onPageChange事件中通过data.data获取数据
+            params: '',               //请求的参数，查询操作时通过setData方法设置，在onPageChange事件中用data.params获取
+            dataType: 'json',         //请求ajaxUrl返回的数据类型，如果ajaxUrl为空，这个参数也没有意义
+            sizeKey: 'pageSize',      //组件向外传递参数pageSize的key值
+            numKey: 'pageNum',        //组件向外传递参数pageNum的key值
+            maskId: '',               //要加蒙版层的id，如果不为空，ajax请求返回数据前会在此id区域加一层蒙版效果
+            loadImg: 'http://3gimg.qq.com/mig_op/cloudJs/images/paging_loading.gif',  //蒙版层加载图片的路径
+            onPageChange: $.noop                         //改变分页时触发，向外传递data.totalCounts,data.pageSize,data.pageNum,data.params和data.data
         };
         
         if($.isPlainObject(options) || !options){
@@ -42,7 +48,7 @@
             _showDetails = defaults.showDetails,
             _showIcons = defaults.showIcons,
             _useSimple = defaults.useSimple,
-            _totalCounts = Number(defaults.totalCounts),
+            _totalCounts = defaults.totalCounts,
             _pageSize = Number(defaults.pageSize),
             _pageNum = Number(defaults.pageNum),
             _visiblePages = Number(defaults.visiblePages),
@@ -55,10 +61,11 @@
             _maskId = defaults.maskId,
             _onPageChange = defaults.onPageChange;
 
-        if(_totalCounts == 0){
-            $(_self).empty();
+        if(_totalCounts === 0){
+            _self.empty();
             return;
         }
+        
         _init(_pageSize, _pageNum);
         
         /**
@@ -72,8 +79,7 @@
                 alert("error：totalCounts|pageSize|pageNum|visiblePages参数设置错误");
                 return;
             }
-            _renderHtml(s, n);
-            _autoAjax(s, n);
+            _ajaxFunc(s, n, _renderHtml)
         }
         
         /**
@@ -83,27 +89,23 @@
         * @return {Number} 当前页码
         */
         function _verify(s, n){
-            if(isNaN(_totalCounts) || isNaN(s) || isNaN(n) || isNaN(_visiblePages) || s < 1){
-                return 0;
-            }
-            if(n < 1){
-                n = 1;
-            }else if(n > Math.ceil(_totalCounts / s)){
-                n = Math.ceil(_totalCounts / s);
-            }
+            if(isNaN(s) || isNaN(n) || isNaN(_visiblePages) || s < 1) return 0;
+            if(n < 1) n = 1;
             return n;
         }
         
         /**
-        * ajax自动请求
+        * 加载组件
         * @param {Number} s 每页展示的记录数
         * @param {Number} n 当前页码
+        * @param {Function} func ajax请求完成后要加载的函数
         */
-        function _autoAjax(s, n){
+        function _ajaxFunc(s, n, func){
+            
             if(_ajaxUrl){
                 var params = _params, url = _ajaxUrl + '?', mask = _createMask();
                 if($.isPlainObject(params)){
-                    var obj = {}; obj[_sizeKey] = s; obj[_numKey] = n; 
+                    var obj = {}; obj[_sizeKey] = s; obj[_numKey] = n;
                     params = $.extend(_params, obj);
                     for( var key in params){
                         url += key + '=' + params[key] + '&';
@@ -115,10 +117,25 @@
                 if(url.charAt(url.length-1) === '&') url = url.substring(0, url.length - 1);
                                 
                 $.post(_ajaxUrl, params, function(data){
-                    _onPageChange({ totalCounts: _totalCounts, pageSize: s, pageNum: n, params: _params, data: data, url: url });
+                    if($.isFunction(_totalCounts)) _totalCounts = Number(_totalCounts(data));
+                    if(_totalCounts === 0){
+                        _self.empty();
+                    }else{
+                        func(s, n);
+                    }
+                    var result = { totalCounts: _totalCounts, params: _params };
+                    result[_sizeKey] = s; result[_numKey] = n;
+                    if($.isPlainObject(data)){
+                        _onPageChange($.extend(result, data));
+                    }else{
+                        result.data = data;
+                        _onPageChange(result);
+                    }
                     if(mask != null) mask.remove();
                 }, defaults.dataType);
             }else{
+                _totalCounts = Number(_totalCounts);
+                func(s, n);
                 _onPageChange({ totalCounts: _totalCounts, pageSize: s, pageNum: n, params: _params });
             }
         }
@@ -182,7 +199,7 @@
             }
             html = '<ul>' + htmlArr.join('') + '</ul>';
             if(_showDetails && !_useSimple) html += _getDetailsHtml(s, n);
-            $(_self).html('<div class="paging_div">' + html + '</div>');
+            _self.html('<div class="paging_div">' + html + '</div>');
             _bindEvnet();
         }
         
@@ -194,7 +211,7 @@
         */
         function _getPagesHtml(n, nArr){
             var html = '';
-            for(var i = 0; i < nArr.length; i ++){
+            for(var i = 0; i < nArr.length; i++){
                 var _num = nArr[i];
                 if(n == _num){
                     html += '<li class="page ' + _activeClass + '"><a>' + _num + '</a></li>';
@@ -214,10 +231,10 @@
         * @return {String} html代码
         */
         function _getDetailsHtml(s, n){
-            var html = '<div class="paging_div_right"><span>共' + Math.ceil(_totalCounts / s) + '页 , </span>';
-            html += '<span>每页</span><input type="text" class="size" value="' + s + '"/><span>项 , </span>';
-            html += '<span>到第</span><input type="text" class="num" value="' + n + '"/><span>页</span> ';
-            html += '<span class="cloud_btn">确定</span>';
+            var html = '<div class="paging_div_right"><span>共' + _totalCounts + '条记录 , </span>';
+            html += '<span>每页</span><input type="text" class="size cloudjs_input" value="' + s + '"/><span>条 , </span>';
+            html += '<span>到第</span><input type="text" class="num cloudjs_input" value="' + n + '"/><span>页</span> ';
+            html += '<span class="cloudjs_btn">确定</span>';
             return html;
         }
         
@@ -247,7 +264,7 @@
             var _index = _start;
             while(_index <= _end) {
                 arr.push(_index);
-                _index ++;
+                _index++;
             }
             if(_start > 1){
                 if(_start > 2) arr.unshift('...');
@@ -267,7 +284,10 @@
         */
         function _getBtnHtml(arr){
             var pclass = arr[2], aclass = '';
-            if(_showIcons) aclass = ' class="cloud_icon"';
+            if(_showIcons){
+                aclass = ' class="paging_icons"';
+                arr[3] = '<i class="cloudjs_icon"></i>';
+            }
             if(arr[0] == arr[1]){
                 pclass += ' ' + _disableClass;
             }
@@ -278,23 +298,23 @@
         * 绑定分页组件所有按钮的点击事件
         */
         function _bindEvnet(){
-            $(_self).find('li:not(.ellipsis)').bind('click', function(){
+            _self.find('li:not(.ellipsis)').bind('click', function(){
                 var num;
                 if($(this).hasClass(_disableClass) || $(this).hasClass(_activeClass)) return;
                 if($(this).hasClass('first')){
                     num = _pageNum = 1;
                 }else if($(this).hasClass('prev')){
-                    num = -- _pageNum;
+                    num = --_pageNum;
                 }else if($(this).hasClass('next')){
-                    num = ++ _pageNum;
+                    num = ++_pageNum;
                 }else if($(this).hasClass('last')){
                     num = _pageNum = Math.ceil(_totalCounts / s);
                 }else{
                     num = _pageNum = Number($(this).text());
                 }
-                $.extend($(_self).data('initData'), { pageNum: num });
+                $.extend(_self.data('initData'), { pageNum: num });
                 _init(_pageSize, num);
-            }).end().find('.cloud_btn').bind('click', function(){
+            }).end().find('.cloudjs_btn').bind('click', function(){
                 _reinit(Number($(this).prevAll('.size').val()), Number($(this).prevAll('.num').val()));
             }).end().find('input[type=text]').keyup(function(event){
                 if(event.keyCode === 13){
@@ -312,9 +332,9 @@
         function _reinit(s, n){
             _pageSize = s;
             _pageNum = n;
-            $.extend($(_self).data('initData'), { pageSize: s, pageNum: n });
+            $.extend(_self.data('initData'), { pageSize: s, pageNum: n });
             _init(s, n);
         }
     },
-    require: ['../css/blue/paging.css']
+    require: ['../css/' + cloudjs.themes() + '/paging.css']
 });

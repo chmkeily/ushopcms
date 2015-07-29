@@ -1,0 +1,110 @@
+.cloudjs_icon {
+  background-image: url(../../images/icons_new.png);
+}
+.cloudjs_btn {
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  padding: 3px 7px;
+  display: inline-block;
+  font-family: Microsoft Yahei;
+  font-size: 12px;
+  white-space: nowrap;
+  cursor: pointer;
+  zoom: 1;
+  *width: 40px;
+  *height: 24px;
+  *line-height: 1;
+  border: 1px solid #1d1b1b;
+  color: #ffffff;
+  background-color: #2d2d2d;
+}
+a.cloudjs_btn {
+  text-decoration: none;
+}
+.cloudjs_btn_white {
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  padding: 3px 7px;
+  display: inline-block;
+  font-family: Microsoft Yahei;
+  font-size: 12px;
+  white-space: nowrap;
+  cursor: pointer;
+  zoom: 1;
+  *width: 40px;
+  *height: 24px;
+  *line-height: 1;
+  border: 1px solid #999999;
+  color: #000000;
+  background-color: #ffffff;
+}
+.cloudjs_icon:hover {
+  opacity: 0.8;
+  filter: alpha(opacity=80);
+}
+.cloudjs_btn:hover {
+  opacity: 0.8;
+  filter: alpha(opacity=80);
+}
+.cloudjs_btn_white:hover {
+  border-color: #666666;
+}
+.cloudjs_btn_white_disable,
+.cloudjs_btn_white:disabled {
+  color: #aaaaaa;
+  border-color: #cfcfcf;
+  cursor: default;
+}
+.cloudjs_btn_disable,
+.cloudjs_btn_disable:hover,
+.cloudjs_btn:disabled {
+  color: #aaaaaa;
+  border-color: #cfcfcf;
+  cursor: default;
+  background: #ffffff;
+}
+.border {
+  border: 1px solid #c6c6c6;
+  box-shadow: inset 1px 2px 1px #f0f0f0;
+}
+.cloudjs_input {
+  height: 25px;
+  line-height: 25px;
+  padding: 0;
+  text-indent: 5px;
+  outline: none;
+  border: 1px solid #c6c6c6;
+  box-shadow: inset 1px 2px 1px #f0f0f0;
+}
+.cloudjs_input:focus {
+  border: solid 1px #aaa;
+}
+.progressbar_div {
+  background-color: #f0f0f0;
+  border: 0;
+  position: relative;
+  text-align: center;
+  margin-top: 4px;
+}
+.progressbar_div .progressbar_progress {
+  height: 100%;
+  width: 0%;
+  position: absolute;
+  background-color: #2d2d2d;
+}
+.progressbar_div .progressbar_value {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  font-weight: normal;
+  top: 0;
+  bottom: 0;
+  margin-top: auto;
+  margin-bottom: auto;
+  height: 20px;
+}

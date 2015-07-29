@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>monthpicker月组件</title>
+    <link rel="stylesheet" href="../css/global.css"/>
+    <link rel="stylesheet" href="../css/prettify.css"/>
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/cloudjs.js"></script>
+    <script src="../js/prettify.js"></script>
+    <script src="../js/global.js"></script>
+</head>
+<body class="body_bg">
+    <div class="primary">
+    <div class="comps_header">
+        <h2 class="comps_name">monthpicker月组件</h2>
+        <p></p>
+    </div>
+    <div class="comps_summary">
+        <h3>cloudjs.monthpicker([options])</h3>
+    </div>
+    
+    <div class="detail_content">
+        <h4>属性</h4>
+        <div class="param_table_box">
+            <table class="param_table">
+                <tbody>
+                    <tr>
+                        <th>属性名</th>
+                        <th>类型</th>
+                        <th>默认值</th>
+                        <th>说明</th>
+                    </tr>
+                    <tr>
+                        <td>width</td>
+                        <td>number</td>
+                        <td>220</td>
+                        <td>月控件的宽度</td>
+                    </tr>
+                    <tr>
+                        <td>beginYear</td>
+                        <td>number</td>
+                        <td>-40</td>
+                        <td><a href="#exp2" class="exp">示例2</a>开始年份,为当前年份的前40年</td>
+                    </tr>
+                    <tr>
+                        <td>endYear</td>
+                        <td>number</td>
+                        <td>10</td>
+                        <td>结束年份,为当前年份的后10年</td>
+                    </tr>
+                    <tr>
+                        <td>placeholder</td>
+                        <td>string</td>
+                        <td>yyyy-mm-dd</td>
+                        <td><a href="#exp3" class="exp">示例3</a>输入框中显示的placeholder信息,需浏览器支持</td>
+                    </tr>
+                    <tr>
+                        <td>timeFormat</td>
+                        <td>string</td>
+                        <td></td>
+                        <td><a href="#exp4" class="exp">示例4</a>显示在输入框中的格式</td>
+                    </tr>
+                    <tr>
+                        <td>minDate</td>
+                        <td>string</td>
+                        <td>null</td>
+                        <td><a href="#exp5" class="exp">示例5</a>可选的最小月份,格式为'+1Y,-1M'.必须以逗号分隔.也可以是某一具体月:'2015,05'</td>
+                    </tr>
+                    <tr>
+                        <td>maxDate</td>
+                        <td>string</td>
+                        <td>null</td>
+                        <td>可选的最大月份,格式同上</td>
+                    </tr>
+                    <tr>
+                        <td>multiSelect</td>
+                        <td>boolean</td>
+                        <td>false</td>
+                        <td><a href="#exp8" class="exp">示例8</a>选择几个连续的月</td>
+                    </tr>
+                    <tr>
+                        <td>startMonth</td>
+                        <td>string</td>
+                        <td></td>
+                        <td><a href="#exp8" class="exp">示例8</a>默认开始月份,必须和 <span class="tags">endMonth</span>配对使用,并且multiSelect</td>
+                    </tr>
+                    <tr>
+                        <td>endMonth</td>
+                        <td>string</td>
+                        <td></td>
+                        <td><a href="#exp8" class="exp">示例8</a>默认结束月份,必须和 <span class="tags">startMonth</span>配对使用</td>
+                    </tr>
+                    <tr>
+                        <td>onSelect</td>
+                        <td>function</td>
+                        <td></td>
+                        <td><a href="#exp6" class="exp">示例6</a>选择月份后触发的回调函数</td>
+                    </tr>
+                    <tr>
+                        <td>onClose</td>
+                        <td>function</td>
+                        <td></td>
+                        <td><a href="#exp7" class="exp">示例7</a>关闭月控件后触发的回调函数,配合 <span class="tags">update</span>方法,可以实现联动日历功能</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <div class="detail_content">
+        <h4>方法</h4>
+        <div class="param_table_box">
+            <table class="param_table">
+                <tbody>
+                    <tr>
+                        <th>方法名</th>
+                        <th>参数</th>
+                        <th>说明</th>
+                    </tr>
+                    <tr>
+                        <td>update</td>
+                        <td>[options]</td>
+                        <td><a href="#exp7" class="exp">示例7</a>月组件的刷新方法,与日历组件功能相同</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+        
+        
+    <div class="detail_content">
+        <h5>示例1: <span class="vice_tit">使用默认参数调用月组件</span></h5>
+        <p>使用默认参数调用月组件</p>
+        <div>
+<input type="text" class="cloudjs_input" id="input_default"/>
+        </div>
+
+            <script class="example_js_1">
+cloudjs('#input_default').monthpicker();
+            </script>
+        <script>writeCode('.example_js_1');</script>
+    </div>
+    
+    <div class="detail_content">
+        <h5><a name="exp2"></a>示例2:<span class="vice_tit">设置开始年份和结束年份</span></h5>
+        <p>设置开始年份和结束年份</p>
+        <div>
+<input type="text" class="cloudjs_input" id="input_begin"/>
+        </div>
+            <script class="example_js_2">
+cloudjs('#input_begin').monthpicker({
+    beginYear:-1,
+    endYear:+1
+});
+            </script>
+        <script>writeCode('.example_js_2');</script>
+    </div>
+    
+    <div class="detail_content">
+        <h5><a name="exp3"></a>示例3:<span class="vice_tit">输入框中默认显示的提示文字</span></h5>
+        <p>输入框中默认显示的提示文字(需浏览器支持placeholder).</p>
+        <p class="pt20">设置placeholder的时候请同时设置timeFormat.</p>
+        <div>
+<input type="text" class="cloudjs_input" id="input_tip"/>
+        </div>
+            <script class="example_js_3">
+cloudjs('#input_tip').monthpicker({
+    placeholder:'请选择月份'    
+});
+            </script>
+        <script>writeCode('.example_js_3');</script>
+    </div>
+    
+    <div class="detail_content">
+        <h5><a name="exp4"></a>示例4:<span class="vice_tit">显示在输入框中的格式</span></h5>
+        <p>显示在输入框中的格式,支持'yyyy-mm','yyyy/mm','yyyymm'等</p>
+        <p class="pt20">设置显示格式为'yyyy/mm'</p>
+        <div>
+<input type="text" class="cloudjs_input" id="input_format1"/>
+        </div>
+            <script class="example_js_4">
+cloudjs('#input_format1').monthpicker({
+    timeFormat:'yyyy/mm'
+});
+            </script>
+        <script>writeCode('.example_js_4');</script>
+    </div>
+    
+    <div class="detail_content">
+        <h5><a name="exp5"></a>示例5:<span class="vice_tit">可选的最小,最大月份</span></h5>
+        <p>可选的最小月份,格式为'+1Y,-1M'.必须以逗号分隔.也可以是某一具体月份:'2015,05'</p>
+        <p class="pt20">设置某一具体月份为最小月份</p>
+        <div>
+<input type="text" class="cloudjs_input" id="input_minDate"/>
+        </div>
+            <script class="example_js_5">
+cloudjs('#input_minDate').monthpicker({
+    minDate:'2015,05'
+});
+            </script>
+        <script>writeCode('.example_js_5');</script>
+        
+        <p class="pt20">以当前日期为点设置最小日期和最大日期</p>
+        <div>
+<input type="text" class="cloudjs_input" id="input_maxDate"/>
+        </div>
+            <script class="example_js_5_1">
+cloudjs('#input_maxDate').monthpicker({
+    minDate:'-1y,+1m',
+    maxDate:'+1m'
+});
+            </script>
+        <script>writeCode('.example_js_5_1');</script>
+    </div>
+    
+    <div class="detail_content">
+        <h5><a name="exp6"></a>示例6:<span class="vice_tit">选择月份后触发的回调函数</span></h5>
+        <p>选择月份后触发的回调函数</p>
+        <div>
+<input type="text" class="cloudjs_input" id="input_onSelect"/>
+        </div>
+            <script class="example_js_6">
+cloudjs('#input_onSelect').monthpicker({
+    onSelect:function(){
+        alert($(this).val());    
+    }
+});
+            </script>
+        <script>writeCode('.example_js_6');</script>
+    </div>
+    
+    <div class="detail_content">
+        <h5><a name="exp7"></a>示例7:<span class="vice_tit">关闭月组件后触发的回调函数</span></h5>
+        <p>关闭月组件后触发的回调函数</p>
+        <div>
+<input type="text" class="cloudjs_input" id="input_onClose"/>
+        </div>
+            <script class="example_js_7">
+cloudjs('#input_onClose').monthpicker({
+    onClose:function(){
+        alert($(this).val());
+    }
+});
+            </script>
+        <script>writeCode('.example_js_7');</script>
+        
+        <p class="pt20">与 <span class="tags">update</span>方法配合,实现联动效果</p>
+        <div>
+<input type="text" class="cloudjs_input" id="input_startDay"/>
+<input type="text" class="cloudjs_input" id="input_endDay"/>
+        </div>
+            <script class="example_js_7_1">
+cloudjs('#input_startDay').monthpicker({
+    onClose:function(){
+        cloudjs('#input_endDay').monthpicker('update',{minDate:$(this).val()});
+        $('#input_endDay').click();
+    }
+});
+cloudjs('#input_endDay').monthpicker();
+            </script>
+        <script>writeCode('.example_js_7_1');</script>
+    </div>
+    
+    <div class="detail_content">
+        <h5><a name="exp8"></a>示例8:<span class="vice_tit">选择连续的几个月</span></h5>
+        <p>选择连续的几个月</p>
+        <div class="example_html_8">
+<input type="text" class="cloudjs_input" id="input_range"/>
+        </div>
+        <script class="example_js_8">
+cloudjs('#input_range').monthpicker({
+    multiSelect:true,
+    startMonth:'2015-07',
+    endMonth:'2015-09'
+});
+            </script>
+        <script>writeCode('.example_html_8');writeCode('.example_js_8');</script>
+    </div>
+    </div>
+</body>
+</html>
+
+
+

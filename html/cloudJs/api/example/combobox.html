@@ -3,151 +3,196 @@
 <head>
     <meta http-equiv="x-ua-compatible" content="IE=edge">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>下拉组件</title>
-	<link rel="stylesheet" href="../css/global.css"/>
-	<link rel="stylesheet" href="../css/prettify.css"/>
-	<script src="../../js/jquery.min.js"></script>
-	<script src="../../js/cloudjs.js"></script>
-	<script src="../js/prettify.js"></script>
-	<script src="../js/global.js"></script>
-
-    <style>
-        body{padding: 10px;}
-    </style>
+    <title>下拉组件</title>
+    <link rel="stylesheet" href="../css/global.css"/>
+    <link rel="stylesheet" href="../css/prettify.css"/>
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/cloudjs.js"></script>
+    <script src="../js/prettify.js"></script>
+    <script src="../js/global.js"></script>
 </head>
 <body class="body_bg">
+    <div class="primary">
     <div class="comps_header">
         <h2 class="comps_name">下拉组件</h2>
     </div>
     <div class="comps_summary">
-        <h3>cloudjs(selector).combobox([options]) <i class="gray">options={'属性名':'属性值',...}</i></h3>
+        <h3>cloudjs(selector).combobox([options])</h3>
     </div>
     <div class="detail_content">
-		<h4>属性</h4>
-		<div class="param_table_box">
-			<table class="param_table">
-				<tbody>
-					<tr>
-						<th>属性名</th>
-						<th>类型</th>
-						<th>默认值</th>
-						<th>说明</th>
-					</tr>
-					<tr>
-                        <td>modal</td>
+        <h4>属性</h4>
+        <div class="param_table_box">
+            <table class="param_table">
+                <tbody>
+                    <tr>
+                        <th>属性名</th>
+                        <th>类型</th>
+                        <th>默认值</th>
+                        <th>说明</th>
+                    </tr>
+                    <tr>
+                         <td>name</td>
+                         <td>string</td>
+                         <td></td>
+                         <td>保存value值的隐藏域的name值。<a href="#eg3" class="exp">示例3</a></td>
+                    </tr>
+                    <tr>
+                         <td>data</td>
+                         <td>array/string</td>
+                         <td></td>
+                         <td>下拉面板的数据，可以是json数组格式，或者请求数据的url。<a href="#eg5" class="exp">示例5</a></td>
+                    </tr>
+                    <tr>
+                         <td>comValue</td>
+                         <td>string</td>
+                         <td>value</td>
+                         <td>value字段名。<a href="#eg5" class="exp">示例5</a></td>
+                    </tr>
+                    <tr>
+                         <td>comText</td>
+                         <td>string</td>
+                         <td>text</td>
+                         <td>text字段名。<a href="#eg5" class="exp">示例5</a></td>
+                    </tr>
+                    <tr>
+                         <td>checkValue</td>
+                         <td>boolean</td>
+                         <td>false</td>
+                         <td>是否检查value值必须是data里面的value。<a href="#eg1" class="exp">示例1</a></td>
+                    </tr>
+                    <tr>
+                         <td>defaultValue</td>
+                         <td>string</td>
+                         <td></td>
+                         <td>默认选中选项的value值。<a href="#eg4" class="exp">示例4</a></td>
+                    </tr>
+                    <tr>
+                        <td>isMulti</td>
                         <td>boolean</td>
                         <td>false</td>
-                        <td>是否模态窗口打开，如果是则弹出框后面会有一层遮罩，页面的内容会被遮住不可点</td>
+                        <td>是否多选。<a href="#eg4" class="exp">示例4</a></td>
                     </tr>
-					<tr>
-						<td>title</td>
-						<td>string</td>
-						<td></td>
-						<td>设置对话框标题</td>
-					</tr>
-					<tr>
+                    <tr>
                         <td>width</td>
                         <td>number</td>
-                        <td>220</td>
-                        <td>设置对话框的宽</td>
+                        <td></td>
+                        <td>设置下拉面板的宽度，默认会与输入框宽度一致。<a href="#eg3" class="exp">示例3</a></td>
                     </tr>
-					<tr>
+                    <tr>
                         <td>height</td>
-                        <td>number/string</td>
-                        <td>auto</td>
-                        <td>设置对话框的高</td>
-                    </tr>
-					<tr>
-						<td>buttons</td>
-						<td>object</td>
-						<td>null</td>
-						<td>对话框的按钮，对应的按钮设置为{“按钮名称”：“回调方法”，“按钮名称”：“回调方法”}</td>
-					</tr>
-					<tr>
-	                     <td>draggable</td>
-	                     <td>boolean</td>
-	                     <td>true</td>
-	                     <td>对话框是否可以拖动</td>
+                        <td>number</td>
+                        <td>200</td>
+                        <td>设置下拉面板的高度。<a href="#eg3" class="exp">示例3</a></td>
                     </tr>
                     <tr>
-	                     <td>resizable</td>
-	                     <td>boolean</td>
-	                     <td>true</td>
-	                     <td>对话框是否可以改变大小</td>
+                        <td>placeholder</td>
+                        <td>string</td>
+                        <td></td>
+                        <td>输入提示信息。<a href="#eg5" class="exp">示例5</a></td>
                     </tr>
                     <tr>
-	                     <td>animate</td>
-	                     <td>boolean</td>
-	                     <td>false</td>
-	                     <td>是否通过动画打开对话框</td>
+                        <td>separator</td>
+                        <td>string</td>
+                        <td>;</td>
+                        <td>多选时，选中值的分隔符，必须是data里面不存在的符号。<a href="#eg4" class="exp">示例4</a></td>
                     </tr>
                     <tr>
-	                     <td>fullscreen</td>
-	                     <td>boolean</td>
-	                     <td>false</td>
-	                     <td>是否支持全屏模式</td>
+                         <td>showAll</td>
+                         <td>boolean</td>
+                         <td>true</td>
+                         <td>是否显示全部数据。<a href="#eg10" class="exp">示例10</a></td>
                     </tr>
                     <tr>
-	                     <td>relative</td>
-	                     <td>string/object</td>
-	                     <td></td>
-	                     <td>对话框的相对元素，不设置时默认在窗口中间打开</td>
+                         <td>recordLen</td>
+                         <td>number</td>
+                         <td>10</td>
+                         <td>showAll为false时，显示的记录数。<a href="#eg10" class="exp">示例10</a></td>
                     </tr>
                     <tr>
-	                     <td>posiiton</td>
-	                     <td>string</td>
-	                     <td></td>
-	                     <td>对话框相对元素的位置，up、down、left、top，只在relative有实际元素时生效</td>
+                         <td>showIcon</td>
+                         <td>boolean</td>
+                         <td>true</td>
+                         <td>是否显示下拉图标。<a href="#eg8" class="exp">示例8</a></td>
                     </tr>
                     <tr>
-	                     <td>onCreate</td>
-	                     <td>function()</td>
-	                     <td>null</td>
-	                     <td>在对话框刚刚创建时调用，该方法在对话框的生命周期中只会调用一次。</td>
+                         <td>checkAllText</td>
+                         <td>string</td>
+                         <td>全选</td>
+                         <td>多选下拉，“全选”文字。<a href="#eg4" class="exp">示例4</a></td>
                     </tr>
                     <tr>
-	                     <td>onOpen</td>
-	                     <td>function()</td>
-	                     <td>null</td>
-	                     <td>在对话框打开时创建，对于被close的对话框，在通过动作open打开时，该方法也会调用</td>
+                         <td>unCheckAllText</td>
+                         <td>string</td>
+                         <td>取消选择</td>
+                         <td>多选下拉，“取消选择”文字。<a href="#eg4" class="exp">示例4</a></td>
                     </tr>
                     <tr>
-	                     <td>onClose</td>
-	                     <td>function()</td>
-	                     <td>null</td>
-	                     <td>在对话框被关闭时调用，一个destroy的对话框，onClose方法会发生在onDestroy之前</td>
+                         <td>showCheckAllText</td>
+                         <td>boolean</td>
+                         <td>true</td>
+                         <td>是否显示“全选”文字。<a href="#eg7" class="exp">示例7</a></td>
                     </tr>
                     <tr>
-	                     <td>onDestroy</td>
-	                     <td>function()</td>
-	                     <td>null</td>
-	                     <td>一个对话框被销毁时调用，该方法在对话框的生命周期中只会调用一次。</td>
+                         <td>showCheckbox</td>
+                         <td>boolean</td>
+                         <td>true</td>
+                         <td>多选的时候，是否显示复选框。<a href="#eg8" class="exp">示例8</a></td>
                     </tr>
                     <tr>
-	                     <td>onResize</td>
-	                     <td>function()</td>
-	                     <td>null</td>
-	                     <td>改变对话框大小时调用的方法，该方法有两个参数，第一个是普通的Event对象，第二个是装载了当前对话框高度宽度的对象 </td>
+                         <td>params</td>
+                         <td>string/object</td>
+                         <td></td>
+                         <td>异步请求下拉数据参数，{%s}表示需要替换掉的字符串。<a href="#eg8" class="exp">示例8</a></td>
                     </tr>
                     <tr>
-	                     <td>onFullscreen</td>
-	                     <td>function()</td>
-	                     <td>null</td>
-	                     <td>当全屏时触发的事件</td>
+                         <td>onAjax</td>
+                         <td>function</td>
+                         <td></td>
+                         <td>处理异步请求结果，生成json或json数组格式数据，并return该数据。<a href="#eg8" class="exp">示例8</a></td>
                     </tr>
                     <tr>
-	                     <td>onRecover</td>
-	                     <td>function()</td>
-	                     <td>null</td>
-	                     <td>当从全屏还原时触发的事件</td>
+                         <td>onCreate</td>
+                         <td>function</td>
+                         <td></td>
+                         <td>当创建下拉组件时触发的事件。<a href="#eg6" class="exp">示例6</a></td>
                     </tr>
-				</tbody>
-			</table>
-		</div>
-	</div>
-	
-	<div class="comps_summary">
-        <h3>cloudjs(selector).dialog('方法名', [args])</h3>
+                    <tr>
+                         <td>onOpen</td>
+                         <td>function</td>
+                         <td></td>
+                         <td>当打开下拉面板时触发的事件。<a href="#eg6" class="exp">示例6</a></td>
+                    </tr>
+                    <tr>
+                         <td>onClose</td>
+                         <td>function</td>
+                         <td></td>
+                         <td>当关闭下拉面板时触发的事件。<a href="#eg6" class="exp">示例6</a></td>
+                    </tr>
+                    <tr>
+                         <td>onSelect</td>
+                         <td>function</td>
+                         <td></td>
+                         <td>当选中的值发生改变时触发的事件。<a href="#eg6" class="exp">示例6</a></td>
+                    </tr>
+                    <tr>
+                         <td>onCheckAll</td>
+                         <td>function</td>
+                         <td></td>
+                         <td>当全选时触发的事件。<a href="#eg6" class="exp">示例6</a></td>
+                    </tr>
+                    <tr>
+                         <td>onUnCkeckAll</td>
+                         <td>function</td>
+                         <td></td>
+                         <td>当取消选择时触发的事件。<a href="#eg6" class="exp">示例6</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <div class="comps_summary">
+        <h3>cloudjs(selector).combobox('方法名', [args])</h3>
     </div>
     
     <div class="detail_content">
@@ -161,24 +206,39 @@
                         <th>说明</th>
                     </tr>
                     <tr>
-                        <td>destroy</td>
+                        <td>getValue</td>
                         <td></td>
-                        <td>彻底销毁弹出框，不可再通过open打开</td>
+                        <td>获取当前选中的值。<a href="#eg7" class="exp">示例7</a></td>
                     </tr>
                     <tr>
-                        <td>close</td>
-                        <td></td>
-                        <td>隐藏弹出框，可通过open方法再次打开，不会清除填写的内容 </td>
+                        <td>setValue</td>
+                        <td>string</td>
+                        <td>需要设置选中数据的value值，多选下拉，多个值可以用设置的separator连接。<a href="#eg7" class="exp">示例7</a></td>
                     </tr>
                     <tr>
-                        <td>open</td>
-                        <td></td>
-                        <td>与close功能相反，重新打开的弹出框会保持之前的内容，要通过代码去修改内容。</td>
+                        <td>addData</td>
+                        <td>array/json</td>
+                        <td>跟初始设置的data数据格式保持一致。<a href="#eg7" class="exp">示例7</a></td>
                     </tr>
                     <tr>
-                        <td>setData</td>
-                        <td>{'属性名':'属性值',...}</td>
-                        <td>重新设置dialog的各种参数</td>
+                        <td>delData</td>
+                        <td>string</td>
+                        <td>需要删除的数据的value值，多个值可以用设置的separator连接。<a href="#eg7" class="exp">示例7</a></td>
+                    </tr>
+                    <tr>
+                        <td>refresh</td>
+                        <td>array</td>
+                        <td>刷新下拉列表数据，必须是json数组。<a href="#eg7" class="exp">示例7</a></td>
+                    </tr>
+                    <tr>
+                        <td>enable</td>
+                        <td></td>
+                        <td>启用下拉组件。<a href="#eg7" class="exp">示例7</a></td>
+                    </tr>
+                    <tr>
+                        <td>disable</td>
+                        <td></td>
+                        <td>禁用下拉组件。<a href="#eg7" class="exp">示例7</a></td>
                     </tr>
                 </tbody>
             </table>
@@ -187,146 +247,394 @@
 
     <div class="detail_content">
         <h4>示例</h4>
+
         <div>
-            <h5>示例1：默认下拉列表</h5>
-            <div class="example_html_1"> 
-                <input type="text" value="" id="combox_input1" />
-            </div>
-            <br />
-            <div class="example_html_1"> 
-                <select id="combox_select1">
-                    <option value="sz">深圳</option>
-                </select>
-            </div>
-            <br />
-            <div class="example_html_1"> 
-                <input type="text" value="" id="combox_input2" />
-            </div>
-            <br />
-            <br />
-            <div class="example_html_1"> 
-                <input type="text" value="" id="combox_input3" />
-            </div>
-            <br />
-            <div class="example_html_1"> 
-                <textarea value="" id="combox_input5" /></textarea>
-            </div>
-            <br />
-            <div class="example_html_1"> 
-                <select id="combox_select2" multiple="multiple" size="5">
-                    <option value="0">小学</option>
-                    <option value="1">初中</option>
-                    <option value="2">高中</option>
-                    <option value="3">中专</option>
-                    <option value="4">大专</option>
-                    <option value="5">本科</option>
-                    <option value="6">研究生</option>
-                    <option value="7">博士</option>
-                    <option value="8">博士后</option>
-                    <option selected>请选择</option>
-                    <option value="0">小学</option>
-                    <option value="1">初中</option>
-                    <option value="2">高中</option>
-                    <option value="3">中专</option>
-                    <option value="4">大专</option>
-                    <option value="5">本科</option>
-                    <option value="6">研究生</option>
-                    <option value="7">博士</option>
-                    <option value="8">博士后</option>
-                    <option selected>请选择</option>
-                </select>
-            </div>
-            <br />
-            <input type="button" id="btn1" value="89900" />
-            <input type="button" id="btn2" value="90000" />
-            <input type="button" id="btn3" value="delData" />
-            <br /><br /><br />
+            <h5><a name="eg1"></a>示例1：最简单的下拉列表</h5>
+<div class="example_html_1"> 
+<input type="text" class="combo_input1">
+<br /><br />
+<input type="text" class="combo_input1">
+</div>
             <script class="example_js_1">
-                var data1 = [
-                    {key: 'sz1', value: '深圳1'},
-                    {key: 'sz', value: '深圳'},
-                    {key: 'gz', value: '广州'}
-                ]
-                cloudjs('#combox_input1').combobox({
-                    defaultKey: 'sz;gz;cs;',
-                    data: data1,
-                    checkKey: true,
-                    onSelect: function(v){
-                        //alert(v);
-                    },
-                    onOpen: function(){
-                        console.log('open');
-                    },
-                    onClose: function(){
-                        console.log('close');
-                    }
-                });
-                cloudjs('#combox_select1').combobox();
-
-                cloudjs('#combox_input2').combobox({
-                    isMulti: true,
-                    defaultKey: 'sz;gz;cs;',
-                    checkKey: true,
-                    onSelect: function(v){
-
-                    },
-                    url: 'data/combobox_data.json'
-                });
-
-                cloudjs('#combox_input3').combobox({
-                    isMulti: true,
-                    defaultKey: 'sz;gz;cs;sz;gz;',
-                    comkey: 'key1',
-                    comvalue: 'value1',
-                    data: [{key1: 'cs', value1: '长沙'},{key1: 'gz', value1: '广州'},{key1: 'sz', value1: '深圳'}],
-                    onOpen: function(){
-                        console.log('open');
-                    },
-                    onClose: function(){
-                        console.log('close');
-                    }
-                });
-                $('#btn1').bind('click', function(){
-                    //cloudjs('#combox_input3').combobox('addData', [{key1: 'sz;gz'}]);
-                    //cloudjs('#combox_input3').combobox('setValue', 'sz;gz');
-                    // cloudjs('#combox_input3').combobox('getValue', function(data){
-                    //     alert(data.key1);
-                    //     alert(data.value1);
-                    // });
-                    cloudjs('#combox_input3').combobox('addData', [{key1: 'tj', value1: '天津'}]);
-                    cloudjs('#combox_input3').combobox('setValue', 'tj');
-                    cloudjs('#combox_input3').combobox('disable');
-                });
-                $('#btn2').bind('click', function(){
-                    cloudjs('#combox_input3').combobox('enable');
-                });
-                $('#btn3').bind('click', function(){
-                    cloudjs('#combox_input3').combobox('delData', 'cs');
-                });
-
-                cloudjs('#combox_input5').combobox({
-                    isMulti: true,
-                    defaultKey: 'sz;gz;cs;',
-                    checkKey: true,
-                    data: {'sz': '深圳','gz': '广州'},
-                    onSelect: function(v){
-
-                    },
-                    url: 'data/combobox_data.json'
-                });
-
-                cloudjs('#combox_select2').combobox({
-                    showAll: false
-                });
-                $('#combox_select2').bind('change', function(){
-                    
-                });
-
-                //cloudjs('#combox_select3').combobox();
+            var data1 = [{value: 'bj', text: '北京'}, {value: 'sh', text: '上海'}, {value: 'gz', text: '广州'}, {value: 'sz', text: '深圳'}]
+cloudjs('.combo_input1')['combobox']({
+    data: data1,
+    checkValue: true,
+    onSelect: function(data){
+        console.log(data.text);
+    }
+});
             </script>
+            <script>writeCode('.example_html_1');writeCode('.example_js_1');</script>
         </div>
 
-        
+        <div>
+            <h5><a name="eg2"></a>示例2：由select生成下拉组件</h5>
+<div class="example_html_2"> 
+<select class="combo_select2">
+    <option value="bj">北京</option>
+    <option value="sh">上海</option>
+    <option value="gz">广州</option>
+    <option value="sz">深圳</option>
+    <option value="">请选择</option>
+</select>
+<select class="combo_select2">
+    <option value="">请选择城市</option>
+    <option value="cd">成都</option>
+    <option value="wh">武汉</option>
+    <option value="cq">重庆</option>
+    <option value="xa">西安</option>
+</select>
+<input type="button" id="combo_btn2" value="生成下拉组件" />
+</div>
+            <script class="example_js_2">
+$('#combo_btn2').bind('click', function(){
+    cloudjs('.combo_select2').combobox();
+});
+            </script>
+            <script>writeCode('.example_html_2');writeCode('.example_js_2');</script>
+        </div>
+
+
+        <div>
+            <h5><a name="eg3"></a>示例3：设置下拉组件宽高</h5>
+<div class="example_html_3"> 
+<select id="combo_select3" style="width: 246px;">
+    <option value="bj" selected="selected">北京</option>
+    <option value="sh" disabled="disabled">上海[我被disabled禁用了，所以我无法被选中]</option>
+    <option value="gz">广州</option>
+    <option value="sz">深圳</option>
+    <option value="dg">东莞</option>
+    <option value="st">汕头</option>
+    <option value="zs">珠海</option>
+    <option value="fs">佛山</option>
+    <option value="jy">揭阳</option>
+    <option value="cz">潮州</option>
+    <option value="zj">湛江</option>
+    <option value="qy">清远</option>
+    <option value="sg">韶关</option>
+    <option value="mz">梅州</option>
+    <option value="hy">河源</option>
+</select>
+</div>
+            <script class="example_js_3">
+cloudjs('#combo_select3').combobox({
+    width: 400,
+    height: 300,
+    name: 'combo_select3_hide',
+    checkValue: true
+});
+            </script>
+            <script>writeCode('.example_html_3');writeCode('.example_js_3');</script>
+        </div>
+
+
+        <div>
+            <h5><a name="eg4"></a>示例4：多选下拉组件</h5>
+<div class="example_html_4"> 
+<select id="combo_select4" multiple="multiple" style="width: 246px;">
+    <option value="bj" selected="selected">北京</option>
+    <option value="sh" disabled="disabled">上海</option>
+    <option value="gz" selected="selected">广州</option>
+    <option value="sz" selected="selected">深圳</option>
+    <option value="dg">东莞</option>
+    <option value="st">汕头</option>
+    <option value="zs">珠海</option>
+    <option value="fs">佛山</option>
+    <option value="jy">揭阳</option>
+    <option value="cz">潮州</option>
+    <option value="zj">湛江</option>
+    <option value="qy">清远</option>
+    <option value="sg">韶关</option>
+    <option value="mz">梅州</option>
+    <option value="hy">河源</option>
+</select>
+</div>
+            <script class="example_js_4">
+cloudjs('#combo_select4').combobox({
+    separator: ',',
+    showAll: false,
+    recordLen: 5,
+    checkAllText: '全部城市',
+    unCheckAllText: '删除城市',
+    defaultValue: 'sz,dg,'    //设置的defaultValue，会覆盖掉select里选中的默认值
+});
+            </script>
+            <script>writeCode('.example_html_4');writeCode('.example_js_4');</script>
+        </div>
+
+
+        <div>
+            <h5><a name="eg5"></a>示例5：异步数据，并对数据进行处理</h5>
+<div class="example_html_5"> 
+<input type="text" id="combo_input5">
+</div>
+            <script class="example_js_5">
+cloudjs('#combo_input5').combobox({
+    placeholder: '请选择城市',
+    data: 'data/combobox_data.json',
+    comValue: 'en',
+    comText: 'cn',
+    onAjax: function(data){
+        var json = [];
+
+        for (var i = 0; i < data.length; i++) {
+            json[i] = {};
+            json[i].en = data[i].en;
+            json[i].cn = data[i].cn.split(':')[0];
+        }
+
+        return json;    //注意：一定要把处理后的数据return;
+    }
+});
+            </script>
+            <script>writeCode('.example_html_5');writeCode('.example_js_5');</script>
+        </div>
+
+
+        <div>
+            <h5><a name="eg6"></a>示例6：监听事件</h5>
+<div class="example_html_6">
+<select class="combo_select6" style="width: 246px;">
+    <option value="bj">北京</option>
+    <option value="sh">上海</option>
+    <option value="gz">广州</option>
+    <option value="sz">深圳</option>
+</select>
+<span id="combo_status6a" class="red"></span>
+<span id="combo_status6b" style="padding-left: 15px; color: #0f0;"></span>
+<span id="combo_status6c" style="padding-left: 15px; color: #00f;"></span>
+</div>
+            <script class="example_js_6">
+cloudjs('.combo_select6').combobox({
+    isMulti: true,  //如果select没有设置multiple属性，在这里加，也是一样的
+    onCreate: function(){
+        $('#combo_status6a').html('创建下拉组件');
+        cloudjs(this.comboEle).tips({
+            title: '这是个多选下拉组件'
+        });
+    },
+    onOpen: function(){
+        $('#combo_status6a').html('展开下拉面板');
+    },
+    onSelect: function(data){
+        var str = '当前没有选中任何选项';
+        if(data.value){
+            str = '当前选中的选项有：' + data.value;
+        } 
+        $('#combo_status6a').html(str);
+    },
+    onClose: function(){
+        $('#combo_status6a').html('关闭下拉面板');
+    },
+    onCheckAll: function(){
+        $('#combo_status6b').html('全部选中');
+    },
+    onUnCheckAll: function(){
+        $('#combo_status6b').html('取消选择');
+    }
+});
+$('.combo_select6').bind('change', function(){
+    if($(this).val()){
+        $('#combo_status6c').html('原生select选中的值是' + $(this).val().join(';'));
+    }else{
+        $('#combo_status6c').html('原生select没有选中的选项');
+    }
+});
+            </script>
+            <script>writeCode('.example_html_6');writeCode('.example_js_6');</script>
+        </div>
+
+
+       <div>
+            <h5><a name="eg7"></a>示例7：下拉组件其他方法</h5>
+<div class="example_html_7">
+<select class="combo_select7" multiple="multiple" style="width: 246px;">
+    <option value="bj">北京</option>
+</select>
+<input type="text" class="combo_select7">
+<br /><br />
+<input type="button" value="获取值getValue" id="getValue7" />
+<input type="button" value="获取第二个的值getValue" id="getValue7b" />
+<input type="button" value="设置值setValue" id="setValue7" />
+<input type="button" value="增加数据addData" id="addData7" />
+<input type="button" value="删除数据delData" id="delData7" />
+<input type="button" value="刷新数据refresh" id="refresh7" />
+<input type="button" value="改变select后刷新refresh" id="refresh7b" />
+<input type="button" value="禁用下拉组件disabled" id="disable7" />
+<input type="button" value="启用下拉组件enable" id="enable7" />
+</div>
+            <script class="example_js_7">
+            var data7 = [{value: 'bj', text: '北京', disabled: 'true'}, {value: 'sh', text: '上海'}, {value: 'gz', text: '广州'}, {value: 'sz', text: '深圳'}]
+var data7b = [{value:"dg",text:"东莞"},{value:"st",text:"汕头"},{value:"zs",text:"珠海"},{value:"fs",text:"佛山"}];
+var data7c = [{value:"cs",text:"长沙"}];
+cloudjs('.combo_select7').combobox({
+    data: data7,
+    defaultValue: 'sz',
+    showCheckAllText: false
+});
+$('#getValue7').bind('click', function(){
+    cloudjs('.combo_select7').combobox('getValue', function(data){
+        alert('value值：' + data.value);
+        alert('text值：' + data.text);
+    });
+});
+$('#getValue7b').bind('click', function(){
+    cloudjs($('.combo_select7').eq(1)).combobox('getValue', function(data){
+        alert('value值：' + data.value);
+        alert('text值：' + data.text);
+    });
+});
+$('#setValue7').bind('click', function(){
+    cloudjs('.combo_select7').combobox('setValue', 'sh;gz;fs;');  // 如果不是下拉列表中的值，会自动过滤掉
+});
+$('#addData7').bind('click', function(){
+    cloudjs('.combo_select7').combobox('addData', data7b);
+});
+$('#delData7').bind('click', function(){
+    cloudjs('.combo_select7').combobox('delData', 'sh');
+});
+$('#refresh7').bind('click', function(){
+    cloudjs('.combo_select7').combobox('refresh', {data: data7c});
+});
+$('#refresh7b').bind('click', function(){
+    var str = '';
+    for(var i = 0; i < data7b.length; i++){
+        str += '<option value="' + data7b[i].value + '" ' + (data7b[i].disabled && data7b[i].disabled === 'true' ? 'disabled="disabled"' : '') + '>' + data7b[i].text + '</option>';
+    }
+    $('.combo_select7:eq(0)').html(str);
+    cloudjs('.combo_select7').combobox('refresh');
+});
+$('#disable7').bind('click', function(){
+    cloudjs('.combo_select7').combobox('disable');
+});
+$('#enable7').bind('click', function(){
+    cloudjs('.combo_select7').combobox('enable');
+});
+            </script>
+            <script>writeCode('.example_html_7');writeCode('.example_js_7');</script>
+        </div>
+
+
+        <div>
+            <h5><a name="eg8"></a>示例8：自动完成</h5>
+<div class="example_html_8"> 
+<input type="text" id="combo_input8">
+</div>
+            <script class="example_js_8">
+cloudjs('#combo_input8').combobox({
+    data: 'data/combobox_data.json',
+    params: 'city={%s}',    //可以输入“城市”测试
+    showIcon: false,
+    onAjax: function(data){
+        //这里只是为了演示方便，对数据做了过滤，实际情况是不需要过滤的，后台返回什么数据，就直接显示什么数据
+        var json = [], searchStr = $('#combo_input8').val(), itemObj;
+
+        if(searchStr === ''){
+            return json;
+        }
+
+        for (var i = 0; i < data.length; i++) {
+            if(data[i].cn.indexOf(searchStr) !== -1){
+                itemObj = {};
+                itemObj.value = data[i].en;
+                itemObj.text = data[i].cn;
+                json.push(itemObj);
+            }
+        }
+
+        return json;
+    }
+});
+            </script>
+            <script>writeCode('.example_html_8');writeCode('.example_js_8');</script>
+        </div>
+
+
+        <div>
+            <h5><a name="eg9"></a>示例9：自动完成 — 多选</h5>
+<div class="example_html_9"> 
+<textarea id="combo_textarea9" style="width: 500px; height: 50px;"></textarea>
+</div>
+            <script class="example_js_9">
+cloudjs('#combo_textarea9').combobox({
+    data: 'data/combobox_data.json',
+    params: 'city={%s}',    //可以输入“城市”测试
+    isMulti: true,
+    showCheckAllText: false,
+    showCheckbox: false,
+    showIcon: false,
+    onAjax: function(data){
+        //这里只是为了演示方便，对数据做了过滤，实际情况是不需要过滤的，后台返回什么数据，就直接显示什么数据
+        var json = [],
+            textArr = $('#combo_textarea9').val().split(';'),
+            searchStr = textArr[textArr.length - 1],
+            itemObj;
+
+        if(searchStr === ''){
+            return json;
+        }
+
+        for (var i = 0; i < data.length; i++) {
+            if(data[i].cn.indexOf(searchStr) !== -1){
+                itemObj = {};
+                itemObj.value = data[i].en;
+                itemObj.text = data[i].cn;
+                json.push(itemObj);
+            }
+        }
+
+        return json;
+    }
+});
+            </script>
+            <script>writeCode('.example_html_9');writeCode('.example_js_9');</script>
+        </div>
+
+
+        <div>
+            <h5><a name="eg10"></a>示例10：大数据量</h5>
+<div class="example_html_10">
+<input type="text" class="combo_input10" style="width: 500px;">
+<input type="button" id="combo_btn10" value="生成下拉组件" /> 显示全部数据，总共有8869条数据，显示下拉面板时，会有卡顿。
+<br /><br />
+<input type="text" class="combo_input10b" style="width: 500px;">
+<input type="button" id="combo_btn10b" value="生成下拉组件" /> 限制最多显示200条，显示下拉面板时，不会有卡顿。
+</div>
+            <script class="example_js_10">
+$('#combo_btn10').bind('click', function(){
+    $.ajax({
+        url: 'data/combobox_stress_data.json',
+        dataType: 'json',
+        success: function(data){
+            cloudjs('.combo_input10').combobox({
+                data: data
+            });
+        }
+    });
+});
+$('#combo_btn10b').bind('click', function(){
+    $.ajax({
+        url: 'data/combobox_stress_data.json',
+        dataType: 'json',
+        success: function(data){
+            cloudjs('.combo_input10b').combobox({
+                data: data,
+                showAll: false,
+                recordLen: 200
+            });
+        }
+    });
+});
+            </script>
+            <script>writeCode('.example_html_10');writeCode('.example_js_10');</script>
+        </div>
+
+
+    </div>
     </div>
 </body>
 </html>
+
+
+

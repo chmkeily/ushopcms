@@ -1,0 +1,51 @@
+@import "./public";
+@dialogHeadHeight:32px;
+@dialogHeadBtnWidth:12px;
+
+@dialogBorderColor:#c6c6c6;
+@headerBgColor:#f9f9f9;
+@headerBoderColor:#efefef;
+@footerBorderColor:@headerBoderColor;
+
+.dialog_div{min-height:106px;position:absolute;border:1px solid @dialogBorderColor;background-color:@whiteColor;.boxShadow(0px, 0px, 10px, @dialogBorderColor);.borderRadius();}
+.dialog_div .dialog_div_head{border-bottom:1px solid @headerBoderColor;height:@dialogHeadHeight;background-color:@headerBgColor;}
+.dialog_div .dialog_div_head .dialog_div_head_title{color:@blackColor;font-weight:normal;display:block;float:left;height:@dialogHeadHeight;line-height:@dialogHeadHeight;width:70%;margin-left:10px;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;zoom:1;max-width:85%;}
+.dialog_div .dialog_div_head .dialog_div_head_btn{margin-top:10px;background-repeat:no-repeat;cursor:pointer;display:block;height:@dialogHeadBtnWidth;line-height:@dialogHeadBtnWidth;width:@dialogHeadBtnWidth;text-align:right;float:right;}
+
+.dialog_div .dialog_div_head .dialog_div_head_fullscreen_btn{margin-right:10px;background-position: -98px -2px;display:none;}
+.dialog_div .dialog_div_head .dialog_div_head_fullscreen_btn:hover{background-position: -98px -2px;}
+
+.dialog_div .dialog_div_head .dialog_div_head_close_btn{margin-right:9px;background-position: -115px -2px}
+.dialog_div .dialog_div_head .dialog_div_head_close_btn:hover{background-position: -115px -2px}
+
+.dialog_div .dialog_div_head .dialog_div_head_backscreen_btn{margin-right:10px;background-position: -82px -2px;display:none;}
+.dialog_div .dialog_div_head .dialog_div_head_backscreen_btn:hover{background-position: -82px -2px;}
+
+.dialog_div .dialog_div_head .dialog_div_head_btn:hover{opacity:0.6;filter:alpha(opacity=60);}
+
+.dialog_div .dialog_div_body{background-color:@whiteColor;padding-top:8px;padding-left:10px;padding-right:10px;padding-bottom:8px;line-height:1.5em;overflow:auto;min-height:22px;*min-height:22px;}
+.dialog_div .dialog_div_foot{background-color:@whiteColor;border-top: 1px solid @footerBorderColor;text-align:right;position:relative;padding-bottom:4px;padding-left:10px;min-height:26px;*min-height:26px;}
+.dialog_div .dialog_div_foot .dialog_div_foot_button{margin-top:4px;margin-right:10px;}
+
+.dialog_div_layer{width:100%;height:100%;position:fixed;background-color:#ddd;opacity:0.6;filter:alpha(opacity=60);top:0px;left:0px;}
+
+.dialog_div .dialog_div_body .dialog_div_body_textarea{font-family:microsoft yahei;*margin-left:-8px !important;*padding:0px !important;background-color:@whiteColor;overflow:auto;padding:2px 2px;margin:0px;outline:none;border:1px solid #dcdcdc;resize:none;word-break:break-all;height:60px;}
+.dialog_div .dialog_div_body .dialog_div_body_textarea_empty{border:1px solid red;}
+.dialog_div .dialog_div_body .dialog_div_body_empty{color:#ff0000;}
+
+.dialog_div .dialog_arrow, .dialog_div .dialog_arrow i{position:absolute;width:0;height:0;font-size:0;border-top-color:transparent;border-bottom-color:transparent;border-right-color:transparent;border-left-color:transparent;border-style:solid;}
+.dialog_div .dialog_arrow{border-width:8px;}
+.dialog_div .dialog_arrow i{border-width:6px;}
+.dialog_div .dialog_arrow_up{bottom:-16px;left:50%;margin-left:-8px;border-top-color:@dialogBorderColor;}
+.dialog_div .dialog_arrow_down{top:-16px;left:50%;margin-left:-8px;border-bottom-color:@dialogBorderColor;}
+.dialog_div .dialog_arrow_left{top:50%;right:-16px;margin-top:-8px;border-left-color:@dialogBorderColor;}
+.dialog_div .dialog_arrow_right{top:50%;left:-16px;margin-top:-8px;border-right-color:@dialogBorderColor;}
+.dialog_div .dialog_arrow_up_left{bottom:-16px;right:7px;border-top-color:@dialogBorderColor;}
+.dialog_div .dialog_arrow_up_right{bottom:-16px;left:9px;border-top-color:@dialogBorderColor;}
+.dialog_div .dialog_arrow_down_left{top:-16px;right:7px;border-bottom-color:@dialogBorderColor;}
+.dialog_div .dialog_arrow_down_right{top:-16px;left:9px;border-bottom-color:@dialogBorderColor;}
+.dialog_div .dialog_arrow_up i, .dialog_div .dialog_arrow_up_left i, .dialog_div .dialog_arrow_up_right i{top:-8px;left:-6px;border-top-color:@whiteColor;}
+.dialog_div .dialog_arrow_down i, .dialog_div .dialog_arrow_down_left i, .dialog_div .dialog_arrow_down_right i{top:-4px;left:-6px;border-bottom-color:@headerBgColor;}
+.dialog_div .dialog_arrow_right i{top:-6px;left:-4px;border-right-color:@whiteColor;}
+.dialog_div .dialog_arrow_left i{top:-6px;left:-8px;border-left-color:@whiteColor;}
+

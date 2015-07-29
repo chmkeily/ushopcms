@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+     <link rel="stylesheet" href="css/prettify.css"/>
+    <link rel="stylesheet" href="css/global.css"/>
+    <title>开始使用</title>
+    <script src="js/prettify.js"></script>
+    <style type="text/css">
+        body{background: #ffffff;color: #666;padding-left: 0;}
+        .header_con{margin: 0 auto; width: 1000px;}
+        .logo{margin-left: 0;}
+    	.primary{box-shadow: none;width: 1000px;margin: 0 auto;}
+    	.tit{font-size: 24px;color: #666666;font-weight: normal;padding: 40px 0;border-bottom: solid 1px #99b0bb;}
+    	.primary p{padding: 20px 0;line-height: 1.8;}
+    	pre.prettyprint{border: solid 1px #c3d2d9 !important; background: #f0f4f6;font:normal 12px/2 simsun;}
+    	.primary h3{font-size: 20px;color: #689e2a;font-weight: normal;padding: 10px 0;}
+    	.column_list{padding: 10px;border: solid 1px #c3d2d9 !important; background: #f0f4f6;font:normal 12px/2 simsun;margin-bottom: 20px;}
+    	.primary a{color: #127dbc;}
+    	.primary a:hover{color: #3073ab;text-decoration: underline;}
+    </style>
+</head>
+<body>
+<div class="header">
+    <div class="header_con">
+        <a class="logo" href="../index.html">cloudjs</a>
+        <ul class="main_nav">
+            <li class="current"><a href="#">开始使用</a></li>
+            <li><a href="example/paging.html">组件文档</a></li>
+            <li><a href="download.html">下载</a></li>
+        </ul>
+    </div>
+</div>
+<div class="primary">
+    <h2 class="tit">开始使用</h2>
+<p>cloudjs包含20个组件，只需要引入jquery和cloudjs.js就可以调用cloudjs的所有组件；<br/>组件调用方式为：cloudjs(selector).组件名([options]) 或 cloudjs.组件名([options])</p>
+<h3>下载</h3>
+<p><a href="http://cloudjs.wsd.com/code/cloudJs_1.0.zip">下载源码</a></p>
+<h3>基础模板</h3>
+<pre class="prettyprint">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;x-ua-compatible&quot; content=&quot;IE=edge&quot;&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+&lt;title&gt;cloudjs使用&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;!-- 此处是html代码 ---&gt;
+&lt;/body&gt;
+&lt;script src=&quot;http://3gimg.qq.com/mig_op/cloudJs/js/jquery.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;http://3gimg.qq.com/mig_op/cloudJs/js/cloudjs.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;&lt;!-- 此处您可以尽情的调用cloudjs组件 --&gt;&lt;/srcipt&gt;
+&lt;/html&gt;</pre>
+<h3>目录结构</h3>
+<ul class="p20 column_list">
+    <li>api ———— 包含该网站除首页以外的所有页面，example目录则包含所有的演示实例</li>
+    <li>js ———— 包含cloudjs框架中所有组件的js及jquery,cloudjs.js,复制到粘贴板组件的swf文件</li>
+    <li>css ———— css中包含6种肤色的目录，里面分别存放各肤色的css，cloudjs默认引入blue目录下的css</li>
+    <li>images ———— 包含组件中用到的所有图片</li>
+    <li>gulp ———— 包含less文件，阅读help.txt，可轻松生成任意指定的肤色并压缩js和css</li>
+</ul>
+<h3>如何换肤</h3>
+<p>换肤分两种情况<br />
+第1种情况，我不想用blue肤色，我想用red肤色，可以把red目录下的css复制到blue目录下，替换原有的，可以修改cloudjs.js第7行为defaultThemes='red', 也可以引入cloudjs时指定data-themes="red"。<br/>
+第2种情况，我的网站使用了多种肤色，需要点击按钮的时候动态改变，调用cloudjs.themes('肤色目录名');动态换肤，引入cloudjs时，加上data-themes指定肤色，如：<br/>&lt;script src=&quot;http://cloudjs.wsd.com/cloudJs/js/cloudjs.js&quot; data-themes=&quot;red&quot;&gt;&lt;/script&gt;。</p>
+<h3>变更组件时如何让老用户看到最新的效果</h3>
+<p>当你修改cloudjs中的css或者js时，由于浏览器缓存，发布到服务器后，老用户还是会看到更新前的状态，尤其是修改bug的情况下，及时更新显得尤为重要。<br/>方法：修改js目录下version.js中的key值，这里的key值就是组件js和css加载时自带的后缀，后缀变了，文件自然也就及时刷新了。</p>
+<h3>浏览器的支持情况</h3>
+<p>支持IE7及以上版本，chrome，firifox，safari等主流浏览器</p>
+</div>
+</body>
+</html>
+<script type="text/javascript">
+	prettyPrint();
+</script>

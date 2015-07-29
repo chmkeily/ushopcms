@@ -1,0 +1,160 @@
+.cloudjs_icon {
+  background-image: url(../../images/icons_new.png);
+}
+.cloudjs_btn {
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  padding: 3px 7px;
+  display: inline-block;
+  font-family: Microsoft Yahei;
+  font-size: 12px;
+  white-space: nowrap;
+  cursor: pointer;
+  zoom: 1;
+  *width: 40px;
+  *height: 24px;
+  *line-height: 1;
+  border: 1px solid #1d1b1b;
+  color: #ffffff;
+  background-color: #2d2d2d;
+}
+a.cloudjs_btn {
+  text-decoration: none;
+}
+.cloudjs_btn_white {
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  padding: 3px 7px;
+  display: inline-block;
+  font-family: Microsoft Yahei;
+  font-size: 12px;
+  white-space: nowrap;
+  cursor: pointer;
+  zoom: 1;
+  *width: 40px;
+  *height: 24px;
+  *line-height: 1;
+  border: 1px solid #999999;
+  color: #000000;
+  background-color: #ffffff;
+}
+.cloudjs_icon:hover {
+  opacity: 0.8;
+  filter: alpha(opacity=80);
+}
+.cloudjs_btn:hover {
+  opacity: 0.8;
+  filter: alpha(opacity=80);
+}
+.cloudjs_btn_white:hover {
+  border-color: #666666;
+}
+.cloudjs_btn_white_disable,
+.cloudjs_btn_white:disabled {
+  color: #aaaaaa;
+  border-color: #cfcfcf;
+  cursor: default;
+}
+.cloudjs_btn_disable,
+.cloudjs_btn_disable:hover,
+.cloudjs_btn:disabled {
+  color: #aaaaaa;
+  border-color: #cfcfcf;
+  cursor: default;
+  background: #ffffff;
+}
+.border {
+  border: 1px solid #c6c6c6;
+  box-shadow: inset 1px 2px 1px #f0f0f0;
+}
+.cloudjs_input {
+  height: 25px;
+  line-height: 25px;
+  padding: 0;
+  text-indent: 5px;
+  outline: none;
+  border: 1px solid #c6c6c6;
+  box-shadow: inset 1px 2px 1px #f0f0f0;
+}
+.cloudjs_input:focus {
+  border: solid 1px #aaa;
+}
+.tab_div,
+.tab_div .tab_wap,
+.tab_div .tab_head,
+.tab_div .tab_tab {
+  margin: 0px;
+  padding: 0px;
+}
+.tab_div {
+  margin: 0px;
+  padding: 0px;
+  font-size: 13px;
+  overflow: hidden;
+}
+.tab_div .tab_head {
+  display: block;
+}
+.tab_div.tab_div_x .tab_head {
+  height: 35px;
+  border-bottom: 1px solid #CCCCCC;
+}
+.tab_div.tab_div_y .tab_head {
+  width: 150px;
+  float: left;
+  border-right: 1px solid #CCCCCC;
+}
+.tab_div .tab_tab {
+  list-style: none;
+  text-align: center;
+  font-size: 14px;
+  color: #000000;
+  padding: 0px 1em;
+  cursor: default;
+  height: 36px;
+  line-height: 35px;
+  border: 1px solid #CCC;
+  cursor: pointer;
+}
+.tab_div.tab_div_x .tab_tab {
+  display: inline-block;
+  float: left;
+  height: 35px;
+  border-bottom: 0;
+  margin-right: 5px;
+}
+.tab_div.tab_div_y .tab_tab {
+  display: block;
+  border-left: 1px solid #CCC;
+  border-right: 1px solid #CCC;
+  border-top: 1px solid #CCC;
+  width: 150px;
+  padding: 0;
+  border-right: 0;
+  margin-bottom: 5px;
+}
+.tab_div.tab_div_x .tab_panel {
+  border: 1px solid #CCC;
+  border-top: 0;
+}
+.tab_div.tab_div_y .tab_panel {
+  margin-left: 151px;
+  border: 1px solid #CCC;
+  border-left: 0;
+}
+.tab_div .tab_selected {
+  color: #ffffff;
+  background-color: #2d2d2d;
+}
+.tab_div.tab_div_x .tab_selected {
+  border: 1px solid #2d2d2d;
+  border-bottom: 0;
+  height: 35px;
+}
+.tab_div.tab_div_y .tab_selected {
+  border: 1px solid #2d2d2d;
+  border-right: 0;
+  width: 150px;
+}

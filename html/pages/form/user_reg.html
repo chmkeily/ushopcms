@@ -27,53 +27,20 @@
                 <div class="left" style="padding-top: 0; width: 60%;">
                     <div class="reg_wrap">
                         <form class="form-horizontal" method="post" id="form" action="/provider/register">
-                            <fieldset>
-                                <div class="control-group">
-                                    <label class="control-label">邮箱</label>
-                                    <div class="controls">
-                                        <input type="text" name="email" class="inputbox" value="" data-check="empty;email" />
-                                        <span class="red">*</span>
-                                    </div>
+                            <div class="login">
+                                <div class="input_div">
+                                    <input type="text" name="email" class="inputbox" value="" data-check="empty;email" placeholder="邮箱" />
+                                    <span class="red">*</span>
                                 </div>
-                                
-                                <div class="control-group">
-                                    <label class="control-label">密码</label>
-                                    <div class="controls">
-                                        <input type="password" name="secret" class="inputbox" value=""/>
-                                        <span class="red">*</span>
-                                    </div>
+                                <div class="input_div">
+                                    <input type="password" name="secret" class="inputbox" value="" placeholder="密码" />
+                                    <span class="red">*</span>
                                 </div>
-
-                                <div class="control-group">
-                                    <label class="control-label">服务商名称</label>
-                                    <div class="controls">
-                                        <input type="text" name="name" class="inputbox" value=""/>
-                                        <span class="red">*</span>
-                                    </div>
+                                <div class="input_div">
+                                    <button type="reset" class="btn">重置</button>&nbsp;&nbsp;&nbsp;
+                                    <button type="button" class="btn btn-primary" id="reg_btn">注册</button>
                                 </div>
-
-                                <div class="control-group">
-                                    <label class="control-label">电话</label>
-                                    <div class="controls">
-                                        <input type="text" name="phone" class="inputbox" value=""/>
-                                        <span class="red">*</span>
-                                    </div>
-                                </div>
-                                
-                                <div class="control-group">
-                                    <label class="control-label">联系人</label>
-                                    <div class="controls">
-                                        <input type="text" name="contact" value=""/>
-                                    </div>
-                                </div>
-                            
-                                <div class="control-group">
-                                    <div class="controls">
-                                        <button type="button" class="btn btn-primary" id="reg_btn">注册</button>&nbsp;&nbsp;&nbsp;
-                                        <button type="reset" class="btn">重置</button>
-                                    </div>
-                                </div>
-                            </fieldset>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -91,7 +58,7 @@
         </div>
     </div>
 
-    <script src="/html/js/jquery-1.6.1.min.js"></script>
+    <script src="/html/js/jquery.min.js"></script>
     <script src="/html/cloudJs/js/cloudjs.js"></script>
     <script>
         $(document).ready(function(){

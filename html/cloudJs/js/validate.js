@@ -1,3 +1,8 @@
+/**
+ * 格式校验组件
+ * author: generzhang@tencent.com
+ * date: 2015-07-01
+ */
 cloudjs.define({
     validate: function(options){
 		var defaults = {
@@ -8,16 +13,15 @@ cloudjs.define({
             checkType: 'empty', // 元素默认的校验类型
             errmsgType: 1, // 页面提示错误信息的方式，1对应弹tip，2对应直接跟在元素后面
             position: '', // 默认的tips提示位置，在元素下方
-            delay: 0 // 提示信息出现多久后消失，默认无动作触发时不消失
+            delay: 0, // 提示信息出现多久后消失，默认无动作触发时不消失
+            zIndex: cloudjs.zIndex()
         };
 
         var _self = this,
             DATA_FLAG = 'data-check', 
             DATA_POSITION = 'data-position', 
             DATA_FORMAT = 'data-format',
-            DATA_WRAPER = 'data-wraper', 
-            VALIDATE_DIV = 'validate_div', 
-            VALIDATE_SPAN = 'validate_span',
+            DATA_WRAPER = 'data-wraper',
             ARROW_WIDTH = 5, 
             ARROW_DOWN = 'down', 
             ARROW_LEFT = 'left', 
@@ -49,7 +53,7 @@ cloudjs.define({
         function _init(){
             var i, len, results = [], result, fail = defaults.fail, success = defaults.success;
 
-            clearTimeout(cloudjs._validateTimeout1);
+            clearTimeout(cloudjs.validate._timeout1);
             _removeErrmsgs();
 
             $.each(_self, function(i, ele){
@@ -74,7 +78,7 @@ cloudjs.define({
                     }
                 }
                 if(defaults.warn && defaults.delay){
-                    cloudjs._validateTimeout1 = setTimeout(function(){
+                    cloudjs.validate._timeout1 = setTimeout(function(){
                         _removeErrmsgs();
                     }, defaults.delay);
                 }
@@ -162,7 +166,7 @@ cloudjs.define({
          * 删除全局的错误提示信息
          */
         function _removeErrmsgs(){
-            $('.' + VALIDATE_DIV + ',.' + VALIDATE_SPAN).remove();
+            $('.validate_div,.validate_span').remove();
         }
 
         /**
@@ -177,7 +181,7 @@ cloudjs.define({
                 wraper = $('<span id="' + wraperId + '"></span>').insertAfter(ele);
                 ele.attr(DATA_WRAPER, '#' + wraperId);
             }
-            ele[0].errmsgObj = $('<span class="' + VALIDATE_SPAN + '">' + content + '</span>').appendTo(wraper);
+            ele[0].errmsgObj = $('<span class="validate_span"><span class="validate_icon"></span>' + content + '</span>').appendTo(wraper);
         }
 
         /**
@@ -195,7 +199,7 @@ cloudjs.define({
             tips.show().css({
                 left: offset.left + 'px',
                 top: offset.top + 'px'
-            }).find('.tips_arrow').addClass('tips_arrow_' + offset.position);
+            }).find('.validate_arrow').addClass('validate_arrow_' + offset.position);
 
             ele[0].errmsgObj = tips;
             
@@ -207,7 +211,7 @@ cloudjs.define({
 						tips.css({
 						    left: offset.left + 'px',
 						    top: offset.top + 'px'
-						}).find('.tips_arrow').removeClass().addClass('tips_arrow tips_arrow_' + offset.position);
+						}).find('.validate_arrow').removeClass().addClass('validate_arrow validate_arrow_' + offset.position);
             		}
                 });
             }
@@ -255,13 +259,11 @@ cloudjs.define({
          */
         function _createTip(content){
             var tips = '';
-            tips += '<div class="';
-            tips += VALIDATE_DIV;
-            tips += '">';
-            tips += '<span class="tips_content">';
+            tips += '<div class="validate_div" style="z-index:' + defaults.zIndex + '">';
+            tips += '<span class="validate_content"><i class="validate_icon"></i>';
             tips += (content || ' ');
             tips += '</span>';
-            tips += '<span class="tips_arrow"></span>';
+            tips += '<span class="validate_arrow"><i></i></span>';
             tips += '</div>';
 
             return $(tips).appendTo('body').hide();
@@ -556,5 +558,5 @@ cloudjs.define({
             return rule;
         }
     },
-    require: ['../css/blue/validate.css']
+    require: ['../css/' + cloudjs.themes() + '/validate.css']
 });

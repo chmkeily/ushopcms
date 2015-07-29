@@ -45,17 +45,17 @@
         </div>
     </div>
 
-    <script src="js/jquery-1.6.1.min.js"></script>
+    <script src="js/jquery.min.js"></script>
     <script src="cloudJs/js/cloudjs.js"></script>
     <script src="js/jquery.md5.js"></script>
     <script>
         function login(){
             if($.trim($('#usr_account').val()) === ''){
-                cloudjs.message({content: '请输入邮箱！', type: 'warn'});
+                cloudjs.message({content: '请输入邮箱！', type: 'error'});
                 return;
             }
             if($.trim($('#usr_passwd').val()) === ''){
-                cloudjs.message({content: '请输入密码！', type: 'warn'});
+                cloudjs.message({content: '请输入密码！', type: 'error'});
                 return;
             }
 

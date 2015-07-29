@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>蒙版组件</title>
+    <link rel="stylesheet" href="../css/prettify.css"/>
+    <link rel="stylesheet" href="../css/global.css"/>
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/cloudjs.js?rand=0.12323358787"></script>
+    <script src="../js/prettify.js"></script>
+    <script src="../js/global.js"></script>
+</head>
+<body class="body_bg">
+    <div class="primary">
+    <div class="comps_header">
+        <h2 class="comps_name">mask蒙版组件</h2>
+        <p></p>
+    </div>
+    <div class="comps_summary">
+        <h3>cloudjs([selector]).mask([options])</h3>
+    </div>
+    <div class="detail_content">
+        <h4>属性</h4>
+        <div class="param_table_box">
+            <table class="param_table">
+                <tbody>
+                    <tr>
+                        <th>属性名</th>
+                        <th>类型</th>
+                        <th>默认值</th>
+                        <th>说明</th>
+                    </tr>
+                    <tr>
+                        <td>maskId</td>
+                        <td>string</td>
+                        <td></td>
+                        <td>蒙版的id，用于销毁蒙版的时候使用。<a href="#eg2" class="exp">示例2</a></td>
+                    </tr>
+                    <tr>
+                        <td>maskHtml</td>
+                        <td>string/selector</td>
+                        <td>&lt;img src="../../images/ajax_loading.gif" /&gt;&lt;br /&gt;&lt;span style="color: #fff; font-size: 24px;">Loading...&lt;/span&gt;</td>
+                        <td>蒙版上面显示的内容。<a href="#eg3" class="exp">示例3</a></td>
+                    </tr>
+                    <tr>
+                         <td>modal</td>
+                         <td>boolean</td>
+                         <td>true</td>
+                         <td>是否加蒙版。<a href="#eg4" class="exp">示例4</a></td>
+                    </tr>
+                    <tr>
+                        <td>relative</td>
+                        <td>selector</td>
+                        <td></td>
+                        <td>需要加蒙版的元素，如果没有，则加整个可视窗口都加蒙版。<a href="#eg2" class="exp">示例2</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="comps_summary">
+        <h3>cloudjs([selector]).mask('方法名', [args])</h3>
+    </div>
+
+    <div class="detail_content">
+        <h4>方法</h4>
+        <div class="param_table_box">
+            <table class="param_table">
+                <tbody>
+                <tr>
+                    <th>方法名</th>
+                    <th>参数</th>
+                    <th>说明</th>
+                </tr>
+                <tr>
+                    <td>destroy</td>
+                    <td>string</td>
+                    <td>销毁指定id的蒙版，对象的参数key为'id'，value为需要销毁的蒙版id，若无参数，则销毁全部。<a href="#eg2" class="exp">示例2</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+        
+    <div class="detail_content">
+        <h4>示例</h4>
+        <div>
+            <h5><a name="eg1"></a>示例1：默认</h5>
+    <div class="example_html_1">
+<input type="button" id="mask_btn1a" value="绑定当前按钮" />
+<input type="button" id="mask_btn1b" value="不绑定当前按钮" />
+    </div>
+            <script class="example_js_1">
+$('#mask_btn1a').bind('click', function(e){
+    var self = this;
+    cloudjs(self).mask();
+
+    setTimeout(function(){
+        cloudjs(self).mask('destroy');
+    }, 1000);
+});
+$('#mask_btn1b').bind('click', function(e){
+    cloudjs.mask();
+
+    setTimeout(function(){
+        cloudjs.mask('destroy');    //这里会销毁所有的蒙版
+    }, 1000);
+});
+            </script>
+            <script>writeCode('.example_html_1');writeCode('.example_js_1');</script>
+        </div>
+
+
+        <div>
+            <h5><a name="eg2"></a>示例2：只对指定元素加蒙版</h5>
+    <div class="example_html_2">
+<input type="button" id="mask_btn2" value="生成蒙版" />
+<input type="button" id="mask_destroy2a" value="通过id销毁蒙版" />
+<input type="button" id="mask_destroy2b" value="通过生成蒙版的绑定元素销毁蒙版" />
+<br /><br />
+<div class="bd" style="height: 400px; position: relative; z-index: 500;" id="relative_div">蒙版只会加到该元素内</div>
+<br />
+<input type="button" id="mask_btn2b" value="生成蒙版" /> 如果设置同ID的蒙版，上一个蒙版没销毁，不会再新增蒙版
+    </div>
+            <script class="example_js_2">
+$('#mask_btn2').bind('click', function(e){
+    var self = this;
+    cloudjs(self).mask({
+        maskId: 'relative_div_mask',
+        relative: '#relative_div'
+    });
+});
+$('#mask_destroy2a').bind('click', function(e){
+    cloudjs.mask('destroy', 'relative_div_mask');
+});
+$('#mask_destroy2b').bind('click', function(e){
+    cloudjs('#mask_btn2').mask('destroy');
+});
+$('#mask_btn2b').bind('click', function(e){
+    var self = this;
+    cloudjs(self).mask({
+        maskId: 'relative_div_mask',
+        relative: '#relative_div',
+        zIndex: 2000
+    });
+});
+            </script>
+            <script>writeCode('.example_html_2');writeCode('.example_js_2');</script>
+        </div>
+
+
+        <div>
+            <h5><a name="eg3"></a>示例3：自定义html内容</h5>
+    <div class="example_html_3">
+<input type="button" id="mask_btn3" value="自定义html内容" />
+    </div>
+            <script class="example_js_3">
+$('#mask_btn3').bind('click', function(e){
+    cloudjs.mask({
+        maskHtml: '<p style="color:#fff; font-size: 24px;">数据加载中，请稍候！</p>'
+    });
+
+    setTimeout(function(){
+        cloudjs.mask('destroy');
+    }, 1000);
+});
+            </script>
+            <script>writeCode('.example_html_3');writeCode('.example_js_3');</script>
+        </div>
+
+
+        <div>
+            <h5><a name="eg4"></a>示例4：不加蒙版</h5>
+    <div class="example_html_4">
+<input type="button" id="mask_btn4" value="只是禁用按钮不加蒙版" />
+<input type="button" id="mask_destroy4" value=" 销毁 " />
+    </div>
+            <script class="example_js_4">
+$('#mask_btn4').bind('click', function(e){
+    var self = this;
+    cloudjs(self).mask({
+        modal: false
+    });
+});
+$('#mask_destroy4').bind('click', function(e){
+    cloudjs('#mask_btn4').mask('destroy');
+});
+            </script>
+            <script>writeCode('.example_html_4');writeCode('.example_js_4');</script>
+        </div>
+
+
+        <div>
+            <h5><a name="eg5"></a>示例5：非input示例</h5>
+    <div class="example_html_5">
+<a href="javascript: void(0);" id="mask_btn5">非input加蒙版</a>
+<span id="mask_destroy5" style="cursor: pointer;">销毁</span>
+<br /><br />
+加蒙版时，绑定的元素会加上class 'mask_disabled'，销毁时会去除 'mask_disabled'。
+<div class="bd" style="height: 300px;" id="relative_div5">蒙版只会加到该元素内</div>
+    </div>
+            <script class="example_js_5">
+$('#mask_btn5').bind('click', function(e){
+    var self = this;
+    cloudjs(self).mask({
+        maskId: 'relative_div_mask5',
+        relative: '#relative_div5'
+    });
+});
+$('#mask_destroy5').bind('click', function(e){
+    cloudjs('#mask_btn5').mask('destroy');
+});
+            </script>
+            <script>writeCode('.example_html_5');writeCode('.example_js_5');</script>
+        </div>
+
+        
+    </div>
+    </div>
+</body>
+</html>
+
+
+

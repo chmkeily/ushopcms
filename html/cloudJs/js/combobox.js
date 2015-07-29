@@ -4,229 +4,227 @@ cloudjs.define({
             isMulti: false,    //是否多选
             width: null,    //下拉列表宽度
             height: 200,    //下拉列表高度
-            separate: ';',    //下拉数据分隔符
-            defaultKey: '',    //默认选中选项
-            checkKey: false,    //是否检查key值必须是data里面的key
-            showIcon: true,
+            placeholder: '',    //输入提示信息
+            separator: ';',    //多选时，数据分隔符
+            defaultValue: '',    //默认选中选项
+            checkValue: false,    //是否检查value值必须是data里面的value
+            showIcon: true, //是否显示下拉图标
             showAll: true,    //是否显示全部下拉
             recordLen: 10,    //搜索时最多显示的记录数
-            name: '',    //key隐藏域
-            zIndex: 600,    //下拉列表的z-index值
+            name: '',    //value隐藏域
             data: null,    //data数据
-            comkey: 'key',    //key字段名
-            comvalue: 'value',    //value字段名
+            comValue: 'value',    //value字段名
+            comText: 'text',    //text字段名
             checkAllText: '全选',    //全选文字
-            unCheckAllText: '取消全选',    //全选文字
+            unCheckAllText: '取消选择',    //取消选择文字
             showCheckAllText: true,    //是否显示全选文字
-            url: '',    //异步下拉数据url
+            showCheckbox: true, //是否显示复选框
             params: '',    //异步搜索下拉数据参数
-            onOpen: $.noop,
-            onClose: $.noop,
-            onSelect: $.noop,
-            onCheckAll: $.noop,
-            onUnCkeckAll: $.noop
-        };
+            onCreate: $.noop,    //创建后回调
+            onAjax: $.noop, //异步请求后的处理回调
+            onOpen: $.noop, //监听下拉面板展开
+            onClose: $.noop, //监听下拉面板关闭
+            onSelect: $.noop, //监听选择数据改变事件
+            onCheckAll: $.noop, //全选事件
+            onUnCheckAll: $.noop  //取消选择
+        },
+        _args0 = options,
+        _args1 = arguments[1],
+        _self = this;
 
-        if($(this).length === 0){
-            cloudjs.util.error('调用combobox下拉组件失败，' + this.selector + ' 找不到相应的元素!');
+        if(_self.length === 0){
+            cloudjs.util.error('调用combobox下拉组件失败，' + _self.selector + ' 找不到相应的元素!');
             return;
         }
 
         if(!options || $.isPlainObject(options)){
             $.extend(defaults, options);
-        }
-
-        var _self = this,
-            _isMulti = defaults.isMulti,
-            _width = defaults.width,
-            _height = defaults.height,
-            _separate = defaults.separate,
-            _defaultKey = defaults.defaultKey,
-            _checkKey = defaults.checkKey,
-            _showIcon = defaults.showIcon,
-            _showAll = defaults.showAll,
-            _recordLen = defaults.recordLen,
-            _hideName = defaults.name,
-            _zIndex = defaults.zIndex,
-            _jsonData = defaults.data,
-            _comkey = defaults.comkey,
-            _comvalue = defaults.comvalue,
-            _checkAllText = defaults.checkAllText,
-            _unCheckAllText = defaults.unCheckAllText,
-            _showCheckAllText = defaults.showCheckAllText,
-            _url = defaults.url,
-            _params = defaults.params,
-            _isCheckAll = false,
-            _comboEle = null,
-            _showEle = null,    //显示value的表单元素
-            _hideEle = null,    //显示key的隐藏表单元素
-            _panelEle = null,    //下拉面板元素
-            _isFirst = true,
-            _isSelectTag = false,
-            _defaultValue = '',
-            _strData = '',    //数据字符串
-            _ajaxIng = false,
-            _searchTimeout = null,
-            _comboObj = null,
-            _args0,
-            _args1;
-
-
-        if(typeof options === 'string'){
-            _comboObj = $(_self)[0]._cloudjsComboObj;
-            _args0 = options;
-            _args1 = arguments[1];
-
+        }else if(typeof _args0 === 'string'){
             if(_args0 === 'getValue'){
-                cloudjs.callback(_comboObj[_args0]());
+                cloudjs.callback(_self[0]._cloudjsComboObj[_args0]());
             }else{
-                _comboObj && _comboObj[_args0](_args1);// && _comboObj[_args0].call(this);
+                _self[0]._cloudjsComboObj && _self[0]._cloudjsComboObj[_args0](_args1);
             }
-
             return;
         }
-        
-        _init();
 
-        /**
-         * 初始化
-         */
+        _self.each(function(){
+            var self = this;
+
+            self._cloudjsComboObj = self._cloudjsComboObj ? $.extend(self._cloudjsComboObj, _getComboObj()) : _getComboObj();
+
+            _init.call(self);
+        });
+
+
         function _init(){
-            var keyArr, optionEles;
+            var self = $(this),
+                cObj = this._cloudjsComboObj,
+                cfg = cObj.cfg,
+                optionEles,
+                tempObj;
 
-            if($(_self).hasClass('combo_text') && $(_self).parent().hasClass('combo_container')){
-                $(_self).siblings().remove();
+            cObj.self = self;
+            if(self.hasClass('combo_text') || self.parent().hasClass('combo_container')){
+                self.siblings().remove();
             }else{
-                if($(_self).prop('disabled')){
-                    $(_self).wrap('<span class="combo_container combo_disabled"></span>');
+                if(self.prop('disabled')){
+                    self.wrap('<span class="combo_container combo_disabled"></span>');
                 }else{
-                    $(_self).wrap('<span class="combo_container"></span>');
+                    self.wrap('<span class="combo_container"></span>');
                 }
             }
 
-            if($(_self)[0].tagName.toLowerCase() === 'select'){
-                _isSelectTag = true;
-                $(_self).hide();
-                $(_self).parent().append('<input type="text" class="combo_text" />');
+            if(self.is('select')){
+                cfg.isSelectTag = true;
+                self.hide();
+                self.parent().append('<input type="text" class="combo_text" />');
+                cObj.showEle = self.siblings('.combo_text');
+                cObj.showEle.css({ 'width': self.outerWidth() - 28 });
+                if(cfg.isMulti){
+                    self.prop('multiple', true);
+                }else{
+                    cfg.isMulti = self.prop('multiple');
+                }
+                if(cfg.isMulti){
+                    cfg.defaultValue = cfg.defaultValue || (self.val() ? self.val().join(cfg.separator) : '');
+                }else{
+                    cfg.defaultValue = cfg.defaultValue || self.val();
+                }
 
-                _showEle = $(_self).siblings('.combo_text');
-
-                if(!_jsonData){ //如果设置了data，以设置的data为准
-                    _jsonData = [];
-                    optionEles = $(_self).find('option');
-                    for (var i = 0; i < optionEles.length; i++) {
-                        _jsonData[i] = {};
-                        _jsonData[i][_comkey] = optionEles.eq(i).attr('value');
-                        _jsonData[i][_comvalue] = optionEles.eq(i).text();
-                        _jsonData[i]['disabled'] = optionEles.eq(i).prop('disabled') ? 'true' : '';
+                if(!cfg.data){ //如果没有设置data，才去取select下拉列表的数据
+                    cfg.data = [];
+                    optionEles = self.find('option');
+                    for(var i = 0; i < optionEles.length; i++){
+                        if(!optionEles.eq(i).attr('value')){
+                            cfg.placeholder = cfg.placeholder || optionEles.eq(i).text();
+                            continue;
+                        }
+                        tempObj = {};
+                        tempObj[cfg.comValue] = optionEles.eq(i).attr('value');
+                        tempObj[cfg.comText] = optionEles.eq(i).text();
+                        tempObj.disabled = optionEles.eq(i).prop('disabled') ? 'true' : 'false';
+                        cfg.data.push(tempObj);
                     }
-                }else{
-                    _isMulti = _isMulti || $(_self).prop('multiple');
                 }
             }else{
-                !$(_self).hasClass('combo_text') && $(_self).addClass('combo_text');
-
-                _showEle = $(_self);
+                !self.hasClass('combo_text') && self.addClass('combo_text');
+                cObj.showEle = self;
             }
-            _comboEle = _showEle.parent();
+            cObj.showEle.attr('placeholder', cfg.placeholder);
+            cObj.comboEle = cObj.showEle.parent().css({ 'zIndex': cloudjs.zIndex() });
 
-            if(_showIcon){
-                $(_self).parent().append('<input type="hidden" class="combo_value" name="' + _hideName + '" /><span class="combo_arrow"><span></span></span>');
+            if(cfg.showIcon){
+                self.parent().append('<input type="hidden" class="combo_value" name="' + cfg.name + '" /><span class="combo_arrow cloudjs_icon"><span></span></span>');
             }else{
-                $(_self).parent().append('<input type="hidden" class="combo_value" name="' + _hideName + '" />');
+                self.parent().append('<input type="hidden" class="combo_value" name="' + cfg.name + '" />');
             }
-            _hideEle = $(_self).siblings('.combo_value');
+            cObj.hideEle = self.siblings('.combo_value');
 
-            _setDefaultValue(_defaultKey);    //设置默认值对应的value
-
-            _bindEvent();
-
-            _comboObj = _comboObj || _getComboObj();
-            $(_self)[0]._cloudjsComboObj = _comboObj;
+            _setDefaultValue.call(this);    //设置默认值
+            _bindEvent.call(this);
+            cObj.create();
         }
 
         /**
          * 设置默认值
          */
         function _setDefaultValue(){
-            if(_defaultKey){
-                if(_jsonData){
-                    if(_isMulti){
-                        _defaultValue = _getMultiValue(_jsonData, _defaultKey);
+            var self = $(this),
+                cObj = this._cloudjsComboObj,
+                cfg = cObj.cfg,
+                ajaxParams;
+            if(cfg.defaultValue){
+                if(cfg.data){
+                    if(cfg.isMulti){
+                        cfg.defaultText = _getMultiValue.call(this, cfg.data, cfg.defaultValue);
                     }else{
-                        if($.isArray(_jsonData)){
-                            for(var i = 0; i < _jsonData.length; i ++){
-                                if(_defaultKey === _jsonData[i][_comkey]){
-                                    _defaultValue = _jsonData[i][_comvalue];
+                        if($.isArray(cfg.data)){
+                            for(var i = 0; i < cfg.data.length; i++){
+                                if(cfg.defaultValue === cfg.data[i][cfg.comValue]){
+                                    cfg.defaultText = cfg.data[i][cfg.comText];
                                 }
                             }
-                        }else if($.isPlainObject(_jsonData)){
-                            _defaultValue = _jsonData[_defaultKey];
+                        }else if(typeof cfg.data === 'string'){
+                            cfg.url = cfg.data;
                         }
                     }
-                    _defaultKey = _checkKey && _defaultValue === '' ? '' : _defaultKey;
+                    cfg.defaultValue = cfg.checkValue && cfg.defaultText === '' ? '' : cfg.defaultValue;
 
-                    _showEle.val(_defaultValue);
-                    _hideEle.val(_defaultKey);
+                    cObj.showEle.val(cfg.defaultText);
+                    cObj.hideEle.val(cfg.defaultValue);
 
                     return;
                 }
 
-                if(_url){
-                    _comboEle.addClass('combo_disabled');
-                    _getAjaxData(_setDefaultValue);
+                if(cfg.url){
+                    ajaxParams = _getParams.call(this);
+                    cObj.comboEle.addClass('combo_disabled');
+                    _getAjaxData.call(this, _setDefaultValue, false, ajaxParams);
                 }
             }else{
-                _hideEle.val('');
+                cObj.hideEle.val('');
             }
         }
 
         /**
-         * 获取默认key对于的value [多选的时候]
-         * @param  {Json/Array}  data 数据
-         * @param  {String} key  key字符串
-         * @return {String}      返回key对应的value字符串
+         * 获取默认value对于的text [多选的时候]
+         * @param  {Json}  data 数据
+         * @param  {String} value  value字符串
+         * @return {String}      返回vakye对应的text字符串
          */
-        function _getMultiValue(data, key){
-            var keyArr = key.split(_separate),
-                valueStr = '';
-
-            _defaultKey = '';
+        function _getMultiValue(data, value){
+            var self = $(this),
+                cObj = this._cloudjsComboObj,
+                cfg = cObj.cfg,
+                valueArr = value.split(cfg.separator),
+                textStr = '';
+            cfg.defaultValue = '';
 
             if($.isArray(data)){
-                for(var i = 0; i < data.length; i ++){
-                    for(var j = 0; j < keyArr.length; j ++){
-                        if((_separate + _defaultKey).indexOf(_separate + keyArr[j] + _separate) === -1 && keyArr[j] === data[i][_comkey]){
-                            _defaultKey += data[i][_comkey] + _separate;
-                            valueStr += data[i][_comvalue] + _separate;
+                for(var i = 0; i < data.length; i++){
+                    for(var j = 0; j < valueArr.length; j++){
+                        if((cfg.separator + cfg.defaultValue).indexOf(cfg.separator + valueArr[j] + cfg.separator) === -1 && valueArr[j] === data[i][cfg.comValue]){
+                            cfg.defaultValue += data[i][cfg.comValue] + cfg.separator;
+                            textStr += data[i][cfg.comText] + cfg.separator;
                         }
                     }
                 }
-            }else if($.isPlainObject(data)){
-                for(var k = 0; k < keyArr.length; k ++){
-                    if(data[keyArr[k]]){
-                        valueStr += data[keyArr[k]] + _separate;
-                    }
-                }
             }
-            return valueStr;
+            return textStr;
         }
 
         /**
          * 通过ajax获取数据
          * @param  {Function} callback 回调函数
+         * @param  {Boolen} flag 是否是点击后加载
+         * @param  {String/Object} ajaxParams ajax参数
          */
-        function _getAjaxData(callback){
-            _ajaxIng = true;
+        function _getAjaxData(callback, flag, ajaxParams){
+            var self = this,
+                cObj = this._cloudjsComboObj,
+                cfg = cObj.cfg,
+                json;
+            ajaxParams = ajaxParams || '';
+            cfg.ajaxIng = true;
 
             $.ajax({
-                url: _url,
+                url: cfg.url,
+                type: 'post',
                 dataType: 'json',
+                data: ajaxParams,
                 success: function(data){
-                    _ajaxIng = false;
-                    _jsonData = data;
-                    _comboEle.removeClass('combo_disabled');
-                    callback();
+                    cfg.ajaxIng = false;
+                    cObj.comboEle.removeClass('combo_disabled');
+                    
+                    if(ajaxParams){
+                        json = cfg.onAjax(data) || data;
+                        callback.call(self, json, true);
+                    }else{
+                        cfg.data = cfg.onAjax(data) || data;
+
+                        callback.call(self);
+                    }
                 }
             });
         }
@@ -235,130 +233,126 @@ cloudjs.define({
          * 改变下拉列表的值
          * @param  {Object} ele 当前操作的下拉元素
          * @param  {String} targetName 当前操作元素名称
+         * @param  {Boolean} isChangeEvent 是否触发onSelect事件，全选/取消选择时，只触发一次
          */
-        function _changeSelect(ele, targetName){
-            ele = ele || _panelEle.find('.combo_item_hover');
+        function _changeSelect(ele, targetName, isChangeEvent){
+            var self = $(this),
+                cObj = this._cloudjsComboObj,
+                cfg = cObj.cfg,
+                lastValue = $.trim(cObj.hideEle.val()),
+                lastText = $.trim(cObj.showEle.val()),
+                curValue,
+                text;
+            isChangeEvent = typeof isChangeEvent === 'undefined' ? true : isChangeEvent;
+            ele = typeof ele !== 'undefined' ? $(ele) : cObj.panelEle.find('.combo_item_hover');
             targetName = targetName || '';
 
             if(targetName !== 'input'){
-                if($(ele).find('.combo_check').prop('checked')){
-                    $(ele).find('.combo_check').prop('checked', false);
+                if(ele.hasClass('combo_item_disabled')){
+                    return;
+                }
+                if(ele.find('.combo_check').prop('checked')){
+                    ele.find('.combo_check').prop('checked', false);
                 }else{
-                    $(ele).find('.combo_check').prop('checked', true);
+                    ele.find('.combo_check').prop('checked', true);
                 }
             }else{
-                ele = $(ele).parent();
+                ele = ele.parent();
             }
 
-            // if($(ele).hasClass('check_all')){
-            //     _isCheckAll = $(ele).find('.combo_check').prop('checked');    //记录全选操作
-            //     _panelEle.find('.combo_item').not('.check_all').each(function(){
-            //         $(this).find('.combo_check').prop('checked', $(ele).find('.combo_check').prop('checked'));
-            //         _changeSelect($(this).find('.combo_check'), 'input');
-            //     });
+            curValue = ele.attr('combo-value');
+            text = ele.text();
 
-            //     return;
-            // }
-
-            var lastKey = $.trim(_hideEle.val()),
-                lastValue = $.trim(_showEle.val()),
-                curKey = $(ele).attr('combo-key'),
-                value = $(ele).text(),
-                lastSeparate;
-
-            if(!_isMulti){
-                _panelEle.hide();
-                _comboObj.close();
+            if(!cfg.isMulti){
+                ele.addClass('combo_item_selected').siblings().removeClass('combo_item_selected');
+                cObj.panelEle.hide();
+                cObj.close();
             }else{
-                _showEle.blur();
-                if($(ele).find('.combo_check').prop('checked')){
-                    if((_separate + lastKey).indexOf(_separate + curKey + _separate, _separate) === -1){
-                        curKey = lastKey + curKey + _separate;
-                        value = lastValue + value + _separate;
+                if(ele.find('.combo_check').prop('checked')){
+                    ele.addClass('combo_item_selected');
+                    if(cfg.params){
+                        cfg.selectValue += curValue + cfg.separator;
+                        cfg.selectText += text + cfg.separator;
+                        _checkInput.call(self[0], cfg.selectText, false);
+                        return;
+                    }
+                    if((cfg.separator + lastValue).indexOf(cfg.separator + curValue + cfg.separator, cfg.separator) === -1){
+                        curValue = lastValue + curValue + cfg.separator;
+                        text = lastText + text + cfg.separator;
                     }else{
-                        curKey = lastKey;
-                        value = lastValue;
+                        curValue = lastValue;
+                        text = lastText;
                     }
                 }else{
-                    curKey = (_separate + lastKey).replace(_separate + curKey + _separate, _separate).replace(_separate, '');
-                    value = (_separate + lastValue).replace(_separate + value + _separate, _separate).replace(_separate, '');
+                    ele.removeClass('combo_item_selected');
+                    if(cfg.params){
+                        cfg.selectValue = (cfg.separator + cfg.selectValue).replace(cfg.separator + curValue + cfg.separator, '');
+                        cfg.selectText = (cfg.separator + cfg.selectText).replace(cfg.separator + text + cfg.separator, '');
+                        _checkInput.call(self[0], cObj.showEle.val(), false);
+                        return;
+                    }
+                    curValue = (cfg.separator + lastValue).replace(cfg.separator + curValue + cfg.separator, cfg.separator).replace(cfg.separator, '');
+                    text = (cfg.separator + lastText).replace(cfg.separator + text + cfg.separator, cfg.separator).replace(cfg.separator, '');
                 }
             }
 
-            _showEle.val(value);
-            _hideEle.val(curKey);
-            if(lastKey !== curKey){    //key值真正改变才触发onSelect
-                _comboObj.select(curKey);
-            }
-        }
-
-        /**
-         * 阻止事件冒泡
-         * @param  {Object} e 当前事件对象
-         */
-        function _stopBubble(e){
-            if(window.ActiveXObject){
-                if(window.event){
-                    window.event.cancelBubble = true;
-                }
-            }else{
-                e.stopPropagation();
+            cObj.showEle.val(text);
+            cObj.hideEle.val(curValue);
+            if(isChangeEvent && lastValue !== curValue){    //value值真正改变才触发onSelect
+                cObj.select(curValue, text);
             }
         }
 
         /**
          * 获取数据，并生成下拉html
-         * @param  {Object} 下拉数据
+         * @param  {Object}  data 下拉数据
+         * @param  {Boolean} isSearch 是否是搜索
+         * @return {String}           生成的html
          */
         function _formatDataToHtml(data, isSearch){
-            var panelHtml = '',
-                key,
+            var self = $(this),
+                cObj = this._cloudjsComboObj,
+                cfg = cObj.cfg,
+                panelHtml = '',
                 value,
-                disabledClass = '',
-                checkedStr = '',
-                dataLen = 0;
+                text,
+                disabledStr,
+                isDisabled = false,
+                isSelected = false,
+                dataLen = 0,
+                checkStr = '';
 
-            if(_isMulti && !isSearch && _showCheckAllText){
-                panelHtml += '<div class="combo_head"><span class="combo_check_all ' + (!_isCheckAll ? '' : 'combo_uncheck_all') + '">' + (!_isCheckAll ? _checkAllText : _unCheckAllText) + '</span><span class="combo_close_btn cloud_icon"></span></div>';
+            cfg.lastData = data;
+            cfg.selectValue = cfg.isFirst && !cfg.selectValue ? cfg.defaultValue : cfg.selectValue;
+            cfg.selectText = cfg.isFirst && !cfg.selectText ? cfg.defaultText : cfg.selectText;
+
+            if(cfg.isMulti && !isSearch && cfg.showCheckAllText){
+                panelHtml += '<div class="combo_head"><span class="combo_close_btn cloud_icon"></span><span class="cloudjs_btn_white combo_check_all ' + (!cfg.isCheckAll ? '' : 'combo_uncheck_all') + '">' + (!cfg.isCheckAll ? cfg.checkAllText : cfg.unCheckAllText) + '</span></div>';
             }
             if($.isArray(data)){
-                for (var i = 0; i < data.length; i++) {
-                    key = data[i][_comkey];
-                    value = data[i][_comvalue];
-                    disabledClass = data[i]['disabled'] ? 'combo_item_disabled' : '';    //可以在数据里加disabled属性
+                for(var i = 0; i < data.length; i++){
+                    value = data[i][cfg.comValue];
+                    text = data[i][cfg.comText];
+                    disabledStr = (!data[i].disabled || data[i].disabled === 'false') ? false : true;
+                    isDisabled = false;
 
-                    if(_isFirst){
-                        _strData += encodeURIComponent(value) + '#' + encodeURIComponent(key) + ',';
+                    if(cfg.isFirst){
+                        cfg.strData += encodeURIComponent(text) + '^' + encodeURIComponent(disabledStr) + '#' + encodeURIComponent(value) + ',';
+                    }
+                    if(data[i].disabled && data[i].disabled === 'true'){
+                        isDisabled = true;
                     }
 
-                    if(!(!_showAll && i >= _recordLen)){
-                        if(_isMulti){
-                            checkedStr = (_separate + $.trim(_showEle.val())).indexOf(_separate + value + _separate) !== -1 ? 'checked="checked"' : '';
-                            panelHtml += '<div class="combo_item ' + disabledClass + '" combo-key="' + key + '"><input type="checkbox" class="combo_check" ' + checkedStr + ' />' + value + '</div>';
+                    if(!(!cfg.showAll && i >= cfg.recordLen)){
+                        if(cfg.isMulti){
+                            isSelected = (cfg.separator + cfg.selectValue).indexOf(cfg.separator + value + cfg.separator) !== -1 ? true : false;
+                            checkStr = '<input style="' + (cfg.showCheckbox ? '' : 'display: none;') + '" type="checkbox" ' + (isDisabled ? 'disabled="disabled"' : '') + ' class="combo_check" ' + (isSelected ? 'checked="checked"' : '') + ' />';
+                            panelHtml += '<div class="combo_item ' + (isDisabled ? 'combo_item_disabled' : '') + (isSelected ? ' combo_item_selected' : '') + '" combo-value="' + value + '">' + checkStr + text + '</div>';
                         }else{
-                            panelHtml += '<div class="combo_item ' + disabledClass + '" combo-key="' + key + '">' + value + '</div>';
+                            isSelected = cfg.selectValue === value ? true : false;
+                            panelHtml += '<div class="combo_item ' + (isDisabled ? 'combo_item_disabled' : '') + (isSelected ? ' combo_item_selected' : '') + '" combo-value="' + value + '">' + text + '</div>';
                         }
                     }
-                }
-            }else if($.isPlainObject(data)){
-                for (var property in data) {
-                    key = property;
-                    value = data[property];
-
-                    if(_isFirst){
-                        _strData += encodeURIComponent(value) + '#' + encodeURIComponent(key) + ',';
-                    }
-
-                    if(!(!_showAll && dataLen >= _recordLen)){
-                        if(_isMulti){
-                            checkedStr = (_separate + $.trim(_showEle.val())).indexOf(_separate + value + _separate) !== -1 ? 'checked="checked"' : '';
-                            panelHtml += '<div class="combo_item" combo-key="' + key + '"><input type="checkbox" class="combo_check" ' + checkedStr + ' />' + value + '</div>';
-                        }else{
-                            panelHtml += '<div class="combo_item" combo-key="' + key + '">' + value + '</div>';
-                        }
-                    }
-
-                    dataLen ++;
                 }
             }
 
@@ -366,84 +360,218 @@ cloudjs.define({
         }
 
         /**
-         * 创建下拉列表面板
-         */
-        function _createComboPamel(){
-            _width = _width || _comboEle.innerWidth();
-
-            var top = _comboEle.outerHeight() - parseInt(_comboEle.css('border-bottom-width'), 10) - parseInt(_comboEle.css('border-top-width'), 10),
-                left = parseInt(_comboEle.css('border-left-width'), 10);
-
-            _panelEle = $('<div></div>').addClass('combo_panel').css({'z-index': _zIndex, 'width': _width, 'max-height': _height, 'top': top, 'left': -left});
-
-            _comboEle.append(_panelEle);
-        }
-
-
-        /**
          * 初始化下拉面板
          * @param  {Object} data 下拉面板数据
-         * @param  {String} data 是否搜索
+         * @param  {String} isSearch 是否是搜索
          */
         function _initSearchPanel(data, isSearch){
-            //$('html').click(); //隐藏其他的下拉列表
-            var isHidden;
+            var self = this,
+                cObj = this._cloudjsComboObj,
+                cfg = cObj.cfg,
+                isHidden,
+                retStr,
+                comboLeft = parseInt(cObj.comboEle.css('border-left-width'), 10),
+                comboHeight = cObj.comboEle.outerHeight() - parseInt(cObj.comboEle.css('border-bottom-width'), 10) - parseInt(cObj.comboEle.css('border-top-width'), 10),
+                scrollTop = $(window).scrollTop(),
+                comboTop = cObj.comboEle.offset().top,
+                screenHeight = $(window).height();
 
-            data = data || _jsonData;
-            if(_comboEle.hasClass('combo_disabled') || _showEle.prop('disabled')){
+            cObj.comboEle.css({ 'zIndex': cloudjs.zIndex() });
+
+            data = data || cfg.data;
+            cfg.width = cfg.width || cObj.comboEle.innerWidth();
+
+            if(cObj.comboEle.hasClass('combo_disabled') || cObj.showEle.prop('disabled')){
                 return;
             }
 
-            if(_isFirst){
-                _createComboPamel();
+            if(cfg.isFirst){
+                cObj.panelEle && cObj.panelEle.remove();
+                cObj.panelEle = $('<div></div>').addClass('combo_panel').css({ 'width': cfg.width, 'max-height': cfg.height, 'top': comboHeight, 'left': -comboLeft });
+                if(cfg.isMulti){
+                    cObj.panelEle.css({ 'min-width': '105px' });
+                }
+                cObj.comboEle.append(cObj.panelEle);
             }
-            isHidden = _panelEle.is(':hidden').length;
+            isHidden = cObj.panelEle.is(':hidden');
             
-            if(data){
-                _panelEle.show().html(_formatDataToHtml(data, isSearch)).unbind('click').bind('click', function(e){
-                    e = e || window.event;
+            if(data && typeof data !== 'string'){
+                if(!isSearch && !cfg.isFirst){
+                    if(typeof JSON !== 'undefined'){
+                        if(JSON.stringify(data) === '[]'){
+                            return;
+                        }
+                        if(JSON.stringify(cfg.lastData) !== JSON.stringify(data)){
+                            retStr = _formatDataToHtml.call(self, data, isSearch);
+                            if(!retStr){
+                                return;
+                            }
+                        }
+                    }else{
+                        retStr = _formatDataToHtml.call(self, data, isSearch);
+                        if(!retStr){
+                            return;
+                        }
+                    }
+                }else{
+                    retStr = _formatDataToHtml.call(self, data, isSearch);
+                    if(!retStr){
+                        cObj.panelEle.hide().find('.combo_item_hover').removeClass('combo_item_hover');
+                        return;
+                    }
+                }
+                cObj.panelEle.html(retStr);
 
-                    var target =  e.target || e.srcElement,
+                if(comboTop - scrollTop > cObj.panelEle.outerHeight() && screenHeight + scrollTop < comboHeight + comboTop + cObj.panelEle.outerHeight()){
+                    cObj.panelEle.css({bottom: comboHeight, top: 'auto'});
+                }else{
+                    cObj.panelEle.css({bottom: 'auto', top: comboHeight});
+                }
+
+                cObj.comboEle.css({ 'zIndex': cloudjs.zIndex() });
+                cObj.panelEle.show().unbind('click').bind('click', function(e){
+                    var target =  e.target,
                         curEle;
 
-                    if($(target).hasClass('combo_item') || (target.tagName.toLowerCase() === 'input' && _isMulti)){
-                        _changeSelect(target, target.tagName.toLowerCase());
+                    if($(target).hasClass('combo_item') || (target.tagName.toLowerCase() === 'input' && cfg.isMulti)){
+                        _changeSelect.call(self, target, target.tagName.toLowerCase());
                     }
 
-                    _stopBubble(e);
+                    e.stopPropagation();
                 }).find('.combo_head').bind('mouseenter', function(e) {
-                    _panelEle.find('.combo_item').removeClass('combo_item_hover');
-                }).find('.combo_check_all').unbind().bind('click', function(){  //全选、取消全选
+                    cObj.panelEle.find('.combo_item').removeClass('combo_item_hover');
+                }).find('.combo_check_all').unbind().bind('click', function(e){  //全选、取消选择
                     if($(this).hasClass('combo_uncheck_all')){
-                        $(this).removeClass('combo_uncheck_all').html(_checkAllText);
-                        _isCheckAll = false;
+                        $(this).removeClass('combo_uncheck_all').html(cfg.checkAllText);
+                        cObj.unCheckAll();
+                        cfg.isCheckAll = false;
                     }else{
-                        $(this).addClass('combo_uncheck_all').html(_unCheckAllText);
-                        _isCheckAll = true;
+                        $(this).addClass('combo_uncheck_all').html(cfg.unCheckAllText);
+                        cObj.checkAll();
+                        cfg.isCheckAll = true;
                     }
-                    _panelEle.find('.combo_item').each(function(){
-                        $(this).find('.combo_check').prop('checked', _isCheckAll);
-                        _changeSelect($(this).find('.combo_check'), 'input');
-                    });
-                }).find('.combo_close_btn').unbind().bind('click', function(){
-                    _panelEle.hide();
-                });
-                isHidden && _comboObj.open();
+                    cObj.panelEle.find('.combo_item').not('.combo_item_disabled').each(function(i){
+                        var isChangeEvent = false;
+                        $(this).find('.combo_check').prop('checked', cfg.isCheckAll);
 
-                _isFirst = false;
+                        if(i === cObj.panelEle.find('.combo_item').not('.combo_item_disabled').length - 1){    //防止多次触发onSelect
+                            isChangeEvent = true;
+                        }
+                        _changeSelect.call(self, $(this).find('.combo_check'), 'input', isChangeEvent);
+                    });
+
+                    e.stopPropagation();
+                }).end().find('.combo_close_btn').unbind().bind('click', function(e){
+                    cObj.panelEle.hide();
+                    cObj.close();
+
+                    e.stopPropagation();
+                });
+                isHidden && cObj.open();
+                if(cObj.panelEle.find('.combo_item_selected').length === 0){
+                    cObj.panelEle.find('.combo_item:eq(0)').addClass('combo_item_hover');
+                }
+
+                cObj.panelEle.find('.combo_item').unbind().bind('mouseenter', function(){
+                    $(this).addClass('combo_item_hover');
+                }).bind('mouseleave', function(){
+                    $(this).removeClass('combo_item_hover');
+                });
+
+                cfg.isFirst = false;
                 return;    //如果有本地数据，则即使有url，也不会去请求
             }
 
-            if(_url){
-                _panelEle.show().html('Loading...');
-                isHidden && _comboObj.open();
-
-                _getAjaxData(_initSearchPanel);
-
-                _isFirst = false;
+            if(cfg.url && !cfg.ajaxIng){
+                _getAjaxData.call(self, _initSearchPanel, true);
             }
         }
 
+        /**
+         * 验证键盘操作
+         * @param  {String} str 当前输入框内容
+         * @return {String}      用于搜索的内容
+         */
+        function _checkInput(str, isSearch){
+            isSearch = typeof isSearch !== 'undefined' ? isSearch : true;
+            var self = this,
+                cObj = self._cloudjsComboObj,
+                cfg = cObj.cfg,
+                strArr = str.split(cfg.separator),
+                lastseparator,
+                valueArr = cfg.selectValue.split(cfg.separator),
+                textArr = cfg.selectText.split(cfg.separator),
+                newTextArr = [],
+                newValueArr = [],
+                searchStr = strArr[strArr.length - 1],
+                newText = '',
+                newValue = '',
+                showText = '',
+                isExist;
+
+            for(var i = 0; i < valueArr.length; i++){
+                isExist = false;
+                for(var j = 0; j < strArr.length; j++){
+                    if(textArr[i] !== '' && textArr[i] === strArr[j] && $.inArray(textArr[i], newTextArr) === -1){
+                        isExist = true;
+                        newTextArr.push(textArr[i]);
+                        newValueArr.push(valueArr[i]);
+                        break;
+                    }
+                }
+                if(!isExist){
+                    cObj.panelEle.find('.combo_item:[combo-value="' + valueArr[i] + '"]').removeClass('combo_item_selected').find('.combo_check').prop('checked', false);
+                }
+            }
+            newValue = newValueArr.join(cfg.separator) ? newValueArr.join(cfg.separator) + cfg.separator : '';
+            if(newTextArr.length === 0){
+                newText = '';
+                showText = newText + searchStr;
+            }else{
+                newText = newTextArr.join(cfg.separator);
+                showText = newText;
+                if($.inArray(searchStr, newTextArr) === -1){
+                    showText = newText + cfg.separator;
+                    if(isSearch){
+                        showText = showText + searchStr;
+                    }
+                }
+                newText += cfg.separator;
+            }
+
+            cObj.showEle.val(showText);
+            cObj.hideEle.val(newValue);
+
+            if(newValue !== cfg.selectValue){
+                cObj.select(newValue, newText);
+            }
+            
+            return searchStr;
+        }
+
+        /**
+         * 获取ajax参数
+         * @param  {String} searchStr 需要替换的字符串
+         * @return {String/Object}    替换后的ajax参数
+         */
+        function _getParams(searchStr){
+            var self = this,
+                cfg = self._cloudjsComboObj.cfg,
+                ajaxParams = '';
+            searchStr = searchStr || '';
+            if(typeof cfg.params === 'string' && cfg.params.indexOf('{%s}') !== -1){
+                ajaxParams = cfg.params.replace(/{%s}/g, searchStr);
+            }else if($.isPlainObject(cfg.params)){
+                ajaxParams = {};
+                for(var key in cfg.params){
+                    ajaxParams[key] = cfg.params[key];
+                    if(cfg.params[key].indexOf('{%s}') !== -1){
+                        ajaxParams[key] = ajaxParams[key].replace(/{%s}/g, searchStr);
+                    }
+                }
+            }
+            return ajaxParams;
+        }
 
         /**
          * 创建combobox对象和其操作方法
@@ -451,170 +579,170 @@ cloudjs.define({
          */
         function _getComboObj(){
             var comboObj = {
-                defaults: defaults,
-                showEle: _showEle,
-                hideEle: _hideEle,
-                comboEle: _comboEle,
+                cfg: {},
+                create: function(){
+                    this.cfg.onCreate.apply(this, arguments);
+                },
                 open: function(){
-                    this.defaults.onOpen.apply(this, arguments);
+                    this.cfg.onOpen.apply(this, arguments);
                 },
                 close: function(){
-                    this.defaults.onClose.apply(this, arguments);
+                    this.cfg.onClose.apply(this, arguments);
+                    this.comboEle.find('.combo_item_hover').removeClass('combo_item_hover');
                 },
                 checkAll: function(){
-                    this.defaults.onClose.apply(this, arguments);
+                    this.cfg.onCheckAll.apply(this, arguments);
                 },
                 unCheckAll: function(){
-                    this.defaults.onClose.apply(this, arguments);
+                    this.cfg.onUnCheckAll.apply(this, arguments);
                 },
-                select: function(key){
-                    this.defaults.onSelect.apply(this, arguments);
+                select: function(value, text){
+                    var valueArr,
+                        data = {};
+                    data[this.cfg.comValue] = value;
+                    data[this.cfg.comText] = text;
+                    this.cfg.onSelect.call(this, data);
+                    this.cfg.selectValue = value;
+                    this.cfg.selectText = text;
 
-                    if(_isSelectTag){
-                        if(_isMulti){
-                            var keyArr = key.split(_separate);
-                            $(_self).prop('multiple', true).find('option').each(function(){
+                    if(this.cfg.isSelectTag){
+                        if(this.cfg.isMulti){
+                            valueArr = value.split(this.cfg.separator);
+                            this.self.prop('multiple', true).find('option').each(function(){
                                 if(!this.disabled){
-                                    $(this).prop('selected', $.inArray(this.value, keyArr) > -1);
+                                    $(this).prop('selected', $.inArray(this.value, valueArr) > -1);
                                 }
                             });
                         }else{
-                            $(_self).prop('multiple', false).find('option:[value="' + key + '"]').prop('selected', true);
+                            this.self.prop('multiple', false).find('option:[value="' + value + '"]').prop('selected', true);
                         }
-                        $(_self).change();
+                        this.self.change();
                     }
                 },
                 getValue: function(){
                     var data = {};
-                    data[this.defaults.comkey] = $.trim(this.showEle.val());
-                    data[this.defaults.comvalue] = $.trim(this.hideEle.val());
+                    data[this.cfg.comValue] = $.trim(this.hideEle.val());
+                    data[this.cfg.comText] = $.trim(this.showEle.val());
                     return data;
                 },
-                setValue: function(key, check){
-                    check = typeof check !== 'undefined' ? check : true;
-                    if(typeof key !== 'string'){
-                        cloudjs.util.error('设置的key值格式不正式。');
+                setValue: function(value, check){
+                    check = typeof check !== 'undefined' ? check : false;
+                    if(typeof value !== 'string'){
+                        cloudjs.util.error('设置的value值格式不正式。');
                         return;
                     }
 
-                    var jsonData = this.defaults.data,
-                        keyArr = [],
-                        value = '',
-                        setKeyStr = '';
-                        separate = this.defaults.separate;
+                    var cfg = this.cfg,
+                        jsonData = cfg.data,
+                        valueArr = [],
+                        text = '',
+                        setvalueStr = '';
+                        separator = cfg.separator;
 
-                    if(this.defaults.isMulti){
-                        keyArr = key.split(separate);
+                    if(cfg.isMulti){
+                        valueArr = value.split(separator);
                     }
 
                     if($.isArray(jsonData)){
                         for(var i = 0; i < jsonData.length; i++){
-                            if(this.defaults.isMulti){
-                                for (var j = 0; j < keyArr.length; j++) {
-                                    if(jsonData[i][this.defaults.comkey] === keyArr[j]){
-                                        value += jsonData[i][this.defaults.comvalue] + separate;
-                                        setKeyStr += keyArr[j] + separate;
+                            if(cfg.isMulti){
+                                for(var j = 0; j < valueArr.length; j++){
+                                    if(jsonData[i][cfg.comValue] === valueArr[j]){
+                                        text += jsonData[i][cfg.comText] + separator;
+                                        setvalueStr += valueArr[j] + separator;
                                     }
                                 }
                             }else{
-                                if(jsonData[i][this.defaults.comkey] === key){
-                                    setKeyStr = key;
-                                    value = jsonData[i][this.defaults.comkey];
+                                if(jsonData[i][cfg.comValue] === value){
+                                    setvalueStr = value;
+                                    text = jsonData[i][cfg.comText];
                                 }
-                            }
-                        }
-                    }else if($.isPlainObject(jsonData)){
-                        if(this.defaults.isMulti){
-                            for(var property in jsonData){
-                                for (var k = 0; k < keyArr.length; k++) {
-                                    if(jsonData[this.defaults.comkey] === keyArr[k]){
-                                        value += jsonData[this.defaults.comvalue] + separate;
-                                        setKeyStr += keyArr[k] + separate;
-                                    }
-                                }
-                            }
-                        }else{
-                            if(jsonData[key]){
-                                setKeyStr = key;
-                                value = jsonData[key];
                             }
                         }
                     }
 
-                    if(setKeyStr || !check){
-                        this.showEle.val(value);
-                        this.hideEle.val(setKeyStr);
+                    if(setvalueStr || check){
+                        this.cfg.isFirst = true;
+                        this.showEle.val(text);
+                        this.hideEle.val(setvalueStr);
+                        this.select(setvalueStr, text);
                     }else{
-                        cloudjs.util.error('设置的key值不在下拉列表中。');
+                        cloudjs.util.error('设置的value值不在下拉列表中。');
                     }
                 },
                 addData: function(data){
-                    var jsonData = this.defaults.data,
-                        newData;
+                    var cfg = this.cfg,
+                        jsonData = cfg.data,
+                        extraData = [],
+                        newData = [],
+                        isExist = false;
                     if($.isArray(jsonData) && $.isArray(data)){
-                        for (var j = 0; j < data.length; j++) {
+                        for(var j = 0; j < data.length; j++){
                             for(var i = 0; i < jsonData.length; i++){
-                                if(jsonData[i][this.defaults.comkey] === data[j][this.defaults.comkey]){
-                                    data.splice(j, 1);
-                                    j--;
+                                if(jsonData[i][cfg.comValue] === data[j][cfg.comValue]){
+                                    isExist = true;
+                                    break;
                                 }
                             }
+                            !isExist && extraData.push(data[j]);
                         }
-
-                        _jsonData = jsonData.concat(data);
-                        defaults.data = jsonData.concat(data);
-                    }else if($.isPlainObject(jsonData) && $.isPlainObject(data)){
-                        newData = {};
-                        for(var property in data){
-                            if(!jsonData[property]){
-                                newData[property] = data[property];
-                            }
-                        }
-
-                        $.extend(_jsonData, newData);
-                        $.extend(defaults, newData);
                     }else{
-                        cloudjs.util.error('新增数据与初始数据格式不符。');
-                    }
-
-                    _isFirst = true;
-                },
-                delData: function(key){
-                    if(typeof key !== 'string'){
-                        cloudjs.util.error('删除的key值格式不正式。');
+                        cloudjs.util.error('新增数据格式不正确。');
                         return;
                     }
 
-                    var jsonData = this.defaults.data,
-                        keyArr = key.split(separate),
-                        value = '',
-                        separate = this.defaults.separate;
+                    if(extraData.length !== 0){
+                        newData = jsonData.concat(extraData);
+                        this.refresh({data: newData});
+                    }
+                },
+                delData: function(value){
+                    if(typeof value !== 'string'){
+                        cloudjs.util.error('删除的value值格式不正式。');
+                        return;
+                    }
+
+                    var jsonData = this.cfg.data,
+                        separator = this.cfg.separator,
+                        valueArr = value.split(separator);
 
                     if($.isArray(jsonData)){
                         for(var i = 0; i < jsonData.length; i++){
-                            for (var j = 0; j < keyArr.length; j++) {
-                                if(jsonData[i][this.defaults.comkey] === keyArr[j]){
+                            for(var j = 0; j < valueArr.length; j++){
+                                if(jsonData[i][this.cfg.comValue] === valueArr[j]){
                                     jsonData.splice(i, 1);
                                     i--;
                                 }
                             }
                         }
-                    }else if($.isPlainObject(jsonData)){
-                        for(var property in jsonData){
-                            for (var k = 0; k < keyArr.length; k++) {
-                                if(jsonData[this.defaults.comkey] === keyArr[k]){
-                                    delete jsonData[this.defaults.comkey];
-                                }
-                            }
+                    }
+                    
+                    this.refresh({data: jsonData});
+                },
+                refresh: function(obj){
+                    this.cfg.isFirst = true;
+                    this.cfg.strData = '';
+
+                    var newCfg = {}, dfv = $.trim(this.hideEle.val());
+                    
+                    if(obj){
+                        newCfg = obj;
+                        if(!$.isPlainObject(newCfg)){
+                            cloudjs.util.error('刷新的数据格式不正式。');
+                            return;
+                        }
+                        this.cfg.data = newCfg.data || this.cfg.data;
+                        this.cfg.isMulti = typeof newCfg.isMulti !== 'undefined' ? newCfg.isMulti : this.cfg.isMulti;
+                    }else{
+                        if(this.cfg.isSelectTag){
+                            this.cfg.data = null;
+                            this.cfg.isMulti = newCfg.isMulti = this.self.prop('multiple');
+                            this.cfg.data = null;
                         }
                     }
-
-                    this.setValue($.trim(this.hideEle.val()), false);
-
-                    _jsonData = jsonData;
-                    defaults.data = jsonData;
-
-                    _isFirst = true;
+                    $.extend(this.cfg, newCfg);
+                    _init.call(this.self[0]);
+                    this.setValue(dfv, true);
                 },
                 disable: function(){
                     this.comboEle.addClass('combo_disabled');
@@ -625,96 +753,134 @@ cloudjs.define({
                     this.showEle.prop('disabled', false);
                 }
             };
+            $.extend(comboObj.cfg, defaults);
+            comboObj.cfg.isFirst = true;
+            comboObj.cfg.isSelectTag = false;
+            comboObj.cfg.defaultText = '';
+            comboObj.cfg.strData = '';
+            comboObj.cfg.ajaxIng = false;
+            comboObj.cfg.searchTimeout = null;
+            comboObj.cfg.comboObj = null;
+            comboObj.cfg.selectValue = '';
+            comboObj.cfg.selectText = '';
+            comboObj.cfg.lastData = null;
+            comboObj.cfg.isContextMenu = false;
+            comboObj.cfg.url = typeof comboObj.cfg.data === 'string' ? comboObj.cfg.data : '';
 
             return comboObj;
         }
 
-        function _bindEvent(){
-            $(_self).parent().unbind('click').bind('click', function(e){
-                _showEle.focus();
 
-                _stopBubble(e);
+        function _bindEvent(){
+            var wSefl = this,
+                wComboObj = wSefl._cloudjsComboObj,
+                wCfg = wComboObj.cfg;
+
+            wComboObj.comboEle.unbind('click').bind('click', function(e){
+                var self = $(this).children().eq(0)[0],
+                    cObj = self._cloudjsComboObj;
+
+                cObj.showEle.focus();
+                e.stopPropagation();
             });
 
-            _showEle.unbind().bind('focus', function(e){
-                _initSearchPanel();
+            wComboObj.showEle.unbind().bind('focus', function(e){
+                var self = $(this).parent().children().eq(0)[0];
+                _initSearchPanel.call(self);
             }).bind('click', function(e){
-                _stopBubble(e);
+                e.stopPropagation();
             }).bind('keyup', function(e){
-                if(e.keyCode==37 || e.keyCode==38 || e.keyCode==39 || e.keyCode==40 || e.keyCode==46 || e.keyCode==13){
-                    return;
-                }
-
-                var value = $.trim($(this).val()),
+                var self = $(this).parent().children().eq(0)[0],
+                    cObj = self._cloudjsComboObj,
+                    cfg = cObj.cfg,
+                    text = $.trim($(this).val()),
                     exg,
                     macthData = null,
                     dataArr = [],
-                    lastSeparate;
+                    ajaxParams,
+                    searchFun,
+                    tempObj;
 
-                if(_isMulti){
-                    lastSeparate = value.lastIndexOf(_separate) + 1;
-                    value = value.slice(lastSeparate);
-                }
-
-                exg = 'var exg = /[^,]*' + encodeURIComponent(value) + '[^,]*#[^,]*/gi',
-                eval(exg);
-
-                clearTimeout(_searchTimeout);    //防止输入太快，做了点延迟
-                searchFun = function(){
-                    if(_strData.toLowerCase().indexOf(encodeURIComponent(value).toLowerCase()) === -1){
-                        macthData = [];
-                    }else{
-                        macthData = _strData.match(exg);
-                    }
-
-                    for(var i = 0; i < macthData.length; i ++){
-                        dataArr[i] = {};
-                        dataArr[i][_comkey] = decodeURIComponent(macthData[i].split('#')[1]);
-                        dataArr[i][_comvalue] = decodeURIComponent(macthData[i].split('#')[0]);
-                    }
-                    
-                    _initSearchPanel(dataArr, true);
-                };
-
-                _searchTimeout = setTimeout(searchFun, 300);
-            }).bind('keydown', function(e){
-                var value = $.trim($(this).val()),
-                    itemLen = _panelEle.find('.combo_item').length,
-                    hoverEle = _panelEle.find('.combo_item_hover'),
-                    hoverIndex = hoverEle.length === 0 ? -1 : hoverEle.index();
-
-                if(value.lastIndexOf(_separate) === value.length - 1 && e.keyCode === 8){
-                    return false;
-                }
-
-                if(!itemLen){
+                if(e.keyCode === 37 || e.keyCode === 38 || e.keyCode === 39 || e.keyCode === 40 || e.keyCode === 46 || e.keyCode === 13){
                     return;
                 }
 
-                if(e.keyCode === 13){
-                    if(hoverIndex === -1){
+                clearTimeout(cfg.searchTimeout);    //防止输入太快
+                searchFun = function(){
+                    text = cfg.isMulti ? _checkInput.call(self, text) : text;
+                    exg = 'var exg = /[^,]*' + encodeURIComponent(text) + '[^,]*#[^,]*/gi',
+                    eval(exg);
+
+                    if(cfg.params){
+                        ajaxParams = _getParams.call(self, text);
+                        
+                        _getAjaxData.call(self, _initSearchPanel, false, ajaxParams);
                         return;
                     }
 
-                    _showEle.val(value).blur();
-                    _changeSelect();
-                    if(_isMulti){
-                        _showEle.focus();
+                    if(decodeURIComponent(cfg.strData).toLowerCase().indexOf(text.toLowerCase()) === -1){
+                        macthData = [];
+                    }else{
+                        macthData = cfg.strData.match(exg);
+                    }
+                    if(!macthData){
+                        macthData = [];
+                    }
+
+                    for(var i = 0; i < macthData.length; i++){
+                        tempObj = {};
+                        tempObj[cfg.comValue] = decodeURIComponent(macthData[i].split('#')[1]);
+                        tempObj[cfg.comText] = decodeURIComponent(macthData[i].split('#')[0]).split('^')[0];
+                        tempObj.disabled = decodeURIComponent(macthData[i].split('#')[0]).split('^')[1];
+
+                        if(tempObj[cfg.comText].toLowerCase().indexOf(text.toLowerCase()) !== -1){
+                            dataArr.push(tempObj);
+                        }
+                    }
+                    
+                    _initSearchPanel.call(self, dataArr, text);
+                };
+
+                cfg.searchTimeout = setTimeout(searchFun, 300);
+            }).bind('keydown', function(e){
+                var self = $(this).parent().children().eq(0)[0],
+                    cObj = self._cloudjsComboObj,
+                    cfg = cObj.cfg,
+                    panelElement = cObj.panelEle,
+                    text = $.trim($(this).val()),
+                    itemLen = cObj.panelEle.children().length,
+                    hoverEle = cObj.panelEle.find('.combo_item_hover'),
+                    curEle,
+                    hoverIndex = hoverEle.length === 0 ? -1 : hoverEle.index();
+
+                if(e.keyCode === 13){
+                    if(hoverIndex === -1){
+                        cObj.showEle.blur();
+                        return false;
+                    }
+
+                    _changeSelect.call(self);
+                    if(!cfg.isMulti){
+                        cObj.showEle.blur();
                     }
                     return;
-                }if(e.keyCode === 38){
+                }else if(e.keyCode === 38){
                     if(hoverIndex === 0 || hoverIndex === -1){
                         hoverIndex = itemLen - 1;
                     }else{
                         --hoverIndex;
                     }
-                    _panelEle.children().removeClass('combo_item_hover').eq(hoverIndex).addClass('combo_item_hover');
+                    if(panelElement.children().eq(hoverIndex).hasClass('combo_head')){
+                        --hoverIndex;
+                    }
+                    
+                    panelElement.children().removeClass('combo_item_hover').eq(hoverIndex).addClass('combo_item_hover');
 
                     //滚动条
-                    if(_panelEle.find('.combo_item_hover').position().top > _panelEle.scrollTop()){
-                        _panelEle.scrollTop(_panelEle.find('.combo_item_hover').position().top);
-                    }else if(_panelEle.find('.combo_item_hover').position().top < 0){
-                        _panelEle.scrollTop(_panelEle.scrollTop() - _panelEle.find('.combo_item_hover').outerHeight());
+                    if(panelElement.find('.combo_item_hover').position().top > panelElement.scrollTop()){
+                        panelElement.scrollTop(panelElement.find('.combo_item_hover').position().top);
+                    }else if(panelElement.find('.combo_item_hover').position().top < 0){
+                        panelElement.scrollTop(panelElement.scrollTop() - panelElement.find('.combo_item_hover').outerHeight());
                     }
                 }else if(e.keyCode === 40){
                     if(hoverIndex < itemLen - 1){
@@ -722,78 +888,98 @@ cloudjs.define({
                     }else{
                         hoverIndex = 0;
                     }
-                    _panelEle.children().removeClass('combo_item_hover').eq(hoverIndex).addClass('combo_item_hover');
+                    if(panelElement.children().eq(hoverIndex).hasClass('combo_head')){
+                        ++hoverIndex;
+                    }
+                    
+                    panelElement.children().removeClass('combo_item_hover').eq(hoverIndex).addClass('combo_item_hover');
 
                     //滚动条
-                    if(_panelEle.find('.combo_item_hover').position().top >= _panelEle.outerHeight() - _panelEle.find('.combo_item_hover').outerHeight()){
-                        _panelEle.scrollTop(_panelEle.scrollTop() + _panelEle.find('.combo_item_hover').outerHeight());
-                    }else if(_panelEle.find('.combo_item_hover').position().top < 0){
-                        _panelEle.scrollTop(0);
+                    if(panelElement.find('.combo_item_hover').position().top >= panelElement.outerHeight() - panelElement.find('.combo_item_hover').outerHeight()){
+                        panelElement.scrollTop(panelElement.scrollTop() + panelElement.find('.combo_item_hover').outerHeight());
+                    }else if(panelElement.find('.combo_item_hover').position().top < 0){
+                        panelElement.scrollTop(0);
                     }
                 }
-            }).bind('blur', function(e){
-                if(!_checkKey && !_isMulti){
+            }).bind('blur', function(){
+                var self = $(this).parent().children().eq(0)[0],
+                    cObj = self._cloudjsComboObj,
+                    cfg = cObj.cfg,
+                    text = $.trim($(self).val()),
+                    textIndex,
+                    lastValue = $.trim(cObj.hideEle.val()),
+                    curValue = '',
+                    textArr = [],
+                    valueArr = [],
+                    arrLen;
+
+                if(!cfg.checkValue && !cfg.isMulti){
                     return;
                 }
 
-                var value = $.trim($(this).val()),
-                    valueIndex,
-                    lastKey = $.trim(_hideEle.val()),
-                    curKey = '',
-                    valArr = [];
-
-                if(!value){
-                    _hideEle.val('');
+                if(!text){
+                    cObj.hideEle.val('');
                     return;
                 }
 
-                if(_isMulti){
-                    valArr = value.split(_separate);
-                    value = '';
+                if(cfg.isMulti){
+                    valueArr = lastValue.split(cfg.separator);
+                    if(cfg.params){
+                        _checkInput.call(self, text, false);
+                        return;
+                    }
+                    text = '';
 
-                    for (var i = 0; i < valArr.length; i++) {
-                        if((',' + _strData).indexOf(',' + encodeURIComponent(valArr[i]) + '#') !== -1 && (_separate + value + _separate).indexOf(valArr[i]) === -1){
-                            value += valArr[i] + _separate;
-                            curKey += decodeURIComponent(_strData.split(encodeURIComponent(valArr[i]) + '#')[1].split(',')[0]) + _separate;
+                    for(var i = 0; i < valueArr.length; i++){
+                        if((',' + cfg.strData).indexOf('#' + encodeURIComponent(valueArr[i]) + ',') !== -1){
+                            arrLen = cfg.strData.split('#' + encodeURIComponent(valueArr[i]) + ',')[0].split(',').length;
+                            text += decodeURIComponent(cfg.strData.split('#' + encodeURIComponent(valueArr[i]) + ',')[0].split(',')[arrLen - 1].split('^')[0]) + cfg.separator;
                         }
                     }
-
-                    $(this).val(value);
-                    if(curKey !== lastKey){
-                        _hideEle.val(curKey);
-                        _comboObj.select(curKey);
-                    }
+                    curValue = lastValue;
                 }else{
-                    valueIndex = (',' + _strData).indexOf(',' + encodeURIComponent(value) + '#');
-                    if(valueIndex !== -1){
-                        curKey = decodeURIComponent(_strData.split(encodeURIComponent(value) + '#')[1].split(',')[0]);
-
-                        if(curKey !== lastKey){
-                            _hideEle.val(curKey);
-                            _comboObj.select(curKey);
-                        }
+                    textIndex = (',' + cfg.strData).indexOf(',' + encodeURIComponent(text) + '^');
+                    if(textIndex !== -1){
+                        curValue = decodeURIComponent(cfg.strData.split(encodeURIComponent(text) + '^')[1].split(',')[0].split('#')[1]);
+                        text = $(self).val();
                     }else{
-                        _hideEle.val('');
-                        $(this).val('');
+                        curValue = '';
+                        text = '';
                     }
                 }
+                $(self).val(text);
+                if(curValue !== lastValue){
+                    cObj.hideEle.val(curValue);
+                    cObj.select(curValue, text);
+                }
+            }).bind('input', function(){
+                $(this).keyup();
+            }).bind('contextmenu', function(){
+                wCfg.isContextMenu = true;
             });
 
+            if('onpropertychange' in this._cloudjsComboObj.showEle[0]){
+                wComboObj.showEle[0].onpropertychange = function(){
+                    var self = $(this).parent().children().eq(0)[0],
+                        cObj = self._cloudjsComboObj,
+                        cfg = cObj.cfg;
 
-            $('.combo_item').live('mouseenter', function(){
-                $(this).addClass('combo_item_hover').siblings().removeClass('combo_item_hover');
-            });
-
+                    if(cfg.isContextMenu && !cfg.isFirst){
+                        cObj.showEle.keyup();
+                        cfg.isContextMenu = false;
+                    }
+                };
+            }
 
             $('html').bind('click', function(){
-                var isVisible = false;
-                if(_panelEle && _panelEle.is(':visible')){
-                    isVisible = true;
-                }
-                _panelEle && _panelEle.hide();
-                _panelEle && isVisible && _comboObj.close();
+                $('.combo_panel:visible').each(function(){
+                    var self = $(this).parent().children().eq(0)[0];
+
+                    self._cloudjsComboObj.panelEle.hide();
+                    self._cloudjsComboObj.close();
+                });
             });
         }
     },
-    require: ['../css/blue/combobox.css']
+    require: ['../css/' + cloudjs.themes() + '/combobox.css']
 });

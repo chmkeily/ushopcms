@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="x-ua-compatible" content="IE=edge">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>图片轮播组件</title>
+    <title>轮播组件</title>
     <link rel="stylesheet" href="../css/global.css"/>
     <link rel="stylesheet" href="../css/prettify.css"/>
     <script src="../../js/jquery.min.js"></script>
@@ -12,12 +12,13 @@
     <script src="../js/global.js"></script>
 </head>
 <body class="body_bg">
+    <div class="primary">
 <div class="comps_header">
     <h2 class="comps_name">图片轮播组件</h2>
     <p>让你的图片展示得更优雅</p>
 </div>
 <div class="comps_summary">
-    <h3>cloudjs(selector).slide([options]) <i class="gray">options={'属性名':'属性值',...}</i></h3>
+    <h3>cloudjs(selector).slide([options])</h3>
 </div>
 <div class="detail_content">
     <h4>属性</h4>
@@ -34,79 +35,85 @@
                 <td>direction</td>
                 <td>string</td>
                 <td>x</td>
-                <td>轮播的方向,可选'x','y',分别表示延x轴轮播和延y轴轮播</td>
+                <td>轮播的方向,可选'x','y',分别表示延x轴轮播和延y轴轮播。<a href="#eg2" class="exp">示例2</a></td>
             </tr>
             <tr>
                 <td>duration</td>
                 <td>number</td>
                 <td>500</td>
-                <td>每次轮播动画持续的时间</td>
+                <td>每次轮播动画持续的时间。<a href="#eg3" class="exp">示例3</a></td>
             </tr>
             <tr>
                 <td>effects</td>
                 <td>string</td>
                 <td>slide</td>
-                <td>轮播动画效果，可选'slide'，'fade'，'cutout'</td>
+                <td>轮播动画效果，可选'slide'，'fade'，'cutout'。<a href="#eg3" class="exp">示例3</a></td>
             </tr>
             <tr>
                 <td>isAuto</td>
                 <td>boolean</td>
                 <td>true</td>
-                <td>是否自动轮播</td>
+                <td>是否自动轮播。<a href="#eg4" class="exp">示例4</a></td>
             </tr>
             <tr>
                 <td>order</td>
                 <td>string</td>
                 <td>forward</td>
-                <td>自动轮播的顺序，可选'forward'和'reverse',分别表示正向轮播和逆向轮播</td>
+                <td>自动轮播的顺序，可选'forward'和'reverse',分别表示正向轮播和逆向轮播。<a href="#eg4" class="exp">示例4</a></td>
             </tr>
             <tr>
                 <td>interval</td>
                 <td>number</td>
                 <td>5000</td>
-                <td>每次轮播的时间间隔</td>
+                <td>每次轮播的时间间隔。<a href="#eg4" class="exp">示例4</a></td>
             </tr>
             <tr>
                 <td>isCycle</td>
                 <td>boolean</td>
                 <td>true</td>
-                <td>是否允许循环轮播</td>
+                <td>是否允许循环轮播。<a href="#eg4" class="exp">示例4</a></td>
             </tr>
             <tr>
                 <td>startIndex</td>
                 <td>number</td>
                 <td>0</td>
-                <td>开始的索引位置</td>
+                <td>开始的索引位置。<a href="#eg2" class="exp">示例2</a></td>
             </tr>
             <tr>
                 <td>isShowAnchor</td>
                 <td>boolean</td>
                 <td>true</td>
-                <td>是否展示锚点</td>
+                <td>是否展示锚点。<a href="#eg5" class="exp">示例5</a></td>
             </tr>
             <tr>
                 <td>anchorOffsetLeft</td>
                 <td>number</td>
                 <td></td>
-                <td>锚点偏移左部的距离</td>
+                <td>锚点偏移左部的距离。<a href="#eg5" class="exp">示例5</a></td>
             </tr>
             <tr>
                 <td>anchorOffsetTop</td>
                 <td>number</td>
                 <td></td>
-                <td>锚点偏移顶部的距离</td>
+                <td>锚点偏移顶部的距离。<a href="#eg5" class="exp">示例5</a></td>
             </tr>
             <tr>
                 <td>isShowArrow</td>
                 <td>boolean</td>
                 <td>true</td>
-                <td>是否展示向前向后箭头</td>
+                <td>是否展示向前向后箭头。<a href="#eg5" class="exp">示例5</a></td>
+            </tr>
+            <tr>
+                <td>enableMouseEnter</td>
+                <td>boolean</td>
+                <td>true</td>
+                <td>鼠标移入是否暂停自动轮播。<a href="#eg2" class="exp">示例2</a></td>
             </tr>
             <tr>
                 <td>onChange</td>
                 <td>function</td>
                 <td></td>
-                <td>每次轮播之后触发的函数，参数为当前索引位置。</td>
+                <td>每次轮播之后触发的函数，参数为当前索引位置。<a href="#eg6" class="exp">示例6</a></td>
             </tr>
 
             </tbody>
@@ -132,29 +139,28 @@
             <tr>
                 <td>toNext</td>
                 <td></td>
-                <td>轮播到下一页</td>
+                <td>轮播到下一页。<a href="#eg7" class="exp">示例7</a></td>
             </tr>
             <tr>
                 <td>toPrev</td>
                 <td></td>
-                <td>轮播到上一页</td>
+                <td>轮播到上一页。<a href="#eg7" class="exp">示例7</a></td>
             </tr>
             <tr>
                 <td>toIndex</td>
                 <td>number</td>
-                <td>轮播到指定的索引位置</td>
+                <td>轮播到指定的索引位置。<a href="#eg7" class="exp">示例7</a></td>
             </tr>
             </tbody>
         </table>
     </div>
 </div>
 
-
-
 <div class="detail_content">
     <h4>示例</h4>
     <div>
-        <h5>示例1：最简单的调用方式，将页面上的节点生成轮播组件，节点的html结构如下html源码所示，使用class="slide_item"标示每个轮播的节点</h5>
+        <h5>示例1：简单的轮播组件</h5>
+        <p>将页面上的节点生成轮播组件，节点的html结构如下html源码所示，使用class="slide_item"标示每个轮播的节点</p>
         <div class="example_html_1">
 <div id="slide_1_1" style="width:400px;height:200px;margin-left:20px;">
     <div class="slide_item"><img src="../images/a.jpg" style="width:100%;height:100%" /></div>
@@ -177,7 +183,8 @@ cloudjs('#slide_1_2').slide();
     </div>
 
     <div>
-        <h5>示例2：设置不同的direction参数，控制不同的轮播方向，默认为'x'；设置startIndex参数，选择开始的索引位置</h5>
+        <h5>示例2：控制轮播方向，开始的索引位置，鼠标移入是否暂停自动轮播</h5>
+        <p>设置不同的direction参数，控制不同的轮播方向，默认为'x'；设置startIndex参数，选择开始的索引位置，设置enableMouseEnter参数，控制鼠标移入是否暂停自动轮播</p>
         <div class="example_html_2">
 <div id="slide_2_1" style="width:400px;height:200px;margin:20px;">
     <div class="slide_item"><img src="../images/a.jpg" style="width:100%;height:100%" /></div>
@@ -194,13 +201,14 @@ cloudjs('#slide_1_2').slide();
         </div>
         <script class="example_js_2">
 cloudjs('#slide_2_1').slide({direction: 'x', startIndex: 1});
-cloudjs('#slide_2_2').slide({direction: 'y'});
+cloudjs('#slide_2_2').slide({direction: 'y', enableMouseEnter: false});
         </script>
         <script>writeCode('.example_html_2');writeCode('.example_js_2');</script>
     </div>
 
     <div>
-        <h5>示例3：设置duration参数，可以改变轮播动画的持续时间；设置effect参数，可以改变轮播的动画效果</h5>
+        <h5>示例3：改变轮播动画的持续时间和动画效果</h5>
+        <p>设置duration参数，可以改变轮播动画的持续时间；设置effect参数，可以改变轮播的动画效果</p>
         <div class="example_html_3">
 <div id="slide_3" style="width:400px;height:200px;margin:20px;">
     <div class="slide_item"><img src="../images/a.jpg" style="width:100%;height:100%" /></div>
@@ -216,7 +224,8 @@ cloudjs('#slide_3').slide({duration: 200, effects: 'fade'});
     </div>
 
     <div>
-        <h5>示例4：设置isCycle参数，控制是否允许循环轮播；isAuto参数，设置是否自动轮播；order参数，设置自动轮播的顺序；interval参数，设置自动轮播的时间间隔</h5>
+        <h5>示例4：允许循环轮播,自动轮播，控制自动轮播的顺序，自动轮播的时间间隔</h5>
+        <p>设置isCycle参数，控制是否允许循环轮播；isAuto参数，设置是否自动轮播；order参数，设置自动轮播的顺序；interval参数，设置自动轮播的时间间隔</p>
 <div class="example_html_4">
 <div id="slide_4_1" style="width:400px;height:200px;margin:20px;">
     <div class="slide_item"><img src="../images/a.jpg" style="width:100%;height:100%" /></div>
@@ -239,8 +248,9 @@ cloudjs('#slide_4_2').slide({isAuto: true, isCycle: true, order: 'reverse', inte
     </div>
 
     <div>
-        <h5>示例5：设置isShowAnchor参数，控制是否展示锚点；设置isShowArrow参数，控制是否展示向前向后箭头；设置anchorOffsetLeft和anchorOffsetTop参数，控制锚点的位置；容器内 也可以使用class=".slide_nav"自定义锚点,设置slide_anchor的css值，可设置锚点的样式，设置slide_anchor_active的css值，可以改变选中时的样式。
+        <h5>示例5：控制是否展示锚点，向前向后箭头；控制锚点的位置和样式
 </h5>
+        <p>设置isShowAnchor参数，控制是否展示锚点；设置isShowArrow参数，控制是否展示向前向后箭头；设置anchorOffsetLeft和anchorOffsetTop参数，控制锚点的位置；容器内 也可以使用class=".slide_nav"自定义锚点,设置slide_anchor的css值，可设置锚点的样式，设置slide_anchor_active的css值，可以改变选中时的样式。</p>
         <div class="example_html_5">
 <div id="slide_5_1" style="width:400px;height:200px;margin:20px;">
     <div class="slide_item"><img src="../images/a.jpg" style="width:100%;height:100%" /></div>
@@ -248,6 +258,7 @@ cloudjs('#slide_4_2').slide({isAuto: true, isCycle: true, order: 'reverse', inte
     <div class="slide_item"><img src="../images/c.jpg" style="width:100%;height:100%" /></div>
     <div class="slide_item"><img src="../images/d.jpg" style="width:100%;height:100%" /></div>
 </div>
+
 <div id="slide_5_2" style="width:400px;height:200px;margin:20px;">
     <div class="slide_item"><img src="../images/a.jpg" style="width:100%;height:100%" /></div>
     <div class="slide_item"><img src="../images/b.jpg" style="width:100%;height:100%" /></div>
@@ -280,6 +291,25 @@ cloudjs('#slide_4_2').slide({isAuto: true, isCycle: true, order: 'reverse', inte
     </div>
 </div>
 
+<div id="slide_5_4" style="width:400px;height:200px;margin:20px;display:none;">
+    <div>
+        <img src="http://test.cloudjs.wsd.com/cloudJs/api/images/a.jpg" style="width:100%;height:100%" />
+        <p style="position: absolute;bottom:0px;;padding:5px 8px; margin:0px;left:0;height:20px;width:100%;background:#000000;color:#FFFFFF">野花</p>
+    </div>
+    <div>
+        <img src="http://test.cloudjs.wsd.com/cloudJs/api/images/b.jpg" style="width:100%;height:100%" />
+        <p style="position: absolute;bottom:0px;padding:5px 8px; margin:0px;left:0;height:20px;width:100%;background:#000000;color:#FFFFFF">卡通</p>
+    </div>
+    <div>
+        <img src="http://test.cloudjs.wsd.com/cloudJs/api/images/c.jpg" style="width:100%;height:100%" />
+        <p style="position: absolute;bottom:0px;padding:5px 8px; margin:0px;left:0;height:20px;width:100%;background:#000000;color:#FFFFFF">天空</p>
+    </div>
+    <div>
+        <img src="http://test.cloudjs.wsd.com/cloudJs/api/images/d.jpg" style="width:100%;height:100%" />
+        <p style="position: absolute;bottom:0px;padding:5px 8px; margin:0px;left:0;height:20px;width:100%;background:#000000;color:#FFFFFF">女生</p>
+    </div>
+</div>
+
 <style type="text/css">
     #slide_5_3 .slide_anchor{
         margin-left:5px;
@@ -298,14 +328,15 @@ cloudjs('#slide_4_2').slide({isAuto: true, isCycle: true, order: 'reverse', inte
         <script class="example_js_5">
 cloudjs('#slide_5_1').slide({isShowAnchor: false});
 cloudjs('#slide_5_2').slide({isShowArrow: false});
-cloudjs('#slide_5_3').slide({anchorOffsetLeft:143,anchorOffsetTop:139,isAuto:false});
+cloudjs('#slide_5_3').slide({anchorOffsetLeft:143, anchorOffsetTop:139, isAuto:false});
+cloudjs('#slide_5_4').slide({anchorOffsetLeft:143, anchorOffsetTop:139, isAuto:false, anchorOffsetLeft:327, anchorOffsetTop:170});
         </script>
         <script>writeCode('.example_html_5');writeCode('.example_js_5');</script>
     </div>
 
-
     <div>
-        <h5>示例6：设置onChange函数，每次轮播之后都会触发的onChange函数，参数为当前索引位置</h5>
+        <h5>示例6：轮播触发的回调函数</h5>
+        <p>设置onChange函数，每次轮播之后都会触发的onChange函数，参数为当前索引位置</p>
         <div class="example_html_6">
 <div id="slide_6" style="width:400px;height:200px;margin:20px;">
     <div class="slide_item"><img src="../images/a.jpg" style="width:100%;height:100%" /></div>
@@ -326,7 +357,8 @@ cloudjs('#slide_6').slide({
     </div>
 
     <div>
-        <h5>示例7：使用prev方法，轮播到上一页；next方法，轮播到下一页；to方法，轮播到指定的索引位置</h5>
+        <h5>示例7：轮播上一页，下一页，轮播到指定页方法</h5>
+        <p>使用toPrev方法，轮播到上一页；toNext方法，轮播到下一页；toIndex方法，轮播到指定的索引位置</p>
     <div class="example_html_7">
 <div id="slide_7" style="width:400px;height:200px;margin:20px;">
     <div class="slide_item"><img src="../images/a.jpg" style="width:100%;height:100%" /></div>
@@ -339,7 +371,7 @@ cloudjs('#slide_6').slide({
 <input type="button" value="轮播到此页" id="slide_to_btn" style="margin-left:20px;" />
 <input type="text" value="0" id="slide_to_num" style="width:30px;margin-left:2px;" />
     </div>
-        <script class="example_js_10">
+        <script class="example_js_7">
 cloudjs('#slide_7').slide({isCycle: true});
 
 $('#slide_prev_btn').bind('click', function(){
@@ -355,7 +387,10 @@ $('#slide_to_btn').bind('click', function(){
         </script>
         <script>writeCode('.example_html_7');writeCode('.example_js_7');</script>
     </div>
-
 </div>
+    </div>
 </body>
 </html>
+
+
+

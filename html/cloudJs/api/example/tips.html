@@ -12,12 +12,13 @@
 	<script src="../js/global.js"></script>
 </head>
 <body class="body_bg">
+    <div class="primary">
     <div class="comps_header">
         <h2 class="comps_name">tips提示组件</h2>
         <p>用于页面元素的信息提示</p>
     </div>
     <div class="comps_summary">
-        <h3>cloudjs(selector).tips([options]) <i class="gray">options={'属性名':'属性值',...}</i></h3>
+        <h3>cloudjs(selector).tips([options])</h3>
     </div>
     <div class="detail_content">
 		<h4>属性</h4>
@@ -34,55 +35,67 @@
                         <td>track</td>
                         <td>boolean</td>
                         <td>false</td>
-                        <td>设置提示信息是否跟随鼠标移动，默认不随鼠标移动</td>
+                        <td>设置提示信息是否跟随鼠标移动，默认不随鼠标移动，详见<a href="#eg2" class="exp">示例2</a></td>
                     </tr>
 					<tr>
 						<td>title</td>
 						<td>string/function(ele, callback)</td>
 						<td></td>
-						<td>设置提示的信息文字，如果被作用的元素本身也有title属性值，则优先使用设置的title属性值，如果两者都没有设置title，则不会出现提示信息，在这里设置的title也可以是一个方法，该方法会传入一个callback参数，调用方将要设置的title传入callback即可</td>
+						<td>设置提示的信息文字，如果被作用的元素本身也有title属性值，则优先使用设置的title属性值，如果两者都没有设置title，则不会出现提示信息，在这里设置的title也可以是一个方法，该方法会传入一个callback参数，调用方将要设置的title传入callback即可，详见<a href="#eg1" class="exp">示例1</a></td>
 					</tr>
 					<tr>
                         <td>position</td>
                         <td>string</td>
                         <td></td>
-                        <td>设置提示信息出现的方位，有left、right、up、down四种，如果不设置，则按照组件自动计算的方位</td>
+                        <td>设置提示信息出现的方位，有left、right、up、down、down_right、down_left、up_right、up_left八种，如果不设置，则按照组件自动计算的方位，当你设置的position会导致tips超出边界的时候，组件也会自动调整position，详见<a href="#eg2" class="exp">示例2</a></td>
                     </tr>
 					<tr>
 						<td>hover</td>
 						<td>boolean</td>
 						<td>false</td>
-						<td>是否支持鼠标移到提示信息上时，提示信息不消失，方便拷贝</td>
+						<td>是否支持鼠标移到提示信息上时，提示信息不消失，方便拷贝，详见<a href="#eg4" class="exp">示例4</a></td>
 					</tr>
 					<tr>
 	                     <td>hideOnFocus</td>
 	                     <td>boolean</td>
 	                     <td>true</td>
-	                     <td>鼠标单击目标元素时，提示信息是否消失（此时鼠标还在目标元素区域内）</td>
+	                     <td>鼠标单击目标元素时，提示信息是否消失（此时鼠标还在目标元素区域内），详见<a href="#eg9" class="exp">示例9</a></td>
                     </tr>
                     <tr>
 	                     <td>isContainer</td>
 	                     <td>boolean</td>
 	                     <td>false</td>
-	                     <td>是否容器，当为容器时，内部的包含有title的元素也会被设置作用到tips</td>
+	                     <td>是否容器，当为容器时，内部的包含有title的元素也会被设置作用到tips，详见<a href="#eg7" class="exp">示例7</a></td>
                     </tr>
                     <tr>
 	                     <td>loading</td>
 	                     <td>string</td>
 	                     <td>loading</td>
-	                     <td>title为回调函数时显示加载的文本内容</td>
+	                     <td>title为回调函数时显示加载的文本内容，详见<a href="#eg8" class="exp">示例8</a></td>
                     </tr>
                     <tr>
                         <td>showDelay</td>
                         <td>number</td>
                         <td>200</td>
-                        <td>鼠标移动到目标元素后tips多长时间内出现，默认是200表示延迟200ms出现</td>
+                        <td>鼠标移动到目标元素后tips多长时间内出现，默认是200表示延迟200ms出现，详见<a href="#eg6" class="exp">示例6</a></td>
                     </tr>
                     <tr>
                         <td>hideDelay</td>
                         <td>number</td>
                         <td>300</td>
-                        <td>当鼠标离开目标元素后tips多长时间后消失，默认是300表示300ms后消失</td>
+                        <td>当鼠标离开目标元素后tips多长时间后消失，默认是300表示300ms后消失，详见<a href="#eg6" class="exp">示例6</a></td>
+                    </tr>
+                    <tr>
+                        <td>width</td>
+                        <td>number</td>
+                        <td>300</td>
+                        <td>设置tips的宽，详见<a href="#eg2" class="exp">示例10</a></td>
+                    </tr>
+                    <tr>
+                        <td>height</td>
+                        <td>number</td>
+                        <td>150</td>
+                        <td>设置tips的高，当内容超出设置的宽高的时候，tips将会出现滚动条，详见<a href="#eg2" class="exp">示例10</a></td>
                     </tr>
 				</tbody>
 			</table>
@@ -106,12 +119,12 @@
                     <tr>
                         <td>setData</td>
                         <td></td>
-                        <td>重新设置属性值，分永久设置和临时设置，永久设置会作用于后面重新弹出的提示信息，而临时设置作用于当前弹出的提示信息</td>
+                        <td>重新设置属性值，分永久设置和临时设置，永久设置会作用于后面重新弹出的提示信息，而临时设置作用于当前弹出的提示信息，详见<a href="#eg9" class="exp">示例9</a></td>
                     </tr>
                     <tr>
                         <td>destroy</td>
                         <td></td>
-                        <td>销毁tips，可通过传入isContainer来设置是否销毁容器内的所有tips</td>
+                        <td>销毁tips，可通过传入isContainer来设置是否销毁容器内的所有tips，详见<a href="#eg10" class="exp">示例10</a></td>
                     </tr>
                 </tbody>
             </table>
@@ -122,7 +135,7 @@
         <h4>示例</h4>
         
         <div>
-            <h5>示例1：给元素设置tips提示信息</h5>
+            <h5><a name="eg1"></a>示例1：给元素设置tips提示信息</h5>
 <div class="example_html_1"> 
 <input type="text" class="tips_input1" title="登记人: yauewu<br>审批人：heryli<br>状态：审批中<br>有效期：2015-05-16">
 </div>
@@ -133,7 +146,7 @@ cloudjs('.tips_input1').tips();//  最常用法
         </div>		
 			
         <div class="mt60">
-            <h5>示例2：让tips跟随鼠标移动</h5>
+            <h5><a name="eg2"></a>示例2：让tips跟随鼠标移动</h5>
 <div class="example_html_2 mb20">
 <input type="text" class="tips_input2" title="请输入机器所在机房地址">
 </div>
@@ -144,7 +157,7 @@ cloudjs('.tips_input2').tips({ track: true, position: 'right' });//  设置鼠�
         </div>
         
         <div class="mt60">
-        	<h5>示例3：鼠标点击目标元素时tips不消失</h5>
+        	<h5><a name="eg3"></a>示例3：鼠标点击目标元素时tips不消失</h5>
 <div class="example_html_3 mb20">
 <input type="text" class="tips_input3" title="请输入机器所在机房地址">
 </div>
@@ -155,7 +168,7 @@ cloudjs('.tips_input3').tips({ hideOnFocus: false });//  设置鼠标点击目�
         </div>
         
         <div class="mt60">
-        	<h5>示例4：鼠标移动到tips上时tips不消失，方便如拷贝tips内的ip</h5>
+        	<h5><a name="eg4"></a>示例4：鼠标移动到tips上时tips不消失，方便如拷贝tips内的ip</h5>
 <div class="example_html_4 mb20">
 <input type="text" class="tips_input4" title="请输入机器ip如：172.10.23.2">
 </div>
@@ -166,18 +179,25 @@ cloudjs('.tips_input4').tips({ hover: true });//  设置鼠标移动到tips上�
         </div>
         
         <div class="mt60">
-        	<h5>示例5：设置目标元素相对tips提示的位置</h5>
+        	<h5><a name="eg5"></a>示例5：设置目标元素相对tips提示的位置</h5>
 <div class="example_html_5 mb20">
-<input type="text" class="tips_input5" title="请输入机器ip如：172.10.23.2">
+<input type="text" class="tips_input5" title="
+<div style='font-weight:bold;'>该node无效，可能是TAF机器死机或者网络异常。</div>
+<div>请尝试以下方式进行排查：</div>
+<div><b>a、</b><font color=red>检查机器是否死机，如果死机，请联系机器责任人处理死机机器</font></div>
+<div><b>b、</b><font color=red>如果机器没死机，查看tafnode进程是否存活，如果不存活，请联系MIG_Cloud_Helper协助解决</font></div>
+<div><b>c、</b><font color=red>如果机器死机或者已经回收，需要下线服务，请点击
+<font color=blue>当前鼠标上的图标</font>来修改服务状态，然后下线服务</font>
+</div>">
 </div>
             <script class="example_js_5">
-cloudjs('.tips_input5').tips({ position: 'right' });//  设置在右边出现tips
+cloudjs('.tips_input5').tips({ position: 'up_right', track: true, hover: true });//  设置在右上方出现tips
             </script>
             <script>writeCode('.example_html_5');writeCode('.example_js_5');</script>
         </div>
         
         <div class="mt60">
-        	<h5>示例6：设置鼠标移动到目标元素上多长时间后出现tips和移开后tips多久消失</h5>
+        	<h5><a name="eg6"></a>示例6：设置鼠标移动到目标元素上多长时间后出现tips和移开后tips多久消失</h5>
 <div class="example_html_6 mb20">
 <input type="text" class="tips_input6" title="请输入机器ip如：172.10.23.2">
 </div>
@@ -188,7 +208,7 @@ cloudjs('.tips_input6').tips({ showDelay: 2000, hideDelay: 3000 });//  设置2�
         </div>
         
         <div class="mt60">
-        	<h5>示例7：设置目标元素为容器，这样所有包含在里面的含有title属性的元素就会被tips作用</h5>
+        	<h5><a name="eg7"></a>示例7：设置目标元素为容器，这样所有包含在里面的含有title属性的元素就会被tips作用</h5>
 <div class="example_html_7 mb20">
 <div class="tips_div7">
 	&nbsp;<input type="text" title="天天向上">
@@ -205,7 +225,7 @@ cloudjs('.tips_div7').tips({ isContainer: true });//  设置目标元素为容�
         </div>
         
         <div class="mt60">
-        	<h5>示例8：利用title回调方法动态设置tips内容，适用于有网络请求场景</h5>
+        	<h5><a name="eg8"></a>示例8：利用title回调方法动态设置tips内容，适用于有网络请求场景</h5>
 <div class="example_html_8 mb20">
 <input type="text" class="tips_input8" value="腾讯">
 </div>
@@ -223,7 +243,7 @@ cloudjs('.tips_input8').tips({
         </div>
         
         <div class="mt60">
-        	<h5>示例9：调用setData方法，动态设置title</h5>
+        	<h5><a name="eg9"></a>示例9：调用setData方法，动态设置title</h5>
 <div class="example_html_9 mb20">
 <input type="button" class="tips_btn9" value="&nbsp;保&nbsp;存&nbsp;" title="点击保存">
 </div>
@@ -241,16 +261,27 @@ $('.tips_btn9').click(function(){
         </div>
         
         <div class="mt60">
-        	<h5>示例10：综合示例</h5>
+        	<h5><a name="eg10"></a>示例10：设置tips宽高</h5>
 <div class="example_html_10 mb20">
-<input type="text" class="tips_input10" title="请输入机房所在区域">
-<input type="button" class="tips_btn10a ml30" value="点击我试试" title="点击可以复制">
-<input type="button" class="tips_btn10b ml30" value="点我销毁左边的tips组件">
-<input type="button" class="tips_btn10c ml30" value="点我重新绑定tips组件">
+<input type="text" class="tips_input10" title="请输入机器所在机房地址">
 </div>
             <script class="example_js_10">
+cloudjs('.tips_input10').tips({ height: 150, width: 300 , hideDelay: 50000});
+            </script>
+            <script>writeCode('.example_html_10');writeCode('.example_js_10');</script>
+        </div>
+        
+        <div class="mt60">
+        	<h5><a name="eg11"></a>示例11：综合示例</h5>
+<div class="example_html_11 mb20">
+<input type="text" class="tips_input11" title="请输入机房所在区域">
+<input type="button" class="tips_btn11a ml30" value="点击我试试" title="点击可以复制">
+<input type="button" class="tips_btn11b ml30" value="点我销毁左边的tips组件">
+<input type="button" class="tips_btn11c ml30" value="点我重新绑定tips组件">
+</div>
+            <script class="example_js_11">
 function bind(){
-    cloudjs('.tips_input10').tips({ 
+    cloudjs('.tips_input11').tips({ 
         hideOnFocus: false, //点击目标元素后不隐藏tips
         track: true, //tips随鼠标移动
         hover: true, //鼠标移动到tips上时tips不消失，方便拷贝
@@ -258,7 +289,7 @@ function bind(){
         delay: 100  //鼠标移动到元素上100毫秒后出现tips
     });
 
-    cloudjs('.tips_btn10a').tips({ 
+    cloudjs('.tips_btn11a').tips({ 
         hideOnFocus: false, //点击目标元素后不隐藏tips
         track: true, //tips随鼠标移动
         hover: true, //鼠标移动到tips上时tips不消失，方便拷贝
@@ -269,22 +300,26 @@ function bind(){
 
 bind();//绑定tips组件
 
-$('.tips_btn10a').click(function(){
+$('.tips_btn11a').click(function(){
     //change为false表示不会真正改变原来的title值，而change为true时，会改变title值，默认false
-    cloudjs('.tips_btn10a').tips('setData', { title: '内容复制成功', change: false });
+    cloudjs('.tips_btn11a').tips('setData', { title: '内容复制成功', change: false });
 });
 
-$('.tips_btn10b').click(function(){
-    cloudjs('.tips_input10,.tips_btn10a').tips('destroy');//销毁左边的tips组件
+$('.tips_btn11b').click(function(){
+    cloudjs('.tips_input11,.tips_btn11a').tips('destroy');//销毁左边的tips组件
 });
 
-$('.tips_btn10c').click(function(){
+$('.tips_btn11c').click(function(){
     bind();//绑定tips组件
 });
             </script>
-            <script>writeCode('.example_html_10');writeCode('.example_js_10');</script>
+            <script>writeCode('.example_html_11');writeCode('.example_js_11');</script>
         </div>
         
     </div>
+    </div>
 </body>
 </html>
+
+
+

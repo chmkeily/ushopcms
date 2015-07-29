@@ -4,9 +4,10 @@
  * 后面时间充足再自研一套
  * 代码风格可能可能与我们其他组件有不一致之处，请忽略
  */
-/***
- * @author generzhang@tencent.com
- * 2015-04-01
+/**
+ * 缩放组件
+ * author: generzhang@tencent.com
+ * date: 2015-07-01
  */
 (function( $, undefined ) {
 
@@ -1835,5 +1836,5 @@ cloudjs.define({
         cloudjs.callback(this.resizable.apply(this, arguments));
     },
     
-    require: ['../css/blue/resizable.css']
+    require: ['../css/' + cloudjs.themes() + '/resizable.css']
 });

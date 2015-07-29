@@ -1,0 +1,6 @@
+﻿[
+    {"value": "dialog", "text": "弹出框组件"},
+    {"value": "paging", "text": "分页组件"},
+    {"value": "message", "text": "消息提示组件"},
+    {"value": "tips", "text": "tips组件"}
+]

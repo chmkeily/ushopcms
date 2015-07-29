@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>返回到顶部组件</title>
+    <link rel="stylesheet" href="../css/global.css"/>
+    <link rel="stylesheet" href="../css/prettify.css"/>
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/cloudjs.js"></script>
+    <script src="../js/prettify.js"></script>
+    <script src="../js/global.js"></script>
+</head>
+<body class="body_bg">
+    <div class="primary">
+    <div class="comps_header">
+        <h2 class="comps_name">cascade级联组件</h2>
+    </div>
+    <div class="comps_summary">
+        <h3>cloudjs(selector).cascade([options])</h3>
+    </div>
+    <div class="detail_content">
+        <h4>属性</h4>
+        <div class="param_table_box">
+            <table class="param_table">
+                <tbody>
+                    <tr>
+                        <th>属性名</th>
+                        <th>类型</th>
+                        <th>默认值</th>
+                        <th>说明</th>
+                    </tr>
+                    <tr>
+                        <td>casType</td>
+                        <td>string</td>
+                        <td>combobox</td>
+                        <td><i>必填</i>，级联类型，combobox表示combobox下拉框，select表示源生态的下拉框,见<a href="#eg6" class="exp">示例6</a></td>
+                    </tr>
+                    <tr>
+                        <td>allData</td>
+                        <td>array/string</td>
+                        <td>null</td>
+                        <td>如果级联的数据全部写在一起，或者由一个url提供，则必填，如果每级的数据是独立的接口，则忽略该参数<br/>
+                        1.可以是jsonArray，详见<a href="#eg1" class="exp">示例1</a><br/>
+                        2.可以是一个url，url返回级联的所有数据，<a href="data/cascade_data.json" class="exp" target="_blank">data/cascade_data.json<a/>，详见<a href="#eg4" class="exp">示例4</a></td>
+                    </tr>
+                    <tr>
+                         <td>casData</td>
+                         <td>jsonarray</td>
+                         <td>null</td>
+                         <td>级联各级的详细数据，数组中对象的格式如下： <br/>
+        {<br/><p style="padding-left:40px;">
+            id: '',  //当前级id <br/>
+            url: '', //当前级url <br/>
+            name: '', //当前级name <br/>
+            width: '', //当前级的宽度 <br/>
+            firstOpt: '',  //指定当前级的第一条记录 <br/>
+            defaultValue: '',  //指定当前级的默认值 <br/>
+            valueName: 'value',  //指定当前级数据的valueName <br/>
+            textName: 'text',   //指定当前级数据的valueName <br/>
+            onSelect: null    //选择列表时触发的事件 <br/></p>
+        }<br/>
+        <p style="color:#DD1144;">参数说明：该对象中的id为必填参数，如果每级数据是独立的接口，则url也是必填，其他的均可省略。<p>
+                         </td>
+                    </tr>
+                    <tr>
+                         <td>sort</td>
+                         <td>number</td>
+                         <td>0</td>
+                         <td>下拉列表是否按照text值排序，0不排，1正序，-1逆序，如果提供的数据本身就排序了，这里保持默认值0就好</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+           
+    <div class="detail_content">
+        <h4>示例</h4>
+        <p style="color:#DD1144;margin-bottom:10px;">特别说明：级联参数获取方式与原生态的select一模一样,可以用$('id').val()或$('[name=xxx]').val()单独获取每一级的值,也可以通过serialize()一次性获取到所有值</p>
+        <div>
+            
+            <h5>示例1：级联的所有数据全部写在jsonArray里，并指定每级宽度</h5>
+<div class="example_html_1">
+<form id="form1">
+    <select id="grade"></select>
+    <select id="teacher"></select>
+    <input type="button" value="通过serialize获取参数" onclick="alert($('#form1').serialize())" />
+    <input type="button" value="通过id获取参数" onclick="alert($('#grade').val() + ',' + $('#teacher').val())" />
+    <input type="button" value="通过name获取参数" onclick="alert($('[name=grade]').val() + ',' + $('[name=teacher]').val())" />
+</form>
+</div>
+            <script class="example_js_1">
+var dataArr = [
+    {"value": "1", "text": "高一", "children": [
+        {"value": "zhangsan", "text": "张三"},
+        {"value": "lisi", "text": "李四"},
+        {"value": "wangwu", "text": "王五"},
+        {"value": "luoliu", "text": "罗六"},
+        {"value": "zhouqi", "text": "周七"}
+    ]},
+    {"value": "2", "text": "高二", "children": [
+        {"value": "wangchao", "text": "王朝"},
+        {"value": "mahan", "text": "马汉"},
+        {"value": "zhanglong", "text": "张龙"},
+        {"value": "zhaohu", "text": "赵虎"}
+    ]},
+    {"value": "3", "text": "高三", "children": [
+        {"value": "zhanzhao", "text": "展昭"},
+        {"value": "gongsunce", "text": "公孙策"},
+        {"value": "baiyutang", "text": "白玉堂"}
+    ]}
+];
+cloudjs.cascade({
+    allData: dataArr,
+    casData: [
+        { id: 'grade', width: 150 },
+        { id: 'teacher', width: 150 }
+    ]
+});
+            </script>
+            <script>writeCode('.example_html_1');writeCode('.example_js_1');</script>
+        </div>
+                
+        <div>
+            <h5>示例2：级联的所有数据是一个url，并为每级添加第一项</h5>
+<div class="example_html_2">
+<select id="a1"></select>
+<select id="a2"></select>
+<input type="button" value="通过serialize获取参数" onclick="alert($(this).parent().find(':input').serialize())" />
+</div>
+<script class="example_js_2">
+cloudjs.cascade({
+    allData: 'data/cascade_data.json',
+    casData: [
+        { id: 'a1', name: 'grade', firstOpt: { "value":"", "text":"请选择年级"} },
+        { id: 'a2', name: 'teacher', firstOpt: { "value":"", "text":"请选择老师"} }
+    ]
+});
+</script>
+            <script>writeCode('.example_html_2');writeCode('.example_js_2');</script>
+        </div>
+        
+        <div class="html_3_box">
+            <h5>示例3：级联每级数据对应独立的url，选择某一项时级联组件发起url请求，级联本身的参数和参数值会自动添加到url后面。</h5>
+<div class="example_html_3">
+<select id="b1"></select>
+<select id="b2"></select>
+<select id="b3"></select>
+<input type="button" value="通过id获取第2级参数" onclick="alert($('#b2').val())" />
+</div>
+<script class="example_js_3">
+cloudjs['cascade']({
+    casData: [
+        { id: 'b1', url: 'data/cascade_level_data.json?id=1' },
+        { id: 'b2', url: 'data/cascade_level_data.json?id=2' },
+        { id: 'b3', url: 'data/cascade_level_data.json?id=3' }
+    ]
+});
+
+</script>
+            <script>writeCode('.example_html_3');writeCode('.example_js_3');</script>
+        </div>
+
+        <div>
+            <h5>示例4：指定默认值，支持select自带name，支持最后一级多选</h5>
+<div class="example_html_4">
+<select id="c1" name="grade"></select>
+<select id="c2" name="teacher" style="width:260px;"></select>
+<input type="button" value="通过serialize获取参数" onclick="alert($(this).parent().find(':input').serialize())" />
+</div>
+<script class="example_js_4">
+cloudjs.cascade({
+    allData: 'data/cascade_data.json',
+    casData: [
+        { id: 'c1', defaultValue: '2' },
+        { id: 'c2', defaultValue: 'mahan', isMulti: true }
+    ]
+});
+</script>
+            <script class="example_js_4">
+
+            </script>
+            <script>writeCode('.example_html_4');writeCode('.example_js_4');</script>
+        </div>
+        
+        <div>
+            <h5>示例5：启用级联的选择事件</h5>
+            <p>如果不是用select生成的级联，就不能用id获取各级参数，只能用name</p>
+<div class="example_html_5">
+<span id="e1"></span>
+<span id="e2"></span>
+<input type="button" value="通过serialize获取参数" onclick="alert($(this).parent().find(':input').serialize())" />
+<input type="button" value="通过name获取第一级参数" onclick="alert($('[name=e1]').val())" />
+</div>
+<script class="example_js_5">
+cloudjs.cascade({
+    allData: 'data/cascade_data.json',
+    casData: [
+        { id: 'e1', onSelect: function(obj){ alert(obj.e1 + ',' + obj.e2); } },
+        { id: 'e2', onSelect: function(obj){ alert(obj.e1 + ',' + obj.e2); } }
+    ]
+});
+</script>
+            <script class="example_js_5">
+
+            </script>
+            <script>writeCode('.example_html_5');writeCode('.example_js_5');</script>
+        </div>
+        
+                <div>
+            <h5>示例6：原生态select级联，只需额外设置casType为select</h5>
+<div class="example_html_6">
+<span id="f1"></span>
+<span id="f2"></span>
+<input type="button" value="通过serialize获取参数" onclick="alert($(this).parent().find(':input').serialize())" />
+</div>
+<script class="example_js_6">
+cloudjs.cascade({
+    casType: 'select',
+    allData: 'data/cascade_data.json',
+    casData: [
+        { id: 'f1', name: 'grade', width: 200, firstOpt: { "value":"", "text":"请选择年级"} },
+        { id: 'f2', name: 'teacher', width: 200, firstOpt: { "value":"", "text":"请选择老师"} }
+    ]
+});
+</script>
+            <script>writeCode('.example_html_6');writeCode('.example_js_6');</script>
+        </div>
+    </div>
+    </div>
+</body>
+</html>
+
+
+
+

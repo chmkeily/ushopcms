@@ -1,3 +1,9 @@
+/**
+ * 浏览器缓存组件
+ * author: amixu@tencent.com
+ * date: 2015-07-01
+ */
+
 cloudjs.define({
     cookie: function(options){
         if(options === 'setCookie'){

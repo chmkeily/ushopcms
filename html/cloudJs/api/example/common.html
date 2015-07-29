@@ -12,6 +12,7 @@
     <script src="../js/global.js"></script>
 </head>
 <body class="body_bg">
+    <div class="primary">
     <div class="comps_header">
         <h2 class="comps_name">cloudJs公共方法</h2>
         <p>调用方式：cloudjs.util.方法名(args)</p>
@@ -59,5 +60,70 @@
             </table>
         </div>
     </div>
+    
+    <div class="detail_content">
+        <h4>示例</h4>
+        <div>
+            <h5><a name="eg1"></a>示例1：isEndWith方法用法</h5>
+            <script class="example_js_1">
+cloudjs.util.isEndWith('cd', 'abcd'); //true
+cloudjs.util.isEndWith('b', 'abcd'); //false
+            </script>
+            <script>writeCode('.example_js_1');</script>
+        </div>
+        
+        <div class="mt60">
+            <h5><a name="eg1"></a>示例2：isStartWith方法用法</h5>
+            <script class="example_js_2">
+cloudjs.util.isStartWith('ab', 'abcd'); //true
+cloudjs.util.isStartWith('b', 'abcd'); //false
+            </script>
+            <script>writeCode('.example_js_2');</script>
+        </div>
+        
+        <div class="mt60">
+            <h5><a name="eg3"></a>示例3：indexOf方法用法</h5>
+            <script class="example_js_3">
+cloudjs.util.indexOf('abcdefghcd', 'cd'); //2
+cloudjs.util.indexOf('abcdefghcd', 'cd', 5); //8
+cloudjs.util.indexOf(['a','b','c','d','e','f','b','c'], 'b'); //1
+cloudjs.util.indexOf(['a','b','c','d','e','f','b','c'], 'b', 5); //6
+            </script>
+            <script>writeCode('.example_js_3');</script>
+        </div>
+        
+        <div class="mt60">
+            <h5><a name="eg4"></a>示例4：log方法用法</h5>
+            <script class="example_js_4">
+cloudjs.util.log('abc'); //相当于console.log('abc');可F12看效果       
+cloudjs.util.log('abc', 'ef'); //相当于console.log('abc', 'ef');可F12看效果       
+            </script>
+            <script>writeCode('.example_js_4');</script>
+        </div>
+        
+        <div class="mt60">
+            <h5><a name="eg5"></a>示例5：error方法用法</h5>
+            <script class="example_js_5">
+cloudjs.util.error('abc'); //相当于console.error('abc');可F12看效果              
+cloudjs.util.error('abc', 'ef'); //相当于console.error('abc', 'ef');可F12看效果        
+            </script>
+            <script>writeCode('.example_js_5');</script>
+        </div>
+        
+        <div class="mt60">
+            <h5><a name="eg6"></a>示例6：trace方法用法</h5>
+            <script class="example_js_6">
+cloudjs.util.trace('abc'); //相当于console.trace('abc');可F12看效果              
+cloudjs.util.trace('abc', 'ef'); //相当于console.trace('abc', 'ef');可F12看效果        
+            </script>
+            <script>writeCode('.example_js_6');</script>
+        </div>
+        
+    </div>
+    
+    </div>
 </body>
 </html>
+
+
+
