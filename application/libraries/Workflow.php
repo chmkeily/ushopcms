@@ -4,6 +4,7 @@
  * @author: hemingchen
  *
  */
-class Workflow {
-
+class Workflow
+{
+	
 }
