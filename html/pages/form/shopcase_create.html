@@ -48,9 +48,9 @@
             </fieldset>
         </form>
 
-        <form class="form-horizontal span8" method="post" id="update_form" action="http://api.dianzhibao.com.cn/upload">
-            <input type="file" value="_ufile" />
-            <input type="submit" id="update_file" value="上传" />
+        <form class="form-horizontal span8" method="post" id="update_form" action="http://dianzhibao.com.cn/upload">
+            <input type="file" name="_ufile" />
+            <input type="button" id="update_file" value="上传" />
         </form>
     </div>
     
@@ -60,10 +60,13 @@
 
     <script>
         $(document).ready(function(){
+            var options = {
+                success: function(response){
+                    alert(typeof response);
+                }
+            };
             $('#update_file').bind('click', function(){
-                $('#update_form').ajaxForm(function(response) {   
-                   alert(typeof response);  
-                }); 
+                $('#update_form').ajaxSubmit(options); 
             });
         });
     </script>
