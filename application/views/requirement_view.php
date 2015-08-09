@@ -44,7 +44,7 @@
                         <td><?php echo $requirement['requirement_title']; ?></td>
                         <td><?php echo $requirement['requirement_type']; ?></td>
                         <td><?php echo $requirement['requirement_ownername']; ?></td>
-                        <td><?php echo $requirement['requirement_st']; ?></td>
+                        <td class="time_td"><?php echo $requirement['requirement_st']; ?></td>
                         <td><?php echo $requirement['requirement_shopcate']; ?></td>
                         <td><?php echo $requirement['requirement_shopcity']; ?></td>
                         <td><?php echo $requirement['requirement_budget']; ?></td>
@@ -57,5 +57,13 @@
 			</table>
         </div>
 	
+	<script src="/html/js/jquery.min.js"></script>
+    <script src="/html/js/ushop.js"></script>
+
+    <script>
+    	$('.time_td').each(function(){
+    		$(this).html(ushop.getTimeByShortStamp($(this).html()));
+    	});
+    </script>
 </body>
 </html>

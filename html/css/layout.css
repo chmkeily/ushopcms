@@ -16,7 +16,7 @@ ul,li{ list-style:none; }
 
 .barbox{ height:55px; background:#1d6b9c; position:relative; }
 .bartitle{ text-align:center; font-family:"Microsoft Yahei"; }
-.bartitle a{ font-size:18px; color:#f8f8f8; padding:0 30px 0 55px; height:48px; line-height:40px; display:inline-block; margin:7px 10px 0 10px; background-image:url(http://beacon.gtimg.com/mig_op/beacon/images/new_icon.png); background-repeat:no-repeat; }
+.bartitle a{ font-size:18px; color:#f8f8f8; padding:0 30px 0 55px; height:48px; line-height:40px; display:inline-block; margin:7px 10px 0 10px; background-image:url(http://dianzhibao.com.cn/html/images/new_icon.png); background-repeat:no-repeat; }
 .bartitle .selector{ background-color:#f8f8f8; color:#335770; -webkit-border-radius:4px 4px 0 0;-moz-border-radius:4px 4px 0 0;border-radius:4px 4px 0 0;}
 .bartitle .a1{ background-position: 20px -436px; }
 .bartitle .a2{ background-position: 20px -486px; }
@@ -30,7 +30,7 @@ ul,li{ list-style:none; }
 .menubox li a{ display:block; padding-left:50px; font-size:14px; border-left:5px solid #306a8f; }
 .menubox li a:hover{ background-color:#35769f; border-left:5px solid #FABF27; }
 .pmenu{ height:30px; padding:20px 0 20px 18px; clear:both; background-color:#36739a; cursor:pointer; }
-.pmenu span{ line-height:30px; padding-left:40px; font-size:16px; display:block; background-image:url(http://beacon.gtimg.com/mig_op/beacon/images/new_icon.png); background-repeat:no-repeat; }
+.pmenu span{ line-height:30px; padding-left:40px; font-size:16px; display:block; background-image:url(http://dianzhibao.com.cn/html/images/new_icon.png); background-repeat:no-repeat; }
 
 
 

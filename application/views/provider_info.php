@@ -11,7 +11,7 @@
 <body class="iframe_body">
     
 	<div>
-		<form class="form-horizontal span8">
+		<div class="form-horizontal span12">
 			<fieldset>
 				<div class="control-group">
 					<label class="control-label">名称</label>
@@ -47,6 +47,13 @@
                         <span><?php echo $userinfo['user_address']; ?></span>
 					</div>
 				</div>
+
+				<div class="control-group">
+					<label class="control-label">图标</label>
+                    <div class="controls">
+                        <img style="width:50px;height:50px;" src="<?php echo $userinfo['user_icon']; ?>"></img>
+					</div>
+                </div>
 				
 				<div class="control-group">
 					<label class="control-label">简介</label>
@@ -65,19 +72,34 @@
                 <div class="control-group">
 					<label class="control-label">营业执照</label>
                     <div class="controls">
-                        <a href="<?php echo $userinfo['user_license']; ?>"> <img style="width:80px;height:60px;" src="<?php echo $userinfo['user_license']; ?>"></img> </a>
+                        <a href="<?php echo $userinfo['user_license']; ?>" target="_blank" class="tips" style="display: inline-block;" title="点击查看大图"> <img style="width:160px;height:120px;" src="<?php echo $userinfo['user_license']; ?>"></img> </a>
 					</div>
                 </div>
           
         		<div class="control-group">
 					<div class="controls">
-                        <a class="btn btn-primary" href="/provider/index?isedit=true">修改</a>
+                        <a class="btn btn-primary modify_btn" href="/provider/index?isedit=true" tabTitle="修改基本信息">修改</a>
                     </div>
                 </div>
 			</fieldset>
-		</form>
+		</div>
 		
 	</div>
 	
+	<script src="/html/js/jquery.min.js"></script>
+    <script src="/html/cloudJs/js/cloudjs.js"></script>
+
+    <script>
+        $(document).ready(function(){
+            cloudjs('.tips').tips();
+
+            $('.modify_btn').bind('click',function(){
+			    if( typeof(window.parent.addTab) === 'function' ){
+			        window.parent.addTab($(this).attr('tabTitle'),$(this).attr('href'));
+			        return false;
+			    }
+			});
+        });
+    </script>
 </body>
 </html>

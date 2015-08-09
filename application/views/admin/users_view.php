@@ -30,7 +30,7 @@
                     <tr id="u<?php echo $userinfo['user_id']; ?>">
                         <td><?php echo $userinfo['user_id']; ?></td>
                         <td><?php echo $userinfo['user_email']; ?></td>
-                        <td><a href="/admin/profile?userid=<?php echo $userinfo['user_id']; ?>"><?php echo $userinfo['user_name']; ?></a></td>
+                        <td><a href="/admin/profile?userid=<?php echo $userinfo['user_id']; ?>" class="js_url"><?php echo $userinfo['user_name']; ?></a></td>
                         <td><?php echo $userinfo['user_phone']; ?></td>
                         <td><?php echo $userinfo['user_contact']; ?></td>
                         <td><?php echo mb_substr($userinfo['user_address'], 0, 10); ?> ...</td>
@@ -62,6 +62,7 @@
     </div>
 
     <script src="/html/js/jquery.min.js"></script>
+    <script src="/html/js/ushop.js"></script>
     <script type="text/javascript">
         function publish(userid)
         {

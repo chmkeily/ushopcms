@@ -8,65 +8,152 @@
     <link rel="stylesheet" type="text/css" href="/asset/bootstrap/css/bootstrap.min.css" media="screen">
 </head>
 <body class="iframe_body">
-    <div>
-        <form class="form-horizontal span8" method="post" action="/shopcase/create">
+    <div class="form-horizontal span8" id="shopcase_cfg">
+        <input type="hidden" name="image" />
+        <!-- <form class="form-horizontal span8" method="post" action="/shopcase/create"> -->
             <fieldset>
                 <div class="control-group">
-                    <label class="control-label">标题</label>
+                    <label class="control-label">案例标题</label>
                     <div class="controls">
                         <input type="text" name="name" class="inputbox" value=""/>
                     </div>
                 </div>
 
                 <div class="control-group">
-                    <label class="control-label">图片列表</label>
+                    <label class="control-label">案例图片</label>
                     <div class="controls">
-                        <input type="text" name="image" class="inputbox" value="注:四张图片URL,字段格式需要德生确定,建议用base64编码后存储"/>
+                        <form class="update_image" method="post" action="http://dianzhibao.com.cn/upload">
+                            <span class="file" style="padding-top: 0;"><input type="file" name="_ufile" /></span>
+                            <input type="button" value="上传图片" class="up_btn" />&nbsp;
+                            <a href="javascript: void(0)" class="icon icon_add tips" title="增加案例图片">+</a>
+                            <a href="javascript: void(0)" class="icon icon_minus tips" title="删除案例图片">-</a>&nbsp;&nbsp;
+                            <span class="result" style="padding-top: 0;"></span>
+                            <input type="hidden" class="file_url" />
+                        </form>
                     </div>
                 </div>
                 
                 <div class="control-group">
-                    <label class="control-label">介绍</label>
+                    <label class="control-label">案例简介</label>
                     <div class="controls">
-                        <input type="text" name="intro" class="inputbox" value=""/>
+                        <textarea name="intro" class="inputbox" style="width: 500px; height: 70px;"></textarea>
                     </div>
                 </div>
                 
                 <div class="control-group">
-                    <label class="control-label">内容</label>
+                    <label class="control-label">案例详细内容</label>
                     <div class="controls">
-                        <input type="text" name="content" class="inputbox" value="注:格式需要德生定,建议用base64编码后存储"/>
+                        <textarea name="content" class="inputbox" style="width: 500px; height: 200px;"></textarea>
                     </div>
                 </div>
 
                 <div class="control-group">
                     <div class="controls">
-                        <button type="reset" class="btn">重置</button>
-                        <button type="submit" class="btn btn-primary">提交</button>
+                        <button type="button" id="save_btn" class="btn btn-primary">提交</button>
                     </div>
                 </div>
             </fieldset>
-        </form>
-
-        <form class="form-horizontal span8" method="post" id="update_form" action="http://dianzhibao.com.cn/upload">
-            <input type="file" name="_ufile" />
-            <input type="button" id="update_file" value="上传" />
-        </form>
-    </div>
+        <!-- </form> -->
+        </div>
     
     <script src="/html/js/jquery.min.js"></script>
     <script src="/html/js/jquery.form.js"></script>
     <script src="/html/cloudJs/js/cloudjs.js"></script>
+    <script src="/html/js/ushop.js"></script>
 
     <script>
-        $(document).ready(function(){
-            var options = {
+        function saveShopCase(){
+            var data = {};
+            data.name = $.trim($('[name="name"]').val());
+            data.image = $.trim($('[name="image"]').val());;
+            data.intro = $.trim($('[name="intro"]').val());
+            data.content = $.trim($('[name="content"]').val());
+
+            $.ajax({
+                url: '/shopcase/create',
+                data: data,
+                type: 'post',
+                dataType: 'json',
                 success: function(response){
-                    alert(typeof response);
+                    cloudjs.message({content: '添加案例成功！', type: 'success'});
                 }
-            };
-            $('#update_file').bind('click', function(){
-                $('#update_form').ajaxSubmit(options); 
+            });
+        }
+
+        $(document).ready(function(){
+            cloudjs('.tips').tips();
+
+            $('[name="_ufile"]').live('change', function(){
+                var scope = $(this);
+                var options = {
+                    dataType: 'json',
+                    success: function(response){
+                        scope.attr('disabled', 'disabled');
+                        scope.parent().siblings('.up_btn').attr('disabled', 'disabled');
+                        scope.parent().siblings('.file_url').val(response.url);
+                        scope.parent().siblings('.result').html('图片上传成功！<a href="' + response.url + '" target="_blank">查看图片</a>').addClass('green');
+                    }
+                };
+                scope.parents('.update_image').ajaxSubmit(options);
+            });
+
+            $('#save_btn').bind('click', function(){
+                var image_str = '';
+
+                for (var i = 0; i < $('.file_url').length; i++) {
+                    if($('.file_url').eq(i).val() !== ''){
+                        image_str += $('.file_url').eq(i).val() + ';';
+                    }
+                }
+                $('[name="image"]').val(image_str);
+
+                if(!$.trim($('[name="name"]').val())){
+                    cloudjs.message({content: '请输入案例标题', type: 'error'});
+                    return;
+                }
+
+                if(!$.trim($('[name="image"]').val())){
+                    cloudjs.message({content: '请至少上传一张案例图片', type: 'error'});
+                    return;
+                }
+
+                if(!$.trim($('[name="intro"]').val())){
+                    cloudjs.message({content: '请输入案例简介', type: 'error'});
+                    return;
+                }
+
+                if(!$.trim($('[name="content"]').val())){
+                    cloudjs.message({content: '请输入案例详细内容', type: 'error'});
+                    return;
+                }
+
+                saveShopCase();
+            });
+
+            $('.icon_add').live('click', function(){
+                if($('.update_image').length === 4){
+                    cloudjs.message({content: '最多上传四张案例图片', type: 'warn'});
+                    return;
+                }
+
+                var clone_el = $(this).parents('.update_image').clone();
+
+                clone_el.find('input').not('input:[type="button"]').val('');
+                clone_el.find('.result').html('');
+                clone_el.find('input').removeAttr('disabled');
+
+                $(this).parents('.update_image').after(clone_el);
+            });
+
+            $('.icon_minus').live('click', function(){
+                if($('.update_image').length === 1){
+                    $(this).parents('.update_image').find('input').removeAttr('disabled');
+                    $(this).parents('.update_image').find('input').not('input:[type="button"]').val('');
+                    $(this).parents('.update_image').find('.result').html('');
+                    return;
+                }
+
+                $(this).parents('.update_image').remove();
             });
         });
     </script>

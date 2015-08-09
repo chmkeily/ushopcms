@@ -101,6 +101,7 @@ class Provider extends CI_Controller {
      * <pre>
      *  接受的表单参数:
      *      name        用户昵称
+     *      icon        用户icon
      *      phone       联系方式(手机/电话)
      *      contact     联系人
      *      city        所在城市编码 (optional)
@@ -113,6 +114,7 @@ class Provider extends CI_Controller {
     function update()
     {
 		$name 		= trim($this->input->get_post('name', TRUE));
+		$icon 		= trim($this->input->get_post('icon', TRUE));
 		$phone 		= trim($this->input->get_post('phone', TRUE));
 		$contact	= trim($this->input->get_post('contact', TRUE));
 		$city	    = trim($this->input->get_post('city', TRUE));
@@ -134,6 +136,10 @@ class Provider extends CI_Controller {
         if (!empty($name))
         {
             $updates['user_name'] = $name;
+        }
+		if (!empty($icon))
+        {
+            $updates['user_icon'] = $icon;
         }
         if (!empty($phone))
         {

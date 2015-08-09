@@ -433,3 +433,10 @@ table.search_table{border-top: solid 2px #FABF27; border-radius: 0;}
 table.search_table thead tr th{border: solid 1px #ededed; padding: 7px 7px 7px 10px; background: #F5F5F5;}
 table.search_table thead:first-child tr:first-child th:first-child{border-radius: 0;}
 .form-horizontal .controls span{padding-top: 5px; display: inline-block;}
+
+.update_image{margin: 0; position: relative; padding-bottom: 10px;}
+.update_image:last-child{padding: 0;}
+.update_image .up_btn{width: 100px; height: 30px; line-height: 28px;}
+.update_image .file{width: 100px; height: 30px; padding: 0; position: absolute; opacity: 0.01; filter:alpha(opacity=0.01); overflow: hidden;}
+.update_image ._ufile{height:30px; width: 100px;}
+.update_image .icon{display: inline-block; height: 20px; width: 20px; background: #E3E3E3; width: 20px; text-align: center; text-decoration: none; font-size: 16px;}

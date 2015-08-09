@@ -16,7 +16,7 @@
                     <div class="controls">
                         <input type="text" name="kw_title" class="inputbox" value=""/>
 						<button type="submit" class="btn btn-primary">查询</button>
-						<a class="btn btn-primary" href="/html/pages/form/coupon_create.html">添加</a>
+						<a class="btn btn-primary add_btn" href="/html/pages/form/coupon_create.html" tabTitle="添加优惠券">添加</a>
 					</div>
 				</div>
            
@@ -55,6 +55,16 @@
 			<?php endif ?>
 			</table>
         </div>
-	
+	<script type="text/javascript" src="/html/js/jquery.min.js"></script>
+	<script>
+		$(document).ready(function(){
+			$('.add_btn').bind('click',function(){
+			    if( typeof(window.parent.addTab) === 'function' ){
+			        window.parent.addTab($(this).attr('tabTitle'),$(this).attr('href'));
+			        return false;
+			    }
+			});
+		});
+	</script>
 </body>
 </html>

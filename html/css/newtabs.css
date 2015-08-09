@@ -181,12 +181,12 @@ a.l-btn .l-btn-focus{
 }
 .tabs-scroller-left{
 	left:0px;
-	background:#c8d5e2 url('http://beacon.gtimg.com/mig_op/beacon/images/tabs_leftarrow.png') no-repeat 1px 17px;
+	background:#c8d5e2 url('http://dianzhibao.com.cn/html/images/tabs_leftarrow.png') no-repeat 1px 17px;
 }
 .tabs-scroller-right{
 	position:absolute;
 	right:0;
-	background:#c8d5e2 url('http://beacon.gtimg.com/mig_op/beacon/images/tabs_rightarrow.png') no-repeat 2px 17px;
+	background:#c8d5e2 url('http://dianzhibao.com.cn/html/images/tabs_rightarrow.png') no-repeat 2px 17px;
 }
 .tabs-tool{
 	position:absolute;
@@ -331,7 +331,7 @@ a.l-btn .l-btn-focus{
 	height:11px;
 	top:13px;
 	right:12px;
-	background:url('http://beacon.gtimg.com/mig_op/beacon/images/beacon_icon.png') no-repeat 0 -210px;
+	background:url('http://dianzhibao.com.cn/html/images/icon.png') no-repeat 0 -210px;
 }
 .tabs li.tabs-selected a.tabs-close{
     top:10px;	
@@ -354,12 +354,12 @@ a.l-btn .l-btn-focus{
 	border:0px;
 }
 .icon-reload{
-	background:url('http://beacon.gtimg.com/mig_op/beacon/images/beacon_icon.png') no-repeat 0 -182px;
+	background:url('http://dianzhibao.com.cn/html/images/icon.png') no-repeat 0 -182px;
 }
 .icon-no{
 	width:22px;
 	height:22px;
 	display:inline-block;
-	background:url('http://beacon.gtimg.com/mig_op/beacon/images/beacon_icon.png') no-repeat 0 -240px;
+	background:url('http://dianzhibao.com.cn/html/images/icon.png') no-repeat 0 -240px;
 }
 #icon-no-png{ margin-top:16px; }

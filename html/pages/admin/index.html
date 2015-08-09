@@ -1,68 +1,64 @@
-<!Doctype html>
-<html lang="zh-CN"><head>
-    <meta charset="UTF-8">
-    <meta name="keywords" content="店之宝,开店,我要开店,店管家,POST机,收银软件,店铺帮手">
-    <meta name="description" content="店之宝，提供开店必备软硬件信息。">
-    <title>管理中心</title>
-    <link rel="stylesheet" type="text/css" href="/html/css/pc.css" media="screen">
-	<link rel="stylesheet" type="text/css" href="/asset/bootstrap/css/bootstrap.min.css" media="screen">
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="x-ua-compatible" content="IE=edge" >
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="店之宝,开店,我要开店,店管家,POST机,收银软件,店铺帮手">
+<meta name="description" content="店之宝，提供开店必备软硬件信息。">
+<title>店之宝</title>
+<link type="text/css" rel="stylesheet" href="/html/css/layout.css">
+<link type="text/css" rel="stylesheet" href="/html/css/newtabs.css">
+<script type="text/javascript" src="/html/js/jquery.min.js"></script>
+<script type="text/javascript" src="/html/js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="/html/js/jquery.newtabs.js"></script>
+<script type="text/javascript">
+    var ushopTreeData = {
+            data1:[
+                {name:'后台管理',title:'后台管理',id:'iconbox1',isOpen:1,url:'',children:[
+                    {name:'服务商管理',title:'服务商管理',id:'',url:'/admin/providers'},
+                    {name:'需求管理',title:'需求管理',id:'',url:'/admin/requirements'},
+                    {name:'案例管理',title:'案例管理',id:'',url:''},
+                    {name:'数据统计',title:'数据统计',id:'',url:''}]
+                }
+            ]
+        };
+    var deflUrl="/admin/providers",deflTit="服务商管理";
+
+    function setDefaultValue(obj){
+        setDefaultTab(obj,deflTit,deflUrl);
+    }
+</script>
+<script type="text/javascript" src="/html/js/data.iframe.js?n=28" charset="UTF-8"></script>
 </head>
-<body class="index_body">
-    <div class="header_min">
-        <div class="topnav">
-            <h1><a class="logo" href="/html" title="店之宝">店之宝</a></h1>
-            <strong class="subnav">管理中心</strong>
+<body class="easyui-layout">
+<div region="north" border="false">
+<div class="header">
+    <a href="http://dianzhibao.com.cn/" class="logo"><img src="/html/images/logo_min.png" alt="店之宝"></a>
+    <div class="util">
+        <div class="user_info">
+            <!-- <span class="avater"><img width="42" height="42" src=""></span> -->
+            <span id="user_name" style="display: inline-block; height: 40px; line-height: 40px;"></span>
+        </div>
+        <div class="fl">
+            <!-- <a href="http://beacon.qq.com/help/index.htm">帮助中心</a> -->
+            <a href="javascript: void(0)" onclick="logout(true)">退出</a>
         </div>
     </div>
-    <div class="manage_container">
-        <div class="aside">
-            <div class="menu">
-                <a id="menu_1" class="menu_item active" onclick="on_menu_action(1)">服务商管理</a>
-                <a id="menu_2" class="menu_item" onclick="on_menu_action(2)">需求管理</a>
-                <a id="menu_3" class="menu_item" onclick="on_menu_action(3)">案例管理</a>
-                <a id="menu_4" class="menu_item" onclick="on_menu_action(4)">数据统计</a>
-                <a id="menu_5" class="menu_item" onclick="on_menu_action(5)">更多服务</a>
-                <a class="menu_item" onclick="logout(true)">退出</a>
-            </div>
-        </div>
-		<div class="main">
-        	<iframe id="id_main_frm" style="border:none;width:100%;height:100%;" src="/admin/providers"></iframe>
-        </div>
+</div>
+
+<div class="blank0"></div>
+</div>
+    <div region="west" border="false" style="width:200px;background:#306a8f;">
+    <div class="menubox" id="commonMenu"></div>
     </div>
-	
-	<script src="/html/js/jquery.min.js"></script>
-	<script type="text/javascript">
-		function on_menu_action(mid)
-		{
-			switch(mid)
-			{
-				case 1:
-					$('#id_main_frm').attr('src', "/admin/providers");
-					break;
-				case 2:
-					$('#id_main_frm').attr('src', "/admin/requirements");
-					break;
-				case 3:
-                    //TODO
-					break;
-				case 4:
-                    //TODO
-					break;
-				case 5:
-					//alert('正在玩命开发中.../汗流浃背');
-					break;
-				default:
-					break;
-			}
+    <div region="center" border="false">
+        <div id="ttbox" class="easyui-tabs" tools="#tab-tools" fit="true" border="false"></div>
+    </div>
+    <div id="tab-tools">
+        <a id="icon-no-png" href="#" title="关闭非当前标签" class="easyui-linkbutton" iconCls="icon-no" ></a>
+    </div>
 
-            //切换选中到菜单
-            for (var i = 1; i < 6; ++ i)
-            {
-                $("#menu_"+i).removeClass("active");
-            }
-            $("#menu_"+mid).addClass("active");
-        }
-
+    <script type="text/javascript">
         function logout(prompt)
         {
             $.ajax({
@@ -77,6 +73,6 @@
                 }
             });
         }
-	</script>
+    </script>
 </body>
 </html>
