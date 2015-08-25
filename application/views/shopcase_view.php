@@ -29,7 +29,6 @@
 						<th><span>ID</span></th>
 						<th><span>名称</span></th>
 						<th><span>简介</span></th>
-						<th><span>服务商ID</span></th>
 						<th><span>提交时间</span></th>
 						<th><span>状态</span></th>
 					</tr>
@@ -41,7 +40,6 @@
                         <td><a href="/shopcase/details?caseid=<?php echo $shopcase['shopcase_id']; ?>"><?php echo $shopcase['shopcase_id']; ?></a></td>
                         <td><?php echo $shopcase['shopcase_name']; ?></td>
                         <td><?php echo mb_substr($shopcase['shopcase_intro'],0,50); ?></td>
-                        <td><?php echo $shopcase['shopcase_providerid']; ?></td>
                         <td><?php echo date('Y-m-d H:i:s', $shopcase['shopcase_ctime']); ?></td>
                         <td><?php echo $shopcase['shopcase_status']; ?></td>
                     </tr>
