@@ -4,26 +4,22 @@
 * business constants are defined here
 */
 
-// 收藏类型
-define('FAVORITE_PROVIDER',				1);
-define('FAVORITE_SHOPCASE',				2);
-define('FAVORITE_PRODUCT',				3);
-define('FAVORITE_COUPON',				4);
-
-
 //角色类型
 define('ROLE_ADMIN', 			99);
 define('ROLE_PROVIDER',			11);
 define('ROLE_USER', 			1);
 
 //审批操作类型
-define('CMD_APPROVE', 			1);
-define('CMD_REJECT', 			2);
+define('CMD_SUBMIT', 			1);	//提交审核
+define('CMD_APPROVE', 			2);	//通过
+define('CMD_REJECT', 			3);	//拒绝
+define('CMD_CANCEL',			4);	//撤销
 
-//服务商状态
-define('STATE_CREATED', 		0);
-define('STATE_MODIFIED',		1);
-define('STATE_FINISHED',		10);
-define('STATE_CLOSED', 			11);
+//服务商和服务案例的状态
+define('STATE_CREATED', 		0);		//创建
+define('STATE_INREVIEW',		1);		//审核中
+define('STATE_ONLINE',			10);	//在线运营中
+define('STATE_OFFLINE', 		11);	//已停止运营（撤销或者已被封禁）
+
 
 /* End of file constants.php */
