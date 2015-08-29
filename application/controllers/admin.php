@@ -262,7 +262,7 @@ class Admin extends CI_Controller {
     }
 
 
-    public sandbox()
+    function sandbox()
     {
         $this->load->library('workflow');
         var_dump($this->workflow);
