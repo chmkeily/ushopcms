@@ -7,6 +7,11 @@
 class Workflow
 {
 	/**
+	* 工作流类型
+	*/
+	protected $_TYPE = 0;
+
+	/**
 	* 状态转换图
 	*/
 	protected $_DFA = null;
@@ -58,5 +63,7 @@ class Workflow
 		);
 
 		var_dump($this->_DFA);
+
+		var_dump(array_keys($this->_DFA));
 	}
 }
