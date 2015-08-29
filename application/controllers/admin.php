@@ -260,6 +260,13 @@ class Admin extends CI_Controller {
         $viewdata['requirements'] = $requirements;
         $this->load->view('requirement_view', $viewdata);
     }
+
+
+    public sandbox()
+    {
+        $this->load->library('workflow');
+        var_dump($this->workflow);
+    }
 }
 
 /* End of file admin.php */
