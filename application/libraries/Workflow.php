@@ -10,8 +10,19 @@ class Workflow
 	* 状态转换图
 	*/
 	protected $_DFA = null;
+
+	/**
+	* constructor
+	*/
+	public function __construct()
+	{
+		$this->create_dfa();
+	}
 	
-	private create_transitions()
+	/**
+	* 构造状态转换图
+	*/
+	private function create_dfa()
 	{
 		$this->_DFA = array(
 			STATE_CREATED	=> array(
