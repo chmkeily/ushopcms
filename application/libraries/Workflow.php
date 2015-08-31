@@ -6,6 +6,9 @@
  */
 class Workflow
 {
+	const ERROR_SYSTEM_FAILED			= -1000;
+	const ERROR_NO_EXPECTED_TRANSIT		= -1001;
+
 	/**
 	* 工作流类型
 	*/
@@ -61,9 +64,36 @@ class Workflow
 
 			//more statuses
 		);
+	}
 
-		var_dump($this->_DFA);
+	/**
+	* @breif 执行事务
+	* @param 流程事务：$trans : {type,id,state}
+	* @param 操作信息：$action : {role,cmd,role_id,comment}
+	* @return 
+	*/
+	function transit($trans, $action)
+	{
+		$curr_state = $trans['state'];
+		$act_role	= $action['role'];
+		$act_cmd	= $action['cmd'];
 
-		var_dump(array_keys($this->_DFA));
+		$transits = &$this->_DFA[$curr_state];
+		if (!isset($transits))
+		{
+			return self::ERROR_NO_EXPECTED_TRANSIT;
+		}
+		
+		
+
+		return null;
+	}
+
+	/**
+	* 根据用户角色和流程状态获取用户可执行的操作
+	*/
+	function get_commands($role, $state)
+	{
+		return null;
 	}
 }
