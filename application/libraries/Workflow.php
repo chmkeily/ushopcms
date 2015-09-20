@@ -84,10 +84,10 @@ class Workflow
 			return self::ERROR_NO_EXPECTED_TRANSIT;
 		}
 		
-		foreach ($transit as $key => $value) {
+		foreach ($transits as $transit)
+		{
 			
 		}
-
 		return null;
 	}
 
