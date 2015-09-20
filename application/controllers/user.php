@@ -54,8 +54,7 @@ class User extends CI_Controller {
 
 		$_RSP['ret'] = 0;
 		$_RSP['user'] = array(
-			'user_id' 	=> $ru['user_id'],
-			'user_name'	=> $ru['user_name']
+			'user_id' 	=> $ru['user_id']
 			);
 		exit(json_encode($_RSP));
 	}
