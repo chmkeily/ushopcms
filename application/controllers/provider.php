@@ -20,53 +20,30 @@ class Provider extends CI_Controller {
 	*	接受的表单数据：
 	*		email				邮箱
 	*		secret				密码
-	*		name				服务商名称
-	*		phone				电话
-	*		contact 			联系人
     *  </pre>
 	*/
 	function register()
 	{
 		$email		= trim($this->input->get_post('email', TRUE));
 		$secret		= trim($this->input->get_post('secret', TRUE));
-		$name		= trim($this->input->get_post('name', TRUE));
-		$phone		= trim($this->input->get_post('phone', TRUE));
-		$contact 	= trim($this->input->get_post('contact', TRUE));
 
-		if (empty($name))
-		{
-			$_RSP['ret'] = 101;
-			$_RSP['msg'] = 'mising name';
-			exit(json_encode($_RSP));
-		}
-        
         if (empty($secret))
 		{
 			$_RSP['ret'] = 101;
-			$_RSP['msg'] = 'mising password';
+			$_RSP['msg'] = '无效密码！';
 			exit(json_encode($_RSP));
         }
 
-		if (empty($phone))
-		{
-			$_RSP['ret'] = 102;
-			$_RSP['msg'] = 'missing phone';
-			exit(json_encode($_RSP));
-		}
-		
 		if (!preg_match('/\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/', $email))
 		{
 			$_RSP['ret'] = 103;
-			$_RSP['msg'] = 'missing/invalid E-mail';
+			$_RSP['msg'] = '无效邮箱！';
 			exit(json_encode($_RSP));
 		}
 		
 		$user = array(
 			'user_email' 	=> $email,
 			'user_secret' 	=> $secret,
-			'user_phone'	=> $phone,
-			'user_name'		=> $name,
-			'user_contact'	=> $contact,
 			'user_type'		=> 0,
 			'user_address'	=> 'null',
             'user_brief'	=> 'null',
@@ -80,20 +57,12 @@ class Provider extends CI_Controller {
 		if (FALSE == $id)
 		{
 			$_RSP['ret'] = 1000;
-			$_RSP['msg'] = 'DB exception';
+			$_RSP['msg'] = '系统错误！（DB异常）';
 			exit(json_encode($_RSP));
 		}
 
         //暂时重定向到登陆页
         header('Location: /html/login.html');
-
-		/*unset($user['user_secret']);
-		$_RSP['ret'] = 0;
-		$_RSP['user'] = array(
-			'userr_id'	=> $id,
-			'user_name'	=> $name,
-			);
-		exit(json_encode($_RSP));*/
     }
 
     /**
