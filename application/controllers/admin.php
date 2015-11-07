@@ -318,7 +318,7 @@ class Admin extends CI_Controller {
         
         $this->load->model('shopcase_model');
         $conditions = array();
-        $shopcases = $this->shopcase_model->get_shopcases($length, $offset);
+        $shopcases = $this->shopcase_model->get_shopcases($conditions, $length, $offset);
         if (!empty($shopcases))
         {
             $viewdata['shopcases'] = $shopcases;
