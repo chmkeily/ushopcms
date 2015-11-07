@@ -9,7 +9,7 @@
 </head>
 <body class="iframe_body">
 		<div>
-            <form class="form-horizontal" method="post" action="/shopcase/index">
+            <form class="form-horizontal" method="post" action="/admin/shopcases">
                 <fieldset>
 				<div class="control-group">
 					<label class="control-label">标题</label>
