@@ -53,7 +53,7 @@
                 <div class="control-group">
                     <label class="control-label">图标</label>
                     <div class="controls">
-                        <form class="update_image" method="post" action="http://dianzhibao.com.cn/upload">
+                        <form class="update_image" method="post" action="http://www.dianzhibao.com.cn/upload">
                             <span class="file" style="padding-top: 0;" title="在店之宝APP上展示服务商列表时使用"><input type="file" name="_ufile" /></span>
                             <input type="button" value="上传图标" class="up_btn" />&nbsp;&nbsp;
                             <span class="result" style="padding-top: 0;"><a href="<?php echo $userinfo['user_icon']; ?>" target="_blank">查看</a></span>
@@ -65,8 +65,8 @@
 				<div class="control-group">
 					<label class="control-label">营业执照</label>
 					<div class="controls">
-						<form class="update_image" method="post" action="http://dianzhibao.com.cn/upload">
-                            <span class="file" style="padding-top: 0;"><input type="file license_file" name="_ufile" /></span>
+						<form class="update_image" method="post" action="http://www.dianzhibao.com.cn/upload">
+                            <span class="file" style="padding-top: 0;"><input type="file" class="license_file" name="_ufile" /></span>
                             <input type="button" value="上传营业执照" class="up_btn" />&nbsp;&nbsp;
                             <span class="result" style="padding-top: 0;"><a href="<?php echo $userinfo['user_license']; ?>" target="_blank">查看</a></span>
                             <input type="hidden" class="file_url" name="license" value="<?php echo $userinfo['user_license']; ?>" />
