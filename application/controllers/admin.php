@@ -291,6 +291,44 @@ class Admin extends CI_Controller {
         $this->load->view('admin/requirement_details', $viewdata);
     }
 
+
+    /**
+    * @brief 案例列表
+    * <pre>
+    *   参数：
+    *       offset
+    *       length
+    * </pre>
+    */
+    public function shopcases()
+    {
+        $offset     = trim($this->input->get_post('start_idx', TRUE));
+        $length     = trim($this->input->get_post('length', TRUE));
+        
+        if (!is_numeric($offset))
+        {
+            $offset = 0;
+        }
+
+        if (!is_numeric($length)
+            || 1 > $length || 20 < $length)
+        {
+            $length = 10;
+        }
+        
+        $this->load->model('shopcase_model');
+        $conditions = array();
+        $shopcases = $this->shopcase_model->get_shopcases($length, $offset);
+        if (!empty($shopcases))
+        {
+            $viewdata['shopcases'] = $shopcases;
+        }
+
+        $viewdata['ret'] = 0;
+        $this->load->view('admin/shopcase_view', $viewdata);
+    }
+
+
     function sandbox()
     {
         $this->load->library('workflow');
