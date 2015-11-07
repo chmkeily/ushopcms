@@ -261,6 +261,34 @@ class Admin extends CI_Controller {
         $this->load->view('admin/requirement_view', $viewdata);
     }
 
+    /**
+     * @brief 需求详情
+     * <pre>
+     *      rid     需求id
+     * </pre>
+     */
+    function requirement_details()
+    {
+        $rid    = trim($this->input->get_post('rid', TRUE));
+
+        if (!is_numeric($rid))
+        {
+            $_RSP['ret'] = -1;
+            $_RSP['msg'] = '不合法的需求id';
+            exit(json_encode($_RSP));
+        }
+
+        $requirement = $this->requirement_model->get_requirement_by_id($rid);
+        if (false === $requirement)
+        {
+            $_RSP['ret'] = -1;
+            $_RSP['msg'] = 'no such requirement';
+            exit(json_encode($_RSP));
+        }
+
+        $viewdata['requirement'] = $requirement;
+        $this->load->view('admin/requirement_details', $viewdata);
+    }
 
     function sandbox()
     {
