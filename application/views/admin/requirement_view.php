@@ -40,8 +40,8 @@
 				<tbody>
             <?php foreach ($requirements as $requirement): ?>
                     <tr id="u<?php echo $requirement['requirement_id']; ?>">
-                        <td><a href="/admin/requirement_details?rid=<?php echo $requirement['requirement_id']; ?>" class="js_url"><?php echo $requirement['requirement_id']; ?></a></td>
-                        <td><?php echo $requirement['requirement_title']; ?></td>
+                        <td><?php echo $requirement['requirement_id']; ?></td>
+                        <td><a href="/admin/requirement_details?rid=<?php echo $requirement['requirement_id']; ?>" class="js_url"><?php echo $requirement['requirement_title']; ?></a></td>
                         <td><?php echo $requirement['requirement_type']; ?></td>
                         <td><?php echo $requirement['requirement_ownername']; ?></td>
                         <td class="time_td"><?php echo $requirement['requirement_st']; ?></td>
