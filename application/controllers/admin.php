@@ -278,6 +278,7 @@ class Admin extends CI_Controller {
             exit(json_encode($_RSP));
         }
 
+        $this->load->model('requirement_model');
         $requirement = $this->requirement_model->get_requirement_by_id($rid);
         if (false === $requirement)
         {
