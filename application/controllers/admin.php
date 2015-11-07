@@ -302,7 +302,7 @@ class Admin extends CI_Controller {
     */
     public function shopcases()
     {
-        $offset     = trim($this->input->get_post('start_idx', TRUE));
+        $offset     = trim($this->input->get_post('offset', TRUE));
         $length     = trim($this->input->get_post('length', TRUE));
         
         if (!is_numeric($offset))
