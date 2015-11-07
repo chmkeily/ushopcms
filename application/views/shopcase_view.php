@@ -26,7 +26,7 @@
 			<table class="search_table table table-bordered table-striped table-hover table-condensed">
 				<thead style="background: #CCCCCC url(/asset/images/treetable/bg-table-thead.png) repeat-x;">
 					<tr>
-						<th><span>ID</span></th>
+						<!-- th><span>ID</span></th -->
 						<th><span>名称</span></th>
 						<th><span>简介</span></th>
 						<th><span>提交时间</span></th>
@@ -37,7 +37,7 @@
 				<tbody>
             <?php foreach ($shopcases as $shopcase): ?>
                     <tr id="u<?php echo $shopcase['shopcase_id']; ?>">
-                        <td><a href="/shopcase/details?caseid=<?php echo $shopcase['shopcase_id']; ?>"><?php echo $shopcase['shopcase_id']; ?></a></td>
+                        <!-- td><a href="/shopcase/details?caseid=<?php echo $shopcase['shopcase_id']; ?>"><?php echo $shopcase['shopcase_id']; ?></a></td -->
                         <td><?php echo $shopcase['shopcase_name']; ?></td>
                         <td><?php echo mb_substr($shopcase['shopcase_intro'],0,50); ?></td>
                         <td><?php echo date('Y-m-d H:i:s', $shopcase['shopcase_ctime']); ?></td>

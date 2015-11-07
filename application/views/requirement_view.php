@@ -24,7 +24,7 @@
 			<table class="search_table table table-bordered table-striped table-hover table-condensed">
 				<thead style="background: #CCCCCC url(/asset/images/treetable/bg-table-thead.png) repeat-x;">
 					<tr>
-						<th><span>需求ID</span></th>
+						<!-- th><span>需求ID</span></th -->
 						<th><span>标题</span></th>
 						<th><span>类型</span></th>
 						<th><span>发布人</span></th>
@@ -40,7 +40,7 @@
 				<tbody>
             <?php foreach ($requirements as $requirement): ?>
                     <tr id="u<?php echo $requirement['requirement_id']; ?>">
-                        <td><a href="/requirement/details?rid=<?php echo $requirement['requirement_id']; ?>"><?php echo $requirement['requirement_id']; ?></a></td>
+                        <!-- td><a href="/requirement/details?rid=<?php echo $requirement['requirement_id']; ?>"><?php echo $requirement['requirement_id']; ?></a></td -->
                         <td><?php echo $requirement['requirement_title']; ?></td>
                         <td><?php echo $requirement['requirement_type']; ?></td>
                         <td><?php echo $requirement['requirement_ownername']; ?></td>
