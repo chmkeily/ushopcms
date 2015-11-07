@@ -26,7 +26,7 @@
 			<table class="search_table table table-bordered table-striped table-hover table-condensed">
 				<thead style="background: #CCCCCC url(/asset/images/treetable/bg-table-thead.png) repeat-x;">
 					<tr>
-						<th><span>ID</span></th>
+						<!-- th><span>ID</span></th -->
 						<th><span>标题</span></th>
 						<th><span>图标</span></th>
 						<th><span>内容</span></th>
