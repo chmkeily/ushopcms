@@ -1,0 +1,70 @@
+<!Doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="店之宝,开店,我要开店,店管家,POST机,收银软件,店铺帮手">
+    <meta name="description" content="店之宝，提供开店必备软硬件信息。">
+    <title>店之宝 - 您的店铺管家</title>
+    <!--  <link rel="shortcut icon" href="images/fav.ico">
+    <link rel="bookmark" href="images/fav.ico"> -->
+    <link rel="stylesheet" type="text/css" href="css/pc.css" media="screen">
+    <link rel="stylesheet" href="css/jquery.fullPage.css" />
+</head>
+<body id="home">
+    <div class="header" style="position: fixed; top: 0; width: 100%; z-index: 1000;">
+        <div class="nav_wrap">
+            <div class="navigation">
+                <a class="logo" href=""><img src="images/logo.png" alt="店之宝"></a>
+                <ul>
+                    <li><a href="index.html" class="active">首页</a></li>
+                    <li><a href="login.html">服务商登录</a></li>
+                    <li><a href="/html/pages/form/user_reg.html">服务商注册</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div id="dowebok" style="margin-top: 72px;">
+	    <div class="section" style="background: #FABF27; ">
+	        <div class="banner_wrap">
+	            <div class="banner">
+	                <div class="left">
+	                    <img src="images/title.png" alt="店之宝">
+	                    <div class="download-area">
+	                        <img class="qrcode" src="images/qrcode.png" alt="二维码">
+	                        <div class="download">
+	                            <a href="https://itunes.apple.com/cn/app/wei/id414478124"><img src="images/ios_download.png" alt="App Store"></a>
+	                            <a href="/rep/apk/dianzhibao.apk"><img src="images/android_download.png" alt="Android Market"></a>
+	                        </div>
+	                        <div class="clear"></div>
+	                    </div>
+	                    <div class="clear"></div>
+	                </div>
+	                <div class="right">
+	                    <img src="images/phone.png" alt="手机">
+	                </div>
+	                <div class="clear"></div>
+	            </div>
+	        </div>
+	    </div>
+	    <div class="section">
+	        <div class="container">
+	            <p style="text-align: center;"><a href="pages/aboutus.html">关于我们</a> | <a href="pages/contactus.html">联系我们</a></p>
+	            <p class="copyright">深圳萌虎科技有限公司版权所有 深ICP备13010468号</p>
+	        </div>
+	    </div>
+	</div>
+    
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.fullPage.min.js"></script>
+    
+    <script>
+    	$(function(){
+		    $('#dowebok').fullpage({
+		    	css3: true,
+		    	navigation: false,
+		    	sectionsColor: ['#FABF27', '#fff']
+		    });
+		});
+    </script>
+</body>
+</html>

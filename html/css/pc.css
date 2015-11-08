@@ -101,31 +101,31 @@ input[type="text"], input[type="password"]{height: 1.5em; line-height: 1.4em; bo
 	display: none;
 }
 
-.header .banner_wrap{background: #FABF27;}
+.banner_wrap{background: #FABF27;}
 
-.header .banner {
+.banner {
 	height: 472px;
-	padding-top: 88px;
+	padding-top: 50px;
 	width: 1000px;
 	margin: 0 auto;
 }
 
-.header .banner .left {
+.banner .left {
 	float: left;
 	width: 50%;
 	padding-top: 40px;
 }
 
-.header .banner .left .download-area {
+.banner .left .download-area {
 	width: 380px;
 	margin-top: 10px;
 }
 
-.header .banner .left .qrcode {
+.banner .left .qrcode {
 	float: left;
 }
 
-.header .banner .left .download {
+.banner .left .download {
 	float: right;
 	width: 220px;
 }
@@ -135,7 +135,7 @@ input[type="text"], input[type="password"]{height: 1.5em; line-height: 1.4em; bo
 .download a:last-child{margin-bottom: 0;}
 .download a img{vertical-align: bottom;}
 
-.header .banner .right {
+.banner .right {
 	float: right;
 	width: 50%;
 }
@@ -149,9 +149,9 @@ input[type="text"], input[type="password"]{height: 1.5em; line-height: 1.4em; bo
 }
 .footer a{color: #666; text-align: center; padding: 10px;}
 
-.footer .container{width: 1000px; margin: 0 auto;}
+.container{width: 100%; margin: 0 auto; position: absolute; bottom: 90px; left: 0;}
 
-.footer .copyright {
+.copyright {
 	clear: both;
 	text-align: center;
 	color: #999;
