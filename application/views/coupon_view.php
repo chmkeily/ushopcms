@@ -33,6 +33,7 @@
 						<th><span>开始时间</span></th>
 						<th><span>过期时间</span></th>
 						<th><span>领取数量</span></th>
+						<th><span>兑换数量</span></th>
 						<!-- th><span>状态</span></th -->
 					</tr>
 				</thead>
@@ -48,6 +49,7 @@
                         <td><?php echo date('Y-m-d H:i:s', $coupon['coupon_begintime']); ?></td>
                         <td><?php echo date('Y-m-d H:i:s', $coupon['coupon_endtime']); ?></td>
                         <td><?php echo $coupon['coupon_takencnt']; ?></td>
+                        <td><?php echo $coupon['coupon_redeemcnt']; ?></td>
                         <!-- td><?php echo $coupon['coupon_status']; ?></td -->
                     </tr>
             <?php endforeach; ?>
