@@ -5,12 +5,13 @@
     <meta name="keywords" content="店之宝,开店,我要开店,店管家,POST机,收银软件,店铺帮手">
     <meta name="description" content="店之宝，提供开店必备软硬件信息。">
     <title>店之宝 - 您的店铺管家</title>
-   <!--  <link rel="shortcut icon" href="images/fav.ico">
+    <!--  <link rel="shortcut icon" href="images/fav.ico">
     <link rel="bookmark" href="images/fav.ico"> -->
     <link rel="stylesheet" type="text/css" href="css/pc.css" media="screen">
+    <link rel="stylesheet" href="css/jquery.fullPage.css" />
 </head>
 <body id="home">
-    <div class="header">
+    <div class="header" style="position: fixed; top: 0; width: 100%; z-index: 1000;">
         <div class="nav_wrap">
             <div class="navigation">
                 <a class="logo" href=""><img src="images/logo.png" alt="店之宝"></a>
@@ -21,88 +22,113 @@
                 </ul>
             </div>
         </div>
-        <div class="banner_wrap">
-            <div class="banner">
-                <div class="left">
-                    <img src="images/title.png" alt="店之宝">
-                    <div class="download-area">
-                        <img class="qrcode" src="images/qrcode.png" alt="二维码">
-                        <div class="download">
-                            <a href="https://itunes.apple.com/cn/app/wei/id414478124"><img src="images/ios_download.png" alt="App Store"></a>
-                            <a href="/rep/apk/dianzhibao.apk"><img src="images/android_download.png" alt="Android Market"></a>
-                        </div>
-                        <div class="clear"></div>
-                    </div>
-                    <div class="clear"></div>
-                </div>
-                <div class="right">
-                    <img src="images/phone.png" alt="手机">
-                </div>
-                <div class="clear"></div>
-            </div>
-        </div>
     </div>
-    <div class="content">
-        <div class="container">
-            <ul>
-                <li>
-                    <div class="left">
-                        <img src="images/s1.jpg" alt="发布需求">
-                    </div>
-                    <div class="right">
-                        <h2 class="yellow">发布需求</h2>
-                        <p>不懂收银系统？不会操作设备？无法培训店员？<br>来店之宝发布需求，客服第一时间响应，为您匹配最适合的服务商。<br>更有专业技术大神在线帮您答疑解惑。</p>
-                    </div>
-                    <div class="clear"></div>
-                </li>
-                <li>
-                    <div class="left">
-                        <h2 class="green">找服务商</h2>
-                        <p>担心系统售后无保？无法确认服务商专业资质？<br />店之宝专注于为您提供优质的系统服务商，<br >后台全程跟踪确保服务无盲点，了却您的后顾之忧。</p>
-                    </div>
-                    <div class="right">
-                        <img src="images/s2.jpg" alt="找服务商">
-                    </div>
-                    <div class="clear"></div>
-                </li>
-                <li>
-                    <div class="left">
-                        <img src="images/s3.jpg" alt="开店案例">
-                    </div>
-                    <div class="right">
-                        <h2 class="purple">开店案例</h2>
-                        <p>新晋掌门不懂如何排兵布阵，来看前辈们都是如何稳坐江山！<br />最新的行业资讯，详尽的行业案例，完善的解决方案。<br />让您的经营之路一切尽在“掌握”。</p>
-                    </div>
-                    <div class="clear"></div>
-                </li>
-                <li>
-                    <div class="left">
-                        <h2 class="blue">优惠活动</h2>
-                        <p>货比三家是您的聪明之选！<br />店之宝为您提供多样化优惠选择，<br />让您从系统采购到售后都能享受到高性价比的服务。</p>
-                    </div>
-                    <div class="right">
-                        <img src="images/s4.jpg" alt="优惠活动">
-                    </div>
-                    <div class="clear"></div>
-                </li>
-                <li>
-                    <div class="left">
-                        <img src="images/s5.jpg" alt="技术服务">
-                    </div>
-                    <div class="right">
-                        <h2 class="red">技术服务</h2>
-                        <p>想要一劳永逸，单靠系统稳定性是不够的！<br />店之宝就是成为您的超级大白，为您提供一站式保姆服务，<br />随时随地响应您的系统问题。</p>
-                    </div>
-                    <div class="clear"></div>
-                </li>
-            </ul>
-        </div>
-    </div>
-    <div class="footer">
-        <div class="container">
-            <p style="text-align: center;"><a href="pages/aboutus.html">关于我们</a> | <a href="pages/contactus.html">联系我们</a></p>
-            <p class="copyright">深圳萌虎科技有限公司版权所有 深ICP备13010468号</p>
-        </div>
-    </div>
+    <div id="dowebok" style="margin-top: 72px;">
+	    <div class="section" style="background: #FABF27; ">
+	        <div class="banner_wrap">
+	            <div class="banner">
+	                <div class="left">
+	                    <img src="images/title.png" alt="店之宝">
+	                    <div class="download-area">
+	                        <img class="qrcode" src="images/qrcode.png" alt="二维码">
+	                        <div class="download">
+	                            <a href="https://itunes.apple.com/cn/app/wei/id414478124"><img src="images/ios_download.png" alt="App Store"></a>
+	                            <a href="/rep/apk/dianzhibao.apk"><img src="images/android_download.png" alt="Android Market"></a>
+	                        </div>
+	                        <div class="clear"></div>
+	                    </div>
+	                    <div class="clear"></div>
+	                </div>
+	                <div class="right">
+	                    <img src="images/phone.png" alt="手机">
+	                </div>
+	                <div class="clear"></div>
+	            </div>
+	        </div>
+	    </div>
+	    <div class="section">
+	    	<div style="max-width: 1000px; margin: 0 auto;">
+	    		<div class="slide_left">
+	    			<div class="slide_img">
+	    				<div id="slide_el" style="width:229px;height:390px;display:none;">
+						    <div>
+						        <img src="images/n1.jpg" style="width:100%;height:100%">
+						    </div>
+						    <div>
+						        <img src="images/n2.jpg" style="width:100%;height:100%">
+						    </div>
+						    <div>
+						        <img src="images/n3.jpg" style="width:100%;height:100%">
+						    </div>
+						    <div>
+						        <img src="images/n4.jpg" style="width:100%;height:100%">
+						    </div>
+						    <div>
+						        <img src="images/n5.jpg" style="width:100%;height:100%">
+						    </div>
+						</div>
+	    			</div>
+	    		</div>
+	    		<div class="slide_right">
+	    			<div class="slide_text">
+	    				<div class="text_item">
+			    			<h2 class="red">发布需求</h2>
+			    			<p>不懂收银系统？不会操作设备？无法培训店员？<br>来店之宝发布需求，客服第一时间响应，为您匹配最适合的服务商。<br>更有专业技术大神在线帮您答疑解惑。</p>
+		    			</div>
+		    			<div class="text_item" style="display: none;">
+			    			<h2 class="red">找服务商</h2>
+			    			<p>担心系统售后无保？无法确认服务商专业资质？<br />店之宝专注于为您提供优质的系统服务商，<br >后台全程跟踪确保服务无盲点，了却您的后顾之忧。</p>
+		    			</div>
+		    			<div class="text_item" style="display: none;">
+			    			<h2 class="red">开店案例</h2>
+			    			<p>新晋掌门不懂如何排兵布阵，来看前辈们都是如何稳坐江山！<br />最新的行业资讯，详尽的行业案例，完善的解决方案。<br />让您的经营之路一切尽在“掌握”。</p>
+		    			</div>
+		    			<div class="text_item" style="display: none;">
+			    			<h2 class="red">优惠活动</h2>
+			    			<p>货比三家是您的聪明之选！<br />店之宝为您提供多样化优惠选择，<br />让您从系统采购到售后都能享受到高性价比的服务。</p>
+		    			</div>
+		    			<div class="text_item" style="display: none;">
+			    			<h2 class="red">技术服务</h2>
+			    			<p>想要一劳永逸，单靠系统稳定性是不够的！<br>店之宝就是成为您的超级大白，为您提供一站式保姆服务，<br>随时随地响应您的系统问题。</p>
+		    			</div>
+	    			</div>
+	    			<div class="slide_icon">
+	    				<span class="icon_item"><img src="images/demand.png" /></span>
+	    				<span class="icon_item"><img src="images/provider.png" /></span>
+	    				<span class="icon_item"><img src="images/case.png" /></span>
+	    				<span class="icon_item"><img src="images/discount.png" /></span>
+	    				<span class="icon_item"><img src="images/service.png" /></span>
+	    			</div>
+	    		</div>
+	    	</div>
+	        <div class="container">
+	            <p style="text-align: center;"><a href="pages/aboutus.html">关于我们</a> | <a href="pages/contactus.html">联系我们</a></p>
+	            <p class="copyright">深ICP备13010468号</p>
+	        </div>
+	    </div>
+	</div>
+    
+    <script src="js/jquery.min.1.8.3.js"></script>
+    <script src="js/jquery.fullPage.min.js"></script>
+    <script src="cloudJs/js/cloudjs.js"></script>
+    
+    <script>
+    	$(function(){
+		    $('#dowebok').fullpage({
+		    	css3: true,
+		    	navigation: false,
+		    	sectionsColor: ['#FABF27', '#fff']
+		    });
+		    
+		    cloudjs('#slide_el').slide({isShowAnchor: false, onChange: function(i){
+		    	$('.slide_text .text_item').hide().eq(i).show();
+		    }});
+		    
+		    $('.slide_icon .icon_item').bind('click', function(){
+		    	$('.slide_text .text_item').hide().eq($(this).index()).show();
+		    	cloudjs('#slide_el').slide('toIndex', $(this).index());
+		    });
+		});
+    </script>
 </body>
 </html>

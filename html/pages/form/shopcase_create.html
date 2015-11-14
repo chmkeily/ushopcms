@@ -117,11 +117,6 @@
                     return;
                 }
 
-                if(!$.trim($('[name="intro"]').val())){
-                    cloudjs.message({content: '请输入案例简介', type: 'error'});
-                    return;
-                }
-
                 if(!$.trim($('[name="content"]').val())){
                     cloudjs.message({content: '请输入案例详细内容', type: 'error'});
                     return;

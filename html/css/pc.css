@@ -140,14 +140,14 @@ input[type="text"], input[type="password"]{height: 1.5em; line-height: 1.4em; bo
 	width: 50%;
 }
 
-.footer {
-	border-top: 1px solid #ccc;
-	min-width: 1000px;
-	padding-top: 20px;
-	padding-bottom: 10px;
-	color: #666;
-}
-.footer a{color: #666; text-align: center; padding: 10px;}
+.slide_left{float: left; width: 50%; position: relative; min-height: 1px; vertical-align: top;}
+.slide_img{position: relative; width: 259px; height: 511px; background: url(../images/sjbg.jpg) 0 0 no-repeat; margin: auto;}
+#slide_el{position: absolute; top: 62px; left: 14px;}
+.slide_right{float: left; width: 50%; position: relative; min-height: 1px;}
+.slide_right .text_item{padding: 40px 0;}
+.slide_right .text_item h2{margin-bottom: 20px; font-size: 50px;}
+.slide_icon{margin-top: 40px;}
+.slide_icon .icon_item{display: inline-block; margin: 0 5px; cursor: pointer;}
 
 .container{width: 100%; margin: 0 auto; position: absolute; bottom: 90px; left: 0;}
 
