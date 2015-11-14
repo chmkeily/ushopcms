@@ -14,6 +14,7 @@ class Coupon_model extends CI_Model
             'coupon_status'     => 'Status',
             'coupon_limitcnt'   => 'LimitCnt',
             'coupon_takencnt'   => 'TakenCnt',
+            'coupon_redeemcnt'   => 'RedeemCnt',
             'coupon_ctime'      => 'CreatedTime',
         );
 
@@ -78,7 +79,7 @@ class Coupon_model extends CI_Model
      */
     function get_coupons($conditions = array(), $limit = 10, $offset = 0)
     {
-        $this->db->select('ID,ProviderID,Title,Icon,Content,Status,BeginTime,EndTime,TakenCnt,CreatedTime');
+        $this->db->select('ID,ProviderID,Title,Icon,Content,Status,BeginTime,EndTime,TakenCnt,RedeemCnt,CreatedTime');
         $rows = $this->create_query($conditions)->get($this->TableName, $limit, $offset)->result_array();
         $items = array();
         foreach ($rows as $row)
