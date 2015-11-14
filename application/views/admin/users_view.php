@@ -66,6 +66,11 @@
     <script type="text/javascript">
         function publish(userid)
         {
+            if (!confirm("确认要发布该服务？"))
+            {
+                return;
+            }
+
             var url = '/admin/publish?providerid=' + userid;
             $.getJSON(url, function(rsp){
                 if (0 == rsp.ret)
