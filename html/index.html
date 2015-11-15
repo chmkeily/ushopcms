@@ -93,11 +93,11 @@
 		    			</div>
 	    			</div>
 	    			<div class="slide_icon">
-	    				<span class="icon_item"><img src="images/demand.png" /></span>
-	    				<span class="icon_item"><img src="images/provider.png" /></span>
-	    				<span class="icon_item"><img src="images/case.png" /></span>
-	    				<span class="icon_item"><img src="images/discount.png" /></span>
-	    				<span class="icon_item"><img src="images/service.png" /></span>
+	    				<span class="icon_item"><img src="images/demand_gray.png" style="display: none;" /><img src="images/demand.png" /></span>
+	    				<span class="icon_item"><img src="images/provider_gray.png" /><img src="images/provider.png" style="display: none;" /></span>
+	    				<span class="icon_item"><img src="images/case_gray.png" /><img src="images/case.png" style="display: none;" /></span>
+	    				<span class="icon_item"><img src="images/discount_gray.png" /><img src="images/discount.png" style="display: none;" /></span>
+	    				<span class="icon_item"><img src="images/service_gray.png" /><img src="images/service.png" style="display: none;" /></span>
 	    			</div>
 	    		</div>
 	    	</div>
@@ -122,10 +122,23 @@
 		    
 		    cloudjs('#slide_el').slide({isShowAnchor: false, onChange: function(i){
 		    	$('.slide_text .text_item').hide().eq(i).show();
+		    	$('.slide_icon .icon_item').each(function(index){
+		    		$(this).find('img').eq(0).show().end().eq(1).hide();
+		    		if(index === i){
+		    			$(this).find('img').eq(1).show().end().eq(0).hide();
+		    		}
+		    	});
 		    }});
 		    
 		    $('.slide_icon .icon_item').bind('click', function(){
+		    	var scope = this;
 		    	$('.slide_text .text_item').hide().eq($(this).index()).show();
+		    	$('.slide_icon .icon_item').each(function(index){
+		    		$(this).find('img').eq(0).show().end().eq(1).hide();
+		    		if(index === $(scope).index()){
+		    			$(this).find('img').eq(1).show().end().eq(0).hide();
+		    		}
+		    	});
 		    	cloudjs('#slide_el').slide('toIndex', $(this).index());
 		    });
 		});
