@@ -115,7 +115,7 @@ class Admin extends CI_Controller {
 
         $count = $this->user_model->count();
         $userinfos = $this->user_model->get_users($conditions, $length, $offset);
-        $viewdata['statuswordings'] = $this->config->item('wordings_provider_status');
+        $viewdata['statuswordings'] = $this->config->item('wordings_provider_statuses');
         $viewdata['count']     = $count;
         $viewdata['pagesize']  = $length;
         $viewdata['currpage']  = ceil($offset / $length) + 1;
@@ -324,7 +324,7 @@ class Admin extends CI_Controller {
             $viewdata['shopcases'] = $shopcases;
         }
 
-        $viewdata['statuswordings'] = $this->config->item('wordings_shopcase_status');
+        $viewdata['statuswordings'] = $this->config->item('wordings_shopcase_statuses');
         $viewdata['ret'] = 0;
         $this->load->view('admin/shopcase_view', $viewdata);
     }
