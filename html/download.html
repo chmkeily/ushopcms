@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>下载店之宝安装包</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    </head>
+	<body>
+    	<div id="scan_result"></div>
+    
+	    <script src="js/jquery.min.js"></script>
+	    <script src="cloudJs/js/cloudjs.js"></script>
+	    
+    	<script>
+	    	$(document).ready(function(){
+				var u = navigator.userAgent, app = navigator.appVersion;
+				var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //android终端或者uc浏览器
+				var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+				
+				if(isAndroid){
+					$('#scan_result').html('您使用的是安卓手机');
+				}
+				if(isiOS){
+					$('#scan_result').html('您使用的是苹果手机');
+				}
+			});
+		</script>
+	</body>
+	</html>
