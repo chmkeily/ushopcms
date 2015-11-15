@@ -74,7 +74,7 @@
                 return;
             }
 
-            var url = '/admin/shopcase_publish?scid=' + userid;
+            var url = '/admin/shopcase_publish?scid=' + caseid;
             $.getJSON(url, function(rsp){
                 if (0 == rsp.ret)
                 {
