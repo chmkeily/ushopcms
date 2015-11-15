@@ -42,7 +42,7 @@
                         <td><a href="/shopcase/details?caseid=<?php echo $shopcase['shopcase_id']; ?>" class="js_url"><?php echo $shopcase['shopcase_name']; ?></a></td>
                         <td><?php echo mb_substr($shopcase['shopcase_intro'],0,50); ?></td>
                         <td><?php echo date('Y-m-d H:i:s', $shopcase['shopcase_ctime']); ?></td>
-                        <td><?php echo $shopcase['shopcase_status']; ?></td>
+                        <td><?php echo $statuswordings[$shopcase['shopcase_status']]; ?></td>
                         <td>
 						<?php if(10 != $shopcase['shopcase_status']): ?>
 							<a onclick="publish(<?php echo $shopcase['shopcase_id']; ?>)" href="#">发布</a>

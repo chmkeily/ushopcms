@@ -324,6 +324,7 @@ class Admin extends CI_Controller {
             $viewdata['shopcases'] = $shopcases;
         }
 
+        $viewdata['statuswordings'] = $this->config->item('wordings_provider_status');
         $viewdata['ret'] = 0;
         $this->load->view('admin/shopcase_view', $viewdata);
     }
