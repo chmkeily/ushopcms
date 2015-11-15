@@ -31,6 +31,7 @@
 						<th><span>简介</span></th>
 						<th><span>提交时间</span></th>
 						<th><span>状态</span></th>
+                        <th><span>操作</span></th>
 					</tr>
 				</thead>
 			<?php if(isset($shopcases)): ?>
@@ -42,6 +43,11 @@
                         <td><?php echo mb_substr($shopcase['shopcase_intro'],0,50); ?></td>
                         <td><?php echo date('Y-m-d H:i:s', $shopcase['shopcase_ctime']); ?></td>
                         <td><?php echo $shopcase['shopcase_status']; ?></td>
+                        <td>
+						<?php if(10 != $shopcase['shopcase_status']): ?>
+							<a onclick="publish(<?php echo $shopcase['shopcase_id']; ?>)" href="#">发布</a>
+						<?php endif ?>
+						</td>
                     </tr>
             <?php endforeach; ?>
                 </tbody>
@@ -60,6 +66,27 @@
 			    }
 			});
 		});
+
+		function publish(caseid)
+        {
+            if (!confirm("确认要发布该服务？"))
+            {
+                return;
+            }
+
+            var url = '/admin/shopcase_publish?scid=' + userid;
+            $.getJSON(url, function(rsp){
+                if (0 == rsp.ret)
+                {
+                    alert('发布成功！');
+                    location.href = '';
+                }
+                else
+                {
+                    alert('发布失败, msg：' + rsp.msg);
+                }
+            });
+        }
 	</script>
 </body>
 </html>

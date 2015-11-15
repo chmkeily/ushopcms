@@ -1,8 +1,8 @@
 <?php
 
-class Shopcase_model extends CI_Model
+class Shopcase_ol_model extends CI_Model
 {
-	var $TableName = 'tb_cms_shopcase';
+	var $TableName = 'tb_shopcase';
     var $FieldMatrix = array(
             'shopcase_id'         => 'ID',
             'shopcase_name'       => 'Name',
@@ -11,13 +11,12 @@ class Shopcase_model extends CI_Model
             'shopcase_providerid' => 'ProviderID',
             'shopcase_content'    => 'Content',
             'shopcase_ctime'      => 'CreatedTime',
-            'shopcase_status'     => 'Status',
         );
 
     public function __construct()
     {
         parent::__construct();
-        $this->load->database('ushopcms');
+        $this->load->database('ushopkit');
     }
 
     //增加
@@ -43,9 +42,8 @@ class Shopcase_model extends CI_Model
      */
     function select_abstract()
     {
-        $this->db->select('ID,Name,Image,Intro,ProviderID,CreatedTime,Status');
+        $this->db->select('ID,Name,Image,Intro,ProviderID,CreatedTIme');
     }
-
     /**
     * @return array or FALSE
     */

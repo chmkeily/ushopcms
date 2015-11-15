@@ -328,6 +328,60 @@ class Admin extends CI_Controller {
         $this->load->view('admin/shopcase_view', $viewdata);
     }
 
+    /**
+    * @brief 案例发布/同步服务商到生产环境(正式表)
+    * <pre>
+    *   接受表单数据:
+    *       scid  案例ID
+    * </pre>
+    */
+    public function shopcase_publish()
+    {
+        $scid = trim($this->input->get_post('scid', TRUE));
+
+        $this->load->model('shopcase_model');
+        $shopcase = $this->shopcase_model->get_shopcase_by_id($scid);
+        if (false === $shopcase)
+        {
+            $_RSP['ret'] = -1;
+            $_RSP['msg'] = '获取服务案例数据失败';
+            exit(json_encode($_RSP));
+        }
+
+        if (10 == $shopcase['shopcase_status'])
+        {
+            $_RSP['ret'] = -2;
+            $_RSP['msg'] = '此状态下不能发布';
+            exit(json_encode($_RSP));
+        }
+
+        $this->load->model('shopcase_ol_model');
+        if (0 == $shopcase['shopcase_status'])
+        {
+            //初次发布
+            $id = $this->shopcase_ol_model->add($shopcase);
+            if (false === $id)
+            {
+                $_RSP['ret'] = -3;
+                $_RSP['msg'] = '发布到生产环境失败';
+                exit(json_encode($_RSP));
+            }
+        }
+        else
+        {
+            //发布更新
+            $this->shopcase_ol_model->update($scid, $shopcase);
+        }
+
+        //更新状态
+        $updates = array('shopcase_status' => 10);
+        $this->shopcase_model->update($scid, $updates);
+
+        $_RSP['ret'] = 0;
+        $_RSP['msg'] = '发布成功';
+        exit(json_encode($_RSP));
+    }
+
 
     function sandbox()
     {
