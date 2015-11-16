@@ -251,7 +251,7 @@ class Admin extends CI_Controller {
         if (!is_numeric($length)
             || 1 > $length || 20 < $length)
         {
-            $length = 10;
+            $length = 20;
         }
 
         $this->load->model('requirement_model');
@@ -313,18 +313,22 @@ class Admin extends CI_Controller {
         if (!is_numeric($length)
             || 1 > $length || 20 < $length)
         {
-            $length = 10;
+            $length = 20;
         }
         
         $this->load->model('shopcase_model');
         $conditions = array();
+        $count = $this->shopcase_model->count();
         $shopcases = $this->shopcase_model->get_shopcases($conditions, $length, $offset);
         if (!empty($shopcases))
         {
             $viewdata['shopcases'] = $shopcases;
         }
-
-        $viewdata['statuswordings'] = $this->config->item('wordings_shopcase_statuses');
+        
+		$viewdata['statuswordings'] = $this->config->item('wordings_shopcase_statuses');
+        $viewdata['count']     = $count;
+        $viewdata['pagesize']  = $length;
+        $viewdata['currpage']  = ceil($offset / $length) + 1;
         $viewdata['ret'] = 0;
         $this->load->view('admin/shopcase_view', $viewdata);
     }

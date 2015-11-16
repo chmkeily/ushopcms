@@ -111,6 +111,14 @@ class Shopcase_model extends CI_Model
         return $shopcases;
     }
 
+	/**
+    * @brief 统计总数
+    */
+    function count($conditions = array())
+    {
+        return $this->create_query($conditions)->count_all_results($this->TableName);
+    }
+
     /**
      * @brief 更新
      */
