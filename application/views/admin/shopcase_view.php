@@ -61,7 +61,7 @@
             <?php if($i == $currpage): ?>
                 <span><?php echo $i; ?></span>
             <?php else: ?>
-                <a href="/admin/providers?offset=<?php echo $offset; ?>&length=<?php echo $pagesize; ?>"><span><?php echo $i; ?></span></a>
+                <a href="/admin/shopcases?offset=<?php echo $offset; ?>&length=<?php echo $pagesize; ?>"><span><?php echo $i; ?></span></a>
             <?php endif ?>
             <?php endfor ?>]
             </div>

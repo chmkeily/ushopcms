@@ -101,8 +101,8 @@
                         <td><textarea name="remark" style="width:300px;height:100px;" form="review_form"></textarea></td>
                     </tr> 
                 </tbody>
+            	<button type="submit" class="btn btn-primary">提交</button>
             </table>
-            <button type="submit" class="btn btn-primary">提交</button>
         </form>
     </div>
 
