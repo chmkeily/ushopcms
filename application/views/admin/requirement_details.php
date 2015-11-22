@@ -89,7 +89,7 @@
                     </tr>
                     <tr>
                         <td>参数：</td>
-                        <td><input type="text" name="action" class="inputbox" value=""/></td>
+                        <td><input type="text" name="action" class="inputbox" value="" placeholder="分配需求时填入服务商ID"/></td>
                     </tr>
                     <tr>
                         <td>备注：</td>
