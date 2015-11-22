@@ -77,6 +77,11 @@
     <div>
         <form id="review_form" class="form-horizontal" method="post" action="/">
             <table class="search_table table table-bordered table-striped table-hover table-condensed">
+            	<thead style="background: #CCCCCC url(/asset/images/treetable/bg-table-thead.png) repeat-x;">
+            		<tr>
+            			<th><span>需求审批</span></th>
+            		</tr>
+            	</thead>
                 <tbody>
                     <tr>
                         <td>操作：</td>
