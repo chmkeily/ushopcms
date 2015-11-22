@@ -73,6 +73,29 @@
 			</tbody>
 		</table>
 	</div>
+
+    <div>
+        <form id="review_form" class="form-horizontal" method="post" action="/">
+            <table class="search_table table table-bordered table-striped table-hover table-condensed">
+                <tbody>
+                    <tr>
+                        <td>操作：</td>
+                        <td><input type="text" name="action" class="inputbox" value=""/></td>
+                    </tr>
+                    <tr>
+                        <td>参数：</td>
+                        <td><input type="text" name="action" class="inputbox" value=""/></td>
+                    </tr>
+                    <tr>
+                        <td>备注：</td>
+                        <td><textarea name="remark" style="width:300px;height:100px;" form="review_form"></textarea></td>
+                    </tr> 
+                </tbody>
+            </table>
+            <button type="submit" class="btn btn-primary">提交</button>
+        </form>
+    </div>
+
 	<?php endif ?>
 </body>
 </html>
