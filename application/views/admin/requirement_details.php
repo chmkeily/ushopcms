@@ -85,11 +85,16 @@
                 <tbody>
                     <tr>
                         <td>操作：</td>
-                        <td><input type="text" name="action" class="inputbox" value=""/></td>
+                        <td>
+                        	<select name="action">
+                        		<option value="1">分配需求</option>
+                        		<option value="2">驳回需求</option>
+                        	</select>
+                        </td>
                     </tr>
                     <tr>
                         <td>参数：</td>
-                        <td><input type="text" name="action" class="inputbox" value="" placeholder="分配需求时填入服务商ID"/></td>
+                        <td><input type="text" name="para" class="inputbox" value="" placeholder="分配需求时填入服务商ID"/></td>
                     </tr>
                     <tr>
                         <td>备注：</td>
