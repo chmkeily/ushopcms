@@ -6,6 +6,7 @@ class Coupon_model extends CI_Model
     var $FieldMatrix = array(
             'coupon_id'         => 'ID',
             'coupon_providerid' => 'ProviderID',
+            'coupon_providername' => 'ProviderName',
             'coupon_title'      => 'Title',
             'coupon_icon'       => 'Icon',
             'coupon_content'    => 'Content',
