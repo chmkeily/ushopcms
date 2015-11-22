@@ -79,7 +79,7 @@
             <table class="search_table table table-bordered table-striped table-hover table-condensed">
             	<thead style="background: #CCCCCC url(/asset/images/treetable/bg-table-thead.png) repeat-x;">
             		<tr>
-            			<th><span>需求审批</span></th>
+            			<th colspan="2"><span>需求审批</span></th>
             		</tr>
             	</thead>
                 <tbody>
