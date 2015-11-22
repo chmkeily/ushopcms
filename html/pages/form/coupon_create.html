@@ -89,6 +89,7 @@
                 dataType: 'json',
                 success: function(response){
                     cloudjs.message({content: '提交成功，请等待审核！', type: 'success'});
+                    location="/coupon/index";
                 }
             });
         }
