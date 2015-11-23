@@ -84,7 +84,7 @@
             	</thead>
                 <tbody>
                     <tr>
-                        <td>操作：</td>
+                        <td width="80px">操作：</td>
                         <td>
                         	<select name="action">
                         		<option value="1">分配需求</option>
@@ -101,8 +101,8 @@
                         <td><textarea name="remark" style="width:300px;height:100px;" form="review_form"></textarea></td>
                     </tr> 
                 </tbody>
-            	<button type="submit" class="btn btn-primary">提交</button>
             </table>
+            	<button type="submit" class="btn btn-primary">提交</button>
         </form>
     </div>
 

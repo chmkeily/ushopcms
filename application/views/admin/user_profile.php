@@ -60,33 +60,33 @@
 		</table>
 	</div>
 
-	<!-- 审核 -->
-	<div class="form-horizontal">
-		<!-- form class="form-horizontal" method="post" action="/coupon/create" -->
-			<fieldset>
-				<div class="control-group">
-					<label class="control-label">操作</label>
-					<div class="controls">
-						<input type="text" name="action" class="inputbox" value=""/>
-						<span class="red">*</span>
-					</div>
-				</div>
+    <div>
+        <form id="review_form" class="form-horizontal" method="post" action="/">
+            <table class="search_table table table-bordered table-striped table-hover table-condensed">
+            	<thead style="background: #CCCCCC url(/asset/images/treetable/bg-table-thead.png) repeat-x;">
+            		<tr>
+            			<th colspan="2"><span>需求审批</span></th>
+            		</tr>
+            	</thead>
+                <tbody>
+                    <tr>
+                        <td width="80px">操作：</td>
+                        <td>
+                        	<select name="action">
+                        		<option value="1">通过</option>
+                        		<option value="2">驳回</option>
+                        	</select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>备注：</td>
+                        <td><textarea name="remark" style="width:300px;height:100px;" form="review_form"></textarea></td>
+                    </tr> 
+                </tbody>
+            </table>
+            	<button type="submit" class="btn btn-primary">提交</button>
+        </form>
+    </div>
 
-				<div class="control-group">
-					<label class="control-label">备注</label>
-					<div class="controls">
-						<textarea name="remark" class="inputbox" style="width: 500px; height: 200px;"></textarea>
-						<span class="red">*</span>
-					</div>
-				</div>
-            
-				<div class="control-group">
-					<div class="controls">
-						<button type="button" id="save_btn" class="btn btn-primary">提交</button>
-					</div>
-				</div>
-			</fieldset>
-		<!-- /form -->
-	</div>
 </body>
 </html>
