@@ -112,7 +112,7 @@ class Provider extends CI_Controller {
         }
         if (!empty($phone))
         {
-            $updates['use_phone'] = $phone;
+            $updates['user_phone'] = $phone;
         }
         if (!empty($contact))
         {
