@@ -98,7 +98,7 @@
                     </tr>
                     <tr>
                         <td>备注：</td>
-                        <td><textarea name="remark" style="width:300px;height:100px;" form="review_form"></textarea></td>
+                        <td><textarea name="remark" style="width:300px;height:100px;"></textarea></td>
                     </tr> 
                 </tbody>
             </table>

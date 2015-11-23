@@ -61,7 +61,7 @@
 	</div>
 
     <div>
-        <form id="review_form" class="form-horizontal" method="post" action="/">
+        <form id="review_form" class="form-horizontal" method="post" action="/admin/sandbox">
             <table class="search_table table table-bordered table-striped table-hover table-condensed">
             	<thead style="background: #CCCCCC url(/asset/images/treetable/bg-table-thead.png) repeat-x;">
             		<tr>
@@ -80,7 +80,7 @@
                     </tr>
                     <tr>
                         <td>备注：</td>
-                        <td><textarea name="remark" style="width:300px;height:100px;" form="review_form"></textarea></td>
+                        <td><textarea name="remark" style="width:300px;height:100px;"></textarea></td>
                     </tr> 
                 </tbody>
             </table>
