@@ -117,6 +117,7 @@
             data.intro = $.trim($('[name="intro"]').val());
             data.icon = $.trim($('[name="icon"]').val());
 
+            $('#save_btn').attr('disabled', 'disabled');
             $.ajax({
                 url: '/provider/update',
                 data: data,
@@ -124,6 +125,11 @@
                 dataType: 'json',
                 success: function(response){
                     cloudjs.message({content: '提交成功，请等待审核！', type: 'success'});
+                    setTimeout(function(){
+			        	try{
+			                parent.$('#ttbox').tabs('close', parent.$('#ttbox').tabs('getSelected').panel('options').title);
+			            }catch(err){};
+		            }, 2000);
                 }
             });
         }

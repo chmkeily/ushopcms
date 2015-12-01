@@ -82,6 +82,7 @@
             data.endtime = ushop.getShortStampByString($.trim($('[name="endtime"]').val()), '-');
             data.content = $('[name="content"]').val();
 
+            $('#save_btn').attr('disabled', 'disabled');
             $.ajax({
                 url: '/coupon/create',
                 data: data,
@@ -89,7 +90,11 @@
                 dataType: 'json',
                 success: function(response){
                     cloudjs.message({content: '提交成功，请等待审核！', type: 'success'});
-                    location="/coupon/index";
+                    setTimeout(function(){
+			        	try{
+			                parent.$('#ttbox').tabs('close', parent.$('#ttbox').tabs('getSelected').panel('options').title);
+			            }catch(err){};
+		            }, 2000);
                 }
             });
         }

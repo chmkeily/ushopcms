@@ -69,6 +69,7 @@
             data.intro = $.trim($('[name="intro"]').val());
             data.content = $.trim($('[name="content"]').val());
 
+            $('#save_btn').attr('disabled', 'disabled');
             $.ajax({
                 url: '/shopcase/create',
                 data: data,
@@ -76,6 +77,11 @@
                 dataType: 'json',
                 success: function(response){
                     cloudjs.message({content: '添加案例成功！', type: 'success'});
+                    setTimeout(function(){
+			        	try{
+			                parent.$('#ttbox').tabs('close', parent.$('#ttbox').tabs('getSelected').panel('options').title);
+			            }catch(err){};
+		            }, 2000);
                 }
             });
         }
